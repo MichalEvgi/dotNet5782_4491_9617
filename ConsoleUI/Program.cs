@@ -9,6 +9,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+            DalObject.DalObject dalObject = new DalObject.DalObject();
             int choice;
             Console.WriteLine("To add press 1");
             Console.WriteLine("To update press 2");

@@ -169,20 +169,21 @@ namespace DalObject
         /// </summary>
         /// <param name="droneId">drone's id</param>
         public static void ReleaseDrone(int droneId)
-        {
+         {
             DroneCharge temp = GetDroneChargeById(droneId);
             Station tempS = GetStationById(temp.StationId);
             Drone tempD = GetDroneById(droneId);
             //save drone charge, station and drone in temps
             DataSource.stations.Remove(tempS);
             DataSource.drones.Remove(tempD);
-            DataSource.DroneCharges.Remove(temp);
             //remove+ remove drone charge
             tempS.ChargeSlots++;
             tempD.Status = DroneStatuses.Available;
+            tempD.Battery = 100;
             //update
             DataSource.drones.Add(tempD);
             DataSource.stations.Add(tempS);
+            DataSource.DroneCharges.Remove(temp);
             //add station and drone back
         }
         /// <summary>
@@ -208,7 +209,7 @@ namespace DalObject
         /// </summary>
         /// <param name="id">drone's id</param>
         /// <returns></returns>
-        public static DroneCharge GetDroneChargeById(int id) => DataSource.DroneCharges.Find(d => d.DroneId == id);
+        public static DroneCharge GetDroneChargeById(int id) => DataSource.DroneCharges.Find(dc => dc.DroneId == id);
         /// <summary>
         /// return customer by id
         /// </summary>
@@ -271,5 +272,49 @@ namespace DalObject
         /// </summary>
         /// <returns></returns>
         public static List<Parcel> PrintParcels() => DataSource.parcels;
+        /// <summary>
+        /// create string of sexagesimal lattitude
+        /// </summary>
+        /// <param name="lat">lattitude</param>
+        /// <returns></returns>
+        public static string Lat(double lat)
+        {
+            string ch;
+            if (lat < 0)
+            {
+                ch = "S";
+                lat *= -1;
+            }
+            else
+                ch = "N";
+            int deg = (int)lat;
+            double dif = lat - deg;
+            int min = (int)(dif * 60);
+            double sec = (dif * 3600 - min * 60);
+            sec = Math.Round(sec, 4);
+            return $"{deg}° {min}' {sec}'' {ch}";
+        }
+        /// <summary>
+        /// dreate string of sexagesimal longitude
+        /// </summary>
+        /// <param name="lng">longitude</param>
+        /// <returns></returns>
+        public static string Lng(double lng)
+        {
+            string ch;
+            if (lng < 0)
+            {
+                ch = "W";
+                lng *= -1;
+            }
+            else
+                ch = "E";
+            int deg = (int)lng;
+            double dif = lng - deg;
+            int min = (int)(dif * 60);
+            double sec = (dif) * 3600 - min * 60;
+            sec = Math.Round(sec, 4);
+            return $"{deg}° {min}' {sec}'' {ch}";
+        }
     }
 }

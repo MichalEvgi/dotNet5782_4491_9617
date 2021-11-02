@@ -31,7 +31,6 @@ namespace DalObject
             CreateStation();
             CreateCustomer();
             CreateParcel();
-            CreateDroneCharge();
         }
         /// <summary>
         /// create 5 drones in the list of drone
@@ -45,7 +44,7 @@ namespace DalObject
                     Id = r.Next(1000, 10000),
                     Model = ((DroneModel)i).ToString(),
                     MaxWeight = (WeightCategories)r.Next(0, 3),
-                    Status = (DroneStatuses)r.Next(0, 2),
+                    Status = DroneStatuses.Available,
                     Battery = r.Next(0, 101)
                 }
                     );
@@ -108,20 +107,6 @@ namespace DalObject
                     Lattitude = r.NextDouble() * 200 - 100
                 }
                     );
-            }
-        }
-        /// <summary>
-        /// create 5 DroneCharges in the list of DroneCharges
-        /// </summary>
-        public static void CreateDroneCharge()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                DroneCharges.Add(new DroneCharge
-                {
-                    DroneId = drones[i].Id,
-                    StationId = stations[r.Next(0, 2)].Id
-                });
             }
         }
     }

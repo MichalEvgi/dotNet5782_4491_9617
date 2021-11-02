@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DalObject;
 
 namespace IDAL
 {
@@ -23,7 +24,7 @@ namespace IDAL
             /// </summary>
             public override string ToString()
             {
-                return "Customer: Id:" + Id + " Name:" + Name + " Phone:" + Phone + " Longitude:" + Longitude + " Lattitude:" + Lattitude;
+                return "Customer: Id:" + Id + " Name:" + Name + " Phone:" + Phone + " Longitude:" +DalObject.DalObject.Lng(Longitude) + " Lattitude:" +DalObject.DalObject.Lat(Lattitude);
             }
 
         }
