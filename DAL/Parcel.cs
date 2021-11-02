@@ -10,6 +10,9 @@ namespace IDAL
     {
         public struct Parcel
         {
+            /// <summary>
+            /// properities
+            /// </summary>
             public int Id { get; set; }
             public int SenderId { get; set; }
             public int TargetId { get; set; }
@@ -20,7 +23,13 @@ namespace IDAL
             public DateTime Scheduled { get; set; }
             public DateTime PickedUp { get; set; }
             public DateTime Delivered { get; set; }
-
+            /// <summary>
+            /// to string
+            /// </summary>
+            public override string ToString()
+            {
+                return "Parcel: Id:" + Id + " Sender Id:" + SenderId + " Target Id:" + TargetId + " Weight:" + Weight + " Priority:" + Priority + " Requested: " + Requested + " Drone Id: " + DroneId + " Scheduled: " + Scheduled + " Pick up: " + PickedUp + " Delivered: " + Delivered;
+            }
         }
     }
 }
