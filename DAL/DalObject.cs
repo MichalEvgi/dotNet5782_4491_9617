@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 using IDAL.DO;
+using IDAL;
 
 namespace DalObject
 {
-    public class DalObject
+    public class DalObject:IDal
     {
         public DalObject()
         {
@@ -38,17 +40,13 @@ namespace DalObject
         /// <param name="id"> drone's id</param>
         /// <param name="model"> drone's model</param>
         /// <param name="maxWeight">drone's max weight of parcel</param>
-        /// <param name="status">drone's status</param>
-        /// <param name="battery">drone's battery</param>
-        public static void AddDrone(int id, string model, int maxWeight, int status, double battery)
+        public static void AddDrone(int id, string model, int maxWeight)
         {
             DataSource.drones.Add(new Drone
             {
                 Id = id,
                 Model = model,
-                MaxWeight = (WeightCategories)maxWeight,
-                Status = (DroneStatuses)status,
-                Battery = battery
+                MaxWeight = (WeightCategories)maxWeight
             });
         }
         /// <summary>
@@ -112,17 +110,13 @@ namespace DalObject
         public static void PickParcel(int id)
         {
             Parcel temp = GetParcelById(id);
-            Drone tempD = GetDroneById(temp.DroneId);
-            //save parcel and drone in temps
+            //save parcel in temp
             DataSource.parcels.Remove(temp);
-            DataSource.drones.Remove(tempD);
             //remove
             temp.PickedUp = DateTime.Now;
-            tempD.Status = DroneStatuses.Delivery;
             //update
-            DataSource.drones.Add(tempD);
             DataSource.parcels.Add(temp);
-            //add parcel and drone back
+            //add parcel back
         }
         /// <summary>
         /// deliver parcel to customer
@@ -131,17 +125,13 @@ namespace DalObject
         public static void DeliverParcel(int id)
         {
             Parcel temp = GetParcelById(id);
-            Drone tempD = GetDroneById(temp.DroneId);
-            //save parcel and drone in temps
+            //save parcel in temp
             DataSource.parcels.Remove(temp);
-            DataSource.drones.Remove(tempD);
             //remove
             temp.Delivered = DateTime.Now;
-            tempD.Status = DroneStatuses.Available;
             //update
-            DataSource.drones.Add(tempD);
             DataSource.parcels.Add(temp);
-            //add parcel and drone back
+            //add parcel back
         }
         /// <summary>
         /// send drone to charge in station
@@ -151,17 +141,13 @@ namespace DalObject
         public static void SendToCharge(int droneId, int stationId)
         {
             Station tempS = GetStationById(stationId);
-            Drone tempD = GetDroneById(droneId);
-            //save station and drone in temps
+            //save station in temp
             DataSource.stations.Remove(tempS);
-            DataSource.drones.Remove(tempD);
             //remove
             tempS.ChargeSlots--;
-            tempD.Status = DroneStatuses.Maintenance;
             //update
-            DataSource.drones.Add(tempD);
             DataSource.stations.Add(tempS);
-            //add station and drone back
+            //add station back
             DataSource.DroneCharges.Add(new DroneCharge { DroneId = droneId, StationId = stationId }); //add drone charge
         }
         /// <summary>
@@ -172,19 +158,14 @@ namespace DalObject
          {
             DroneCharge temp = GetDroneChargeById(droneId);
             Station tempS = GetStationById(temp.StationId);
-            Drone tempD = GetDroneById(droneId);
-            //save drone charge, station and drone in temps
+            //save drone charge and station in temps
             DataSource.stations.Remove(tempS);
-            DataSource.drones.Remove(tempD);
             //remove+ remove drone charge
             tempS.ChargeSlots++;
-            tempD.Status = DroneStatuses.Available;
-            tempD.Battery = 100;
             //update
-            DataSource.drones.Add(tempD);
             DataSource.stations.Add(tempS);
             DataSource.DroneCharges.Remove(temp);
-            //add station and drone back
+            //add station back
         }
         /// <summary>
         /// return parcel by id
@@ -256,22 +237,22 @@ namespace DalObject
         /// return list of stations
         /// </summary>
         /// <returns></returns>
-        public static List<Station> PrintStations()=>DataSource.stations;
+        public static IEnumerable<Station> PrintStations()=>DataSource.stations;
         /// <summary>
         /// return list of drones
         /// </summary>
         /// <returns></returns>
-        public static List<Drone> PrintDrones() => DataSource.drones;
+        public static IEnumerable<Drone> PrintDrones() => DataSource.drones;
         /// <summary>
         /// return list of customers
         /// </summary>
         /// <returns></returns>
-        public static List<Customer> PrintCustomers() => DataSource.customers;
+        public static IEnumerable<Customer> PrintCustomers() => DataSource.customers;
         /// <summary>
         /// return list of parcels
         /// </summary>
         /// <returns></returns>
-        public static List<Parcel> PrintParcels() => DataSource.parcels;
+        public static IEnumerable<Parcel> PrintParcels() => DataSource.parcels;
         /// <summary>
         /// create string of sexagesimal lattitude
         /// </summary>

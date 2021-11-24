@@ -23,7 +23,12 @@ namespace DalObject
 
         internal class Config
         {
-            internal static int index = 1000;
+           // internal static int index = 1000;
+            public static double Available { get; set; }
+            public static double LightWeight { get; set; }
+            public static double MediumWeight { get; set; }
+            public static double HeavyWeight { get; set; }
+            public static double ChargingRate { get; set; } //drone loading rate- precent per hour
         }
         public static void Initialize()
         {
@@ -43,9 +48,7 @@ namespace DalObject
                 {
                     Id = r.Next(1000, 10000),
                     Model = ((DroneModel)i).ToString(),
-                    MaxWeight = (WeightCategories)r.Next(0, 3),
-                    Status = DroneStatuses.Available,
-                    Battery = r.Next(0, 101)
+                    MaxWeight = (WeightCategories)r.Next(0, 3)
                 }
                     );
             }

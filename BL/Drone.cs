@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IDAL
+namespace IBL
 {
-    namespace DO
+    namespace BO
     {
         public struct Drone
         {
@@ -16,7 +16,7 @@ namespace IDAL
             public int Id { get; set; }
             public string Model { get; set; }
             public WeightCategories MaxWeight { get; set; }
-           
+
             /// <summary>
             /// to string
             /// </summary>

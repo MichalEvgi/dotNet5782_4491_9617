@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DalObject;
 using IDAL.DO;
+using IDAL;
 
 namespace ConsoleUI
 {
@@ -9,7 +10,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            DalObject.DalObject dalObject = new DalObject.DalObject();
+            IDal dalObject = new DalObject.DalObject();
             int choice;
             Console.WriteLine("To add press 1");
             Console.WriteLine("To update press 2");
@@ -138,17 +139,14 @@ namespace ConsoleUI
         {
             int id;
             string model;
-            int maxWeight, status = 0;
-            double battery;
+            int maxWeight;
             Console.WriteLine("enter id");
             int.TryParse(Console.ReadLine(), out id);
             Console.WriteLine("enter model");
             model = Console.ReadLine();
             Console.WriteLine("enter 0 for light, 1 for Medium and 2 for Heavy");
             int.TryParse(Console.ReadLine(), out maxWeight);
-            Console.WriteLine("enter battery");
-            double.TryParse(Console.ReadLine(), out battery);
-            DalObject.DalObject.AddDrone(id, model, maxWeight, status, battery);
+            DalObject.DalObject.AddDrone(id, model, maxWeight);
         }
         /// <summary>
         /// add customer to the customers list
@@ -283,7 +281,7 @@ namespace ConsoleUI
         /// </summary>
         public static void ListStations()
         {
-            List<Station> stations = DalObject.DalObject.PrintStations();
+            IEnumerable<Station> stations = DalObject.DalObject.PrintStations();
             foreach (Station s in stations)
             {
                 Console.WriteLine(s);
@@ -294,7 +292,7 @@ namespace ConsoleUI
         /// </summary>
         public static void ListDrones()
         {
-            List<Drone> drones = DalObject.DalObject.PrintDrones();
+            IEnumerable<Drone> drones = DalObject.DalObject.PrintDrones();
             foreach (Drone d in drones)
             {
                 Console.WriteLine(d);
@@ -305,7 +303,7 @@ namespace ConsoleUI
         /// </summary>
         public static void ListCustomers()
         {
-            List<Customer> customers = DalObject.DalObject.PrintCustomers();
+            IEnumerable<Customer> customers = DalObject.DalObject.PrintCustomers();
             foreach (Customer c in customers)
             {
                 Console.WriteLine(c);
@@ -316,7 +314,7 @@ namespace ConsoleUI
         /// </summary>
         public static void ListParcels()
         {
-            List<Parcel> parcels = DalObject.DalObject.PrintParcels();
+            IEnumerable<Parcel> parcels = DalObject.DalObject.PrintParcels();
             foreach (Parcel p in parcels)
             {
                 Console.WriteLine(p);
@@ -327,7 +325,7 @@ namespace ConsoleUI
         /// </summary>
         public static void ListUnassociated()
         {
-            List<Parcel> parcels = DalObject.DalObject.PrintParcels();
+            IEnumerable<Parcel> parcels = DalObject.DalObject.PrintParcels();
             foreach (Parcel p in parcels)
             {
                 if (p.DroneId == 0) //if the parcel is not associated with drone
@@ -339,7 +337,7 @@ namespace ConsoleUI
         /// </summary>
         public static void ListAvailable()
         {
-            List<Station> stations = DalObject.DalObject.PrintStations();
+            IEnumerable<Station> stations = DalObject.DalObject.PrintStations();
             foreach (Station s in stations)
             {
                 if (s.ChargeSlots > 0) //if there are any available charging slots in the station
