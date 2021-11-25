@@ -8,21 +8,16 @@ namespace IBL
 {
     namespace BO
     {
-        public struct Parcel
+        public struct ParcelInCustomer
         {
             /// <summary>
             /// properities
             /// </summary>
             public int Id { get; set; }
-            public CustomerInParcel Sender { get; set; }
-            public CustomerInParcel Target { get; set; }
             public WeightCategories Weight { get; set; }
             public Priorities Priority { get; set; }
-            public DroneInParcel DroneP { get; set; }
-            public DateTime RequestedTime { get; set; }
-            public DateTime ScheduledTime { get; set; }
-            public DateTime PickedUpTime { get; set; }
-            public DateTime DeliveredTime { get; set; }
+            public ParcelModes ParcelMode { get; set; }
+            public CustomerInParcel OtherCustomer { get; set; }
             /// <summary>
             /// to string
             /// </summary>

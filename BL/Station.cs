@@ -16,15 +16,15 @@ namespace IBL
             /// </summary>
             public int Id { get; set; }
             public int Name { get; set; }
-            public double Longitude { get; set; }
-            public double Lattitude { get; set; }
-            public int ChargeSlots { get; set; }
+            public Location LocationS { get; set; }
+            public int AvailableSlots { get; set; }
+            public List<DroneInCharging> DronesInCharging { get; set; }
             /// <summary>
             /// to string
             /// </summary>
             public override string ToString()
             {
-                return "Station: Id: " + Id + " Name: " + Name + " Longitude: " + DalObject.DalObject.Lng(Longitude) + " Lattitude: " + DalObject.DalObject.Lat(Lattitude) + " Charge Slots: " + ChargeSlots;
+                return ToolStringClass.ToStringProperty(this);
             }
 
         }

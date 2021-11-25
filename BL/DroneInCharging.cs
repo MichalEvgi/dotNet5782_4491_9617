@@ -4,22 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace IBL
 {
     namespace BO
     {
-        public struct Customer
+        public struct DroneInCharging
         {
             /// <summary>
             /// properties
             /// </summary>
             public int Id { get; set; }
-            public string Name { get; set; }
-            public string Phone { get; set; }
-            public Location LocationC { get; set; }
-            public List<ParcelInCustomer> FromCustomer { get; set; }
-            public List<ParcelInCustomer> ToCustomer { get; set; }
+            public double Battery { get; set; }
+
             /// <summary>
             /// to string
             /// </summary>
@@ -27,7 +23,6 @@ namespace IBL
             {
                 return ToolStringClass.ToStringProperty(this);
             }
-
         }
     }
 }

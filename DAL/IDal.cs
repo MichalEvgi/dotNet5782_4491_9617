@@ -41,7 +41,7 @@ namespace IDAL
         /// <param name="target">target customer id</param>
         /// <param name="weight"> parcel's weight</param>
         /// <param name="priority">parcel's priority</param>
-        public void AddParcel(int sender, int target, int weight, int priority);
+        public void AddParcel(int id, int sender, int target, int weight, int priority);
         // <summary>
         /// assign drone to parcel
         /// </summary>
@@ -113,5 +113,11 @@ namespace IDAL
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Parcel> PrintParcels();
+        /// <summary>
+        /// request power consumption by drone
+        /// return array of weight mode and charging rate
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<double> ElectricityRequest();
  }
 }

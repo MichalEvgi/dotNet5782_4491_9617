@@ -23,7 +23,7 @@ namespace DalObject
         /// <param name="lng"> station's longitude</param>
         /// <param name="lat"> station's lattitude</param>
         /// <param name="chargeslots"> number of available charge slots</param>
-        public static void AddStation(int id, int name, double lng, double lat, int chargeslots)
+        public void AddStation(int id, int name, double lng, double lat, int chargeslots)
         {
             DataSource.stations.Add(new Station
             {
@@ -40,7 +40,7 @@ namespace DalObject
         /// <param name="id"> drone's id</param>
         /// <param name="model"> drone's model</param>
         /// <param name="maxWeight">drone's max weight of parcel</param>
-        public static void AddDrone(int id, string model, int maxWeight)
+        public void AddDrone(int id, string model, int maxWeight)
         {
             DataSource.drones.Add(new Drone
             {
@@ -57,7 +57,7 @@ namespace DalObject
         /// <param name="phone">customer's phone</param>
         /// <param name="lng">customer's longitude</param>
         /// <param name="lat">customer's lattitude</param>
-        public static void AddCustomer(int id, string name, string phone, double lng, double lat)
+        public void AddCustomer(int id, string name, string phone, double lng, double lat)
         {
             DataSource.customers.Add(new Customer
             {
@@ -75,11 +75,11 @@ namespace DalObject
         /// <param name="target">target customer id</param>
         /// <param name="weight"> parcel's weight</param>
         /// <param name="priority">parcel's priority</param>
-        public static void AddParcel(int sender, int target, int weight, int priority)
+        public void AddParcel(int id, int sender, int target, int weight, int priority)
         {
             DataSource.parcels.Add(new Parcel
             {
-                Id = DataSource.Config.index,
+                Id = id,
                 SenderId = sender,
                 TargetId = target,
                 Weight = (WeightCategories)weight,
@@ -87,14 +87,13 @@ namespace DalObject
                 Requested = DateTime.Now,
                 DroneId = 0
             });
-            DataSource.Config.index++;
         }
         /// <summary>
         /// assign drone to parcel
         /// </summary>
         /// <param name="id"> parcel's id</param>
         /// <param name="droneId"> drone's id</param>
-        public static void DroneToParcel(int id, int droneId)
+        public void DroneToParcel(int id, int droneId)
         {
             Parcel temp = GetParcelById(id); //save parcel in temp
             DataSource.parcels.Remove(temp); //remove
@@ -107,7 +106,7 @@ namespace DalObject
         /// pick parcel by drone
         /// </summary>
         /// <param name="id">parcel's id</param>
-        public static void PickParcel(int id)
+        public void PickParcel(int id)
         {
             Parcel temp = GetParcelById(id);
             //save parcel in temp
@@ -122,7 +121,7 @@ namespace DalObject
         /// deliver parcel to customer
         /// </summary>
         /// <param name="id">parcel's id</param>
-        public static void DeliverParcel(int id)
+        public void DeliverParcel(int id)
         {
             Parcel temp = GetParcelById(id);
             //save parcel in temp
@@ -138,7 +137,7 @@ namespace DalObject
         /// </summary>
         /// <param name="droneId">drone's id</param>
         /// <param name="stationId">station's id</param>
-        public static void SendToCharge(int droneId, int stationId)
+        public void SendToCharge(int droneId, int stationId)
         {
             Station tempS = GetStationById(stationId);
             //save station in temp
@@ -154,7 +153,7 @@ namespace DalObject
         /// release drone from station
         /// </summary>
         /// <param name="droneId">drone's id</param>
-        public static void ReleaseDrone(int droneId)
+        public void ReleaseDrone(int droneId)
          {
             DroneCharge temp = GetDroneChargeById(droneId);
             Station tempS = GetStationById(temp.StationId);
@@ -202,7 +201,7 @@ namespace DalObject
         /// </summary>
         /// <param name="id">station's id</param>
         /// <returns></returns>
-        public static string ShowStation(int id)
+        public string ShowStation(int id)
         {
             return GetStationById(id).ToString();
         }
@@ -211,7 +210,7 @@ namespace DalObject
         /// </summary>
         /// <param name="id">drone's id</param>
         /// <returns></returns>
-        public static string ShowDrone(int id)
+        public string ShowDrone(int id)
         {
             return GetDroneById(id).ToString();
         }
@@ -220,7 +219,7 @@ namespace DalObject
         /// </summary>
         /// <param name="id">customer's id</param>
         /// <returns></returns>
-        public static string ShowCustomer(int id)
+        public string ShowCustomer(int id)
         {
             return GetCustomerById(id).ToString();
         }
@@ -229,7 +228,7 @@ namespace DalObject
         /// </summary>
         /// <param name="id">parcel's id</param>
         /// <returns></returns>
-        public static string ShowParcel(int id)
+        public string ShowParcel(int id)
         {
             return GetParcelById(id).ToString();
         }
@@ -237,22 +236,22 @@ namespace DalObject
         /// return list of stations
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<Station> PrintStations()=>DataSource.stations;
+        public IEnumerable<Station> PrintStations()=>DataSource.stations;
         /// <summary>
         /// return list of drones
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<Drone> PrintDrones() => DataSource.drones;
+        public IEnumerable<Drone> PrintDrones() => DataSource.drones;
         /// <summary>
         /// return list of customers
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<Customer> PrintCustomers() => DataSource.customers;
+        public IEnumerable<Customer> PrintCustomers() => DataSource.customers;
         /// <summary>
         /// return list of parcels
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<Parcel> PrintParcels() => DataSource.parcels;
+        public IEnumerable<Parcel> PrintParcels() => DataSource.parcels;
         /// <summary>
         /// create string of sexagesimal lattitude
         /// </summary>
@@ -296,6 +295,21 @@ namespace DalObject
             double sec = (dif) * 3600 - min * 60;
             sec = Math.Round(sec, 4);
             return $"{deg}° {min}' {sec}'' {ch}";
+        }
+        /// <summary>
+        /// request power consumption by drone
+        /// return array of weight mode and charging rate
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<double> ElectricityRequest()
+        {
+            double[] arr = new double[5];
+            arr[0] = DataSource.Config.Available;
+            arr[1] = DataSource.Config.LightWeight;
+            arr[2] = DataSource.Config.MediumWeight;
+            arr[3] = DataSource.Config.HeavyWeight;
+            arr[4] = DataSource.Config.ChargingRate;
+            return arr;
         }
     }
 }

@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace IBL
 {
     namespace BO
     {
-        public struct Customer
+        public struct CustomerToList
         {
             /// <summary>
             /// properties
@@ -17,9 +16,10 @@ namespace IBL
             public int Id { get; set; }
             public string Name { get; set; }
             public string Phone { get; set; }
-            public Location LocationC { get; set; }
-            public List<ParcelInCustomer> FromCustomer { get; set; }
-            public List<ParcelInCustomer> ToCustomer { get; set; }
+            public int Supplied { get; set; }
+            public int NotSupplied { get; set; }
+            public int Arrived { get; set; }
+            public int NotArrived { get; set; }
             /// <summary>
             /// to string
             /// </summary>
@@ -27,7 +27,6 @@ namespace IBL
             {
                 return ToolStringClass.ToStringProperty(this);
             }
-
         }
     }
 }

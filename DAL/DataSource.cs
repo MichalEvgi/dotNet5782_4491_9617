@@ -23,7 +23,6 @@ namespace DalObject
 
         internal class Config
         {
-           // internal static int index = 1000;
             public static double Available { get; set; }
             public static double LightWeight { get; set; }
             public static double MediumWeight { get; set; }
