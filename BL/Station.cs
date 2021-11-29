@@ -9,7 +9,7 @@ namespace IBL
 {
     namespace BO
     {
-        public struct Station
+        public class Station
         {
             /// <summary>
             /// properties
@@ -18,7 +18,7 @@ namespace IBL
             public int Name { get; set; }
             public Location LocationS { get; set; }
             public int AvailableSlots { get; set; }
-            public List<DroneInCharging> DronesInCharging { get; set; }
+            public IEnumerable<DroneInCharging> DronesInCharging { get; set; }
             /// <summary>
             /// to string
             /// </summary>

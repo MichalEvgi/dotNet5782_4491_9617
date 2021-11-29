@@ -8,7 +8,7 @@ namespace IBL
 {
     namespace BO
     {
-        public struct DroneInParcel
+        public class DroneInParcel
         {
             /// <summary>
             /// properties

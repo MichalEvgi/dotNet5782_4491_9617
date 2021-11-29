@@ -17,7 +17,7 @@ namespace IBL
             /// </summary>
             public override string ToString()
             {
-                return "Longitude:" + DalObject.DalObject.Lng(Longitude) + " Lattitude:" + DalObject.DalObject.Lat(Lattitude);
+                return "Longitude:" + BL.Lng(Longitude) + " Lattitude:" + BL.Lat(Lattitude);
             }
         }
     }

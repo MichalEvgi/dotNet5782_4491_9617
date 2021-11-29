@@ -9,7 +9,7 @@ namespace IBL
 {
     namespace BO
     {
-        public struct Customer
+        public class Customer
         {
             /// <summary>
             /// properties
@@ -18,8 +18,8 @@ namespace IBL
             public string Name { get; set; }
             public string Phone { get; set; }
             public Location LocationC { get; set; }
-            public List<ParcelInCustomer> FromCustomer { get; set; }
-            public List<ParcelInCustomer> ToCustomer { get; set; }
+            public IEnumerable<ParcelInCustomer> FromCustomer { get; set; }
+            public IEnumerable<ParcelInCustomer> ToCustomer { get; set; }
             /// <summary>
             /// to string
             /// </summary>

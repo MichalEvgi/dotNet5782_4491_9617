@@ -12,37 +12,20 @@ namespace IDAL
         /// <summary>
         /// add station to the list of stations
         /// </summary>
-        /// <param name="id"> station's id</param>
-        /// <param name="name"> station's name</param>
-        /// <param name="lng"> station's longitude</param>
-        /// <param name="lat"> station's lattitude</param>
-        /// <param name="chargeslots"> number of available charge slots</param>
-        public void AddStation(int id, int name, double lng, double lat, int chargeslots);
+        public void AddStation(Station s);
         /// <summary>
         /// add drone to list of drones
         /// </summary>
-        /// <param name="id"> drone's id</param>
-        /// <param name="model"> drone's model</param>
-        /// <param name="maxWeight">drone's max weight of parcel</param>
-        public void AddDrone(int id, string model, int maxWeight);
+        public void AddDrone(Drone d);
         /// <summary>
         /// add customer to the list of customeer
         /// </summary>
-        /// <param name="id">customer's id</param>
-        /// <param name="name">customer's name</param>
-        /// <param name="phone">customer's phone</param>
-        /// <param name="lng">customer's longitude</param>
-        /// <param name="lat">customer's lattitude</param>
-        public void AddCustomer(int id, string name, string phone, double lng, double lat);
+        public void AddCustomer(Customer c);
         /// <summary>
         /// add parcel to the list of parcels
         /// </summary>
-        /// <param name="sender">sender customer id</param>
-        /// <param name="target">target customer id</param>
-        /// <param name="weight"> parcel's weight</param>
-        /// <param name="priority">parcel's priority</param>
-        public void AddParcel(int id, int sender, int target, int weight, int priority);
-        // <summary>
+        public void AddParcel(Parcel p);
+        /// <summary>
         /// assign drone to parcel
         /// </summary>
         /// <param name="id"> parcel's id</param>
@@ -69,7 +52,7 @@ namespace IDAL
         /// </summary>
         /// <param name="droneId">drone's id</param>
         public void ReleaseDrone(int droneId);
-        // <summary>
+        /// <summary>
         /// return the description of a specific station
         /// </summary>
         /// <param name="id">station's id</param>
@@ -113,6 +96,68 @@ namespace IDAL
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Parcel> PrintParcels();
+        /// <summary>
+        /// delete drone by id
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteDrone(int id);
+        /// <summary>
+        /// delete station by id
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteStation(int id);
+        /// <summary>
+        /// delete customer by id
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteCustomer(int id);
+        /// <summary>
+        /// delete parcel by id
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteParcel(int id);
+        /// /// <summary>
+        /// return parcel by id
+        /// </summary>
+        /// <param name="id">parcel's id</param>
+        /// <returns></returns>
+        public Parcel GetParcelById(int id);
+        /// <summary>
+        /// return drone by id
+        /// </summary>
+        /// <param name="id">drone's id</param>
+        /// <returns></returns>
+        public Drone GetDroneById(int id);
+        /// <summary>
+        /// return station by id
+        /// </summary>
+        /// <param name="id">station's id</param>
+        /// <returns></returns>
+        public Station GetStationById(int id);
+        /// <summary>
+        /// return drone charge by drone's id
+        /// </summary>
+        /// <param name="id">drone's id</param>
+        /// <returns></returns>
+        public DroneCharge GetDroneChargeById(int id);
+        /// <summary>
+        /// return customer by id
+        /// </summary>
+        /// <param name="id">customeer's id</param>
+        /// <returns></returns>
+        public Customer GetCustomerById(int id);
+        /// <summary>
+        /// return how many full slots in the station
+        /// </summary>
+        /// <param name="stationId">station id</param>
+        /// <returns></returns>
+        public int FullSlots(int stationId);
+        /// <summary>
+        /// return all the drone IDs that are charged in station(according to the station id)
+        /// </summary>
+        /// <param name="stationId">station id</param>
+        /// <returns></returns>
+        public IEnumerable<int> DroneInChargeIds(int stationId);
         /// <summary>
         /// request power consumption by drone
         /// return array of weight mode and charging rate

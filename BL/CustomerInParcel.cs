@@ -8,7 +8,7 @@ namespace IBL
 {
     namespace BO
     {
-        public struct CustomerInParcel
+        public class CustomerInParcel
         {
             /// <summary>
             /// properties

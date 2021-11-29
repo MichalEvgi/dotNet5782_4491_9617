@@ -8,7 +8,7 @@ namespace IBL
 {
     namespace BO
     {
-        public struct ParcelToList
+        public class ParcelToList
         {
             /// <summary>
             /// properities

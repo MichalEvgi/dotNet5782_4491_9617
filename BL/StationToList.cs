@@ -8,7 +8,7 @@ namespace IBL
 {
     namespace BO
     {
-        public struct StationToList
+        public class StationToList
         {
             /// <summary>
             /// properties
