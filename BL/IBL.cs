@@ -64,7 +64,7 @@ namespace IBL
         /// <param name="id">customer id</param>
         /// <param name="name">new customer name</param>
         /// <param name="phone">new customer phone</param>
-        public void UpdateCustomer(int id, string name, int phone);
+        public void UpdateCustomer(int id, string name, string phone);
         /// <summary>
         /// send drone to charge
         /// </summary>

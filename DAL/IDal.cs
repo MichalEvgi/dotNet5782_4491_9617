@@ -164,5 +164,30 @@ namespace IDAL
         /// </summary>
         /// <returns></returns>
         public IEnumerable<double> ElectricityRequest();
+        /// <summary>
+        /// return the transfered parcel with the droneId
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <returns></returns>
+        public Parcel GetTransferedParcel(int droneId);
+        /// <summary>
+        /// calculate the distance between two points of longitude and lattitude
+        /// </summary>
+        /// <param name="lon1"></param>
+        /// <param name="lat1"></param>
+        /// <param name="lon2"></param>
+        /// <param name="lat2"></param>
+        /// <returns></returns>
+        public double Distance(double lon1, double lat1, double lon2, double lat2);
+        /// <summary>
+        /// return all the stations with available chargeSlots
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Station> AvailableStations();
+        /// <summary>
+        /// return the list of parcels that not associated yet with drone
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Parcel> UnassociatedParcel();
  }
 }

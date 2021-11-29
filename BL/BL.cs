@@ -145,37 +145,108 @@ namespace IBL
         /// </summary>
         /// <param name="id">drone id</param>
         /// <param name="model">new drone model</param>
-        public void UpdateDrone(int id, string model);
+        public void UpdateDrone(int id, string model)
+        {
+            IDAL.DO.Drone temp = dal.GetDroneById(id);
+            dal.DeleteDrone(id);
+            temp.Model = model;
+            dal.AddDrone(temp);
+            int index = drones.FindIndex(d => d.Id == id);
+            drones[index].Model = model;
+        }
+        
         /// <summary>
         /// update the station
         /// </summary>
         /// <param name="id">station id</param>
         /// <param name="name">new station name</param>
         /// <param name="chargeSlots">new station charge slots</param>
-        public void UpdateStation(int id, int name, int chargeSlots);
+        public void UpdateStation(int id, int name, int chargeSlots)
+        {
+            IDAL.DO.Station temp = dal.GetStationById(id);
+            dal.DeleteStation(id);
+            if (name != -1)
+                temp.Name = name;
+            if (chargeSlots != -1)
+                temp.ChargeSlots = chargeSlots - dal.FullSlots(id);
+            dal.AddStation(temp);
+        }
         /// <summary>
         /// update the customer
         /// </summary>
         /// <param name="id">customer id</param>
         /// <param name="name">new customer name</param>
         /// <param name="phone">new customer phone</param>
-        public void UpdateCustomer(int id, string name, int phone);
+        public void UpdateCustomer(int id, string name, string phone)
+        {
+            IDAL.DO.Customer temp = dal.GetCustomerById(id);
+            dal.DeleteCustomer(id);
+            if (name != "")
+                temp.Name = name;
+            if (phone != "")
+                temp.Phone = phone;
+            dal.AddCustomer(temp);
+        }
         /// <summary>
         /// send drone to charge
         /// </summary>
         /// <param name="id">drone</param>
-        public void SendToCharge(int id);
+        public void SendToCharge(int id)
+        {
+            int index = drones.FindIndex(x => x.Id == id);
+            DroneToList drone = drones[index];
+            //if (drone.Status != DroneStatus.Available)
+            // throw Exception;
+            IEnumerable<IDAL.DO.Station> avStation = dal.AvailableStations();
+            IDAL.DO.Station closestStation = avStation.First();
+            double lon1 = drone.CurrentLocation.Longitude;
+            double lat1 = drone.CurrentLocation.Lattitude;
+            foreach(IDAL.DO.Station s in avStation)
+            {
+                double lon2 = closestStation.Longitude;
+                double lat2 = closestStation.Lattitude;
+                double lon3 = s.Longitude;
+                double lat3 = s.Lattitude;
+                if(dal.Distance(lon1,lat1,lon2,lat2)>dal.Distance(lon1,lat1,lon3,lat3))
+                    closestStation = s;
+            }
+            double smallestDistance = dal.Distance(lon1, lat1, closestStation.Longitude, closestStation.Lattitude);
+            //if (drone.Battery < smallestDistance * dal.ElectricityRequest().First())
+            //   throw;
+            drones[index].Battery -= smallestDistance * dal.ElectricityRequest().First();
+            drones[index].CurrentLocation = new Location { Longitude = closestStation.Longitude, Lattitude = closestStation.Lattitude };
+            drones[index].Status = DroneStatus.Maintenance;
+            dal.SendToCharge(id, closestStation.Id);
+        }
         /// <summary>
         /// release drone from charging
         /// </summary>
         /// <param name="id">drone's id</param>
         /// <param name="timeInCharging">charging time</param>
-        public void ReleaseDrone(int id, double timeInCharging);
+        public void ReleaseDrone(int id, double timeInCharging)
+        {
+            int index = drones.FindIndex(x => x.Id == id);
+            // if (drones[index].Status != DroneStatus.Maintenance)
+            //   throw;
+            drones[index].Battery += timeInCharging * dal.ElectricityRequest().ElementAt(4);
+            if (drones[index].Battery > 100)
+                drones[index].Battery = 100;
+            drones[index].Status = DroneStatus.Available;
+            dal.ReleaseDrone(id);
+        }        
         /// <summary>
         /// assign drone to parcel
         /// </summary>
         /// <param name="id"> drone's id</param>
-        public void DroneToParcel(int id);
+        public void DroneToParcel(int id)
+        {
+            int index = drones.FindIndex(x => x.Id == id);
+            // if (drones[index].Status != DroneStatus.Available)
+            //   throw;
+            IEnumerable<IDAL.DO.Parcel> unParcels = dal.UnassociatedParcel();
+            unParcels.OrderBy(p => p);
+            
+        }
         /// <summary>
         /// pick parcel by drone
         /// </summary>
@@ -215,19 +286,41 @@ namespace IBL
         {
             IDAL.DO.Drone d = dal.GetDroneById(id);
             DroneToList droneToList = drones.Find(d => d.Id == id);
+            IDAL.DO.Parcel p = dal.GetTransferedParcel(id);
+            IDAL.DO.Customer dalSender = dal.GetCustomerById(p.SenderId);
+            IDAL.DO.Customer dalTarget = dal.GetCustomerById(p.TargetId);
+            CustomerInParcel sender = new CustomerInParcel { Id = p.SenderId, Name = dalSender.Name };
+            CustomerInParcel target = new CustomerInParcel { Id = p.TargetId, Name = dalTarget.Name };
+            int parcelmode = 1;
+            if (p.PickedUp != DateTime.MinValue)
+                parcelmode = 2;
+            ParcelInTransfer parcelInTransfer = new ParcelInTransfer
+            {
+                Id = p.Id,
+                OnTheWay = parcelmode == 2,
+                Priority = (Priorities)p.Priority,
+                Weight = (WeightCategories)p.Weight,
+                ParcelMode = (ParcelModes)parcelmode,
+                Sender = sender,
+                Target = target,
+                SourceLocation = new Location { Longitude = dalSender.Longitude, Lattitude = dalSender.Lattitude },
+                DestinationLocation = new Location { Longitude = dalTarget.Longitude, Lattitude = dalTarget.Lattitude },
+                Distance = dal.Distance(dalSender.Longitude, dalSender.Lattitude, dalTarget.Longitude, dalTarget.Lattitude)
+            };
             ///delivery
             Drone drone = new Drone
             {
                 Id = d.Id,
                 Model = d.Model,
-                MaxWeight= (WeightCategories)d.MaxWeight,
-                Battery=droneToList.Battery,
-                Status=droneToList.Status,
-                TransferedParcel=delivery,
-                CurrentLocation=droneToList.CurrentLocation
+                MaxWeight = (WeightCategories)d.MaxWeight,
+                Battery = droneToList.Battery,
+                Status = droneToList.Status,
+                TransferedParcel = parcelInTransfer,
+                CurrentLocation =droneToList.CurrentLocation
             };
             return drone.ToString();
         }
+
         /// <summary>
         /// return the description of a specific customer
         /// </summary>

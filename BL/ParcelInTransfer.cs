@@ -19,7 +19,7 @@ namespace IBL
             public WeightCategories Weight { get; set; }
             public ParcelModes ParcelMode { get; set; }
             public CustomerInParcel Sender { get; set; }
-            public CustomerInParcel target { get; set; }
+            public CustomerInParcel Target { get; set; }
             public Location SourceLocation { get; set; }
             public Location DestinationLocation { get; set; }
             public double Distance { get; set; }

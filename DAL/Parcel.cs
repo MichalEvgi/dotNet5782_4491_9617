@@ -8,7 +8,8 @@ namespace IDAL
 {
     namespace DO
     {
-        public struct Parcel
+        public struct Parcel:IComparable
+
         {
             /// <summary>
             /// properities
@@ -23,6 +24,12 @@ namespace IDAL
             public DateTime Scheduled { get; set; }
             public DateTime PickedUp { get; set; }
             public DateTime Delivered { get; set; }
+
+            public int CompareTo(object obj)
+            {
+                throw new NotImplementedException();
+            }
+
             /// <summary>
             /// to string
             /// </summary>

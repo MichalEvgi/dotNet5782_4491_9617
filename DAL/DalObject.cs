@@ -114,11 +114,11 @@ namespace DalObject
             Station tempS = GetStationById(temp.StationId);
             //save drone charge and station in temps
             DataSource.stations.Remove(tempS);
+            DataSource.DroneCharges.Remove(temp);
             //remove+ remove drone charge
             tempS.ChargeSlots++;
             //update
             DataSource.stations.Add(tempS);
-            DataSource.DroneCharges.Remove(temp);
             //add station back
         }
         /// <summary>
@@ -327,6 +327,58 @@ namespace DalObject
             arr[3] = DataSource.Config.HeavyWeight;
             arr[4] = DataSource.Config.ChargingRate;
             return arr;
+        }
+
+        /// <summary>
+        /// return the transfered parcel with the droneId
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <returns></returns>
+        public Parcel GetTransferedParcel(int droneId)
+        {
+            foreach(Parcel p in DataSource.parcels)
+            {
+                if (p.DroneId == droneId && p.Delivered == DateTime.MinValue)
+                    return p;
+            }
+            throw; //parcel not found
+        }
+        /// <summary>
+        /// calculate the distance between two points of longitude and lattitude
+        /// </summary>
+        /// <param name="lon1"></param>
+        /// <param name="lat1"></param>
+        /// <param name="lon2"></param>
+        /// <param name="lat2"></param>
+        /// <returns></returns>
+        public double Distance(double lon1, double lat1, double lon2, double lat2)
+        {
+            var p = 0.017453292519943295;    // Math.PI / 180
+            var a = 0.5 - Math.Cos((lat2 - lat1) * p) / 2 +
+                    Math.Cos(lat1 * p) * Math.Cos(lat2 * p) *
+                    (1 - Math.Cos((lon2 - lon1) * p)) / 2;
+
+            return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
+        }
+        /// <summary>
+        /// return all the stations with available chargeSlots
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Station> AvailableStations()
+        {
+            return from Station s in DataSource.stations
+                   where s.ChargeSlots > 0
+                   select s;
+        }
+        /// <summary>
+        /// return the list of parcels that not associated yet with drone
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Parcel> UnassociatedParcel()
+        {
+            return from Parcel p in DataSource.parcels
+                   where p.DroneId == 0
+                   select p;
         }
     }
 }
