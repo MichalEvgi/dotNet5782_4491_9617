@@ -194,5 +194,9 @@ namespace IDAL
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Parcel> DeliveredParcel();
- }
+        public bool ExistStation(int id);
+        public bool ExistDrone(int id);
+        public bool ExistCustomer(int id);
+        public bool ExistParcel(int id);
+    }
 }

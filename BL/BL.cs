@@ -56,6 +56,8 @@ namespace IBL
                             droneToList.CurrentLocation = new Location { Longitude = senderLon, Lattitude = senderLat };
                         }
                         double minBattery = MinBattery(parcel, droneToList.CurrentLocation.Longitude, droneToList.CurrentLocation.Lattitude);
+                        if (minBattery > 100)
+                            throw new FullBatteryException(",the consumption for drone:" + drone.Id + " is " + minBattery + "%");
                         droneToList.Battery = minBattery + rand.NextDouble() * (100 - minBattery);
                         break;
                     }
@@ -77,9 +79,13 @@ namespace IBL
                         droneToList.CurrentLocation = new Location { Longitude = targetRandParcel.Longitude, Lattitude = targetRandParcel.Lattitude };
                         IDAL.DO.Station closeToDrone = ClosestStation(dal.AvailableStations(), droneToList.CurrentLocation.Longitude, droneToList.CurrentLocation.Lattitude);
                         double minBattery = dal.Distance(droneToList.CurrentLocation.Longitude, droneToList.CurrentLocation.Lattitude, closeToDrone.Longitude, closeToDrone.Lattitude) * available;
+                        if (minBattery > 100)
+                            throw new FullBatteryException(",the consumption for drone:" + drone.Id + " is " + minBattery + "%");
+                        droneToList.Battery = minBattery;
                     }
-                }
 
+                }
+                drones.Add(droneToList);
             }
         }
         /// <summary>
@@ -87,61 +93,100 @@ namespace IBL
         /// </summary>
         public void AddStation(Station s)
         {
-            dal.AddStation(new IDAL.DO.Station
+            if (s.Id < 1)
+                throw new InvalidInputException("id should be bigger than 0");
+            if (s.AvailableSlots < 0)
+                throw new InvalidInputException("available chargeslots cannot be negative");
+            try
             {
-                Id = s.Id,
-                Name = s.Name,
-                Longitude = s.LocationS.Longitude,
-                Lattitude = s.LocationS.Lattitude,
-                ChargeSlots = s.AvailableSlots
-            });
+                dal.AddStation(new IDAL.DO.Station
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Longitude = s.LocationS.Longitude,
+                    Lattitude = s.LocationS.Lattitude,
+                    ChargeSlots = s.AvailableSlots
+                });
+            }
+            catch (IDAL.DO.AlreadyExistsException ex)
+            {
+                throw new AlreadyExistsException(ex.Message);
+            }
+
         }
         /// <summary>
         /// send to DAL for adding the drone to list of drones
         /// </summary>
         public void AddDrone(Drone d, int stationId)
         {
+            if (!dal.ExistStation(stationId))
+                throw new NotFoundException("station");
+            if (d.Id < 1)
+                throw new InvalidInputException("drone id should be bigger than 0");
             d.Battery = rand.Next(20, 41);
             d.Status = DroneStatus.Maintenance;
             IDAL.DO.Station s = dal.GetStationById(stationId);
             d.CurrentLocation = new Location { Longitude = s.Longitude, Lattitude = s.Lattitude };
-            dal.AddDrone(new IDAL.DO.Drone
+            try
             {
-                Id = d.Id,
-                Model = d.Model,
-                MaxWeight = (IDAL.DO.WeightCategories)d.MaxWeight
-            });
-            dal.SendToCharge(d.Id, stationId);
-            drones.Add(new DroneToList
+                dal.AddDrone(new IDAL.DO.Drone
+                {
+                    Id = d.Id,
+                    Model = d.Model,
+                    MaxWeight = (IDAL.DO.WeightCategories)d.MaxWeight
+                });
+                dal.SendToCharge(d.Id, stationId);
+                drones.Add(new DroneToList
+                {
+                    Id = d.Id,
+                    Model = d.Model,
+                    MaxWeight = d.MaxWeight,
+                    Battery = d.Battery,
+                    Status = d.Status,
+                    CurrentLocation = d.CurrentLocation,
+                    ParcelId = 0
+                });
+            }
+            catch (IDAL.DO.AlreadyExistsException ex)
             {
-                Id = d.Id,
-                Model = d.Model,
-                MaxWeight = d.MaxWeight,
-                Battery = d.Battery,
-                Status = d.Status,
-                CurrentLocation = d.CurrentLocation,
-                ParcelId = 0
-            });
+                throw new AlreadyExistsException(ex.Message);
+            }
         }
         /// <summary>
         /// send to DAL for adding the customer to the list of customeer
         /// </summary>
         public void AddCustomer(Customer c)
         {
-            dal.AddCustomer(new IDAL.DO.Customer
+            if (c.Id < 100000000 || c.Id > 444444444)
+                throw new InvalidInputException("id should be 9 digits");
+            if (c.Phone.Length != 10)
+                throw new InvalidInputException("phone number should be 10 digits");
+            try
             {
-                Id = c.Id,
-                Name = c.Name,
-                Phone = c.Phone,
-                Longitude = c.LocationC.Longitude,
-                Lattitude = c.LocationC.Lattitude
-            });
+                dal.AddCustomer(new IDAL.DO.Customer
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Phone = c.Phone,
+                    Longitude = c.LocationC.Longitude,
+                    Lattitude = c.LocationC.Lattitude
+                });
+            }
+            catch (IDAL.DO.AlreadyExistsException ex)
+            {
+                throw new AlreadyExistsException(ex.Message);
+            }
+
         }
         /// <summary>
         /// send to DAL for adding the parcel to the list of parcels
         /// </summary>
         public void AddParcel(Parcel p)
         {
+            if (dal.ExistCustomer(p.Sender.Id))
+                throw new NotFoundException("customer:" + p.Sender.Id);
+            if (dal.ExistCustomer(p.Target.Id))
+                throw new NotFoundException("customer:" + p.Target.Id);
             dal.AddParcel(new IDAL.DO.Parcel
             {
                 SenderId = p.Sender.Id,
@@ -161,9 +206,16 @@ namespace IBL
         /// <param name="id"></param>
         public void DeleteDrone(int id)
         {
-            dal.DeleteDrone(id);
-            int i = drones.FindIndex(d => d.Id == id);
-            drones.RemoveAt(i);
+            try
+            {
+                dal.DeleteDrone(id);
+                int i = drones.FindIndex(d => d.Id == id);
+                drones.RemoveAt(i);
+            }
+            catch(IDAL.DO.NotFoundException ex)
+            {
+                throw new NotFoundException(ex.Message);
+            }
         }
         /// <summary>
         /// delete station by id
@@ -171,7 +223,14 @@ namespace IBL
         /// <param name="id"></param>
         public void DeleteStation(int id)
         {
-            dal.DeleteStation(id);
+            try
+            {
+                dal.DeleteStation(id);
+            }
+            catch (IDAL.DO.NotFoundException ex)
+            {
+                throw new NotFoundException(ex.Message);
+            }
         }
         /// <summary>
         /// delete customer by id
@@ -179,7 +238,14 @@ namespace IBL
         /// <param name="id"></param>
         public void DeleteCustomer(int id)
         {
-            dal.DeleteCustomer(id);
+            try
+            {
+                dal.DeleteCustomer(id);
+            }
+            catch (IDAL.DO.NotFoundException ex)
+            {
+                throw new NotFoundException(ex.Message);
+            }
         }
         /// <summary>
         /// delete parcel by id
@@ -187,7 +253,14 @@ namespace IBL
         /// <param name="id"></param>
         public void DeleteParcel(int id)
         {
-            dal.DeleteParcel(id);
+            try
+            {
+                dal.DeleteParcel(id);
+            }
+            catch (IDAL.DO.NotFoundException ex)
+            {
+                throw new NotFoundException(ex.Message);
+            }
         }
         /// <summary>
         /// update the drone model
@@ -196,6 +269,8 @@ namespace IBL
         /// <param name="model">new drone model</param>
         public void UpdateDrone(int id, string model)
         {
+            if (!dal.ExistDrone(id))
+                throw new NotFoundException("drone");
             IDAL.DO.Drone temp = dal.GetDroneById(id);
             dal.DeleteDrone(id);
             temp.Model = model;
@@ -212,12 +287,18 @@ namespace IBL
         /// <param name="chargeSlots">new station charge slots</param>
         public void UpdateStation(int id, int name, int chargeSlots)
         {
+            if (!dal.ExistStation(id))
+                throw new NotFoundException("station");
+            if (chargeSlots < 0)
+                throw new InvalidInputException("The number of chargeslots cannot be negative ");
             IDAL.DO.Station temp = dal.GetStationById(id);
             dal.DeleteStation(id);
             if (name != -1)
                 temp.Name = name;
             if (chargeSlots != -1)
                 temp.ChargeSlots = chargeSlots - dal.FullSlots(id);
+            if (temp.ChargeSlots < 0)
+                throw new InvalidInputException("The number of chargeslots cannot be " + chargeSlots + ", there are " + dal.FullSlots(id) + " fullslots");
             dal.AddStation(temp);
         }
         /// <summary>
@@ -228,6 +309,10 @@ namespace IBL
         /// <param name="phone">new customer phone</param>
         public void UpdateCustomer(int id, string name, string phone)
         {
+            if (!dal.ExistCustomer(id))
+                throw new NotFoundException("customer");
+            if (phone.Length != 10&&phone!="") 
+                throw new InvalidInputException("phone number should be 10 digits");
             IDAL.DO.Customer temp = dal.GetCustomerById(id);
             dal.DeleteCustomer(id);
             if (name != "")
@@ -296,13 +381,13 @@ namespace IBL
             IDAL.DO.Parcel chosenParcel;
             foreach (var parcel in unParcels)
             {
-                if(drones[index].Battery>=MinBattery(parcel,lonD,latD))
+                if (drones[index].Battery >= MinBattery(parcel, lonD, latD))
                 {
                     found = true;
                     chosenParcel = parcel;
                     drones[index].Status = DroneStatus.Delivery;
                     dal.DroneToParcel(chosenParcel.Id, drones[index].Id);
-                    break;    
+                    break;
                 }
             }
             //if (!found)

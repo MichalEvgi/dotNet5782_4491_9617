@@ -21,7 +21,7 @@ namespace DalObject
         public void AddStation(Station s)
         {
             if (DataSource.stations.Exists(stat => stat.Id == s.Id))
-                throw new AlreadyExists("station");
+                throw new AlreadyExistsException("station");
             DataSource.stations.Add(s);
         }
         /// <summary>
@@ -29,6 +29,8 @@ namespace DalObject
         /// </summary>
         public void AddDrone(Drone d)
         {
+            if (DataSource.drones.Exists(dron => dron.Id == d.Id))
+                throw new AlreadyExistsException("drone");
             DataSource.drones.Add(d);
         }
         /// <summary>
@@ -36,6 +38,8 @@ namespace DalObject
         /// </summary>
         public void AddCustomer(Customer c)
         {
+            if (DataSource.customers.Exists(cust => cust.Id == c.Id))
+                throw new AlreadyExistsException("customer");
             DataSource.customers.Add(c);
         }
         /// <summary>
@@ -54,6 +58,10 @@ namespace DalObject
         /// <param name="droneId"> drone's id</param>
         public void DroneToParcel(int id, int droneId)
         {
+            if (!DataSource.parcels.Exists(par => par.Id == id))
+                throw new NotFoundException("parcel");
+            if (!DataSource.drones.Exists(dron => dron.Id == droneId))
+                throw new NotFoundException("drone");
             Parcel temp = GetParcelById(id); //save parcel in temp
             DataSource.parcels.Remove(temp); //remove
             temp.DroneId = droneId;
@@ -67,6 +75,8 @@ namespace DalObject
         /// <param name="id">parcel's id</param>
         public void PickParcel(int id)
         {
+            if (!DataSource.parcels.Exists(par => par.Id == id))
+                throw new NotFoundException("parcel");
             Parcel temp = GetParcelById(id);
             //save parcel in temp
             DataSource.parcels.Remove(temp);
@@ -82,6 +92,8 @@ namespace DalObject
         /// <param name="id">parcel's id</param>
         public void DeliverParcel(int id)
         {
+            if (!DataSource.parcels.Exists(par => par.Id == id))
+                throw new NotFoundException("parcel");
             Parcel temp = GetParcelById(id);
             //save parcel in temp
             DataSource.parcels.Remove(temp);
@@ -98,6 +110,10 @@ namespace DalObject
         /// <param name="stationId">station's id</param>
         public void SendToCharge(int droneId, int stationId)
         {
+            if(!DataSource.drones.Exists(dron => dron.Id == droneId))
+                throw new NotFoundException("drone");
+            if(!DataSource.stations.Exists(stat => stat.Id == stationId))
+                throw new NotFoundException("station");
             Station tempS = GetStationById(stationId);
             //save station in temp
             DataSource.stations.Remove(tempS);
@@ -114,6 +130,8 @@ namespace DalObject
         /// <param name="droneId">drone's id</param>
         public void ReleaseDrone(int droneId)
          {
+            if(!DataSource.drones.Exists(dron => dron.Id == droneId))
+                throw new NotFoundException("drone");
             DroneCharge temp = GetDroneChargeById(droneId);
             Station tempS = GetStationById(temp.StationId);
             //save drone charge and station in temps
@@ -162,6 +180,8 @@ namespace DalObject
         /// <returns></returns>
         public string ShowStation(int id)
         {
+            if(!DataSource.stations.Exists(stat => stat.Id == id))
+                throw new NotFoundException("station");
             return GetStationById(id).ToString();
         }
         /// <summary>
@@ -171,6 +191,8 @@ namespace DalObject
         /// <returns></returns>
         public string ShowDrone(int id)
         {
+            if (!DataSource.drones.Exists(dron => dron.Id == id))
+                throw new NotFoundException("drone");
             return GetDroneById(id).ToString();
         }
         /// <summary>
@@ -180,6 +202,8 @@ namespace DalObject
         /// <returns></returns>
         public string ShowCustomer(int id)
         {
+            if (!DataSource.customers.Exists(cust => cust.Id == id))
+                throw new NotFoundException("customer");
             return GetCustomerById(id).ToString();
         }
         /// <summary>
@@ -189,6 +213,8 @@ namespace DalObject
         /// <returns></returns>
         public string ShowParcel(int id)
         {
+            if (!DataSource.parcels.Exists(parc => parc.Id == id))
+                throw new NotFoundException("parcel");
             return GetParcelById(id).ToString();
         }
         /// <summary>
@@ -217,6 +243,8 @@ namespace DalObject
         /// <param name="id"></param>
         public void DeleteDrone(int id)
         {
+            if (!DataSource.drones.Exists(dron => dron.Id == id))
+                throw new NotFoundException("drone");
             Drone temp = GetDroneById(id);
             DataSource.drones.Remove(temp);
         }
@@ -226,6 +254,8 @@ namespace DalObject
         /// <param name="id"></param>
         public void DeleteStation(int id)
         {
+            if (!DataSource.stations.Exists(stat => stat.Id == id))
+                throw new NotFoundException("station");
             Station temp = GetStationById(id);
             DataSource.stations.Remove(temp);
         }
@@ -235,6 +265,8 @@ namespace DalObject
         /// <param name="id"></param>
         public void DeleteCustomer(int id)
         {
+            if (!DataSource.customers.Exists(cust => cust.Id == id))
+                throw new NotFoundException("customer");
             Customer temp = GetCustomerById(id);
             DataSource.customers.Remove(temp);
         }
@@ -244,6 +276,8 @@ namespace DalObject
         /// <param name="id"></param>
         public void DeleteParcel(int id)
         {
+            if (!DataSource.parcels.Exists(parc => parc.Id == id))
+                throw new NotFoundException("parcel");
             Parcel temp = GetParcelById(id);
             DataSource.parcels.Remove(temp);
         }
@@ -254,6 +288,8 @@ namespace DalObject
         /// <returns></returns>
         public int FullSlots(int stationId)
         {
+            if (!DataSource.stations.Exists(stat => stat.Id == stationId))
+                throw new NotFoundException("station");
             int count= 0;
             foreach (var d in DataSource.DroneCharges)
             {
@@ -269,6 +305,8 @@ namespace DalObject
         /// <returns></returns>
         public IEnumerable<int> DroneInChargeIds(int stationId)
         {
+            if (!DataSource.stations.Exists(stat => stat.Id == stationId))
+                throw new NotFoundException("station");
             return from DroneCharge d in DataSource.DroneCharges
                    where d.StationId == stationId
                    select d.DroneId;
@@ -340,12 +378,14 @@ namespace DalObject
         /// <returns></returns>
         public Parcel GetTransferedParcel(int droneId)
         {
-            foreach(Parcel p in DataSource.parcels)
+            if (!DataSource.drones.Exists(dron => dron.Id == droneId))
+                throw new NotFoundException("drone");
+            foreach (Parcel p in DataSource.parcels)
             {
                 if (p.DroneId == droneId && p.Delivered == DateTime.MinValue)
                     return p;
             }
-            throw; //parcel not found
+             throw new NotFoundException("parcel"); //parcel not found
         }
         /// <summary>
         /// calculate the distance between two points of longitude and lattitude
@@ -394,5 +434,9 @@ namespace DalObject
                    where p.Delivered != DateTime.MinValue
                    select p;
         }
+        public bool ExistStation(int id) => DataSource.stations.Exists(s => s.Id == id);
+        public bool ExistDrone(int id) => DataSource.drones.Exists(d => d.Id == id);
+        public bool ExistCustomer(int id) => DataSource.customers.Exists(c => c.Id == id);
+        public bool ExistParcel(int id) => DataSource.parcels.Exists(p => p.Id == id);
     }
 }
