@@ -20,6 +20,8 @@ namespace DalObject
         /// </summary>
         public void AddStation(Station s)
         {
+            if (DataSource.stations.Exists(stat => stat.Id == s.Id))
+                throw new AlreadyExists("station");
             DataSource.stations.Add(s);
         }
         /// <summary>
@@ -41,6 +43,8 @@ namespace DalObject
         /// </summary>
         public void AddParcel(Parcel p)
         {
+            p.Id = DataSource.Config.RunIndex;
+            DataSource.Config.RunIndex++;
             DataSource.parcels.Add(p);
         }
         /// <summary>
@@ -378,6 +382,16 @@ namespace DalObject
         {
             return from Parcel p in DataSource.parcels
                    where p.DroneId == 0
+                   select p;
+        }
+        /// <summary>
+        /// return all the delivered parcels
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Parcel> DeliveredParcel()
+        {
+            return from Parcel p in DataSource.parcels
+                   where p.Delivered != DateTime.MinValue
                    select p;
         }
     }

@@ -189,5 +189,10 @@ namespace IDAL
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Parcel> UnassociatedParcel();
+        /// <summary>
+        /// return all the delivered parcels
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Parcel> DeliveredParcel();
  }
 }

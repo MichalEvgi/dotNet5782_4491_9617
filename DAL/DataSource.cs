@@ -23,6 +23,7 @@ namespace DalObject
 
         internal class Config
         {
+            public static int RunIndex = 1000;
             public static double Available { get; set; }
             public static double LightWeight { get; set; }
             public static double MediumWeight { get; set; }
@@ -80,11 +81,11 @@ namespace DalObject
         /// </summary>
         public static void CreateParcel()
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 9; i++)
             {
                 parcels.Add(new Parcel
                 {
-                    Id = r.Next(100, 999),
+                    Id = Config.RunIndex,
                     SenderId = customers[r.Next(0, 10)].Id,
                     TargetId = customers[r.Next(0, 10)].Id,
                     Weight = (WeightCategories)r.Next(0, 3),
@@ -94,9 +95,24 @@ namespace DalObject
                     Scheduled = DateTime.MinValue,
                     PickedUp = DateTime.MinValue,
                     Delivered = DateTime.MinValue
-
-                });
+                }) ;
+                Config.RunIndex++;
             }
+            parcels.Add(new Parcel
+            {
+                Id = Config.RunIndex,
+                SenderId = customers[r.Next(0, 10)].Id,
+                TargetId = customers[r.Next(0, 10)].Id,
+                Weight = (WeightCategories)r.Next(0, 3),
+                Priority = (Priorities)r.Next(0, 3),
+                Requested = DateTime.Now,
+                DroneId = drones[r.Next(0, 5)].Id,
+                Scheduled = DateTime.Now,
+                PickedUp = DateTime.Now,
+                Delivered = DateTime.Now
+
+            });
+            Config.RunIndex++;
         }
         /// <summary>
         /// create 10 customers in the lise of customers
