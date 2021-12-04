@@ -34,15 +34,15 @@ namespace IBL
             }
         }
         [Serializable]
-        public class FullBatteryException : Exception
+        public class BatteryException : Exception
         {
-            public FullBatteryException() : base() { }
-            public FullBatteryException(string message) : base(message) { }
-            public FullBatteryException(string message, Exception inner) : base(message, inner) { }
-            protected FullBatteryException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+            public BatteryException() : base() { }
+            public BatteryException(string message) : base(message) { }
+            public BatteryException(string message, Exception inner) : base(message, inner) { }
+            protected BatteryException(SerializationInfo info, StreamingContext context) : base(info, context) { }
             override public string ToString()
             {
-                return "The drone's battery consumption is over 100% " + Message;
+                return  Message;
             }
         }
         [Serializable]
@@ -55,6 +55,42 @@ namespace IBL
             override public string ToString()
             {
                 return "Invalid input: " + Message;
+            }
+        }
+        [Serializable]
+        public class DroneStatusException : Exception
+        {
+            public DroneStatusException() : base() { }
+            public DroneStatusException(string message) : base(message) { }
+            public DroneStatusException(string message, Exception inner) : base(message, inner) { }
+            protected DroneStatusException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+            override public string ToString()
+            {
+                return  Message;
+            }
+        }
+        [Serializable]
+        public class EmptyListException : Exception
+        {
+            public EmptyListException() : base() { }
+            public EmptyListException(string message) : base(message) { }
+            public EmptyListException(string message, Exception inner) : base(message, inner) { }
+            protected EmptyListException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+            override public string ToString()
+            {
+                return Message;
+            }
+        }
+        [Serializable]
+        public class ParcelModeException : Exception
+        {
+            public ParcelModeException() : base() { }
+            public ParcelModeException(string message) : base(message) { }
+            public ParcelModeException(string message, Exception inner) : base(message, inner) { }
+            protected ParcelModeException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+            override public string ToString()
+            {
+                return Message;
             }
         }
     }
