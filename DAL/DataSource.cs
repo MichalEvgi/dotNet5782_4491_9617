@@ -36,10 +36,10 @@ namespace DalObject
             CreateStation();
             CreateCustomer();
             CreateParcel();
-            Config.Available = 0.5;
-            Config.LightWeight = 1;
-            Config.MediumWeight = 2;
-            Config.HeavyWeight = 3;
+            Config.Available = 0.25;
+            Config.LightWeight = 0.5;
+            Config.MediumWeight = 1;
+            Config.HeavyWeight = 2;
             Config.ChargingRate = 25;
         }
         /// <summary>
@@ -69,8 +69,8 @@ namespace DalObject
                 {
                     Id = i + 1,
                     Name = r.Next(100000, 1000000),
-                    Longitude = r.NextDouble() * 200 - 100,
-                    Lattitude = r.NextDouble() * 200 - 100,
+                    Longitude = r.NextDouble() * 3 +30,
+                    Lattitude = r.NextDouble() * 3 +30,
                     ChargeSlots = 3
                 }
                     );
@@ -91,7 +91,7 @@ namespace DalObject
                     Weight = (WeightCategories)r.Next(0, 3),
                     Priority = (Priorities)r.Next(0, 3),
                     Requested = DateTime.Now,
-                    DroneId = 0,
+                    DroneId = null,
                     Scheduled = DateTime.MinValue,
                     PickedUp = DateTime.MinValue,
                     Delivered = DateTime.MinValue
@@ -126,8 +126,8 @@ namespace DalObject
                     Id = r.Next(100000000, 444444444),
                     Name = ((Names)i).ToString(),
                     Phone = "05" + r.Next(10000000, 99999999),
-                    Longitude = r.NextDouble() * 200 - 100,
-                    Lattitude = r.NextDouble() * 200 - 100
+                    Longitude = r.NextDouble() * 3 +30,
+                    Lattitude = r.NextDouble() * 3 +30
                 }
                     );
             }
