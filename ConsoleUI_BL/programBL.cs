@@ -8,10 +8,11 @@ using IBL.BO;
 using IBL;
 namespace ConsoleUI_BL
 {
-    public class Class1
+    public class programBL
     {
         static void Main(string[] args)
         {
+            #region MAIN
             try
             {
                 IBL.IBL ibl = new BL();
@@ -31,18 +32,20 @@ namespace ConsoleUI_BL
                         case 2: Updating(ibl); break;
                         case 3: Showing(ibl); break;
                         case 4: ShowList(ibl); break;
-                        default: Console.WriteLine("error! enter a number between 1 to 5"); break;
+                        default: Console.WriteLine("error! enter a number between 1 to 5"); break; //ERROR
                     }
                     Console.WriteLine("enter another choice");
                     int.TryParse(Console.ReadLine(), out choice);
                 }
             }
-            catch(BatteryException ex)
+            catch(BatteryException ex) //exception in the BL constructor
             {
                 Console.WriteLine(ex);
                 Console.WriteLine("Run the program again");
             }
+            #endregion
         }
+        #region ADDING
         /// <summary>
         /// ask the user which object to add
         /// </summary>
@@ -69,6 +72,130 @@ namespace ConsoleUI_BL
                     Console.WriteLine("To exit press 5"); break;
             }
         }
+        /// <summary>
+        /// add station to the stations list
+        /// </summary>
+        public static void AddStation(IBL.IBL ibl)
+        {
+            int id, name, charge;
+            double lng, lat;
+            Console.WriteLine("enter id");
+            int.TryParse(Console.ReadLine(), out id);
+            Console.WriteLine("enter name(number)");
+            int.TryParse(Console.ReadLine(), out name);
+            Console.WriteLine("enter longitude between 35 to 35.2");
+            double.TryParse(Console.ReadLine(), out lng);
+            Console.WriteLine("enter lattitude between 31 to 31.2");
+            double.TryParse(Console.ReadLine(), out lat);
+            Console.WriteLine("enter available charge slots");
+            int.TryParse(Console.ReadLine(), out charge);
+            try
+            {
+                ibl.AddStation(new Station { Id = id, Name = name, LocationS = new Location { Longitude = lng, Lattitude = lat }, AvailableSlots = charge });
+            }
+            catch (InvalidInputException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (AlreadyExistsException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+        /// <summary>
+        /// add drone to the drones list
+        /// </summary>
+        public static void AddDrone(IBL.IBL ibl)
+        {
+            int id;
+            string model;
+            int maxWeight;
+            int stationId;
+            Console.WriteLine("enter id");
+            int.TryParse(Console.ReadLine(), out id);
+            Console.WriteLine("enter model");
+            model = Console.ReadLine();
+            Console.WriteLine("enter max weight: 0 for light, 1 for Medium and 2 for Heavy");
+            int.TryParse(Console.ReadLine(), out maxWeight);
+            Console.WriteLine("enter station number for initial charging");
+            int.TryParse(Console.ReadLine(), out stationId);
+            try
+            {
+                ibl.AddDrone(new Drone { Id = id, Model = model, MaxWeight = (WeightCategories)maxWeight }, stationId);
+            }
+            catch (NotFoundException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (InvalidInputException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (AlreadyExistsException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+        /// <summary>
+        /// add customer to the customers list
+        /// </summary>
+        public static void AddCustomer(IBL.IBL ibl)
+        {
+            int id;
+            string name, phone;
+            double lng, lat;
+            Console.WriteLine("enter id");
+            int.TryParse(Console.ReadLine(), out id);
+            Console.WriteLine("enter name");
+            name = Console.ReadLine();
+            Console.WriteLine("enter phone");
+            phone = Console.ReadLine();
+            while (!phone.All(char.IsDigit)) //check if the phone that was entered was all digits
+            {
+                Console.WriteLine("phone should be digits only");
+                Console.WriteLine("enter phone");
+                phone = Console.ReadLine();
+            }
+            Console.WriteLine("enter longitude between 35 to 35.2");
+            double.TryParse(Console.ReadLine(), out lng);
+            Console.WriteLine("enter lattitude between 31 to 31.2");
+            double.TryParse(Console.ReadLine(), out lat);
+            try
+            {
+                ibl.AddCustomer(new Customer { Id = id, Name = name, Phone = phone, LocationC = new Location { Longitude = lng, Lattitude = lat } });
+            }
+            catch (InvalidInputException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (AlreadyExistsException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+        // add parcel to the parecls list
+        public static void AddParcel(IBL.IBL ibl)
+        {
+            int sender, target, weight, priority;
+            Console.WriteLine("enter sender id");
+            int.TryParse(Console.ReadLine(), out sender);
+            Console.WriteLine("enter target id");
+            int.TryParse(Console.ReadLine(), out target);
+            Console.WriteLine("enter parcel's weight: 0 for light, 1 for Medium and 2 for Heavy");
+            int.TryParse(Console.ReadLine(), out weight);
+            Console.WriteLine("enter priority: 0 for Regular, 1 for Express and 2 for Urgent");
+            int.TryParse(Console.ReadLine(), out priority);
+            try
+            {
+                ibl.AddParcel(new Parcel { Sender = new CustomerInParcel { Id = sender }, Target = new CustomerInParcel { Id = target }, Weight = (WeightCategories)weight, Priority = (Priorities)priority });
+            }
+            catch (NotFoundException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+        #endregion
+        #region UPDATING
         /// <summary>
         /// ask the user which update to do
         /// </summary>
@@ -101,184 +228,6 @@ namespace ConsoleUI_BL
                     Console.WriteLine("To view an entity, press 3");
                     Console.WriteLine("To view a list press 4");
                     Console.WriteLine("To exit press 5"); break;
-            }
-        }
-        /// <summary>
-        /// ask the user which object to show
-        /// </summary>
-        public static void Showing(IBL.IBL ibl)
-        {
-            int c;
-            Console.WriteLine("To view a station press 1");
-            Console.WriteLine("To view a drone press 2");
-            Console.WriteLine("To view a customer press 3");
-            Console.WriteLine("To view a parcel press 4");
-            int.TryParse(Console.ReadLine(), out c);
-            switch (c)
-            {
-                case 1: viewStation(ibl); break;
-                case 2: viewDrone(ibl); break;
-                case 3: viewCustomer(ibl); break;
-                case 4: viewParcel(ibl); break;
-                default:
-                    Console.WriteLine("error!");
-                    Console.WriteLine("To add press 1");
-                    Console.WriteLine("To update press 2");
-                    Console.WriteLine("To view an entity, press 3");
-                    Console.WriteLine("To view a list press 4");
-                    Console.WriteLine("To exit press 5"); break;
-            }
-        }
-        /// <summary>
-        /// ask the user which list to show
-        /// </summary>
-        public static void ShowList(IBL.IBL ibl)
-        {
-            int c;
-            Console.WriteLine("To view a list of stations press 1");
-            Console.WriteLine("To view a list of drones press 2");
-            Console.WriteLine("To view a list of customers press 3");
-            Console.WriteLine("To view a list of parcels press 4");
-            Console.WriteLine("To view a list of unassociated parcels press 5");
-            Console.WriteLine("To view a list of stations with available charging stands press 6");
-            int.TryParse(Console.ReadLine(), out c);
-            switch (c)
-            {
-                case 1: ListStations(ibl); break;
-                case 2: ListDrones(ibl); break;
-                case 3: ListCustomers(ibl); break;
-                case 4: ListParcels(ibl); break;
-                case 5: ListUnassociated(ibl); break;
-                case 6: ListAvailable(ibl); break;
-                default:   
-                    Console.WriteLine("error!");
-                    Console.WriteLine("To add press 1");
-                    Console.WriteLine("To update press 2");
-                    Console.WriteLine("To view an entity, press 3");
-                    Console.WriteLine("To view a list press 4");
-                    Console.WriteLine("To exit press 5"); break;
-            }
-        }
-        /// <summary>
-        /// add station to the stations list
-        /// </summary>
-        public static void AddStation(IBL.IBL ibl)
-        {
-            int id, name, charge;
-            double lng, lat;
-            Console.WriteLine("enter id");
-            int.TryParse(Console.ReadLine(), out id);
-            Console.WriteLine("enter name(number)");
-            int.TryParse(Console.ReadLine(), out name);
-            Console.WriteLine("enter longitude between 35 to 35.2");
-            double.TryParse(Console.ReadLine(), out lng);
-            Console.WriteLine("enter lattitude between 31 to 31.2");
-            double.TryParse(Console.ReadLine(), out lat);
-            Console.WriteLine("enter available charge slots");
-            int.TryParse(Console.ReadLine(), out charge);
-            try
-            {
-                ibl.AddStation(new Station { Id = id, Name = name, LocationS = new Location { Longitude = lng, Lattitude = lat }, AvailableSlots = charge });
-            }
-            catch(InvalidInputException ex)
-            {
-                Console.WriteLine(ex);
-            }
-            catch(AlreadyExistsException ex)
-            {
-                Console.WriteLine(ex);
-            }
-        }
-        /// <summary>
-        /// add drone to the drones list
-        /// </summary>
-        public static void AddDrone(IBL.IBL ibl)
-        {
-            int id;
-            string model;
-            int maxWeight;
-            int stationId;
-            Console.WriteLine("enter id");
-            int.TryParse(Console.ReadLine(), out id);
-            Console.WriteLine("enter model");
-            model = Console.ReadLine();
-            Console.WriteLine("enter max weight: 0 for light, 1 for Medium and 2 for Heavy");
-            int.TryParse(Console.ReadLine(), out maxWeight);
-            Console.WriteLine("enter station number for initial charging");
-            int.TryParse(Console.ReadLine(), out stationId);
-            try
-            {
-                ibl.AddDrone(new Drone { Id = id, Model = model, MaxWeight = (WeightCategories)maxWeight }, stationId);
-            }
-            catch(NotFoundException ex)
-            {
-                Console.WriteLine(ex);
-            }
-            catch (InvalidInputException ex)
-            {
-                Console.WriteLine(ex);
-            }
-            catch (AlreadyExistsException ex)
-            {
-                Console.WriteLine(ex);
-            }
-        }
-        /// <summary>
-        /// add customer to the customers list
-        /// </summary>
-        public static void AddCustomer(IBL.IBL ibl)
-        {
-            int id;
-            string name, phone;
-            double lng, lat;
-            Console.WriteLine("enter id");
-            int.TryParse(Console.ReadLine(), out id);
-            Console.WriteLine("enter name");
-            name = Console.ReadLine();
-            Console.WriteLine("enter phone");
-            phone = Console.ReadLine();
-            while(!phone.All(char.IsDigit))
-            {
-                Console.WriteLine("phone should be digits only");
-                Console.WriteLine("enter phone");
-                phone = Console.ReadLine();
-            }
-            Console.WriteLine("enter longitude between 35 to 35.2");
-            double.TryParse(Console.ReadLine(), out lng);
-            Console.WriteLine("enter lattitude between 31 to 31.2");
-            double.TryParse(Console.ReadLine(), out lat);
-            try
-            {
-                ibl.AddCustomer(new Customer { Id = id, Name = name, Phone = phone, LocationC = new Location { Longitude = lng, Lattitude = lat } });
-            }
-            catch (InvalidInputException ex)
-            {
-                Console.WriteLine(ex);
-            }
-            catch (AlreadyExistsException ex)
-            {
-                Console.WriteLine(ex);
-            }
-        }
-        // add parcel to the parecls list
-        public static void AddParcel(IBL.IBL ibl)
-        {
-            int sender, target, weight, priority;   
-            Console.WriteLine("enter sender id");
-            int.TryParse(Console.ReadLine(), out sender);
-            Console.WriteLine("enter target id");
-            int.TryParse(Console.ReadLine(), out target);
-            Console.WriteLine("enter parcel's weight: 0 for light, 1 for Medium and 2 for Heavy");
-            int.TryParse(Console.ReadLine(), out weight);
-            Console.WriteLine("enter priority: 0 for Regular, 1 for Express and 2 for Urgent");
-            int.TryParse(Console.ReadLine(), out priority);
-            try
-            {
-                ibl.AddParcel(new Parcel { Sender = new CustomerInParcel { Id = sender }, Target = new CustomerInParcel { Id = target }, Weight = (WeightCategories)weight, Priority = (Priorities)priority });
-            }
-            catch (NotFoundException ex)
-            {
-                Console.WriteLine(ex);
             }
         }
         /// <summary>
@@ -336,10 +285,10 @@ namespace ConsoleUI_BL
             Console.WriteLine("enter customer id for updating");
             int.TryParse(Console.ReadLine(), out customerId);
             Console.WriteLine("enter the new name for updating (if you don't want to update press enter)");
-            newName= Console.ReadLine();
+            newName = Console.ReadLine();
             Console.WriteLine("enter the new phone number for updating (if you don't want to update press enter)");
             newPhone = Console.ReadLine();
-            while (!newPhone.All(char.IsDigit)&& newPhone!="")
+            while (!newPhone.All(char.IsDigit) && newPhone != "")
             {
                 Console.WriteLine("phone should be digits only");
                 Console.WriteLine("enter the new phone");
@@ -382,7 +331,7 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(ex);
             }
-            catch(EmptyListException ex)
+            catch (EmptyListException ex)
             {
                 Console.WriteLine(ex);
             }
@@ -427,7 +376,7 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(ex);
             }
-            catch(DroneStatusException ex)
+            catch (DroneStatusException ex)
             {
                 Console.WriteLine(ex);
             }
@@ -486,6 +435,34 @@ namespace ConsoleUI_BL
                 Console.WriteLine(ex);
             }
         }
+        #endregion
+        #region SHOWING
+        /// <summary>
+        /// ask the user which object to show
+        /// </summary>
+        public static void Showing(IBL.IBL ibl)
+        {
+            int c;
+            Console.WriteLine("To view a station press 1");
+            Console.WriteLine("To view a drone press 2");
+            Console.WriteLine("To view a customer press 3");
+            Console.WriteLine("To view a parcel press 4");
+            int.TryParse(Console.ReadLine(), out c);
+            switch (c)
+            {
+                case 1: viewStation(ibl); break;
+                case 2: viewDrone(ibl); break;
+                case 3: viewCustomer(ibl); break;
+                case 4: viewParcel(ibl); break;
+                default:
+                    Console.WriteLine("error!");
+                    Console.WriteLine("To add press 1");
+                    Console.WriteLine("To update press 2");
+                    Console.WriteLine("To view an entity, press 3");
+                    Console.WriteLine("To view a list press 4");
+                    Console.WriteLine("To exit press 5"); break;
+            }
+        }
         /// <summary>
         /// prints the requested station
         /// </summary>
@@ -498,7 +475,7 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(ibl.GetStation(id));
             }
-            catch(NotFoundException ex)
+            catch (NotFoundException ex)
             {
                 Console.WriteLine(ex); ;
             }
@@ -552,6 +529,38 @@ namespace ConsoleUI_BL
             catch (NotFoundException ex)
             {
                 Console.WriteLine(ex); ;
+            }
+        }
+        #endregion
+        #region SHOWLIST
+        /// <summary>
+        /// ask the user which list to show
+        /// </summary>
+        public static void ShowList(IBL.IBL ibl)
+        {
+            int c;
+            Console.WriteLine("To view a list of stations press 1");
+            Console.WriteLine("To view a list of drones press 2");
+            Console.WriteLine("To view a list of customers press 3");
+            Console.WriteLine("To view a list of parcels press 4");
+            Console.WriteLine("To view a list of unassociated parcels press 5");
+            Console.WriteLine("To view a list of stations with available charging stands press 6");
+            int.TryParse(Console.ReadLine(), out c);
+            switch (c)
+            {
+                case 1: ListStations(ibl); break;
+                case 2: ListDrones(ibl); break;
+                case 3: ListCustomers(ibl); break;
+                case 4: ListParcels(ibl); break;
+                case 5: ListUnassociated(ibl); break;
+                case 6: ListAvailable(ibl); break;
+                default:   
+                    Console.WriteLine("error!");
+                    Console.WriteLine("To add press 1");
+                    Console.WriteLine("To update press 2");
+                    Console.WriteLine("To view an entity, press 3");
+                    Console.WriteLine("To view a list press 4");
+                    Console.WriteLine("To exit press 5"); break;
             }
         }
         /// <summary>
@@ -620,5 +629,6 @@ namespace ConsoleUI_BL
                     Console.WriteLine(s);
             }
         }
+        #endregion
     }
 }

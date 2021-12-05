@@ -11,10 +11,12 @@ namespace DalObject
 {
     public class DalObject:IDal
     {
+        #region INITIALIZE
         public DalObject()
         {
             DataSource.Initialize();
         }
+        #endregion
         #region STATION
         /// <summary>
         /// add station to the list of stations
@@ -389,7 +391,7 @@ namespace DalObject
             //add parcel back
         }
         #endregion
-        #region HELP METHOD
+        #region HELP METHODS
         /// <summary>
         /// create string of sexagesimal lattitude
         /// </summary>

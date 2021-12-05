@@ -9,48 +9,16 @@ namespace IBL
 {
     public interface IBL
     {
+        #region STATION
         /// <summary>
         ///send to DAL for adding the station to the list of stations
         /// </summary>
         public void AddStation(Station s);
         /// <summary>
-        /// send to DAL for adding the drone to list of drones
-        /// </summary>
-        public void AddDrone(Drone d, int stationId);
-        /// <summary>
-        /// send to DAL for adding the customer to the list of customeer
-        /// </summary>
-        public void AddCustomer(Customer c);
-        /// <summary>
-        /// send to DAL for adding the parcel to the list of parcels
-        /// </summary>
-        public void AddParcel(Parcel p);
-        /// <summary>
-        /// delete drone by id
-        /// </summary>
-        /// <param name="id"></param>
-        public void DeleteDrone(int id);
-        /// <summary>
         /// delete station by id
         /// </summary>
         /// <param name="id"></param>
         public void DeleteStation(int id);
-        /// <summary>
-        /// delete customer by id
-        /// </summary>
-        /// <param name="id"></param>
-        public void DeleteCustomer(int id);
-        /// <summary>
-        /// delete parcel by id
-        /// </summary>
-        /// <param name="id"></param>
-        public void DeleteParcel(int id);
-        /// <summary>
-        /// update the drone model
-        /// </summary>
-        /// <param name="id">drone id</param>
-        /// <param name="model">new drone model</param>
-        public void UpdateDrone(int id, string model);
         /// <summary>
         /// update the station
         /// </summary>
@@ -59,12 +27,38 @@ namespace IBL
         /// <param name="chargeSlots">new station charge slots</param>
         public void UpdateStation(int id, int name, int chargeSlots);
         /// <summary>
-        /// update the customer
+        /// return the description of a specific station
         /// </summary>
-        /// <param name="id">customer id</param>
-        /// <param name="name">new customer name</param>
-        /// <param name="phone">new customer phone</param>
-        public void UpdateCustomer(int id, string name, string phone);
+        /// <param name="id">station's id</param>
+        /// <returns></returns>
+        public string GetStation(int id);
+        /// <summary>
+        /// return list of stations
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<StationToList> GetStationsList();
+        /// <summary>
+        /// return the list of the base stations with available charging slots
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<StationToList> AvailableStations();
+        #endregion
+        #region DRONE
+        /// <summary>
+        /// send to DAL for adding the drone to list of drones
+        /// </summary>
+        public void AddDrone(Drone d, int stationId);
+        /// <summary>
+        /// delete drone by id
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteDrone(int id);
+        /// <summary>
+        /// update the drone model
+        /// </summary>
+        /// <param name="id">drone id</param>
+        /// <param name="model">new drone model</param>
+        public void UpdateDrone(int id, string model);
         /// <summary>
         /// send drone to charge
         /// </summary>
@@ -76,6 +70,57 @@ namespace IBL
         /// <param name="id">drone's id</param>
         /// <param name="timeInCharging">charging time</param>
         public void ReleaseDrone(int id, double timeInCharging);
+        /// <summary>
+        /// return the description of a specific drone
+        /// </summary>
+        /// <param name="id">drone's id</param>
+        /// <returns></returns>
+        public string GetDrone(int id);
+        /// <summary>
+        /// return list of drones
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<DroneToList> GetDronesList();
+        #endregion
+        #region CUSTOMER
+        /// <summary>
+        /// send to DAL for adding the customer to the list of customeer
+        /// </summary>
+        public void AddCustomer(Customer c);
+        /// <summary>
+        /// delete customer by id
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteCustomer(int id);
+        /// <summary>
+        /// update the customer
+        /// </summary>
+        /// <param name="id">customer id</param>
+        /// <param name="name">new customer name</param>
+        /// <param name="phone">new customer phone</param>
+        public void UpdateCustomer(int id, string name, string phone);
+        /// <summary>
+        /// return the description of a specific customer
+        /// </summary>
+        /// <param name="id">customer's id</param>
+        /// <returns></returns>
+        public string GetCustomer(int id);
+        /// <summary>
+        /// return list of customers
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<CustomerToList> GetCustomersList();
+        #endregion
+        #region PARCEL
+        /// <summary>
+        /// send to DAL for adding the parcel to the list of parcels
+        /// </summary>
+        public void AddParcel(Parcel p);
+        /// <summary>
+        /// delete parcel by id
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteParcel(int id);  
         /// <summary>
         /// assign drone to parcel
         /// </summary>
@@ -92,44 +137,11 @@ namespace IBL
         /// <param name="id">drone's id</param>
         public void DeliverParcel(int id);
         /// <summary>
-        /// return the description of a specific station
-        /// </summary>
-        /// <param name="id">station's id</param>
-        /// <returns></returns>
-        public string GetStation(int id);
-        /// <summary>
-        /// return the description of a specific drone
-        /// </summary>
-        /// <param name="id">drone's id</param>
-        /// <returns></returns>
-        public string GetDrone(int id);
-        /// <summary>
-        /// return the description of a specific customer
-        /// </summary>
-        /// <param name="id">customer's id</param>
-        /// <returns></returns>
-        public string GetCustomer(int id);
-        /// <summary>
         /// return the description of a specific parcel
         /// </summary>
         /// <param name="id">parcel's id</param>
         /// <returns></returns>
         public string GetParcel(int id);
-        /// <summary>
-        /// return list of stations
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<StationToList> GetStationsList();
-        /// <summary>
-        /// return list of drones
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<DroneToList> GetDronesList();
-        /// <summary>
-        /// return list of customers
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<CustomerToList> GetCustomersList();
         /// <summary>
         /// return list of parcels
         /// </summary>
@@ -140,10 +152,6 @@ namespace IBL
         /// </summary>
         /// <returns></returns>
         public IEnumerable<ParcelToList> UnassociatedParcel();
-        /// <summary>
-        /// return the list of the base stations with available charging slots
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<StationToList> AvailableStations();
+        #endregion
     }
 }
