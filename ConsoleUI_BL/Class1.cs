@@ -170,9 +170,9 @@ namespace ConsoleUI_BL
             int.TryParse(Console.ReadLine(), out id);
             Console.WriteLine("enter name(number)");
             int.TryParse(Console.ReadLine(), out name);
-            Console.WriteLine("enter longitude");
+            Console.WriteLine("enter longitude between 35 to 35.2");
             double.TryParse(Console.ReadLine(), out lng);
-            Console.WriteLine("enter lattitude");
+            Console.WriteLine("enter lattitude between 31 to 31.2");
             double.TryParse(Console.ReadLine(), out lat);
             Console.WriteLine("enter available charge slots");
             int.TryParse(Console.ReadLine(), out charge);
@@ -202,7 +202,7 @@ namespace ConsoleUI_BL
             int.TryParse(Console.ReadLine(), out id);
             Console.WriteLine("enter model");
             model = Console.ReadLine();
-            Console.WriteLine("enter 0 for light, 1 for Medium and 2 for Heavy");
+            Console.WriteLine("enter max weight: 0 for light, 1 for Medium and 2 for Heavy");
             int.TryParse(Console.ReadLine(), out maxWeight);
             Console.WriteLine("enter station number for initial charging");
             int.TryParse(Console.ReadLine(), out stationId);
@@ -243,9 +243,9 @@ namespace ConsoleUI_BL
                 Console.WriteLine("enter phone");
                 phone = Console.ReadLine();
             }
-            Console.WriteLine("enter longitude");
+            Console.WriteLine("enter longitude between 35 to 35.2");
             double.TryParse(Console.ReadLine(), out lng);
-            Console.WriteLine("enter lattitude");
+            Console.WriteLine("enter lattitude between 31 to 31.2");
             double.TryParse(Console.ReadLine(), out lat);
             try
             {
@@ -268,9 +268,9 @@ namespace ConsoleUI_BL
             int.TryParse(Console.ReadLine(), out sender);
             Console.WriteLine("enter target id");
             int.TryParse(Console.ReadLine(), out target);
-            Console.WriteLine("enter 0 for light, 1 for Medium and 2 for Heavy");
+            Console.WriteLine("enter parcel's weight: 0 for light, 1 for Medium and 2 for Heavy");
             int.TryParse(Console.ReadLine(), out weight);
-            Console.WriteLine("enter 0 for Regular, 1 for Express and 2 for Urgent");
+            Console.WriteLine("enter priority: 0 for Regular, 1 for Express and 2 for Urgent");
             int.TryParse(Console.ReadLine(), out priority);
             try
             {

@@ -81,7 +81,7 @@ namespace IBL
                         double minBattery = dal.Distance(droneToList.CurrentLocation.Longitude, droneToList.CurrentLocation.Lattitude, closeToDrone.Longitude, closeToDrone.Lattitude) * available;
                         if (minBattery > 100)
                             throw new BatteryException("The battery is over than 100%, the consumption for drone:" + drone.Id + " is " + minBattery + "%");
-                        droneToList.Battery = minBattery;
+                        droneToList.Battery = rand.NextDouble() * (100 - minBattery)+ minBattery; 
                     }
 
                 }
@@ -97,6 +97,10 @@ namespace IBL
                 throw new InvalidInputException("id should be bigger than 0");
             if (s.AvailableSlots < 0)
                 throw new InvalidInputException("available chargeslots cannot be negative");
+            if (s.Name < 0)
+                throw new InvalidInputException("name cannot be negative");
+            if (s.LocationS.Longitude > 35.2 || s.LocationS.Longitude < 35 || s.LocationS.Lattitude > 31.2 || s.LocationS.Lattitude < 31)
+                throw new InvalidInputException("The location is out of range of shipments the longitude should be 35-35.2 and the lattitude should be 31-31.2");
             try
             {
                 dal.AddStation(new IDAL.DO.Station
@@ -161,6 +165,8 @@ namespace IBL
                 throw new InvalidInputException("id should be 9 digits");
             if (c.Phone.Length != 10)
                 throw new InvalidInputException("phone number should be 10 digits");
+            if (c.LocationC.Longitude > 35.2 || c.LocationC.Longitude < 35 || c.LocationC.Lattitude > 31.2 || c.LocationC.Lattitude < 31)
+                throw new InvalidInputException("The location is out of range of shipments the longitude should be 35-35.2 and the lattitude should be 31-31.2");
             try
             {
                 dal.AddCustomer(new IDAL.DO.Customer
@@ -183,9 +189,9 @@ namespace IBL
         /// </summary>
         public void AddParcel(Parcel p)
         {
-            if (dal.ExistCustomer(p.Sender.Id))
+            if (!dal.ExistCustomer(p.Sender.Id))
                 throw new NotFoundException("customer:" + p.Sender.Id);
-            if (dal.ExistCustomer(p.Target.Id))
+            if (!dal.ExistCustomer(p.Target.Id))
                 throw new NotFoundException("customer:" + p.Target.Id);
             dal.AddParcel(new IDAL.DO.Parcel
             {
@@ -289,16 +295,19 @@ namespace IBL
         {
             if (!dal.ExistStation(id))
                 throw new NotFoundException("station");
-            if (chargeSlots < 0)
+            if (chargeSlots < -1)
                 throw new InvalidInputException("The number of chargeslots cannot be negative ");
+            if (name < -1)
+                throw new InvalidInputException("name cannot be negative");
             IDAL.DO.Station temp = dal.GetStationById(id);
+            int fullslots = dal.FullSlots(id);
             dal.DeleteStation(id);
             if (name != -1)
                 temp.Name = name;
             if (chargeSlots != -1)
-                temp.ChargeSlots = chargeSlots - dal.FullSlots(id);
+                temp.ChargeSlots = chargeSlots - fullslots;
             if (temp.ChargeSlots < 0)
-                throw new InvalidInputException("The number of chargeslots cannot be " + chargeSlots + ", there are " + dal.FullSlots(id) + " fullslots");
+                throw new InvalidInputException("The number of chargeslots cannot be " + chargeSlots + ", there are " + fullslots + " fullslots");
             dal.AddStation(temp);
         }
         /// <summary>
@@ -683,9 +692,7 @@ namespace IBL
         /// <returns></returns>
         public IEnumerable<ParcelToList> UnassociatedParcel()
         {
-            return from IDAL.DO.Parcel p in dal.PrintParcels()
-                   where p.DroneId == null
-                   select convertToParcelToList(p);
+            return dal.UnassociatedParcel().Select(p => convertToParcelToList(p));
         }
         /// <summary>
         /// return the list of the base stations with available charging slots

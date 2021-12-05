@@ -24,7 +24,12 @@ namespace IBL
             /// </summary>
             public override string ToString()
             {
-                return ToolStringClass.ToStringProperty(this);
+                string dronelist="";
+                foreach(DroneInCharging d in DronesInCharging)
+                {
+                    dronelist += d.ToString();
+                }
+                return "Id:"+Id+"\nName:"+Name+"\nLocation:"+LocationS+ "\nAvailable slots:"+AvailableSlots+ "\nDrones in charging:"+dronelist;
             }
 
         }

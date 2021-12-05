@@ -25,7 +25,16 @@ namespace IBL
             /// </summary>
             public override string ToString()
             {
-                return ToolStringClass.ToStringProperty(this);
+                string fromC = "", toC = "";
+                foreach (ParcelInCustomer p in FromCustomer)
+                {
+                    fromC += p.ToString();
+                }
+                foreach (ParcelInCustomer p in ToCustomer)
+                {
+                    toC += p.ToString();
+                }
+                return "Id:"+Id+"\nName:"+Name+"\nPhone:"+Phone+"\nLocation:"+LocationC+"\nParcel from customer:"+fromC+ "\nParcel to customer:" + toC;
             }
 
         }

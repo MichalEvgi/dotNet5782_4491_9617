@@ -25,6 +25,21 @@ namespace DalObject
             DataSource.stations.Add(s);
         }
         /// <summary>
+        /// delete station by id
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteStation(int id)
+        {
+            if (!DataSource.stations.Exists(stat => stat.Id == id))
+                throw new NotFoundException("station");
+            Station temp = GetStationById(id);
+            DataSource.stations.Remove(temp);
+        }
+        /// <summary>
+        /// delete customer by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <summary>
         /// add drone to list of drones
         /// </summary>
         public void AddDrone(Drone d)
@@ -248,21 +263,7 @@ namespace DalObject
             Drone temp = GetDroneById(id);
             DataSource.drones.Remove(temp);
         }
-        /// <summary>
-        /// delete station by id
-        /// </summary>
-        /// <param name="id"></param>
-        public void DeleteStation(int id)
-        {
-            if (!DataSource.stations.Exists(stat => stat.Id == id))
-                throw new NotFoundException("station");
-            Station temp = GetStationById(id);
-            DataSource.stations.Remove(temp);
-        }
-        /// <summary>
-        /// delete customer by id
-        /// </summary>
-        /// <param name="id"></param>
+        
         public void DeleteCustomer(int id)
         {
             if (!DataSource.customers.Exists(cust => cust.Id == id))
@@ -421,7 +422,7 @@ namespace DalObject
         public IEnumerable<Parcel> UnassociatedParcel()
         {
             return from Parcel p in DataSource.parcels
-                   where p.DroneId == 0
+                   where p.DroneId == null
                    select p;
         }
         /// <summary>
