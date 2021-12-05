@@ -15,6 +15,7 @@ namespace DalObject
         {
             DataSource.Initialize();
         }
+        #region STATION
         /// <summary>
         /// add station to the list of stations
         /// </summary>
@@ -36,9 +37,75 @@ namespace DalObject
             DataSource.stations.Remove(temp);
         }
         /// <summary>
-        /// delete customer by id
+        /// return the description of a specific station
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">station's id</param>
+        /// <returns></returns>
+        public string ShowStation(int id)
+        {
+            if (!DataSource.stations.Exists(stat => stat.Id == id))
+                throw new NotFoundException("station");
+            return GetStationById(id).ToString();
+        }
+        /// <summary>
+        /// return list of stations
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Station> PrintStations() => DataSource.stations;
+        /// <summary>
+        /// return all the stations with available chargeSlots
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Station> AvailableStations()
+        {
+            return from Station s in DataSource.stations
+                   where s.ChargeSlots > 0
+                   select s;
+        }
+        /// <summary>
+        /// return if the station exists in stations or doesn't
+        /// </summary>
+        /// <param name="id">station's id</param>
+        /// <returns></returns>
+        public bool ExistStation(int id) => DataSource.stations.Exists(s => s.Id == id);
+        /// <summary>
+        /// return station by id
+        /// </summary>
+        /// <param name="id">station's id</param>
+        /// <returns></returns>
+        public Station GetStationById(int id) => DataSource.stations.Find(s => s.Id == id);
+        /// <summary>
+        /// return how many full slots in the station
+        /// </summary>
+        /// <param name="stationId">station id</param>
+        /// <returns></returns>
+        public int FullSlots(int stationId)
+        {
+            if (!DataSource.stations.Exists(stat => stat.Id == stationId))
+                throw new NotFoundException("station");
+            int count = 0;
+            foreach (var d in DataSource.DroneCharges)
+            {
+                if (d.StationId == stationId)
+                    count++;
+            }
+            return count;
+        }
+        /// <summary>
+        /// return all the drone IDs that are charged in station(according to the station id)
+        /// </summary>
+        /// <param name="stationId">station id</param>
+        /// <returns></returns>
+        public IEnumerable<int> DroneInChargeIds(int stationId)
+        {
+            if (!DataSource.stations.Exists(stat => stat.Id == stationId))
+                throw new NotFoundException("station");
+            return from DroneCharge d in DataSource.DroneCharges
+                   where d.StationId == stationId
+                   select d.DroneId;
+        }
+        #endregion
+        #region DRONE
         /// <summary>
         /// add drone to list of drones
         /// </summary>
@@ -49,7 +116,94 @@ namespace DalObject
             DataSource.drones.Add(d);
         }
         /// <summary>
-        /// add customer to the list of customeer
+        /// delete drone by id
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteDrone(int id)
+        {
+            if (!DataSource.drones.Exists(dron => dron.Id == id))
+                throw new NotFoundException("drone");
+            Drone temp = GetDroneById(id);
+            DataSource.drones.Remove(temp);
+        }
+        /// <summary>
+        /// return the description of a specific drone
+        /// </summary>
+        /// <param name="id">drone's id</param>
+        /// <returns></returns>
+        public string ShowDrone(int id)
+        {
+            if (!DataSource.drones.Exists(dron => dron.Id == id))
+                throw new NotFoundException("drone");
+            return GetDroneById(id).ToString();
+        }
+        /// <summary>
+        /// return list of drones
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Drone> PrintDrones() => DataSource.drones;
+        /// <summary>
+        /// return drone by id
+        /// </summary>
+        /// <param name="id">drone's id</param>
+        /// <returns></returns>
+        public Drone GetDroneById(int id) => DataSource.drones.Find(d => d.Id == id);
+        /// <summary>
+        /// return if the drone exists in drones or doesn't
+        /// </summary>
+        /// <param name="id">drone's id</param>
+        /// <returns></returns>
+        public bool ExistDrone(int id) => DataSource.drones.Exists(d => d.Id == id);
+        /// <summary>
+        /// send drone to charge in station
+        /// </summary>
+        /// <param name="droneId">drone's id</param>
+        /// <param name="stationId">station's id</param>
+        public void SendToCharge(int droneId, int stationId)
+        {
+            if (!DataSource.drones.Exists(dron => dron.Id == droneId))
+                throw new NotFoundException("drone");
+            if (!DataSource.stations.Exists(stat => stat.Id == stationId))
+                throw new NotFoundException("station");
+            Station tempS = GetStationById(stationId);
+            //save station in temp
+            DataSource.stations.Remove(tempS);
+            //remove
+            tempS.ChargeSlots--;
+            //update
+            DataSource.stations.Add(tempS);
+            //add station back
+            DataSource.DroneCharges.Add(new DroneCharge { DroneId = droneId, StationId = stationId }); //add drone charge
+        }
+        /// <summary>
+        /// release drone from station
+        /// </summary>
+        /// <param name="droneId">drone's id</param>
+        public void ReleaseDrone(int droneId)
+        {
+            if (!DataSource.drones.Exists(dron => dron.Id == droneId))
+                throw new NotFoundException("drone");
+            DroneCharge temp = GetDroneChargeById(droneId);
+            Station tempS = GetStationById(temp.StationId);
+            //save drone charge and station in temps
+            DataSource.stations.Remove(tempS);
+            DataSource.DroneCharges.Remove(temp);
+            //remove+ remove drone charge
+            tempS.ChargeSlots++;
+            //update
+            DataSource.stations.Add(tempS);
+            //add station back
+        }
+        /// <summary>
+        /// return drone charge by drone's id
+        /// </summary>
+        /// <param name="id">drone's id</param>
+        /// <returns></returns>
+        public DroneCharge GetDroneChargeById(int id) => DataSource.DroneCharges.Find(dc => dc.DroneId == id);
+        #endregion
+        #region CUSTOMER
+        /// <summary>
+        /// add customer to the list of customer
         /// </summary>
         public void AddCustomer(Customer c)
         {
@@ -58,6 +212,47 @@ namespace DalObject
             DataSource.customers.Add(c);
         }
         /// <summary>
+        /// delete customer by id
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteCustomer(int id)
+        {
+            if (!DataSource.customers.Exists(cust => cust.Id == id))
+                throw new NotFoundException("customer");
+            Customer temp = GetCustomerById(id);
+            DataSource.customers.Remove(temp);
+        }
+        /// <summary>
+        /// return the description of a specific customer
+        /// </summary>
+        /// <param name="id">customer's id</param>
+        /// <returns></returns>
+        public string ShowCustomer(int id)
+        {
+            if (!DataSource.customers.Exists(cust => cust.Id == id))
+                throw new NotFoundException("customer");
+            return GetCustomerById(id).ToString();
+        }
+        /// <summary>
+        /// return list of customers
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Customer> PrintCustomers() => DataSource.customers;
+        /// <summary>
+        /// return if the customer exists in customers or doesn't
+        /// </summary>
+        /// <param name="id">customer's id</param>
+        /// <returns></returns>
+        public bool ExistCustomer(int id) => DataSource.customers.Exists(c => c.Id == id);
+        /// <summary>
+        /// return customer by id
+        /// </summary>
+        /// <param name="id">customeer's id</param>
+        /// <returns></returns>
+        public Customer GetCustomerById(int id) => DataSource.customers.Find(c => c.Id == id);
+        #endregion
+        #region PARCEL
+        /// <summary>
         /// add parcel to the list of parcels
         /// </summary>
         public void AddParcel(Parcel p)
@@ -65,6 +260,81 @@ namespace DalObject
             p.Id = DataSource.Config.RunIndex;
             DataSource.Config.RunIndex++;
             DataSource.parcels.Add(p);
+        }
+        /// <summary>
+        /// delete parcel by id
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteParcel(int id)
+        {
+            if (!DataSource.parcels.Exists(parc => parc.Id == id))
+                throw new NotFoundException("parcel");
+            Parcel temp = GetParcelById(id);
+            DataSource.parcels.Remove(temp);
+        }
+        /// <summary>
+        /// return the description of a specific parcel
+        /// </summary>
+        /// <param name="id">parcel's id</param>
+        /// <returns></returns>
+        public string ShowParcel(int id)
+        {
+            if (!DataSource.parcels.Exists(parc => parc.Id == id))
+                throw new NotFoundException("parcel");
+            return GetParcelById(id).ToString();
+        }
+        /// <summary>
+        /// return list of parcels
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Parcel> PrintParcels() => DataSource.parcels;
+        /// <summary>
+        /// return the list of parcels that not associated yet with drone
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Parcel> UnassociatedParcel()
+        {
+            return from Parcel p in DataSource.parcels
+                   where p.DroneId == null
+                   select p;
+        }
+        /// <summary>
+        /// return all the delivered parcels
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Parcel> DeliveredParcel()
+        {
+            return from Parcel p in DataSource.parcels
+                   where p.Delivered != DateTime.MinValue
+                   select p;
+        }
+        /// <summary>
+        /// return if the parcel exists in parcels or doesn't
+        /// </summary>
+        /// <param name="id">parcel's id</param>
+        /// <returns></returns>
+        public bool ExistParcel(int id) => DataSource.parcels.Exists(p => p.Id == id);
+        /// <summary>
+        /// return parcel by id
+        /// </summary>
+        /// <param name="id">parcel's id</param>
+        /// <returns></returns>
+        public Parcel GetParcelById(int id) => DataSource.parcels.Find(p => p.Id == id);
+        /// <summary>
+        /// return the transfered parcel with the droneId
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <returns></returns>
+        public Parcel GetTransferedParcel(int droneId)
+        {
+            if (!DataSource.drones.Exists(dron => dron.Id == droneId))
+                throw new NotFoundException("drone");
+            foreach (Parcel p in DataSource.parcels)
+            {
+                if (p.DroneId == droneId && p.Delivered == DateTime.MinValue)
+                    return p;
+            }
+            throw new NotFoundException("parcel"); //parcel not found
         }
         /// <summary>
         /// assign drone to parcel
@@ -118,200 +388,8 @@ namespace DalObject
             DataSource.parcels.Add(temp);
             //add parcel back
         }
-        /// <summary>
-        /// send drone to charge in station
-        /// </summary>
-        /// <param name="droneId">drone's id</param>
-        /// <param name="stationId">station's id</param>
-        public void SendToCharge(int droneId, int stationId)
-        {
-            if(!DataSource.drones.Exists(dron => dron.Id == droneId))
-                throw new NotFoundException("drone");
-            if(!DataSource.stations.Exists(stat => stat.Id == stationId))
-                throw new NotFoundException("station");
-            Station tempS = GetStationById(stationId);
-            //save station in temp
-            DataSource.stations.Remove(tempS);
-            //remove
-            tempS.ChargeSlots--;
-            //update
-            DataSource.stations.Add(tempS);
-            //add station back
-            DataSource.DroneCharges.Add(new DroneCharge { DroneId = droneId, StationId = stationId }); //add drone charge
-        }
-        /// <summary>
-        /// release drone from station
-        /// </summary>
-        /// <param name="droneId">drone's id</param>
-        public void ReleaseDrone(int droneId)
-         {
-            if(!DataSource.drones.Exists(dron => dron.Id == droneId))
-                throw new NotFoundException("drone");
-            DroneCharge temp = GetDroneChargeById(droneId);
-            Station tempS = GetStationById(temp.StationId);
-            //save drone charge and station in temps
-            DataSource.stations.Remove(tempS);
-            DataSource.DroneCharges.Remove(temp);
-            //remove+ remove drone charge
-            tempS.ChargeSlots++;
-            //update
-            DataSource.stations.Add(tempS);
-            //add station back
-        }
-        /// <summary>
-        /// return parcel by id
-        /// </summary>
-        /// <param name="id">parcel's id</param>
-        /// <returns></returns>
-        public Parcel GetParcelById(int id)=> DataSource.parcels.Find(p => p.Id == id);
-        /// <summary>
-        /// return drone by id
-        /// </summary>
-        /// <param name="id">drone's id</param>
-        /// <returns></returns>
-        public Drone GetDroneById(int id) => DataSource.drones.Find(d => d.Id == id);
-        /// <summary>
-        /// return station by id
-        /// </summary>
-        /// <param name="id">station's id</param>
-        /// <returns></returns>
-        public Station GetStationById(int id) => DataSource.stations.Find(s => s.Id == id);
-        /// <summary>
-        /// return drone charge by drone's id
-        /// </summary>
-        /// <param name="id">drone's id</param>
-        /// <returns></returns>
-        public DroneCharge GetDroneChargeById(int id) => DataSource.DroneCharges.Find(dc => dc.DroneId == id);
-        /// <summary>
-        /// return customer by id
-        /// </summary>
-        /// <param name="id">customeer's id</param>
-        /// <returns></returns>
-        public Customer GetCustomerById(int id) => DataSource.customers.Find(c => c.Id == id);
-        /// <summary>
-        /// return the description of a specific station
-        /// </summary>
-        /// <param name="id">station's id</param>
-        /// <returns></returns>
-        public string ShowStation(int id)
-        {
-            if(!DataSource.stations.Exists(stat => stat.Id == id))
-                throw new NotFoundException("station");
-            return GetStationById(id).ToString();
-        }
-        /// <summary>
-        /// return the description of a specific drone
-        /// </summary>
-        /// <param name="id">drone's id</param>
-        /// <returns></returns>
-        public string ShowDrone(int id)
-        {
-            if (!DataSource.drones.Exists(dron => dron.Id == id))
-                throw new NotFoundException("drone");
-            return GetDroneById(id).ToString();
-        }
-        /// <summary>
-        /// return the description of a specific customer
-        /// </summary>
-        /// <param name="id">customer's id</param>
-        /// <returns></returns>
-        public string ShowCustomer(int id)
-        {
-            if (!DataSource.customers.Exists(cust => cust.Id == id))
-                throw new NotFoundException("customer");
-            return GetCustomerById(id).ToString();
-        }
-        /// <summary>
-        /// return the description of a specific parcel
-        /// </summary>
-        /// <param name="id">parcel's id</param>
-        /// <returns></returns>
-        public string ShowParcel(int id)
-        {
-            if (!DataSource.parcels.Exists(parc => parc.Id == id))
-                throw new NotFoundException("parcel");
-            return GetParcelById(id).ToString();
-        }
-        /// <summary>
-        /// return list of stations
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Station> PrintStations()=>DataSource.stations;
-        /// <summary>
-        /// return list of drones
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Drone> PrintDrones() => DataSource.drones;
-        /// <summary>
-        /// return list of customers
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Customer> PrintCustomers() => DataSource.customers;
-        /// <summary>
-        /// return list of parcels
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Parcel> PrintParcels() => DataSource.parcels;
-        /// <summary>
-        /// delete drone by id
-        /// </summary>
-        /// <param name="id"></param>
-        public void DeleteDrone(int id)
-        {
-            if (!DataSource.drones.Exists(dron => dron.Id == id))
-                throw new NotFoundException("drone");
-            Drone temp = GetDroneById(id);
-            DataSource.drones.Remove(temp);
-        }
-        
-        public void DeleteCustomer(int id)
-        {
-            if (!DataSource.customers.Exists(cust => cust.Id == id))
-                throw new NotFoundException("customer");
-            Customer temp = GetCustomerById(id);
-            DataSource.customers.Remove(temp);
-        }
-        /// <summary>
-        /// delete parcel by id
-        /// </summary>
-        /// <param name="id"></param>
-        public void DeleteParcel(int id)
-        {
-            if (!DataSource.parcels.Exists(parc => parc.Id == id))
-                throw new NotFoundException("parcel");
-            Parcel temp = GetParcelById(id);
-            DataSource.parcels.Remove(temp);
-        }
-        /// <summary>
-        /// return how many full slots in the station
-        /// </summary>
-        /// <param name="stationId">station id</param>
-        /// <returns></returns>
-        public int FullSlots(int stationId)
-        {
-            if (!DataSource.stations.Exists(stat => stat.Id == stationId))
-                throw new NotFoundException("station");
-            int count= 0;
-            foreach (var d in DataSource.DroneCharges)
-            {
-                if (d.StationId == stationId)
-                    count++;
-            }
-            return count;
-        }
-        /// <summary>
-        /// return all the drone IDs that are charged in station(according to the station id)
-        /// </summary>
-        /// <param name="stationId">station id</param>
-        /// <returns></returns>
-        public IEnumerable<int> DroneInChargeIds(int stationId)
-        {
-            if (!DataSource.stations.Exists(stat => stat.Id == stationId))
-                throw new NotFoundException("station");
-            return from DroneCharge d in DataSource.DroneCharges
-                   where d.StationId == stationId
-                   select d.DroneId;
-        }
+        #endregion
+        #region HELP METHOD
         /// <summary>
         /// create string of sexagesimal lattitude
         /// </summary>
@@ -371,23 +449,6 @@ namespace DalObject
             arr[4] = DataSource.Config.ChargingRate;
             return arr;
         }
-
-        /// <summary>
-        /// return the transfered parcel with the droneId
-        /// </summary>
-        /// <param name="droneId"></param>
-        /// <returns></returns>
-        public Parcel GetTransferedParcel(int droneId)
-        {
-            if (!DataSource.drones.Exists(dron => dron.Id == droneId))
-                throw new NotFoundException("drone");
-            foreach (Parcel p in DataSource.parcels)
-            {
-                if (p.DroneId == droneId && p.Delivered == DateTime.MinValue)
-                    return p;
-            }
-             throw new NotFoundException("parcel"); //parcel not found
-        }
         /// <summary>
         /// calculate the distance between two points of longitude and lattitude
         /// </summary>
@@ -405,39 +466,6 @@ namespace DalObject
 
             return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
         }
-        /// <summary>
-        /// return all the stations with available chargeSlots
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Station> AvailableStations()
-        {
-            return from Station s in DataSource.stations
-                   where s.ChargeSlots > 0
-                   select s;
-        }
-        /// <summary>
-        /// return the list of parcels that not associated yet with drone
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Parcel> UnassociatedParcel()
-        {
-            return from Parcel p in DataSource.parcels
-                   where p.DroneId == null
-                   select p;
-        }
-        /// <summary>
-        /// return all the delivered parcels
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Parcel> DeliveredParcel()
-        {
-            return from Parcel p in DataSource.parcels
-                   where p.Delivered != DateTime.MinValue
-                   select p;
-        }
-        public bool ExistStation(int id) => DataSource.stations.Exists(s => s.Id == id);
-        public bool ExistDrone(int id) => DataSource.drones.Exists(d => d.Id == id);
-        public bool ExistCustomer(int id) => DataSource.customers.Exists(c => c.Id == id);
-        public bool ExistParcel(int id) => DataSource.parcels.Exists(p => p.Id == id);
+        #endregion
     }
 }

@@ -194,9 +194,29 @@ namespace IDAL
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Parcel> DeliveredParcel();
+        /// <summary>
+        /// return if the station exists in stations or doesn't
+        /// </summary>
+        /// <param name="id">station's id</param>
+        /// <returns></returns>
         public bool ExistStation(int id);
+        /// <summary>
+        /// return if the drone exists in drones or doesn't
+        /// </summary>
+        /// <param name="id">drone's id</param>
+        /// <returns></returns>
         public bool ExistDrone(int id);
+        /// <summary>
+        /// return if the customer exists in customers or doesn't
+        /// </summary>
+        /// <param name="id">customer's id</param>
+        /// <returns></returns>
         public bool ExistCustomer(int id);
+        /// <summary>
+        /// return if the parcel exists in parcels or doesn't
+        /// </summary>
+        /// <param name="id">parcel's id</param>
+        /// <returns></returns>
         public bool ExistParcel(int id);
     }
 }
