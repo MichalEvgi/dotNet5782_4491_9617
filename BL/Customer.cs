@@ -18,8 +18,8 @@ namespace IBL
             public string Name { get; set; }
             public string Phone { get; set; }
             public Location LocationC { get; set; }
-            public IEnumerable<ParcelInCustomer> FromCustomer { get; set; }
-            public IEnumerable<ParcelInCustomer> ToCustomer { get; set; }
+            public IEnumerable<ParcelInCustomer> FromCustomer { get; set; } //list of all the parcels that the customer sent
+            public IEnumerable<ParcelInCustomer> ToCustomer { get; set; } //list of all the parcels that the customer got
             /// <summary>
             /// to string
             /// </summary>
@@ -28,11 +28,11 @@ namespace IBL
                 string fromC = "", toC = "";
                 foreach (ParcelInCustomer p in FromCustomer)
                 {
-                    fromC += p.ToString();
+                    fromC += p.ToString(); //all the ToString of the list FromCustomer
                 }
                 foreach (ParcelInCustomer p in ToCustomer)
                 {
-                    toC += p.ToString();
+                    toC += p.ToString();  //all the ToString of the list ToCustomer
                 }
                 return "Id:"+Id+"\nName:"+Name+"\nPhone:"+Phone+"\nLocation:"+LocationC+"\nParcel from customer:"+fromC+ "\nParcel to customer:" + toC;
             }

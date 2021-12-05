@@ -18,7 +18,7 @@ namespace IBL
             public int Name { get; set; }
             public Location LocationS { get; set; }
             public int AvailableSlots { get; set; }
-            public IEnumerable<DroneInCharging> DronesInCharging { get; set; }
+            public IEnumerable<DroneInCharging> DronesInCharging { get; set; }  //list of all the drones that charge in this station
             /// <summary>
             /// to string
             /// </summary>
@@ -27,7 +27,7 @@ namespace IBL
                 string dronelist="";
                 foreach(DroneInCharging d in DronesInCharging)
                 {
-                    dronelist += d.ToString();
+                    dronelist += d.ToString();   // all the toString of the list DronesInCharging
                 }
                 return "Id:"+Id+"\nName:"+Name+"\nLocation:"+LocationS+ "\nAvailable slots:"+AvailableSlots+ "\nDrones in charging:"+dronelist;
             }

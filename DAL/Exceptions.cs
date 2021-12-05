@@ -10,6 +10,9 @@ namespace IDAL
 {
     namespace DO
     {
+        /// <summary>
+        /// if the value not found throw this exception
+        /// </summary>
         [Serializable]
         public class NotFoundException : Exception
         {
@@ -22,6 +25,9 @@ namespace IDAL
                 return "This " + Message +" wasn't found";
             }
         }
+        /// <summary>
+        /// if the value already exist throw this exception
+        /// </summary>
         [Serializable]
         public class AlreadyExistsException : Exception
         {

@@ -8,7 +8,10 @@ using System.Runtime.Serialization;
 namespace IBL
 {
     namespace BO
-    {
+    {  
+        /// <summary>
+        /// if the value not found throw this exception
+        /// </summary>
         [Serializable]
         public class NotFoundException : Exception
         {
@@ -21,6 +24,9 @@ namespace IBL
                 return "This " + Message +" wasn't found";
             }
         }
+        /// <summary>
+        /// if the value already exist throw this exception
+        /// </summary>
         [Serializable]
         public class AlreadyExistsException : Exception
         {
@@ -33,6 +39,9 @@ namespace IBL
                 return "This " + Message + " already exists";
             }
         }
+        /// <summary>
+        /// if battery calculations are wrong throw this exception
+        /// </summary>
         [Serializable]
         public class BatteryException : Exception
         {
@@ -45,6 +54,9 @@ namespace IBL
                 return  Message;
             }
         }
+        /// <summary>
+        /// if the input is invalid throw this exception
+        /// </summary>
         [Serializable]
         public class InvalidInputException : Exception
         {
@@ -57,6 +69,9 @@ namespace IBL
                 return "Invalid input: " + Message;
             }
         }
+        /// <summary>
+        /// if the status of the drone not suitable for the action throw this exception
+        /// </summary>
         [Serializable]
         public class DroneStatusException : Exception
         {
@@ -69,6 +84,9 @@ namespace IBL
                 return  Message;
             }
         }
+        /// <summary>
+        /// if the list is empty throw this exception
+        /// </summary>
         [Serializable]
         public class EmptyListException : Exception
         {
@@ -81,6 +99,9 @@ namespace IBL
                 return Message;
             }
         }
+        /// <summary>
+        /// if the mode of the parcel not suitable for the action throw this exception
+        /// </summary>
         [Serializable]
         public class ParcelModeException : Exception
         {
