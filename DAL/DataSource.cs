@@ -92,9 +92,9 @@ namespace DalObject
                     Priority = (Priorities)r.Next(0, 3),
                     Requested = DateTime.Now,
                     DroneId = null,
-                    Scheduled = DateTime.MinValue,
-                    PickedUp = DateTime.MinValue,
-                    Delivered = DateTime.MinValue
+                    Scheduled = null,
+                    PickedUp = null,
+                    Delivered =null
                 }) ;
                 Config.RunIndex++;
             }

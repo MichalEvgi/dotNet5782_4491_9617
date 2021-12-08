@@ -81,6 +81,8 @@ namespace IBL
         /// </summary>
         /// <returns></returns>
         public IEnumerable<DroneToList> GetDronesList();
+        public IEnumerable<DroneToList> StatusDrone(DroneStatus status);
+        public IEnumerable<DroneToList> WeightDrone(WeightCategories weight);
         #endregion
         #region CUSTOMER
         /// <summary>

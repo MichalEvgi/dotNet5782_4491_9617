@@ -31,10 +31,10 @@ namespace IDAL
         /// <returns></returns>
         public IEnumerable<Station> PrintStations();
         /// <summary>
-        /// return all the stations with available chargeSlots
+        /// return all the stations with specific condition
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Station> AvailableStations();
+        public IEnumerable<Station> FilteredStations(Predicate<Station> predi);
         /// <summary>
         /// return station by id
         /// </summary>
@@ -183,15 +183,10 @@ namespace IDAL
         /// <returns></returns>
         public IEnumerable<Parcel> PrintParcels();
         /// <summary>
-        /// return the list of parcels that not associated yet with drone
+        /// return the list of parcels with specific condition
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Parcel> UnassociatedParcel();
-        /// <summary>
-        /// return all the delivered parcels
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Parcel> DeliveredParcel();
+        public IEnumerable<Parcel> FilteredParcel(Predicate<Parcel> predi);
         /// /// <summary>
         /// return parcel by id
         /// </summary>

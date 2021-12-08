@@ -55,13 +55,13 @@ namespace DalObject
         /// <returns></returns>
         public IEnumerable<Station> PrintStations() => DataSource.stations;
         /// <summary>
-        /// return all the stations with available chargeSlots
+        /// return all the stations with specific condition
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Station> AvailableStations()
+        public IEnumerable<Station> FilteredStations(Predicate<Station> predi)
         {
             return from Station s in DataSource.stations
-                   where s.ChargeSlots > 0
+                   where predi(s)
                    select s;
         }
         /// <summary>
@@ -291,23 +291,13 @@ namespace DalObject
         /// <returns></returns>
         public IEnumerable<Parcel> PrintParcels() => DataSource.parcels;
         /// <summary>
-        /// return the list of parcels that not associated yet with drone
+        /// return the list of parcels with specific filter
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Parcel> UnassociatedParcel()
+        public IEnumerable<Parcel> FilteredParcel(Predicate<Parcel> predi)
         {
             return from Parcel p in DataSource.parcels
-                   where p.DroneId == null
-                   select p;
-        }
-        /// <summary>
-        /// return all the delivered parcels
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Parcel> DeliveredParcel()
-        {
-            return from Parcel p in DataSource.parcels
-                   where p.Delivered != DateTime.MinValue
+                   where predi(p)
                    select p;
         }
         /// <summary>
@@ -333,7 +323,7 @@ namespace DalObject
                 throw new NotFoundException("drone");
             foreach (Parcel p in DataSource.parcels)
             {
-                if (p.DroneId == droneId && p.Delivered == DateTime.MinValue)
+                if (p.DroneId == droneId && p.Delivered == null)
                     return p;
             }
             throw new NotFoundException("parcel"); //parcel not found

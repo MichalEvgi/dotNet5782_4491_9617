@@ -19,10 +19,10 @@ namespace IBL
             public WeightCategories Weight { get; set; }
             public Priorities Priority { get; set; }
             public DroneInParcel DroneP { get; set; }
-            public DateTime RequestedTime { get; set; }
-            public DateTime ScheduledTime { get; set; }
-            public DateTime PickedUpTime { get; set; }
-            public DateTime DeliveredTime { get; set; }
+            public DateTime? RequestedTime { get; set; }
+            public DateTime? ScheduledTime { get; set; }
+            public DateTime? PickedUpTime { get; set; }
+            public DateTime? DeliveredTime { get; set; }
             /// <summary>
             /// to string
             /// </summary>
