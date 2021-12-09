@@ -7,18 +7,21 @@
         mc:Ignorable="d"
         Title="DroneWindow" Height="640" Width="800">
     <Grid Name="MainGrid">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="400*"/>
-        </Grid.RowDefinitions>
-        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
-         VerticalAlignment="Stretch" Width="auto">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions >
+        <Grid Name="addDrone" Visibility="Visible">
+            <Label x:Name="IdLbl" Content="Id:" HorizontalAlignment="Left" Margin="234,158,0,0" VerticalAlignment="Top" Height="34" Width="70"/>
+            <Label x:Name="ModelLbl" Content="Model:" HorizontalAlignment="Left" Margin="234,229,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.25,0.464" Width="93"/>
+            <Label x:Name="WeightLbl" Content="Max Weight:" HorizontalAlignment="Left" Margin="234,287,0,0" VerticalAlignment="Top" Width="108"/>
+            <Label x:Name="StationIdLbl" Content="Station Id:" HorizontalAlignment="Left" Margin="234,373,0,0" VerticalAlignment="Top" Width="93"/>
+            <TextBox x:Name="IdtxtBox" HorizontalAlignment="Left" Margin="367,158,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" Height="34" TextChanged="IdtxtBox_TextChanged"/>
+            <TextBox x:Name="ModeltxtBox" HorizontalAlignment="Left" Margin="367,211,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" Height="44"/>
+            <ComboBox x:Name="WeightCmb" HorizontalAlignment="Left" Margin="367,287,0,0" VerticalAlignment="Top" Width="112" Height="23"/>
+            <TextBox x:Name="SIdtxtBox" HorizontalAlignment="Left" Margin="367,373,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" Height="38" TextChanged="SIdtxtBox_TextChanged"/>
+            <Button x:Name="AddButton" Content="add" HorizontalAlignment="Left" Margin="352,522,0,0" VerticalAlignment="Top" Height="49" Width="88" Click="AddButton_Click"/>
+            <Button x:Name="CancelButton" Content="cancel" HorizontalAlignment="Left" Margin="545,522,0,0" VerticalAlignment="Top" Height="49" Width="87" Click="CancelButton_Click"/>
+
+        </Grid>
+        <Grid Name="actions" Visibility="Hidden">
         </Grid>
     </Grid>
+
 </Window>
