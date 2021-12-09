@@ -39,7 +39,12 @@ namespace PL
             try
             {
                 bl.AddDrone(new Drone { Id = Convert.ToInt32(IdtxtBox.Text), Model = ModeltxtBox.Text, MaxWeight = (WeightCategories)WeightCmb.SelectedItem }, Convert.ToInt32(SIdtxtBox.Text));
-                MessageBox.Show("נוסף בהצלחה");
+                MessageBoxResult result= MessageBox.Show("נוסף בהצלחה");
+                if(result== MessageBoxResult.OK)
+                {
+
+                    this.Close();
+                }
             }
             catch (NotFoundException ex)
             {
