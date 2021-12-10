@@ -21,7 +21,32 @@
 
         </Grid>
         <Grid Name="actions" Visibility="Visible">
-            
+            <Label x:Name="Updatelbl" Content="עדכון רחפן" HorizontalAlignment="Left" Margin="120,77,0,0" VerticalAlignment="Top" Height="32" Width="85" RenderTransformOrigin="0.5,0.5"/>
+            <Label x:Name="deliverylbl" Content="משלוח" HorizontalAlignment="Left" Margin="623,70,0,0" VerticalAlignment="Top" Height="34" Width="58"/>
+            <Label x:Name="Chargelbl" Content="טעינת רחפן" HorizontalAlignment="Left" Margin="610,376,0,0" VerticalAlignment="Top" Height="28" Width="71"/>
+            <Button x:Name="AssignParcelbt" Content="שיוך רחפן" HorizontalAlignment="Left" Margin="610,129,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="PickParcelbt" Content="איסוף חבילה" HorizontalAlignment="Left" Margin="610,185,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
+            <Button x:Name="DeliverParcelbt" Content="אספקת חבילה" HorizontalAlignment="Left" Margin="593,252,0,0" VerticalAlignment="Top" Width="92" Height="24"/>
+            <Button x:Name="SendToChargebt" Content="שליחה לטעינה" HorizontalAlignment="Left" Margin="593,424,0,0" VerticalAlignment="Top" Width="92"/>
+            <Button x:Name="SendFromChargebt" Content="שחרור מטעינה" HorizontalAlignment="Left" Margin="593,503,0,0" VerticalAlignment="Top" Width="92"/>
+            <Label x:Name="Idlbl" Content="Id:" HorizontalAlignment="Left" Margin="98,139,0,0" VerticalAlignment="Top" Height="27"/>
+            <Label x:Name="Batterylbl" Content="Battery:" HorizontalAlignment="Left" Margin="98,196,0,0" VerticalAlignment="Top" Width="57" Height="24"/>
+            <Label x:Name="Weightlbl" Content="Max Weight:" HorizontalAlignment="Left" Margin="98,252,0,0" VerticalAlignment="Top" Width="76" Height="24"/>
+            <Label x:Name="Modellbl" Content="Model:" HorizontalAlignment="Left" Margin="98,0,0,0" VerticalAlignment="Center" Width="76" Height="30"/>
+            <Label x:Name="Statuslbl" Content="Status:" HorizontalAlignment="Left" Margin="98,330,0,0" VerticalAlignment="Top" Width="57"/>
+            <Label x:Name="Deliverylbl" Content="Delivery:" HorizontalAlignment="Left" Margin="98,376,0,0" VerticalAlignment="Top" Width="57" Height="28"/>
+            <Label x:Name="Latitudelbl" Content="Latitude:" HorizontalAlignment="Left" Margin="98,424,0,0" VerticalAlignment="Top" Width="57" Height="33"/>
+            <Label x:Name="Longitudelbl" Content="Longitude:" HorizontalAlignment="Left" Margin="98,479,0,0" VerticalAlignment="Top" Width="76" Height="34"/>
+            <Button x:Name="Updatebt" Content="עדכון" HorizontalAlignment="Left" Margin="109,554,0,0" VerticalAlignment="Top" Height="27" Width="86"/>
+            <TextBox x:Name="Idtxtbox" HorizontalAlignment="Left" Margin="195,139,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27"/>
+            <TextBox x:Name="Batterytxtbox" HorizontalAlignment="Left" Margin="195,196,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24"/>
+            <TextBox x:Name="Weighttxtbox" HorizontalAlignment="Left" Margin="195,252,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24"/>
+            <TextBox x:Name="Modeltxtbox" HorizontalAlignment="Left" Margin="195,297,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="Statustxtbox" HorizontalAlignment="Left" Margin="195,330,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26"/>
+            <TextBox x:Name="Deliverytxtbox" HorizontalAlignment="Left" Margin="195,376,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="28"/>
+            <TextBox x:Name="Latitudetxtbox" HorizontalAlignment="Left" Margin="195,434,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="23"/>
+            <TextBox x:Name="Longitudetxtbox" HorizontalAlignment="Left" Margin="195,479,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="34"/>
+
         </Grid>
     </Grid>
 

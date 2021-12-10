@@ -89,5 +89,15 @@ namespace PL
                 SIdtxtBox.Text = SIdtxtBox.Text.Remove(SIdtxtBox.Text.Length - 1);
             }
         }
+
+        public DroneToList selectedDrone;
+        public DroneWindow(IBL.IBL bL,DroneToList drone)
+        {
+            bl = bL;
+            InitializeComponent();
+            selectedDrone = drone;
+            actions.Visibility = Visibility.Visible;
+            addDrone.Visibility = Visibility.Hidden;
+        }
     }
 }

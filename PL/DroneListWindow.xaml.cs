@@ -58,7 +58,7 @@ namespace PL
 
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-           // new DroneWindow(bl,ListView.se).Show();
+           new DroneWindow(bl,(IBL.BO.DroneToList)(this.DroneListView.SelectedItem)).Show();
         }
     }
 }
