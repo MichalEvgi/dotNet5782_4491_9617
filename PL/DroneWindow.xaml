@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="DroneWindow" Height="640" Width="800">
     <Grid Name="MainGrid">
-        <Grid Name="addDrone" Visibility="Visible">
+        <Grid Name="addDrone" Visibility="Hidden">
             <Label x:Name="IdLbl" Content="Id:" HorizontalAlignment="Left" Margin="234,158,0,0" VerticalAlignment="Top" Height="34" Width="70"/>
             <Label x:Name="ModelLbl" Content="Model:" HorizontalAlignment="Left" Margin="234,229,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.25,0.464" Width="93"/>
             <Label x:Name="WeightLbl" Content="Max Weight:" HorizontalAlignment="Left" Margin="234,287,0,0" VerticalAlignment="Top" Width="108"/>
@@ -20,7 +20,8 @@
             <Button x:Name="CancelButton" Content="cancel" HorizontalAlignment="Left" Margin="545,522,0,0" VerticalAlignment="Top" Height="49" Width="87" Click="CancelButton_Click"/>
 
         </Grid>
-        <Grid Name="actions" Visibility="Hidden">
+        <Grid Name="actions" Visibility="Visible">
+            
         </Grid>
     </Grid>
 

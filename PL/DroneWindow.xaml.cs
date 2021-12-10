@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IBL.BO;
 using IBL;
+using System.Collections.ObjectModel;
 
 namespace PL
 {
@@ -22,11 +23,21 @@ namespace PL
     public partial class DroneWindow : Window
     {
         IBL.IBL bl;
+        public ObservableCollection<DroneToList> droneTos;
         public DroneWindow(IBL.IBL bL)
         {
             bl = bL;
             InitializeComponent();
             WeightCmb.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            addDrone.Visibility = Visibility.Visible;
+            actions.Visibility = Visibility.Hidden;
+            //droneTos = new ObservableCollection<DroneToList>();
+            //List<DroneToList> drones = bl.GetDronesList().ToList();
+            //foreach(var d in drones)
+            //{
+            //    droneTos.Add(d);
+            //}
+
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -42,7 +53,6 @@ namespace PL
                 MessageBoxResult result= MessageBox.Show("נוסף בהצלחה");
                 if(result== MessageBoxResult.OK)
                 {
-
                     this.Close();
                 }
             }
