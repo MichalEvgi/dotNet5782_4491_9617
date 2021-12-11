@@ -37,15 +37,15 @@
             <Label x:Name="Deliverylbl" Content="Delivery:" HorizontalAlignment="Left" Margin="98,376,0,0" VerticalAlignment="Top" Width="57" Height="28"/>
             <Label x:Name="Latitudelbl" Content="Latitude:" HorizontalAlignment="Left" Margin="98,424,0,0" VerticalAlignment="Top" Width="57" Height="33"/>
             <Label x:Name="Longitudelbl" Content="Longitude:" HorizontalAlignment="Left" Margin="98,479,0,0" VerticalAlignment="Top" Width="76" Height="34"/>
-            <Button x:Name="Updatebt" Content="עדכון" HorizontalAlignment="Left" Margin="109,554,0,0" VerticalAlignment="Top" Height="27" Width="86"/>
-            <TextBox x:Name="Idtxtbox" HorizontalAlignment="Left" Margin="195,139,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27"/>
-            <TextBox x:Name="Batterytxtbox" HorizontalAlignment="Left" Margin="195,196,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24"/>
-            <TextBox x:Name="Weighttxtbox" HorizontalAlignment="Left" Margin="195,252,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24"/>
+            <Button x:Name="Updatebt" Content="עדכון" HorizontalAlignment="Left" Margin="109,554,0,0" VerticalAlignment="Top" Height="27" Width="86" Click="Updatebt_Click"/>
+            <TextBox x:Name="Idtxtbox" HorizontalAlignment="Left" Margin="195,139,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27" IsEnabled="False"/>
+            <TextBox x:Name="Batterytxtbox" HorizontalAlignment="Left" Margin="195,196,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" IsEnabled="False"/>
+            <TextBox x:Name="Weighttxtbox" HorizontalAlignment="Left" Margin="195,252,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" IsEnabled="False"/>
             <TextBox x:Name="Modeltxtbox" HorizontalAlignment="Left" Margin="195,297,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="Statustxtbox" HorizontalAlignment="Left" Margin="195,330,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26"/>
-            <TextBox x:Name="Deliverytxtbox" HorizontalAlignment="Left" Margin="195,376,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="28"/>
-            <TextBox x:Name="Latitudetxtbox" HorizontalAlignment="Left" Margin="195,434,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="23"/>
-            <TextBox x:Name="Longitudetxtbox" HorizontalAlignment="Left" Margin="195,479,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="34"/>
+            <TextBox x:Name="Statustxtbox" HorizontalAlignment="Left" Margin="195,330,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" IsEnabled="False"/>
+            <TextBox x:Name="Deliverytxtbox" HorizontalAlignment="Left" Margin="195,376,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="28" IsEnabled="False"/>
+            <TextBox x:Name="Latitudetxtbox" HorizontalAlignment="Left" Margin="195,434,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="23" IsEnabled="False"/>
+            <TextBox x:Name="Longitudetxtbox" HorizontalAlignment="Left" Margin="195,479,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="34" IsEnabled="False"/>
 
         </Grid>
     </Grid>

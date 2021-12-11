@@ -1,5 +1,7 @@
-﻿using System;
+﻿using IBL.BO;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +22,20 @@ namespace PL
     public partial class DroneListWindow : Window
     {
         IBL.IBL bl;
+        public ObservableCollection<DroneToList> droneTos;
         public DroneListWindow(IBL.IBL bL)
         {
             bl = bL;
             InitializeComponent();
-            DroneListView.ItemsSource = bl.GetDronesList();
+            var drones = bl.GetDronesList();
+            droneTos = new ObservableCollection<DroneToList>();
+            //List<DroneToList> drones = bl.GetDronesList().ToList();
+            foreach(var d in drones)
+            {
+                droneTos.Add(d);
+            }
+
+            DroneListView.ItemsSource = droneTos;
             StatusSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatus));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
         }

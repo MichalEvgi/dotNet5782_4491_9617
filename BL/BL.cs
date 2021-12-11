@@ -443,7 +443,7 @@ namespace IBL
         /// </summary>
         /// <param name="id">drone's id</param>
         /// <returns></returns>
-        public string GetDrone(int id)
+        public Drone GetDrone(int id)
         {
             // validation
             if (!dal.ExistDrone(id))
@@ -471,7 +471,7 @@ namespace IBL
                     TransferedParcel = null,
                     CurrentLocation = droneToList.CurrentLocation
                 };
-                return drone1.ToString();
+                return drone1;
             }
 
             // the drone have parcel
@@ -514,7 +514,7 @@ namespace IBL
                 TransferedParcel = parcelInTransfer,
                 CurrentLocation = droneToList.CurrentLocation
             };
-            return drone.ToString();
+            return drone;
         }
         /// <summary>
         /// return list of drones

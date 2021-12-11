@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace IBL
 {
     namespace BO
     {
-        public class DroneToList
+        public class DroneToList : INotifyPropertyChanged
         {
             /// <summary>
             /// properties
@@ -20,6 +21,14 @@ namespace IBL
             public DroneStatus Status { get; set; }
             public Location CurrentLocation { get; set; }
             public int ParcelId { get; set; }
+
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            public void NotifyPropertyChanged(string propName)
+            {
+                if (this.PropertyChanged != null)
+                    this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
 
             /// <summary>
             /// to string

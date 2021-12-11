@@ -90,14 +90,29 @@ namespace PL
             }
         }
 
-        public DroneToList selectedDrone;
+        public Drone selectedDrone;
         public DroneWindow(IBL.IBL bL,DroneToList drone)
         {
             bl = bL;
             InitializeComponent();
-            selectedDrone = drone;
+            selectedDrone = bl.GetDrone(drone.Id);
             actions.Visibility = Visibility.Visible;
             addDrone.Visibility = Visibility.Hidden;
+            Idtxtbox.Text = selectedDrone.Id.ToString();
+            Batterytxtbox.Text = selectedDrone.Battery.ToString();
+            Weighttxtbox.Text = selectedDrone.MaxWeight.ToString();
+            Modeltxtbox.Text = selectedDrone.Model;
+            Statustxtbox.Text = selectedDrone.Status.ToString();
+            Longitudetxtbox.Text = selectedDrone.CurrentLocation.Longitude.ToString();
+            Latitudetxtbox.Text = selectedDrone.CurrentLocation.Lattitude.ToString();
+
+
+        }
+
+        private void Updatebt_Click(object sender, RoutedEventArgs e)
+        {
+            bl.UpdateDrone(selectedDrone.Id, ModeltxtBox.Text);
+            MessageBox.Show("עודכן בהצלחה");
         }
     }
 }
