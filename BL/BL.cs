@@ -516,6 +516,15 @@ namespace IBL
             };
             return drone;
         }
+        public DroneToList GetDroneTo(int id)
+        {
+           foreach(DroneToList d in drones)
+            {
+                if (d.Id == id)
+                    return d;
+            }
+            return new DroneToList();
+        }
         /// <summary>
         /// return list of drones
         /// </summary>

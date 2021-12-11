@@ -29,7 +29,6 @@ namespace PL
             InitializeComponent();
             var drones = bl.GetDronesList();
             droneTos = new ObservableCollection<DroneToList>();
-            //List<DroneToList> drones = bl.GetDronesList().ToList();
             foreach(var d in drones)
             {
                 droneTos.Add(d);
@@ -54,7 +53,7 @@ namespace PL
 
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
-            new DroneWindow(bl).Show();
+            new DroneWindow(bl,droneTos).Show();
         }
 
         private void DroneListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

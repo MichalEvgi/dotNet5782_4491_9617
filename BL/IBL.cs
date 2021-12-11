@@ -76,6 +76,7 @@ namespace IBL
         /// <param name="id">drone's id</param>
         /// <returns></returns>
         public Drone GetDrone(int id);
+        public DroneToList GetDroneTo(int id);
         /// <summary>
         /// return list of drones
         /// </summary>

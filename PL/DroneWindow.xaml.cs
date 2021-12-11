@@ -24,14 +24,14 @@ namespace PL
     {
         IBL.IBL bl;
         public ObservableCollection<DroneToList> droneTos;
-        public DroneWindow(IBL.IBL bL)
+        public DroneWindow(IBL.IBL bL, ObservableCollection<DroneToList> droneTo)
         {
             bl = bL;
             InitializeComponent();
             WeightCmb.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             addDrone.Visibility = Visibility.Visible;
             actions.Visibility = Visibility.Hidden;
-            //droneTos = new ObservableCollection<DroneToList>();
+            droneTos = droneTo;
             //List<DroneToList> drones = bl.GetDronesList().ToList();
             //foreach(var d in drones)
             //{
@@ -50,7 +50,8 @@ namespace PL
             try
             {
                 bl.AddDrone(new Drone { Id = Convert.ToInt32(IdtxtBox.Text), Model = ModeltxtBox.Text, MaxWeight = (WeightCategories)WeightCmb.SelectedItem }, Convert.ToInt32(SIdtxtBox.Text));
-                MessageBoxResult result= MessageBox.Show("נוסף בהצלחה");
+                droneTos.Add(bl.GetDroneTo(Convert.ToInt32(IdtxtBox.Text)));
+                MessageBoxResult result = MessageBox.Show("נוסף בהצלחה");
                 if(result== MessageBoxResult.OK)
                 {
                     this.Close();
@@ -161,7 +162,7 @@ namespace PL
         {
             try
             {
-                bl.PickParcel(selectedDrone.Id);
+                bl.DeliverParcel(selectedDrone.Id);
                 MessageBox.Show("סופק בהצלחה");
             }
             catch (NotFoundException ex)
@@ -207,7 +208,7 @@ namespace PL
         {
             try
             {
-                bl.ReleaseDrone(selectedDrone.Id,);
+                bl.ReleaseDrone(selectedDrone.Id,2);
                 MessageBox.Show("שוחרר מטעינה בהצלחה");
             }
             catch (NotFoundException ex)
