@@ -24,9 +24,9 @@
             <Label x:Name="Updatelbl" Content="עדכון רחפן" HorizontalAlignment="Left" Margin="120,77,0,0" VerticalAlignment="Top" Height="32" Width="85" RenderTransformOrigin="0.5,0.5"/>
             <Label x:Name="deliverylbl" Content="משלוח" HorizontalAlignment="Left" Margin="623,70,0,0" VerticalAlignment="Top" Height="34" Width="58"/>
             <Label x:Name="Chargelbl" Content="טעינת רחפן" HorizontalAlignment="Left" Margin="610,376,0,0" VerticalAlignment="Top" Height="28" Width="71"/>
-            <Button x:Name="AssignParcelbt" Content="שיוך רחפן" HorizontalAlignment="Left" Margin="610,129,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="PickParcelbt" Content="איסוף חבילה" HorizontalAlignment="Left" Margin="610,185,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
-            <Button x:Name="DeliverParcelbt" Content="אספקת חבילה" HorizontalAlignment="Left" Margin="593,252,0,0" VerticalAlignment="Top" Width="92" Height="24"/>
+            <Button x:Name="AssignParcelbt" Content="שיוך רחפן" HorizontalAlignment="Left" Margin="610,129,0,0" VerticalAlignment="Top" Width="75" Click="AssignParcelbt_Click"/>
+            <Button x:Name="PickParcelbt" Content="איסוף חבילה" HorizontalAlignment="Left" Margin="610,185,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="PickParcelbt_Click"/>
+            <Button x:Name="DeliverParcelbt" Content="אספקת חבילה" HorizontalAlignment="Left" Margin="593,252,0,0" VerticalAlignment="Top" Width="92" Height="24" Click="DeliverParcelbt_Click"/>
             <Button x:Name="SendToChargebt" Content="שליחה לטעינה" HorizontalAlignment="Left" Margin="593,424,0,0" VerticalAlignment="Top" Width="92"/>
             <Button x:Name="SendFromChargebt" Content="שחרור מטעינה" HorizontalAlignment="Left" Margin="593,503,0,0" VerticalAlignment="Top" Width="92"/>
             <Label x:Name="Idlbl" Content="Id:" HorizontalAlignment="Left" Margin="98,139,0,0" VerticalAlignment="Top" Height="27"/>

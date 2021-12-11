@@ -114,5 +114,110 @@ namespace PL
             bl.UpdateDrone(selectedDrone.Id, ModeltxtBox.Text);
             MessageBox.Show("עודכן בהצלחה");
         }
+
+        private void AssignParcelbt_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.DroneToParcel(selectedDrone.Id);
+                MessageBox.Show("שיוך בהצלחה");
+            }
+            catch (NotFoundException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (DroneStatusException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (EmptyListException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void PickParcelbt_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.PickParcel(selectedDrone.Id);
+                MessageBox.Show("נאסף בהצלחה");
+            }
+            catch (NotFoundException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (DroneStatusException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (ParcelModeException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void DeliverParcelbt_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.PickParcel(selectedDrone.Id);
+                MessageBox.Show("סופק בהצלחה");
+            }
+            catch (NotFoundException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (DroneStatusException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (ParcelModeException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void SendToChargebt_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.SendToCharge(selectedDrone.Id);
+                MessageBox.Show("נשלח לטעינה בהצלחה");
+            }
+            catch (NotFoundException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (DroneStatusException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (BatteryException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (EmptyListException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void SendFromChargebt_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.ReleaseDrone(selectedDrone.Id,);
+                MessageBox.Show("שוחרר מטעינה בהצלחה");
+            }
+            catch (NotFoundException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (DroneStatusException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }
