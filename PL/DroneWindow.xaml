@@ -42,17 +42,17 @@
             <Label x:Name="locationlbl" Content="Location:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="57" Height="33" Grid.Column="1" Margin="0,382,0,0"/>
             <Button x:Name="Updatebt" Content="עדכון" HorizontalAlignment="Left" Margin="20,534,0,0" VerticalAlignment="Top" Height="27" Width="86" Click="Updatebt_Click" Grid.Column="2"/>
             <TextBox x:Name="Idtxtbox" HorizontalAlignment="Left" Margin="3,139,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27" IsReadOnly="True" Grid.Column="2" />
-            <TextBox x:Name="Batterytxtbox"  HorizontalAlignment="Left" Margin="3,196,0,0" Text="{Binding Path=Battery}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" IsReadOnly="True" Grid.Column="2"/>
+            <TextBox x:Name="Batterytxtbox"  HorizontalAlignment="Left" Margin="3,196,0,0" Text="{Binding Path=Battery}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" IsReadOnly="True" Grid.Column="2" />
             <TextBox x:Name="Weighttxtbox" HorizontalAlignment="Left" Margin="3,252,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" IsReadOnly="True" Grid.Column="2"/>
             <TextBox x:Name="Modeltxtbox" HorizontalAlignment="Left" Margin="3,297,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="2"/>
-            <TextBox x:Name="Statustxtbox" HorizontalAlignment="Left" Margin="3,330,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" IsReadOnly="True" Grid.Column="2"/>
-            <TextBox x:Name="Deliverytxtbox" HorizontalAlignment="Left" Margin="3,471,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="193" Height="53" VerticalScrollBarVisibility= "Auto" IsReadOnly="True" Grid.Column="2"/>
+            <TextBox x:Name="Statustxtbox" HorizontalAlignment="Left" Margin="3,330,0,0" Text="{Binding Path=Status}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" IsReadOnly="True" Grid.Column="2"/>
+            <TextBox x:Name="Deliverytxtbox" HorizontalAlignment="Left" Margin="3,471,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="193" Height="53" VerticalScrollBarVisibility= "Auto" IsReadOnly="True" Grid.Column="2" />
             <TextBox x:Name="locationtxtbox" HorizontalAlignment="Left" Margin="3,382,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Height="52" IsReadOnly="True" Grid.Column="2"/>
             <TextBox x:Name="TimeTxt" HorizontalAlignment="Left" Margin="396,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Visibility="Visible" Height="18" Grid.Column="2" TextChanged="TimeTxt_TextChanged"/>
             <Label x:Name="TimeLbl" Content=":הכנס זמן בטעינה" HorizontalAlignment="Left" Margin="398,218,0,319" VerticalAlignment="Top" Visibility="Visible" Width="100" Height="25" Grid.Column="2"/>
-            <Button x:Name="ReleaseBt" Content="שחרר" HorizontalAlignment="Left" Margin="431,277,0,0" VerticalAlignment="Top" Visibility="Visible" Click="ReleaseBt_Click" Height="20" Width="35" Grid.Column="2"/>
+            <Button x:Name="ReleaseBt" Content="שחרר" HorizontalAlignment="Left" Margin="398,277,0,0" VerticalAlignment="Top" Visibility="Visible" Click="ReleaseBt_Click" Height="38" Width="68" Grid.Column="2"/>
             <Button x:Name="Exitbt" Content="יציאה" HorizontalAlignment="Left" Margin="508,0,0,0" VerticalAlignment="Center" Height="33" Width="75" Click="Exitbt_Click" Grid.Row="1" Grid.Column="2"/>
-            <Button x:Name="Deliverybt" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Margin="404,109,0,0" VerticalAlignment="Top" Click="Deliverybt_Click" Width="85"/>
+            <Button x:Name="Deliverybt" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Margin="411,125,0,0" VerticalAlignment="Top" Click="Deliverybt_Click" Width="85"/>
             <Button x:Name="Chargingbt" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Margin="405,193,0,0" VerticalAlignment="Top" Width="84" Click="Chargingbt_Click"/>
 
 

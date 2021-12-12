@@ -27,13 +27,13 @@ namespace PL
         {
             bl = bL;
             InitializeComponent();
-            var drones = bl.GetDronesList();
             droneTos = new ObservableCollection<DroneToList>();
-            foreach(var d in drones)
+            List<DroneToList> drone = bl.GetDronesList().ToList();
+            foreach(var d in drone)
             {
                 droneTos.Add(d);
             }
-
+            droneTos.CollectionChanged += DroneTos_CollectionChanged;
             DroneListView.ItemsSource = droneTos;
             foreach (DroneStatus ds in (DroneStatus[])Enum.GetValues(typeof(DroneStatus)))
             {
@@ -45,6 +45,30 @@ namespace PL
                 WeightSelector.Items.Add(wc);
             }
             WeightSelector.Items.Add("Clear filter");
+        }
+
+        private void DroneTos_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            SelectorChanges();
+        }
+        public void SelectorChanges()
+        {
+            if((StatusSelector.SelectedItem==null||StatusSelector.SelectedItem.ToString() == "Clear filter") && (WeightSelector.SelectedItem==null||WeightSelector.SelectedItem.ToString() == "Clear filter"))
+            {
+                DroneListView.ItemsSource = droneTos.ToList();
+            }
+            else
+            {
+                if (StatusSelector.SelectedItem == null || StatusSelector.SelectedItem.ToString() == "Clear filter")
+                    DroneListView.ItemsSource = droneTos.Where(d => d.MaxWeight == (WeightCategories)WeightSelector.SelectedItem);
+                else
+                {
+                    if(WeightSelector.SelectedItem == null || WeightSelector.SelectedItem.ToString() == "Clear filter")
+                        DroneListView.ItemsSource = droneTos.Where(d => d.Status == (DroneStatus)StatusSelector.SelectedItem);
+                    else
+                        DroneListView.ItemsSource = droneTos.Where(d => (d.MaxWeight == (WeightCategories)WeightSelector.SelectedItem) && (d.Status == (DroneStatus)StatusSelector.SelectedItem));
+                }
+            }
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -92,7 +116,7 @@ namespace PL
 
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
-            new DroneWindow(bl,droneTos).Show();
+            new DroneWindow(bl,this).Show();
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -102,7 +126,7 @@ namespace PL
 
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-           new DroneWindow(bl,(IBL.BO.DroneToList)(this.DroneListView.SelectedItem)).Show();
+           new DroneWindow(bl,(IBL.BO.DroneToList)(this.DroneListView.SelectedItem),this).Show();
         }
     }
 }

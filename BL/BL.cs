@@ -778,6 +778,7 @@ namespace IBL
                     found = true;
                     chosenParcel = parcel;
                     drones[index].Status = DroneStatus.Delivery;
+                    drones[index].ParcelId = chosenParcel.Id;
                     dal.DroneToParcel(chosenParcel.Id, drones[index].Id);
                     break;
                 }
@@ -887,6 +888,7 @@ namespace IBL
             drones[index].Battery -= dis * dal.ElectricityRequest().ElementAt((int)parcel.Weight + 1);
             drones[index].CurrentLocation = new Location { Longitude = c.Longitude, Lattitude = c.Lattitude };
             drones[index].Status = DroneStatus.Available;
+            drones[index].ParcelId = 0;
 
         }
         /// <summary>

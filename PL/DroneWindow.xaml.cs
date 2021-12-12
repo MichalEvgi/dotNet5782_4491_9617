@@ -25,14 +25,16 @@ namespace PL
     {
         IBL.IBL bl;
         public ObservableCollection<DroneToList> droneTos;
-        public DroneWindow(IBL.IBL bL, ObservableCollection<DroneToList> droneTo)
+        private DroneListWindow dr;
+        public DroneWindow(IBL.IBL bL, DroneListWindow dlw)
         {
             bl = bL;
+            dr = dlw;
             InitializeComponent();
             WeightCmb.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             addDrone.Visibility = Visibility.Visible;
             actions.Visibility = Visibility.Hidden;
-            droneTos = droneTo;
+            //droneTos = droneTo;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -49,10 +51,11 @@ namespace PL
                 else
                 {
                     bl.AddDrone(new Drone { Id = Convert.ToInt32(IdtxtBox.Text), Model = ModeltxtBox.Text, MaxWeight = (WeightCategories)WeightCmb.SelectedItem }, Convert.ToInt32(SIdtxtBox.Text));
-                    droneTos.Add(bl.GetDroneTo(Convert.ToInt32(IdtxtBox.Text)));
+                    dr.droneTos.Add(bl.GetDroneTo(Convert.ToInt32(IdtxtBox.Text)));
                     MessageBoxResult result = MessageBox.Show("נוסף בהצלחה");
                     if (result == MessageBoxResult.OK)
                     {
+                        dr.SelectorChanges();
                         this.Close();
                     }
                 }
@@ -96,9 +99,10 @@ namespace PL
         public object s_SystemMenuHandle { get; private set; }
         public object Handle { get; private set; }
 
-        public DroneWindow(IBL.IBL bL, DroneToList drone)
+        public DroneWindow(IBL.IBL bL, DroneToList drone,DroneListWindow dl)
         {
             bl = bL;
+            dr = dl;
             InitializeComponent();
             selectedDrone = bl.GetDrone(drone.Id);
             DataContext = selectedDrone;
@@ -145,8 +149,9 @@ namespace PL
 
         private void Updatebt_Click(object sender, RoutedEventArgs e)
         {
-            bl.UpdateDrone(selectedDrone.Id, ModeltxtBox.Text);
+            bl.UpdateDrone(selectedDrone.Id, Modeltxtbox.Text);
             MessageBox.Show("עודכן בהצלחה");
+            dr.SelectorChanges();
         }
 
         private void Deliverybt_Click(object sender, RoutedEventArgs e)
@@ -166,6 +171,12 @@ namespace PL
             {
                 bl.DroneToParcel(selectedDrone.Id);
                 MessageBox.Show("שיוך בהצלחה");
+                dr.SelectorChanges();
+                selectedDrone = bl.GetDrone(selectedDrone.Id);
+                DataContext = selectedDrone;
+                Deliverytxtbox.Text = selectedDrone.TransferedParcel.ToString();
+                Deliverylbl.Visibility = Visibility.Visible;
+                Deliverytxtbox.Visibility = Visibility.Visible;
                 Deliverybt.Content = "איסוף חבילה";
                 Chargingbt.IsEnabled = false;
             }
@@ -189,6 +200,10 @@ namespace PL
             {
                 bl.PickParcel(selectedDrone.Id);
                 MessageBox.Show("נאסף בהצלחה");
+                locationtxtbox.Text = selectedDrone.TransferedParcel.SourceLocation.ToString();
+                dr.SelectorChanges();
+                selectedDrone = bl.GetDrone(selectedDrone.Id);
+                DataContext = selectedDrone;
                 Deliverybt.Content = "אספקת חבילה";
             }
             catch (NotFoundException ex)
@@ -211,6 +226,12 @@ namespace PL
             {
                 bl.DeliverParcel(selectedDrone.Id);
                 MessageBox.Show("סופק בהצלחה");
+                locationtxtbox.Text = selectedDrone.TransferedParcel.DestinationLocation.ToString();
+                dr.SelectorChanges();
+                selectedDrone = bl.GetDrone(selectedDrone.Id);
+                DataContext = selectedDrone;
+                Deliverylbl.Visibility = Visibility.Hidden;
+                Deliverytxtbox.Visibility = Visibility.Hidden;
                 Deliverybt.Content = "שיוך חבילה";
                 Chargingbt.IsEnabled = true;
             }
@@ -242,6 +263,10 @@ namespace PL
             {
                 bl.SendToCharge(selectedDrone.Id);
                 MessageBox.Show("נשלח לטעינה בהצלחה");
+                dr.SelectorChanges();
+                selectedDrone = bl.GetDrone(selectedDrone.Id);
+                DataContext = selectedDrone;
+                locationtxtbox.Text = selectedDrone.CurrentLocation.ToString();
                 Deliverybt.IsEnabled = false;
                 Chargingbt.Content = "שחרור מטעינה";
             }
@@ -281,6 +306,10 @@ namespace PL
                 MessageBox.Show("שוחרר מטעינה בהצלחה");
                 Deliverybt.IsEnabled = true;
                 Chargingbt.Content = "שליחה לטעינה";
+                dr.SelectorChanges();
+                selectedDrone = bl.GetDrone(selectedDrone.Id);
+                DataContext = selectedDrone;
+                TimeTxt.Text = "";
             }
             catch (NotFoundException ex)
             {
@@ -290,6 +319,7 @@ namespace PL
             {
                 MessageBox.Show(ex.ToString());
             }
+
         }
 
         private void Exitbt_Click(object sender, RoutedEventArgs e)
@@ -306,5 +336,7 @@ namespace PL
             }
 
         }
+
+        
     }
 }
