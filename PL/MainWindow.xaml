@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/images/1d01659c303895bd6570de0146694fb7.jpg"/>
+        </Grid.Background>
         <Button x:Name="DroneListButton" Content="Show Drone List" HorizontalAlignment="Left" Margin="193,133,0,0" VerticalAlignment="Top" Height="84" Width="207" FontSize="20" FontWeight="Bold" Click="DroneListButton_Click"/>
 
     </Grid>

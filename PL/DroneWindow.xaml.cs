@@ -274,7 +274,7 @@ namespace PL
         {
             try
             {
-                bl.ReleaseDrone(selectedDrone.Id, Convert.ToInt32(TimeTxt.Text));
+                bl.ReleaseDrone(selectedDrone.Id, Convert.ToDouble(TimeTxt.Text));
                 TimeLbl.Visibility = Visibility.Hidden;
                 TimeTxt.Visibility = Visibility.Hidden;
                 ReleaseBt.Visibility = Visibility.Hidden;
@@ -299,11 +299,12 @@ namespace PL
 
         private void TimeTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(TimeTxt.Text, "[^0-9]"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(TimeTxt.Text, "[^0-9 .]"))
             {
                 MessageBox.Show("Please enter only numbers.");
                 TimeTxt.Text = TimeTxt.Text.Remove(TimeTxt.Text.Length - 1);
             }
+
         }
     }
 }
