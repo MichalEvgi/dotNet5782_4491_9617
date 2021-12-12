@@ -35,30 +35,64 @@ namespace PL
             }
 
             DroneListView.ItemsSource = droneTos;
-            StatusSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatus));
-            WeightSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
+            foreach (DroneStatus ds in (DroneStatus[])Enum.GetValues(typeof(DroneStatus)))
+            {
+                StatusSelector.Items.Add(ds);
+            }
+            StatusSelector.Items.Add("Clear filter");
+            foreach (WeightCategories wc in (WeightCategories[])Enum.GetValues(typeof(WeightCategories)))
+            {
+                WeightSelector.Items.Add(wc);
+            }
+            WeightSelector.Items.Add("Clear filter");
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            IBL.BO.DroneStatus status = (IBL.BO.DroneStatus)StatusSelector.SelectedItem;
-            DroneListView.ItemsSource = bl.StatusDrone(status);
+            if (StatusSelector.SelectedItem.ToString() == "Clear filter")
+            {
+                if (WeightSelector.SelectedItem != null && WeightSelector.SelectedItem.ToString() != "Clear filter")
+
+                    DroneListView.ItemsSource = bl.WeightDrone((WeightCategories)WeightSelector.SelectedItem);
+                else
+
+                    DroneListView.ItemsSource = bl.GetDronesList();
+            }
+            else if (WeightSelector.SelectedItem != null && WeightSelector.SelectedItem.ToString() != "Clear filter")
+            {
+                DroneListView.ItemsSource = bl.StatusAndWeight((DroneStatus)StatusSelector.SelectedItem, (WeightCategories)WeightSelector.SelectedItem);
+            }
+            else
+            {
+                DroneListView.ItemsSource = bl.StatusDrone((DroneStatus)StatusSelector.SelectedItem);
+            }
+   
         }
 
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            IBL.BO.WeightCategories weight = (IBL.BO.WeightCategories)WeightSelector.SelectedItem;
-            DroneListView.ItemsSource = bl.WeightDrone(weight);
+            if (WeightSelector.SelectedItem.ToString() == "Clear filter")
+            {
+                if (StatusSelector.SelectedItem != null && StatusSelector.SelectedItem.ToString() != "Clear filter")
+                    DroneListView.ItemsSource = bl.StatusDrone((DroneStatus)StatusSelector.SelectedItem);
+                else
+                    DroneListView.ItemsSource = bl.GetDronesList();
+            }
+            else if(StatusSelector.SelectedItem!=null&& StatusSelector.SelectedItem.ToString() != "Clear filter")
+            {
+                DroneListView.ItemsSource = bl.StatusAndWeight((DroneStatus)StatusSelector.SelectedItem, (WeightCategories)WeightSelector.SelectedItem);
+            }
+            else
+            {
+                DroneListView.ItemsSource = bl.WeightDrone((WeightCategories)WeightSelector.SelectedItem);
+            }
+
+            
         }
 
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
             new DroneWindow(bl,droneTos).Show();
-        }
-
-        private void DroneListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)

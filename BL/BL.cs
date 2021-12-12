@@ -651,6 +651,12 @@ namespace IBL
                    where d.MaxWeight == weight
                    select d;
         }
+        public IEnumerable<DroneToList> StatusAndWeight(DroneStatus status, WeightCategories weight)
+        {
+            return from DroneToList d in drones
+                   where (d.Status == status) && (d.MaxWeight == weight)
+                   select d;
+        }
         /// <summary>
         /// convert from DAL customet to BL customertolist
         /// </summary>

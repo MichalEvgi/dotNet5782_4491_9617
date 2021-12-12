@@ -15,6 +15,7 @@ using IBL.BO;
 using IBL;
 using System.Collections.ObjectModel;
 
+
 namespace PL
 {
     /// <summary>
@@ -43,12 +44,17 @@ namespace PL
         {
             try
             {
-                bl.AddDrone(new Drone { Id = Convert.ToInt32(IdtxtBox.Text), Model = ModeltxtBox.Text, MaxWeight = (WeightCategories)WeightCmb.SelectedItem }, Convert.ToInt32(SIdtxtBox.Text));
-                droneTos.Add(bl.GetDroneTo(Convert.ToInt32(IdtxtBox.Text)));
-                MessageBoxResult result = MessageBox.Show("נוסף בהצלחה");
-                if (result == MessageBoxResult.OK)
+                if (IdtxtBox.Text == "" || ModeltxtBox.Text == "" || WeightCmb.SelectedItem == null || SIdtxtBox.Text == "")
+                    MessageBox.Show("לא כל השדות מלאים");
+                else
                 {
-                    this.Close();
+                    bl.AddDrone(new Drone { Id = Convert.ToInt32(IdtxtBox.Text), Model = ModeltxtBox.Text, MaxWeight = (WeightCategories)WeightCmb.SelectedItem }, Convert.ToInt32(SIdtxtBox.Text));
+                    droneTos.Add(bl.GetDroneTo(Convert.ToInt32(IdtxtBox.Text)));
+                    MessageBoxResult result = MessageBox.Show("נוסף בהצלחה");
+                    if (result == MessageBoxResult.OK)
+                    {
+                        this.Close();
+                    }
                 }
             }
             catch (NotFoundException ex)
@@ -86,6 +92,10 @@ namespace PL
         }
 
         public Drone selectedDrone;
+
+        public object s_SystemMenuHandle { get; private set; }
+        public object Handle { get; private set; }
+
         public DroneWindow(IBL.IBL bL, DroneToList drone)
         {
             bl = bL;
@@ -287,5 +297,13 @@ namespace PL
             this.Close();
         }
 
+        private void TimeTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(TimeTxt.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                TimeTxt.Text = TimeTxt.Text.Remove(TimeTxt.Text.Length - 1);
+            }
+        }
     }
 }

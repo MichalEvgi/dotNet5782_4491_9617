@@ -25,7 +25,7 @@
             <Label Content="Drone Max Weight:" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
             <ComboBox Name="WeightSelector" Grid.Column="3" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" SelectionChanged="WeightSelector_SelectionChanged"/>
         </Grid>
-        <ListView x:Name="DroneListView" Margin="0,1,0,0" Grid.Row="1" SelectionChanged="DroneListView_SelectionChanged" MouseDoubleClick="DroneListView_MouseDoubleClick">
+        <ListView x:Name="DroneListView" Margin="0,1,0,0" Grid.Row="1"  MouseDoubleClick="DroneListView_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

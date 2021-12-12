@@ -48,7 +48,7 @@
             <TextBox x:Name="Statustxtbox" HorizontalAlignment="Left" Margin="3,330,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" IsReadOnly="True" Grid.Column="2"/>
             <TextBox x:Name="Deliverytxtbox" HorizontalAlignment="Left" Margin="3,471,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="193" Height="53" VerticalScrollBarVisibility= "Auto" IsReadOnly="True" Grid.Column="2"/>
             <TextBox x:Name="locationtxtbox" HorizontalAlignment="Left" Margin="3,382,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Height="52" IsReadOnly="True" Grid.Column="2"/>
-            <TextBox x:Name="TimeTxt" HorizontalAlignment="Left" Margin="396,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Visibility="Visible" Height="18" Grid.Column="2"/>
+            <TextBox x:Name="TimeTxt" HorizontalAlignment="Left" Margin="396,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Visibility="Visible" Height="18" Grid.Column="2" TextChanged="TimeTxt_TextChanged"/>
             <Label x:Name="TimeLbl" Content=":הכנס זמן בטעינה" HorizontalAlignment="Left" Margin="398,218,0,319" VerticalAlignment="Top" Visibility="Visible" Width="100" Height="25" Grid.Column="2"/>
             <Button x:Name="ReleaseBt" Content="שחרר" HorizontalAlignment="Left" Margin="431,277,0,0" VerticalAlignment="Top" Visibility="Visible" Click="ReleaseBt_Click" Height="20" Width="35" Grid.Column="2"/>
             <Button x:Name="Exitbt" Content="יציאה" HorizontalAlignment="Left" Margin="508,0,0,0" VerticalAlignment="Center" Height="33" Width="75" Click="Exitbt_Click" Grid.Row="1" Grid.Column="2"/>
