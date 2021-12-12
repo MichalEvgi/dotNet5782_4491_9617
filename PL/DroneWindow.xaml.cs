@@ -46,7 +46,7 @@ namespace PL
                 bl.AddDrone(new Drone { Id = Convert.ToInt32(IdtxtBox.Text), Model = ModeltxtBox.Text, MaxWeight = (WeightCategories)WeightCmb.SelectedItem }, Convert.ToInt32(SIdtxtBox.Text));
                 droneTos.Add(bl.GetDroneTo(Convert.ToInt32(IdtxtBox.Text)));
                 MessageBoxResult result = MessageBox.Show("נוסף בהצלחה");
-                if(result== MessageBoxResult.OK)
+                if (result == MessageBoxResult.OK)
                 {
                     this.Close();
                 }
@@ -86,7 +86,7 @@ namespace PL
         }
 
         public Drone selectedDrone;
-        public DroneWindow(IBL.IBL bL,DroneToList drone)
+        public DroneWindow(IBL.IBL bL, DroneToList drone)
         {
             bl = bL;
             InitializeComponent();
@@ -99,18 +99,38 @@ namespace PL
             Weighttxtbox.Text = selectedDrone.MaxWeight.ToString();
             Modeltxtbox.Text = selectedDrone.Model;
             Statustxtbox.Text = selectedDrone.Status.ToString();
-            if (selectedDrone.Status == IBL.BO.DroneStatus.Delivery)
+            locationtxtbox.Text = selectedDrone.CurrentLocation.ToString();
+            if (selectedDrone.Status != DroneStatus.Delivery)
+            {
+                Deliverytxtbox.Visibility = Visibility.Hidden;
+                Deliverylbl.Visibility = Visibility.Hidden;
+                Deliverybt.Content = "שיוך חבילה";
+                Chargingbt.IsEnabled = true;
+            }
+            else
             {
                 Deliverytxtbox.Text = selectedDrone.TransferedParcel.ToString();
                 Deliverytxtbox.Visibility = Visibility.Visible;
                 Deliverylbl.Visibility = Visibility.Visible;
+                Chargingbt.IsEnabled = false;
+                if (!selectedDrone.TransferedParcel.OnTheWay)
+                    Deliverybt.Content = "איסוף חבילה";
+                else
+                    Deliverybt.Content = "אספקת חבילה";
+            }
+            if(selectedDrone.Status== DroneStatus.Maintenance)
+            {
+                Deliverybt.IsEnabled = false;
+                Chargingbt.Content = "שחרור מטעינה";
             }
             else
             {
-                Deliverytxtbox.Visibility = Visibility.Hidden;
-                Deliverylbl.Visibility = Visibility.Hidden;
+                Deliverybt.IsEnabled = true;
+                Chargingbt.Content = "שליחה לטעינה";
             }
-            locationtxtbox.Text = selectedDrone.CurrentLocation.ToString();
+            TimeLbl.Visibility = Visibility.Hidden;
+            TimeTxt.Visibility = Visibility.Hidden;
+            ReleaseBt.Visibility = Visibility.Hidden;
         }
 
         private void Updatebt_Click(object sender, RoutedEventArgs e)
@@ -119,12 +139,25 @@ namespace PL
             MessageBox.Show("עודכן בהצלחה");
         }
 
-        private void AssignParcelbt_Click(object sender, RoutedEventArgs e)
+        private void Deliverybt_Click(object sender, RoutedEventArgs e)
+        {
+            if (Deliverybt.Content.ToString() == "שיוך חבילה")
+                AssignParcel();
+            else
+                if (Deliverybt.Content.ToString() == "איסוף חבילה")
+                PickParcel();
+            else
+                DeliverParcel();
+        }
+
+        private void AssignParcel()
         {
             try
             {
                 bl.DroneToParcel(selectedDrone.Id);
                 MessageBox.Show("שיוך בהצלחה");
+                Deliverybt.Content = "איסוף חבילה";
+                Chargingbt.IsEnabled = false;
             }
             catch (NotFoundException ex)
             {
@@ -140,12 +173,13 @@ namespace PL
             }
         }
 
-        private void PickParcelbt_Click(object sender, RoutedEventArgs e)
+        private void PickParcel()
         {
             try
             {
                 bl.PickParcel(selectedDrone.Id);
                 MessageBox.Show("נאסף בהצלחה");
+                Deliverybt.Content = "אספקת חבילה";
             }
             catch (NotFoundException ex)
             {
@@ -161,12 +195,14 @@ namespace PL
             }
         }
 
-        private void DeliverParcelbt_Click(object sender, RoutedEventArgs e)
+        private void DeliverParcel()
         {
             try
             {
                 bl.DeliverParcel(selectedDrone.Id);
                 MessageBox.Show("סופק בהצלחה");
+                Deliverybt.Content = "שיוך חבילה";
+                Chargingbt.IsEnabled = true;
             }
             catch (NotFoundException ex)
             {
@@ -181,13 +217,23 @@ namespace PL
                 MessageBox.Show(ex.ToString());
             }
         }
+        private void Chargingbt_Click(object sender, RoutedEventArgs e)
+        {
+            if (Chargingbt.Content.ToString() == "שליחה לטעינה")
+                SendToChargeb();
+            else
+                SendFromCharge();
+        }
 
-        private void SendToChargebt_Click(object sender, RoutedEventArgs e)
+
+        private void SendToChargeb()
         {
             try
             {
                 bl.SendToCharge(selectedDrone.Id);
                 MessageBox.Show("נשלח לטעינה בהצלחה");
+                Deliverybt.IsEnabled = false;
+                Chargingbt.Content = "שחרור מטעינה";
             }
             catch (NotFoundException ex)
             {
@@ -207,7 +253,7 @@ namespace PL
             }
         }
 
-        private void SendFromChargebt_Click(object sender, RoutedEventArgs e)
+        private void SendFromCharge()
         {
             TimeLbl.Visibility = Visibility.Visible;
             TimeTxt.Visibility = Visibility.Visible;
@@ -223,6 +269,8 @@ namespace PL
                 TimeTxt.Visibility = Visibility.Hidden;
                 ReleaseBt.Visibility = Visibility.Hidden;
                 MessageBox.Show("שוחרר מטעינה בהצלחה");
+                Deliverybt.IsEnabled = true;
+                Chargingbt.Content = "שליחה לטעינה";
             }
             catch (NotFoundException ex)
             {
@@ -238,5 +286,6 @@ namespace PL
         {
             this.Close();
         }
+
     }
 }

@@ -20,34 +20,41 @@
             <Button x:Name="CancelButton" Content="cancel" HorizontalAlignment="Left" Margin="545,522,0,0" VerticalAlignment="Top" Height="49" Width="87" Click="CancelButton_Click"/>
 
         </Grid>
-        <Grid Name="actions" Visibility="Visible">
-            <Label x:Name="Updatelbl" Content="עדכון רחפן" HorizontalAlignment="Left" Margin="120,77,0,0" VerticalAlignment="Top" Height="32" Width="85" RenderTransformOrigin="0.5,0.5"/>
-            <Label x:Name="deliverylbl" Content="משלוח" HorizontalAlignment="Left" Margin="623,70,0,0" VerticalAlignment="Top" Height="34" Width="58"/>
-            <Label x:Name="Chargelbl" Content="טעינת רחפן" HorizontalAlignment="Left" Margin="610,376,0,0" VerticalAlignment="Top" Height="28" Width="71"/>
-            <Button x:Name="AssignParcelbt" Content="שיוך רחפן" HorizontalAlignment="Left" Margin="610,129,0,0" VerticalAlignment="Top" Width="75" Click="AssignParcelbt_Click"/>
-            <Button x:Name="PickParcelbt" Content="איסוף חבילה" HorizontalAlignment="Left" Margin="610,185,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="PickParcelbt_Click"/>
-            <Button x:Name="DeliverParcelbt" Content="אספקת חבילה" HorizontalAlignment="Left" Margin="593,252,0,0" VerticalAlignment="Top" Width="92" Height="24" Click="DeliverParcelbt_Click"/>
-            <Button x:Name="SendToChargebt" Content="שליחה לטעינה" HorizontalAlignment="Left" Margin="593,424,0,0" VerticalAlignment="Top" Width="92" Click="SendToChargebt_Click"/>
-            <Button x:Name="SendFromChargebt" Content="שחרור מטעינה" HorizontalAlignment="Left" Margin="593,476,0,0" VerticalAlignment="Top" Width="92" Click="SendFromChargebt_Click"/>
-            <Label x:Name="Idlbl" Content="Id:" HorizontalAlignment="Left" Margin="98,139,0,0" VerticalAlignment="Top" Height="27"/>
-            <Label x:Name="Batterylbl" Content="Battery:" HorizontalAlignment="Left" Margin="98,196,0,0" VerticalAlignment="Top" Width="57" Height="24"/>
-            <Label x:Name="Weightlbl" Content="Max Weight:" HorizontalAlignment="Left" Margin="98,252,0,0" VerticalAlignment="Top" Width="76" Height="40"/>
-            <Label x:Name="Modellbl" Content="Model:" HorizontalAlignment="Left" Margin="98,0,0,0" VerticalAlignment="Center" Width="76" Height="30"/>
-            <Label x:Name="Statuslbl" Content="Status:" HorizontalAlignment="Left" Margin="98,330,0,0" VerticalAlignment="Top" Width="57"/>
-            <Label x:Name="Deliverylbl" Content="Delivery:" HorizontalAlignment="Left" Margin="98,458,0,0" VerticalAlignment="Top" Width="57" Height="28"/>
-            <Label x:Name="locationlbl" Content="Location:" HorizontalAlignment="Left" Margin="98,376,0,0" VerticalAlignment="Top" Width="57" Height="33"/>
-            <Button x:Name="Updatebt" Content="עדכון" HorizontalAlignment="Left" Margin="109,554,0,0" VerticalAlignment="Top" Height="27" Width="86" Click="Updatebt_Click"/>
-            <TextBox x:Name="Idtxtbox" HorizontalAlignment="Left" Margin="195,139,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27" IsReadOnly="True"/>
-            <TextBox x:Name="Batterytxtbox"  HorizontalAlignment="Left" Margin="195,196,0,0" Text="{Binding Path=Battery}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" IsReadOnly="True"/>
-            <TextBox x:Name="Weighttxtbox" HorizontalAlignment="Left" Margin="195,252,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" IsReadOnly="True"/>
-            <TextBox x:Name="Modeltxtbox" HorizontalAlignment="Left" Margin="195,297,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="Statustxtbox" HorizontalAlignment="Left" Margin="195,330,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" IsReadOnly="True"/>
-            <TextBox x:Name="Deliverytxtbox" HorizontalAlignment="Left" Margin="195,471,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="193" Height="53" VerticalScrollBarVisibility= "Auto" IsReadOnly="True"/>
-            <TextBox x:Name="locationtxtbox" HorizontalAlignment="Left" Margin="195,382,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Height="52" IsReadOnly="True"/>
-            <TextBox x:Name="TimeTxt" HorizontalAlignment="Left" Margin="588,529,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Visibility="Hidden"/>
-            <Label x:Name="TimeLbl" Content=":הכנס זמן בטעינה" HorizontalAlignment="Left" Margin="590,498,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.567" Visibility="Hidden"/>
-            <Button x:Name="ReleaseBt" Content="שחרר" HorizontalAlignment="Left" Margin="623,558,0,0" VerticalAlignment="Top" Visibility="Hidden" Click="ReleaseBt_Click"/>
-            <Button x:Name="Exitbt" Content="יציאה" HorizontalAlignment="Left" Margin="700,581,0,0" VerticalAlignment="Top" Height="33" Width="75" Click="Exitbt_Click"/>
+        <Grid x:Name="actions" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="57*"/>
+                <ColumnDefinition Width="121*"/>
+                <ColumnDefinition Width="622*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="289*"/>
+                <RowDefinition Height="23*"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="Updatelbl" Content="עדכון רחפן" HorizontalAlignment="Left" Margin="56,77,0,0" VerticalAlignment="Top" Height="32" Width="85" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2"/>
+            <Label x:Name="deliverylbl" Content="משלוח" HorizontalAlignment="Left" Margin="431,70,0,0" VerticalAlignment="Top" Height="34" Width="58" Grid.Column="2"/>
+            <Label x:Name="Chargelbl" Content="טעינת רחפן" HorizontalAlignment="Left" Margin="418,165,0,0" VerticalAlignment="Top" Height="28" Width="71" Grid.Column="2"/>
+            <Label x:Name="Idlbl" Content="Id:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Grid.Column="1" Width="23" Margin="0,140,0,0"/>
+            <Label x:Name="Batterylbl" Content="Battery:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Height="24" Grid.Column="1" Margin="1,196,0,0"/>
+            <Label x:Name="Weightlbl" Content="Max Weight:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Height="40" Grid.Column="1" Margin="0,249,0,0"/>
+            <Label x:Name="Modellbl" Content="Model:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="76" Height="30" Grid.Column="1" Margin="0,290,0,0"/>
+            <Label x:Name="Statuslbl" Content="Status:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="57" Grid.Column="1" Height="26" Margin="1,329,0,0"/>
+            <Label x:Name="Deliverylbl" Content="Delivery:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="57" Height="28" Grid.Column="1" Margin="0,458,0,0"/>
+            <Label x:Name="locationlbl" Content="Location:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="57" Height="33" Grid.Column="1" Margin="0,382,0,0"/>
+            <Button x:Name="Updatebt" Content="עדכון" HorizontalAlignment="Left" Margin="20,534,0,0" VerticalAlignment="Top" Height="27" Width="86" Click="Updatebt_Click" Grid.Column="2"/>
+            <TextBox x:Name="Idtxtbox" HorizontalAlignment="Left" Margin="3,139,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27" IsReadOnly="True" Grid.Column="2" />
+            <TextBox x:Name="Batterytxtbox"  HorizontalAlignment="Left" Margin="3,196,0,0" Text="{Binding Path=Battery}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" IsReadOnly="True" Grid.Column="2"/>
+            <TextBox x:Name="Weighttxtbox" HorizontalAlignment="Left" Margin="3,252,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" IsReadOnly="True" Grid.Column="2"/>
+            <TextBox x:Name="Modeltxtbox" HorizontalAlignment="Left" Margin="3,297,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="2"/>
+            <TextBox x:Name="Statustxtbox" HorizontalAlignment="Left" Margin="3,330,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" IsReadOnly="True" Grid.Column="2"/>
+            <TextBox x:Name="Deliverytxtbox" HorizontalAlignment="Left" Margin="3,471,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="193" Height="53" VerticalScrollBarVisibility= "Auto" IsReadOnly="True" Grid.Column="2"/>
+            <TextBox x:Name="locationtxtbox" HorizontalAlignment="Left" Margin="3,382,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Height="52" IsReadOnly="True" Grid.Column="2"/>
+            <TextBox x:Name="TimeTxt" HorizontalAlignment="Left" Margin="396,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Visibility="Visible" Height="18" Grid.Column="2"/>
+            <Label x:Name="TimeLbl" Content=":הכנס זמן בטעינה" HorizontalAlignment="Left" Margin="398,218,0,319" VerticalAlignment="Top" Visibility="Visible" Width="100" Height="25" Grid.Column="2"/>
+            <Button x:Name="ReleaseBt" Content="שחרר" HorizontalAlignment="Left" Margin="431,277,0,0" VerticalAlignment="Top" Visibility="Visible" Click="ReleaseBt_Click" Height="20" Width="35" Grid.Column="2"/>
+            <Button x:Name="Exitbt" Content="יציאה" HorizontalAlignment="Left" Margin="508,0,0,0" VerticalAlignment="Center" Height="33" Width="75" Click="Exitbt_Click" Grid.Row="1" Grid.Column="2"/>
+            <Button x:Name="Deliverybt" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Margin="404,109,0,0" VerticalAlignment="Top" Click="Deliverybt_Click" Width="85"/>
+            <Button x:Name="Chargingbt" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Margin="405,193,0,0" VerticalAlignment="Top" Width="84" Click="Chargingbt_Click"/>
+
 
         </Grid>
     </Grid>
