@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="DroneListWindow" Height="640" Width="800">
-    <Grid Name="MainGrid">
+    <Grid Name="MainGrid" Background="#FFD3F6F3">
         <Grid.RowDefinitions>
             <RowDefinition Height="68*"/>
             <RowDefinition Height="496*"/>
@@ -32,7 +32,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Name="AddDrone" Content="Add new drone" Width="89" Height="30" Grid.Row="2" RenderTransformOrigin="0.536,0.696" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="576,0,0,0" Click="AddDrone_Click"/>
-        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="695,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="30" Width="87" Click="ExitButton_Click"/>
+        <Button Name="AddDrone" Content="Add new drone" Width="133" Height="30" Grid.Row="2" RenderTransformOrigin="0.536,0.696" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="532,0,0,0" Click="AddDrone_Click" FontWeight="Bold" FontSize="16" Background="Transparent"/>
+        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="695,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="30" Width="87" Click="ExitButton_Click" FontWeight="Bold" FontSize="16" Background="Transparent"/>
     </Grid>
 </Window>
