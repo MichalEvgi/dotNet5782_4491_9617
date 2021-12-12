@@ -32,12 +32,6 @@ namespace PL
             addDrone.Visibility = Visibility.Visible;
             actions.Visibility = Visibility.Hidden;
             droneTos = droneTo;
-            //List<DroneToList> drones = bl.GetDronesList().ToList();
-            //foreach(var d in drones)
-            //{
-            //    droneTos.Add(d);
-            //}
-
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -97,6 +91,7 @@ namespace PL
             bl = bL;
             InitializeComponent();
             selectedDrone = bl.GetDrone(drone.Id);
+            DataContext = selectedDrone;
             actions.Visibility = Visibility.Visible;
             addDrone.Visibility = Visibility.Hidden;
             Idtxtbox.Text = selectedDrone.Id.ToString();
@@ -104,10 +99,18 @@ namespace PL
             Weighttxtbox.Text = selectedDrone.MaxWeight.ToString();
             Modeltxtbox.Text = selectedDrone.Model;
             Statustxtbox.Text = selectedDrone.Status.ToString();
-            Longitudetxtbox.Text = selectedDrone.CurrentLocation.Longitude.ToString();
-            Latitudetxtbox.Text = selectedDrone.CurrentLocation.Lattitude.ToString();
-
-
+            if (selectedDrone.Status == IBL.BO.DroneStatus.Delivery)
+            {
+                Deliverytxtbox.Text = selectedDrone.TransferedParcel.ToString();
+                Deliverytxtbox.Visibility = Visibility.Visible;
+                Deliverylbl.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Deliverytxtbox.Visibility = Visibility.Hidden;
+                Deliverylbl.Visibility = Visibility.Hidden;
+            }
+            locationtxtbox.Text = selectedDrone.CurrentLocation.ToString();
         }
 
         private void Updatebt_Click(object sender, RoutedEventArgs e)
@@ -206,9 +209,19 @@ namespace PL
 
         private void SendFromChargebt_Click(object sender, RoutedEventArgs e)
         {
+            TimeLbl.Visibility = Visibility.Visible;
+            TimeTxt.Visibility = Visibility.Visible;
+            ReleaseBt.Visibility = Visibility.Visible;
+        }
+
+        private void ReleaseBt_Click(object sender, RoutedEventArgs e)
+        {
             try
             {
-                bl.ReleaseDrone(selectedDrone.Id,2);
+                bl.ReleaseDrone(selectedDrone.Id, Convert.ToInt32(TimeTxt.Text));
+                TimeLbl.Visibility = Visibility.Hidden;
+                TimeTxt.Visibility = Visibility.Hidden;
+                ReleaseBt.Visibility = Visibility.Hidden;
                 MessageBox.Show("שוחרר מטעינה בהצלחה");
             }
             catch (NotFoundException ex)
@@ -219,6 +232,11 @@ namespace PL
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void Exitbt_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
