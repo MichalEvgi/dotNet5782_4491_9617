@@ -439,7 +439,7 @@ namespace IBL
 
         }
         /// <summary>
-        /// return the description of a specific drone
+        /// return a specific drone
         /// </summary>
         /// <param name="id">drone's id</param>
         /// <returns></returns>
@@ -639,18 +639,34 @@ namespace IBL
         {
             return dal.PrintCustomers().Select(c => convertToCustomerToList(c));
         }
+        /// <summary>
+        /// return list of drones with status=status
+        /// </summary>
+        /// <param name="status">status</param>
+        /// <returns></returns>
         public IEnumerable<DroneToList> StatusDrone(DroneStatus status)
         {
             return from DroneToList d in drones
                    where d.Status == status
                    select d;
         }
+        /// <summary>
+        /// return list of drones with weight=weight
+        /// </summary>
+        /// <param name="weight">weight</param>
+        /// <returns></returns>
         public IEnumerable<DroneToList> WeightDrone(WeightCategories weight)
         {
             return from DroneToList d in drones
                    where d.MaxWeight == weight
                    select d;
         }
+        /// <summary>
+        /// eturn list of drones with status=status and weight=weight
+        /// </summary>
+        /// <param name="status">status</param>
+        /// <param name="weight">weight</param>
+        /// <returns></returns>
         public IEnumerable<DroneToList> StatusAndWeight(DroneStatus status, WeightCategories weight)
         {
             return from DroneToList d in drones

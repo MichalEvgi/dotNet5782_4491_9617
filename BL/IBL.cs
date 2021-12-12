@@ -71,7 +71,7 @@ namespace IBL
         /// <param name="timeInCharging">charging time</param>
         public void ReleaseDrone(int id, double timeInCharging);
         /// <summary>
-        /// return the description of a specific drone
+        /// return a specific drone
         /// </summary>
         /// <param name="id">drone's id</param>
         /// <returns></returns>
@@ -82,8 +82,24 @@ namespace IBL
         /// </summary>
         /// <returns></returns>
         public IEnumerable<DroneToList> GetDronesList();
+        /// <summary>
+        /// return list of drones with status=status
+        /// </summary>
+        /// <param name="status">status</param>
+        /// <returns></returns>
         public IEnumerable<DroneToList> StatusDrone(DroneStatus status);
+        /// <summary>
+        /// return list of drones with weight=weight
+        /// </summary>
+        /// <param name="weight">weight</param>
+        /// <returns></returns>
         public IEnumerable<DroneToList> WeightDrone(WeightCategories weight);
+        /// <summary>
+        /// eturn list of drones with status=status and weight=weight
+        /// </summary>
+        /// <param name="status">status</param>
+        /// <param name="weight">weight</param>
+        /// <returns></returns>
         public IEnumerable<DroneToList> StatusAndWeight(DroneStatus status, WeightCategories weight);
         #endregion
         #region CUSTOMER
