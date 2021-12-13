@@ -11,8 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using IBL.BO;
-using IBL;
+using BO;
+using BlApi;
 using System.Collections.ObjectModel;
 
 namespace PL
@@ -22,11 +22,11 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
-        IBL.IBL bl;
+        IBL bl;
         public ObservableCollection<DroneToList> droneTos;
         private DroneListWindow dr;
         //open add drone window
-        public DroneWindow(IBL.IBL bL, DroneListWindow dlw)
+        public DroneWindow(IBL bL, DroneListWindow dlw)
         {
             bl = bL;
             dr = dlw;
@@ -84,7 +84,7 @@ namespace PL
         public object s_SystemMenuHandle { get; private set; }
         public object Handle { get; private set; }
         //open action drone window
-        public DroneWindow(IBL.IBL bL, DroneToList drone,DroneListWindow dl)
+        public DroneWindow(IBL bL, DroneToList drone,DroneListWindow dl)
         {
             bl = bL;
             dr = dl;

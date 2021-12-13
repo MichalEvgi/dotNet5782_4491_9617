@@ -1,5 +1,4 @@
-﻿using IBL.BO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BO;
+using BlApi;
 
 namespace PL
 {
@@ -21,9 +22,9 @@ namespace PL
     /// </summary>
     public partial class DroneListWindow : Window
     {
-        IBL.IBL bl;
+        IBL bl;
         public ObservableCollection<DroneToList> droneTos;
-        public DroneListWindow(IBL.IBL bL)
+        public DroneListWindow(IBL bL)
         {
             bl = bL;
             InitializeComponent();
@@ -141,7 +142,7 @@ namespace PL
         //open drone window with action state
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-           new DroneWindow(bl,(IBL.BO.DroneToList)(this.DroneListView.SelectedItem),this).Show();
+           new DroneWindow(bl,(DroneToList)(this.DroneListView.SelectedItem),this).Show();
         }
     }
 }
