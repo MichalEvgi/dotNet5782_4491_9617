@@ -4,23 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BO
+
+
+namespace DO
 {
-    public class StationToList
+    public struct Station
     {
         /// <summary>
         /// properties
         /// </summary>
         public int Id { get; set; }
         public int Name { get; set; }
-        public int AvailableSlots { get; set; }
-        public int FullSlots { get; set; }
+        public double Longitude { get; set; }
+        public double Lattitude { get; set; }
+        public int ChargeSlots { get; set; }
         /// <summary>
         /// to string
         /// </summary>
         public override string ToString()
         {
-            return ToolStringClass.ToStringProperty(this);
+            return "Station: Id: " + Id + " Name: " + Name + " Longitude: " + Lng(Longitude) + " Lattitude: " + Lat(Lattitude) + " Charge Slots: " + ChargeSlots;
         }
+
     }
 }
+

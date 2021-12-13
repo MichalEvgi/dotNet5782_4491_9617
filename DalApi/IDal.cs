@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDAL.DO;
+using DO;
 
-namespace IDAL
+namespace DalApi
 {
     public interface IDal
     {
@@ -222,6 +222,53 @@ namespace IDAL
         /// </summary>
         /// <returns></returns>
         public IEnumerable<double> ElectricityRequest();
-        #endregion       
+        /// <summary>
+        /// dreate string of sexagesimal longitude
+        /// </summary>
+        /// <param name="lng">longitude</param>
+        /// <returns></returns>
+        public static string Lng(double lng)
+        {
+            {
+                string ch;
+                if (lng < 0)
+                {
+                    ch = "W";
+                    lng *= -1;
+                }
+                else
+                    ch = "E";
+                int deg = (int)lng;
+                double dif = lng - deg;
+                int min = (int)(dif * 60);
+                double sec = (dif) * 3600 - min * 60;
+                sec = Math.Round(sec, 4);
+                return $"{deg}° {min}' {sec}'' {ch}";
+            }
+        }
+        /// /// // <summary>
+        /// create string of sexagesimal lattitude
+        /// </summary>
+        /// <param name="lat">lattitude</param>
+        /// <returns></returns>
+        public static string Lat(double lat)
+        {
+            string ch;
+            if (lat < 0)
+            {
+                ch = "S";
+                lat *= -1;
+            }
+            else
+                ch = "N";
+            int deg = (int)lat;
+            double dif = lat - deg;
+            int min = (int)(dif * 60);
+            double sec = (dif * 3600 - min * 60);
+            sec = Math.Round(sec, 4);
+            return $"{deg}° {min}' {sec}'' {ch}";
+        }
     }
+    #endregion
+}
 }

@@ -4,27 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBL
+namespace BO
 {
-    namespace BO
+    public class ParcelInCustomer
     {
-        public class ParcelInCustomer
+        /// <summary>
+        /// properities
+        /// </summary>
+        public int Id { get; set; }
+        public WeightCategories Weight { get; set; }
+        public Priorities Priority { get; set; }
+        public ParcelModes ParcelMode { get; set; }
+        public CustomerInParcel OtherCustomer { get; set; }
+        /// <summary>
+        /// to string
+        /// </summary>
+        public override string ToString()
         {
-            /// <summary>
-            /// properities
-            /// </summary>
-            public int Id { get; set; }
-            public WeightCategories Weight { get; set; }
-            public Priorities Priority { get; set; }
-            public ParcelModes ParcelMode { get; set; }
-            public CustomerInParcel OtherCustomer { get; set; }
-            /// <summary>
-            /// to string
-            /// </summary>
-            public override string ToString()
-            {
-                return ToolStringClass.ToStringProperty(this);
-            }
+            return ToolStringClass.ToStringProperty(this);
         }
     }
 }

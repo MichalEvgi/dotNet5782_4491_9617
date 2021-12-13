@@ -5,13 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace BO
+namespace DO
 {
     public enum Priorities { Regular, Express, Urgent }
-    public enum WeightCategories { Light, Medium, Heavy }
-    public enum ParcelModes { Defined, Associated, Collected, Provided }
-    public enum DroneStatus { Available, Maintenance, Delivery }
+    public enum WeightCategories { light, Medium, Heavy }
     public enum DroneModel { COBRA, AIRFUN, APOLLOMAGIC, COMBO, TELLO }
     public enum Names { YOSSEF, SHIRA, MICHAL, DINA, ELHANAN, OSHER, MIRYAM, ESTER, DANIEL, NATHAN }
 
 }
+

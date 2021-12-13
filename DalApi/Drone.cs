@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BO
+
+namespace DO
 {
-    public class Drone
+    public struct Drone
     {
         /// <summary>
         /// properties
@@ -14,18 +15,16 @@ namespace BO
         public int Id { get; set; }
         public string Model { get; set; }
         public WeightCategories MaxWeight { get; set; }
-        public double Battery { get; set; }
-        public DroneStatus Status { get; set; }
-        public ParcelInTransfer TransferedParcel { get; set; }
-        public Location CurrentLocation { get; set; }
 
         /// <summary>
         /// to string
         /// </summary>
         public override string ToString()
         {
-            return ToolStringClass.ToStringProperty(this);
+            return "Drone: Id: " + Id + " Model: " + Model + " Max Weight: " + MaxWeight;
         }
 
     }
 }
+
+

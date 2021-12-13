@@ -4,23 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BO
+
+namespace DO
 {
-    public class DroneInParcel
+    public struct DroneCharge
     {
         /// <summary>
         /// properties
         /// </summary>
-        public int Id { get; set; }
-        public double Battery { get; set; }
-        public Location CurrentLocation { get; set; }
-
+        public int DroneId { get; set; }
+        public int StationId { get; set; }
         /// <summary>
         /// to string
         /// </summary>
         public override string ToString()
         {
-            return ToolStringClass.ToStringProperty(this);
+            return "Drone Charge: Drone Id: " + DroneId + " Station Id: " + StationId;
         }
+
     }
 }
+
+
