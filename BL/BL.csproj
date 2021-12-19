@@ -2,12 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace />
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DalApi\DalApi.csproj" />
+    <ProjectReference Include="..\DalApi\DalFacade.csproj" />
     <ProjectReference Include="..\DalObject\DalObject.csproj" />
     <ProjectReference Include="..\DalXml\DalXml.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BL\" />
   </ItemGroup>
 
 </Project>

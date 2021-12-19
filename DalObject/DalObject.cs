@@ -9,9 +9,15 @@ using DO;
 
 namespace Dal
 {
-    public class DalObject:IDal
+   sealed class DalObject:IDal
     {
         #region INITIALIZE
+        //#region singelton
+        //static readonly DalObject instance = new DalObject();
+        //static DalObject() { }// static ctor to ensure instance init is done just before first usage
+        //DalObject() { } // default => private
+        //public static DalObject Instance { get => instance; }// The public Instance property to use
+        //#endregion
         public DalObject()
         {
             DataSource.Initialize();
