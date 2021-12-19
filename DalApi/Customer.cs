@@ -24,7 +24,7 @@ namespace DO
         /// </summary>
         public override string ToString()
         {
-            return "Customer: Id:" + Id + " Name:" + Name + " Phone:" + Phone + " Longitude:" + Lng(Longitude) + " Lattitude:" + Lat(Lattitude);
+            return "Customer: Id:" + Id + " Name:" + Name + " Phone:" + Phone + " Longitude:" + DalApi.IDal.Lng(Longitude) + " Lattitude:" + DalApi.IDal.Lat(Lattitude);
         }
 
     }

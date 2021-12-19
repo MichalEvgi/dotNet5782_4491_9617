@@ -23,7 +23,7 @@ namespace DO
         /// </summary>
         public override string ToString()
         {
-            return "Station: Id: " + Id + " Name: " + Name + " Longitude: " + Lng(Longitude) + " Lattitude: " + Lat(Lattitude) + " Charge Slots: " + ChargeSlots;
+            return "Station: Id: " + Id + " Name: " + Name + " Longitude: " +DalApi.IDal.Lng(Longitude) + " Lattitude: " + DalApi.IDal.Lat(Lattitude) + " Charge Slots: " + ChargeSlots;
         }
 
     }
