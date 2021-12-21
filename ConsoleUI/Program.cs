@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using DalObject;
-using IDAL.DO;
-using IDAL;
+using DalApi;
+using DO;
 
 namespace ConsoleUI
 {
@@ -10,7 +9,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            IDal dalObject = new DalObject.DalObject();
+            IDal dalObject = DalFactory.GetDal();
             int choice;
             Console.WriteLine("To add press 1");
             Console.WriteLine("To update press 2");

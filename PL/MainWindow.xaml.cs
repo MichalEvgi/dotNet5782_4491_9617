@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BlApi;
 
 namespace PL
 {
@@ -20,10 +21,10 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        private IBL.IBL bL;
+        private IBL bL;
         public MainWindow()
         {
-            bL = new IBL.BL();
+            bL = new BL();
             InitializeComponent();
         }
         //open droneList window

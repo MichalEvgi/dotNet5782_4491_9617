@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
-using IBL.BO;
-using IBL;
+using BO;
+using BlApi;
+
 namespace ConsoleUI_BL
 {
     public class programBL
@@ -15,7 +16,7 @@ namespace ConsoleUI_BL
             #region MAIN
             try
             {
-                IBL.IBL ibl = new BL();
+                IBL ibl = new BL();
                 int choice;
                 Console.WriteLine("To add press 1");
                 Console.WriteLine("To update press 2");
@@ -49,7 +50,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// ask the user which object to add
         /// </summary>
-        public static void Adding(IBL.IBL ibl)
+        public static void Adding(IBL ibl)
         {
             int c;
             Console.WriteLine("To add station press 1");
@@ -75,7 +76,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// add station to the stations list
         /// </summary>
-        public static void AddStation(IBL.IBL ibl)
+        public static void AddStation(IBL ibl)
         {
             int id, name, charge;
             double lng, lat;
@@ -105,7 +106,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// add drone to the drones list
         /// </summary>
-        public static void AddDrone(IBL.IBL ibl)
+        public static void AddDrone(IBL ibl)
         {
             int id;
             string model;
@@ -139,7 +140,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// add customer to the customers list
         /// </summary>
-        public static void AddCustomer(IBL.IBL ibl)
+        public static void AddCustomer(IBL ibl)
         {
             int id;
             string name, phone;
@@ -174,7 +175,7 @@ namespace ConsoleUI_BL
             }
         }
         // add parcel to the parecls list
-        public static void AddParcel(IBL.IBL ibl)
+        public static void AddParcel(IBL ibl)
         {
             int sender, target, weight, priority;
             Console.WriteLine("enter sender id");
@@ -199,7 +200,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// ask the user which update to do
         /// </summary>
-        public static void Updating(IBL.IBL ibl)
+        public static void Updating(IBL ibl)
         {
             int c;
             Console.WriteLine("To update drone details press 1");
@@ -233,7 +234,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// update the model of the drone
         /// </summary>
-        public static void UpdateDrone(IBL.IBL ibl)
+        public static void UpdateDrone(IBL ibl)
         {
             int droneId;
             string newModel;
@@ -253,7 +254,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// update the the station name or the station charging slots or both of them
         /// </summary>
-        public static void UpdateStation(IBL.IBL ibl)
+        public static void UpdateStation(IBL ibl)
         {
             int stationId, newName, newChargeSlots;
             Console.WriteLine("enter station id for updating");
@@ -278,7 +279,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// update the customer name or the customer phone or both of them
         /// </summary>
-        public static void UpdateCustomer(IBL.IBL ibl)
+        public static void UpdateCustomer(IBL ibl)
         {
             int customerId;
             string newName, newPhone;
@@ -310,7 +311,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// send drone to charge in station
         /// </summary>
-        public static void SendDrone(IBL.IBL ibl)
+        public static void SendDrone(IBL ibl)
         {
             int droneId;
             Console.WriteLine("enter drone id for charging");
@@ -339,7 +340,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// release drone from charge station
         /// </summary>
-        public static void ReleaseDrone(IBL.IBL ibl)
+        public static void ReleaseDrone(IBL ibl)
         {
             int droneId;
             double timeInCharging;
@@ -363,7 +364,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// assign parcel to drone
         /// </summary>
-        public static void ParcelToDrone(IBL.IBL ibl)
+        public static void ParcelToDrone(IBL ibl)
         {
             int droneId;
             Console.WriteLine("enter drone for association");
@@ -388,7 +389,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// pick up parcel by drone
         /// </summary>
-        public static void CollectParcel(IBL.IBL ibl)
+        public static void CollectParcel(IBL ibl)
         {
             int id;
             Console.WriteLine("enter drone id for collecting parcel");
@@ -413,7 +414,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// deliever parcel to customer
         /// </summary>
-        public static void DeliverParcel(IBL.IBL ibl)
+        public static void DeliverParcel(IBL ibl)
         {
             int id;
             Console.WriteLine("enter drone id for delievering parcel");
@@ -440,7 +441,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// ask the user which object to show
         /// </summary>
-        public static void Showing(IBL.IBL ibl)
+        public static void Showing(IBL ibl)
         {
             int c;
             Console.WriteLine("To view a station press 1");
@@ -466,7 +467,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// prints the requested station
         /// </summary>
-        public static void viewStation(IBL.IBL ibl)
+        public static void viewStation(IBL ibl)
         {
             int id;
             Console.WriteLine("enter station id to show");
@@ -483,7 +484,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// Prints the requested drone
         /// </summary>
-        public static void viewDrone(IBL.IBL ibl)
+        public static void viewDrone(IBL ibl)
         {
             int id;
             Console.WriteLine("enter drone id to show");
@@ -500,7 +501,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// Prints the requested customeer
         /// </summary>
-        public static void viewCustomer(IBL.IBL ibl)
+        public static void viewCustomer(IBL ibl)
         {
             int id;
             Console.WriteLine("enter customer id to show");
@@ -517,7 +518,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// Prints the requested parcel
         /// </summary>
-        public static void viewParcel(IBL.IBL ibl)
+        public static void viewParcel(IBL ibl)
         {
             int id;
             Console.WriteLine("enter parcel id to show");
@@ -536,7 +537,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// ask the user which list to show
         /// </summary>
-        public static void ShowList(IBL.IBL ibl)
+        public static void ShowList(IBL ibl)
         {
             int c;
             Console.WriteLine("To view a list of stations press 1");
@@ -566,7 +567,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// prints the stations list
         /// </summary>
-        public static void ListStations(IBL.IBL ibl)
+        public static void ListStations(IBL ibl)
         {
             IEnumerable<StationToList> stations = ibl.GetStationsList();
             foreach (StationToList s in stations)
@@ -577,7 +578,7 @@ namespace ConsoleUI_BL
         /// <summary>
         ///  prints the drones list
         /// </summary>
-        public static void ListDrones(IBL.IBL ibl)
+        public static void ListDrones(IBL ibl)
         {
             IEnumerable<DroneToList> drones = ibl.GetDronesList();
             foreach (DroneToList d in drones)
@@ -588,7 +589,7 @@ namespace ConsoleUI_BL
         /// <summary>
         ///  prints the customers list
         /// </summary>
-        public static void ListCustomers(IBL.IBL ibl)
+        public static void ListCustomers(IBL ibl)
         {
             IEnumerable<CustomerToList> customers = ibl.GetCustomersList();
             foreach (CustomerToList c in customers)
@@ -599,7 +600,7 @@ namespace ConsoleUI_BL
         /// <summary>
         ///  prints the parcels list
         /// </summary>
-        public static void ListParcels(IBL.IBL ibl)
+        public static void ListParcels(IBL ibl)
         {
             IEnumerable<ParcelToList> parcels = ibl.GetParcelsList();
             foreach (ParcelToList p in parcels)
@@ -610,7 +611,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// prints the list of parcels that not associated yet with drone
         /// </summary>
-        public static void ListUnassociated(IBL.IBL ibl)
+        public static void ListUnassociated(IBL ibl)
         {
             IEnumerable<ParcelToList> parcels = ibl.UnassociatedParcel();
             foreach (ParcelToList p in parcels)
@@ -621,7 +622,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// prints the base stations with available charging slots
         /// </summary>
-        public static void ListAvailable(IBL.IBL ibl)
+        public static void ListAvailable(IBL ibl)
         {
             IEnumerable<StationToList> stations = ibl.AvailableStations(); 
             foreach (StationToList s in stations)
