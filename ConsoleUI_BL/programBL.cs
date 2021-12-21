@@ -16,7 +16,7 @@ namespace ConsoleUI_BL
             #region MAIN
             try
             {
-                IBL ibl = new BL();
+                IBL ibl = BlFactory.GetBl(); ;
                 int choice;
                 Console.WriteLine("To add press 1");
                 Console.WriteLine("To update press 2");
@@ -43,6 +43,10 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(ex);
                 Console.WriteLine("Run the program again");
+            }
+            catch(DalConfigException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
             #endregion
         }

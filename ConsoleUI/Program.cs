@@ -9,25 +9,32 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            IDal dalObject = DalFactory.GetDal();
-            int choice;
-            Console.WriteLine("To add press 1");
-            Console.WriteLine("To update press 2");
-            Console.WriteLine("To view an entity, press 3");
-            Console.WriteLine("To view a list press 4");
-            int.TryParse(Console.ReadLine(), out choice);
-            //ask the user which kind of action he wants to operate
-            while (choice != 5)
+            try
             {
-                switch (choice)
-                {
-                    case 1: Adding(dalObject); break;
-                    case 2: Updating(dalObject); break;
-                    case 3: Showing(dalObject); break;
-                    case 4: ShowList(dalObject); break;
-                }
-                Console.WriteLine("enter another choice");
+                IDal dalObject = DalFactory.GetDal();
+                int choice;
+                Console.WriteLine("To add press 1");
+                Console.WriteLine("To update press 2");
+                Console.WriteLine("To view an entity, press 3");
+                Console.WriteLine("To view a list press 4");
                 int.TryParse(Console.ReadLine(), out choice);
+                //ask the user which kind of action he wants to operate
+                while (choice != 5)
+                {
+                    switch (choice)
+                    {
+                        case 1: Adding(dalObject); break;
+                        case 2: Updating(dalObject); break;
+                        case 3: Showing(dalObject); break;
+                        case 4: ShowList(dalObject); break;
+                    }
+                    Console.WriteLine("enter another choice");
+                    int.TryParse(Console.ReadLine(), out choice);
+                }
+            }
+            catch(DalConfigException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
         /// <summary>

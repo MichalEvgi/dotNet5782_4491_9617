@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BlApi;
+using BO;
 
 namespace PL
 {
@@ -24,8 +25,14 @@ namespace PL
         private IBL bL;
         public MainWindow()
         {
-            bL = new BL();
-            InitializeComponent();
+            try
+            {
+                bL = BlFactory.GetBl();
+                InitializeComponent();
+            }
+            catch(DalConfigException)
+            {
+            }
         }
         //open droneList window
         private void DroneListButton_Click(object sender, RoutedEventArgs e)

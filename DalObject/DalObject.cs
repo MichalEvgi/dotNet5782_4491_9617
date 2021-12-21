@@ -12,10 +12,32 @@ namespace Dal
    sealed class DalObject:IDal
     {
         #region INITIALIZE
-        static readonly DalObject instance = new DalObject();
-        static DalObject() { DataSource.Initialize(); }// static ctor to ensure instance init is done just before first usage
-        DalObject() { } // default => private
-        public static DalObject Instance { get => instance; }// The public Instance property to use
+        #region Singelton
+        private static DalObject instance = null;
+        private static readonly object padlock = new object();
+
+        public static DalObject Instance
+        {
+            get
+            {
+                if(instance==null)
+                {
+                    lock(padlock)
+                    {
+                        if(instance==null)
+                        {
+                            instance = new DalObject();
+                        }
+                    }
+                }
+                return instance;
+            }
+        }
+        #endregion
+        public DalObject() 
+        {
+            DataSource.Initialize();
+        } 
         #endregion
         #region STATION
         /// <summary>

@@ -9,20 +9,49 @@ using BO;
 
 namespace BlApi
 {
-    public class BL : IBL
+    class BL : IBL
     {
         #region INITIALIZE
         private IDal dal;
         private List<DroneToList> drones;
         private static Random rand = new Random();
-        
+
+        #region Singelton
+        private static BL instance = null;
+        private static readonly object padlock = new object();
+
+        public static BL Instance
+        {
+            get
+            {
+                if(instance==null)
+                {
+                    lock(padlock)
+                    {
+                        if(instance==null)
+                        {
+                            instance = new BL();
+                        }
+                    }
+                }
+                return instance;
+            }
+        }
+        #endregion
         public BL()
         {
             // create DAL objects of all entites
-            dal = DalFactory.GetDal();
-            // init drones BL
-            drones = new List<DroneToList>();
-            initializeDrones();
+            try
+            {
+                dal = DalFactory.GetDal();
+                // init drones BL
+                drones = new List<DroneToList>();
+                initializeDrones();
+            }
+            catch (DalApi.DalConfigException ex)
+            {
+                throw new BO.DalConfigException(ex.Message);
+            }
         }
         private void initializeDrones()
         {
@@ -32,7 +61,7 @@ namespace BlApi
             double mediumWeight = dal.ElectricityRequest().ElementAt(2);
             double heavyWeight = dal.ElectricityRequest().ElementAt(3);
             double chargingRate = dal.ElectricityRequest().ElementAt(4);
-            
+
             // loop on droneS in order to insert to BL
             foreach (var drone in dal.PrintDrones())
             {
@@ -74,7 +103,7 @@ namespace BlApi
                         }
                         //get the minimum battery
                         double minBattery = MinBattery(parcel, droneToList.CurrentLocation.Longitude, droneToList.CurrentLocation.Lattitude);
-                       //if the min battery is over 100%
+                        //if the min battery is over 100%
                         if (minBattery > 100)
                             throw new BatteryException("The battery is over than 100%, the consumption for drone:" + drone.Id + " is " + minBattery + "%");
                         //set the battery to a random battery between minBattery to 100%
@@ -90,7 +119,7 @@ namespace BlApi
                     if (droneToList.Status == DroneStatus.Maintenance)
                     {
                         //set a random location (from the available stations locations)
-                        DO.Station randStation = dal.FilteredStations(s => s.ChargeSlots > 0).ElementAt(rand.Next(0, dal.FilteredStations(s=>s.ChargeSlots>0).Count()));
+                        DO.Station randStation = dal.FilteredStations(s => s.ChargeSlots > 0).ElementAt(rand.Next(0, dal.FilteredStations(s => s.ChargeSlots > 0).Count()));
                         droneToList.CurrentLocation = new Location { Longitude = randStation.Longitude, Lattitude = randStation.Lattitude };
                         dal.SendToCharge(droneToList.Id, randStation.Id);
                         //set a random battery between 0-20
@@ -100,10 +129,10 @@ namespace BlApi
                     {
                         //if the drone is available
                         //set a random location from the delivered parcels target locations
-                        DO.Parcel randParcel = dal.FilteredParcel(p=>p.Delivered!=null).ElementAt(rand.Next(0, dal.FilteredParcel(p => p.Delivered != null).Count()));
+                        DO.Parcel randParcel = dal.FilteredParcel(p => p.Delivered != null).ElementAt(rand.Next(0, dal.FilteredParcel(p => p.Delivered != null).Count()));
                         DO.Customer targetRandParcel = dal.GetCustomerById(randParcel.TargetId);
                         droneToList.CurrentLocation = new Location { Longitude = targetRandParcel.Longitude, Lattitude = targetRandParcel.Lattitude };
-                       //find the closest station with available charging slots
+                        //find the closest station with available charging slots
                         DO.Station closeToDrone = ClosestStation(dal.FilteredStations(s => s.ChargeSlots > 0), droneToList.CurrentLocation.Longitude, droneToList.CurrentLocation.Lattitude);
                         //calculate the minimum battery to go to the closest station for charging
                         double minBattery = dal.Distance(droneToList.CurrentLocation.Longitude, droneToList.CurrentLocation.Lattitude, closeToDrone.Longitude, closeToDrone.Lattitude) * available;
@@ -518,7 +547,7 @@ namespace BlApi
         }
         public DroneToList GetDroneTo(int id)
         {
-           foreach(DroneToList d in drones)
+            foreach (DroneToList d in drones)
             {
                 if (d.Id == id)
                     return d;
@@ -616,7 +645,7 @@ namespace BlApi
             if (!dal.ExistCustomer(id))
                 throw new NotFoundException("customer");
             // get parcel from/to
-            IEnumerable<ParcelInCustomer> parcelFrom =  dal.FilteredParcel(p=>p.SenderId==id).Select(p=> convertToParcelInCustomer(p, p.TargetId));
+            IEnumerable<ParcelInCustomer> parcelFrom = dal.FilteredParcel(p => p.SenderId == id).Select(p => convertToParcelInCustomer(p, p.TargetId));
             IEnumerable<ParcelInCustomer> parcelTo = dal.FilteredParcel(p => p.TargetId == id).Select(p => convertToParcelInCustomer(p, p.SenderId));
             // get from DAL
             DO.Customer c = dal.GetCustomerById(id);
@@ -770,7 +799,7 @@ namespace BlApi
             double lonD = drones[index].CurrentLocation.Longitude;
             double latD = drones[index].CurrentLocation.Lattitude;
             //get the unassociated parcels
-            IEnumerable<DO.Parcel> unParcels = dal.FilteredParcel(p=>p.DroneId==null);
+            IEnumerable<DO.Parcel> unParcels = dal.FilteredParcel(p => p.DroneId == null);
             if (unParcels.Count() == 0) //there's no unassociated parcels
                 throw new EmptyListException("there is no unassociated parcels");
             //remove the parcels with over weight 
@@ -977,7 +1006,7 @@ namespace BlApi
         /// <returns></returns>
         public IEnumerable<ParcelToList> UnassociatedParcel()
         {
-            return dal.FilteredParcel(p=>p.DroneId==null).Select(p => convertToParcelToList(p));
+            return dal.FilteredParcel(p => p.DroneId == null).Select(p => convertToParcelToList(p));
         }
         /// <summary>
         /// convert from DAL parcel to BL parcelincustomer
@@ -1086,7 +1115,7 @@ namespace BlApi
             senderDistance = dal.Distance(senderLon, senderLat, lonD, latD);
             deliveryDistance = dal.Distance(senderLon, senderLat, targetLon, targetLat);
             chargeDistance = dal.Distance(targetLon, targetLat, closeToTarget.Longitude, closeToTarget.Lattitude);
-            
+
             return (senderDistance + chargeDistance) * dal.ElectricityRequest().First() + deliveryDistance * dal.ElectricityRequest().ElementAt((int)parcel.Weight + 1);
         }
         /// <summary>
