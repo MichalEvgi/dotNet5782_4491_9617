@@ -19,7 +19,7 @@ namespace BlApi
         public BL()
         {
             // create DAL objects of all entites
-            dal = new Dal.DalObject();
+            dal = new DalFactory.GetDal();
             // init drones BL
             drones = new List<DroneToList>();
             initializeDrones();
