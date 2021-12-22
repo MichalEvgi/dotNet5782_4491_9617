@@ -6,7 +6,22 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="CustomerListWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Name="MainGrid" Background="#FFD3F6F3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="68*"/>
+            <RowDefinition Height="496*"/>
+            <RowDefinition Height="59*"/>
+        </Grid.RowDefinitions>
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="4,0,-4,0">
+        </Grid>
+        <ListView x:Name="CustomerListView" Margin="0,1,0,0" Grid.Row="1" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="AddCustomer" Content="Add new customer" Width="151" Height="30" Grid.Row="2" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="514,0,0,0"  FontWeight="Bold" FontSize="16" Background="Transparent" Click="AddCustomer_Click_1"/>
+        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="695,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="30" Width="87"  FontWeight="Bold" FontSize="16" Background="Transparent" Click="ExitButton_Click_1"/>
     </Grid>
 </Window>

@@ -17,27 +17,15 @@ using BlApi;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for CustomerListWindow.xaml
+    /// Interaction logic for CustomerWindow.xaml
     /// </summary>
-    public partial class CustomerListWindow : Window
+    public partial class CustomerWindow : Window
     {
         IBL bl;
-        public CustomerListWindow(IBL bL)
+        public CustomerWindow(IBL bL)
         {
             bl = bL;
             InitializeComponent();
-            CustomerListView.ItemsSource = bl.GetCustomersList();
-        }
-
-
-        private void AddCustomer_Click_1(object sender, RoutedEventArgs e)
-        {
-            new CustomerWindow(bl).Show();
-        }
-
-        private void ExitButton_Click_1(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }
