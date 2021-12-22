@@ -77,10 +77,10 @@ namespace DalApi
         /// <param name="stationId">station's id</param>
         public void SendToCharge(int droneId, int stationId);
         /// <summary>
-        /// release drone from station
+        /// release drone from station and return the time in charging
         /// </summary>
         /// <param name="droneId">drone's id</param>
-        public void ReleaseDrone(int droneId);
+        public double ReleaseDrone(int droneId);
         /// <summary>
         /// return the description of a specific drone
         /// </summary>

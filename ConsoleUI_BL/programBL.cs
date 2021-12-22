@@ -347,14 +347,11 @@ namespace ConsoleUI_BL
         public static void ReleaseDrone(IBL ibl)
         {
             int droneId;
-            double timeInCharging;
             Console.WriteLine("enter drone id for releasing");
             int.TryParse(Console.ReadLine(), out droneId);
-            Console.WriteLine("enter time in charging (in hours)");
-            double.TryParse(Console.ReadLine(), out timeInCharging);
             try
             {
-                ibl.ReleaseDrone(droneId, timeInCharging);
+                ibl.ReleaseDrone(droneId);
             }
             catch (NotFoundException ex)
             {

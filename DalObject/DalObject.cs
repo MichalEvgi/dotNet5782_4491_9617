@@ -197,17 +197,18 @@ namespace Dal
             //update
             DataSource.stations.Add(tempS);
             //add station back
-            DataSource.DroneCharges.Add(new DroneCharge { DroneId = droneId, StationId = stationId }); //add drone charge
+            DataSource.DroneCharges.Add(new DroneCharge { DroneId = droneId, StationId = stationId , EntryTime=DateTime.Now}); //add drone charge
         }
         /// <summary>
         /// release drone from station
         /// </summary>
         /// <param name="droneId">drone's id</param>
-        public void ReleaseDrone(int droneId)
+        public double ReleaseDrone(int droneId)
         {
             if (!DataSource.drones.Exists(dron => dron.Id == droneId))
                 throw new NotFoundException("drone");
             DroneCharge temp = GetDroneChargeById(droneId);
+            double timeCharge = (DateTime.Now - temp.EntryTime).TotalSeconds;
             Station tempS = GetStationById(temp.StationId);
             //save drone charge and station in temps
             DataSource.stations.Remove(tempS);
@@ -217,6 +218,7 @@ namespace Dal
             //update
             DataSource.stations.Add(tempS);
             //add station back
+            return timeCharge; 
         }
         /// <summary>
         /// return drone charge by drone's id

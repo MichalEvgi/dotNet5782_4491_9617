@@ -447,7 +447,7 @@ namespace BlApi
         /// </summary>
         /// <param name="id">drone's id</param>
         /// <param name="timeInCharging">charging time</param>
-        public void ReleaseDrone(int id, double timeInCharging)
+        public void ReleaseDrone(int id)
         {
             // validation drone exists
             int index = drones.FindIndex(x => x.Id == id);
@@ -457,11 +457,11 @@ namespace BlApi
                 throw new DroneStatusException("The drone must be in maintence status to be released");
 
             // update drone release in DAL 
-            dal.ReleaseDrone(id);
+           double timeInCharging= dal.ReleaseDrone(id);
 
             // update BL
             // update battery by charge rate 4th element
-            drones[index].Battery += timeInCharging * dal.ElectricityRequest().ElementAt(4);
+            drones[index].Battery += timeInCharging/60 * dal.ElectricityRequest().ElementAt(4);
             if (drones[index].Battery > 100)
                 drones[index].Battery = 100;
             drones[index].Status = DroneStatus.Available;

@@ -94,13 +94,6 @@ namespace PL
             //show the actions only
             actions.Visibility = Visibility.Visible;
             addDrone.Visibility = Visibility.Hidden;
-            //fill the textBox of the drone properties
-            Idtxtbox.Text = selectedDrone.Id.ToString();
-            Batterytxtbox.Text = selectedDrone.Battery.ToString();
-            Weighttxtbox.Text = selectedDrone.MaxWeight.ToString();
-            Modeltxtbox.Text = selectedDrone.Model;
-            Statustxtbox.Text = selectedDrone.Status.ToString();
-            locationtxtbox.Text = selectedDrone.CurrentLocation.ToString();
             if (selectedDrone.Status != DroneStatus.Delivery)
             { //the drone is not in delivery
                 //hide the transfered parcel
@@ -113,7 +106,6 @@ namespace PL
             else
             { //the drone is in delivery
                 //show the transfered parcel
-                Deliverytxtbox.Text = selectedDrone.TransferedParcel.ToString();
                 Deliverytxtbox.Visibility = Visibility.Visible;
                 Deliverylbl.Visibility = Visibility.Visible;
                 //disable charging
@@ -135,9 +127,6 @@ namespace PL
                 Deliverybt.IsEnabled = true;
                 Chargingbt.Content = "שליחה לטעינה";
             }
-            TimeLbl.Visibility = Visibility.Hidden;
-            TimeTxt.Visibility = Visibility.Hidden;
-            ReleaseBt.Visibility = Visibility.Hidden;
         }
         //update drone model
         private void Updatebt_Click(object sender, RoutedEventArgs e)
@@ -177,7 +166,6 @@ namespace PL
                 selectedDrone = bl.GetDrone(selectedDrone.Id);
                 DataContext = selectedDrone;
                 //show the delivered parcel
-                Deliverytxtbox.Text = selectedDrone.TransferedParcel.ToString();
                 Deliverylbl.Visibility = Visibility.Visible;
                 Deliverytxtbox.Visibility = Visibility.Visible;
                 //change the delivery button state
@@ -208,7 +196,7 @@ namespace PL
                 //seccessfuly picked up message
                 MessageBox.Show("נאסף בהצלחה");
                 //updating
-                locationtxtbox.Text = selectedDrone.TransferedParcel.SourceLocation.ToString();
+                //locationtxtbox.Text = selectedDrone.TransferedParcel.SourceLocation.ToString();
                 dr.SelectorChanges();
                 selectedDrone = bl.GetDrone(selectedDrone.Id);
                 DataContext = selectedDrone;
@@ -238,7 +226,6 @@ namespace PL
                 //seccessfully delivered message
                 MessageBox.Show("סופק בהצלחה");
                 //updating
-                locationtxtbox.Text = selectedDrone.TransferedParcel.DestinationLocation.ToString();
                 dr.SelectorChanges();
                 selectedDrone = bl.GetDrone(selectedDrone.Id);
                 DataContext = selectedDrone;
@@ -285,7 +272,6 @@ namespace PL
                 dr.SelectorChanges();
                 selectedDrone = bl.GetDrone(selectedDrone.Id);
                 DataContext = selectedDrone;
-                locationtxtbox.Text = selectedDrone.CurrentLocation.ToString();
                 //disable deliver parcel with the drone
                 Deliverybt.IsEnabled = false;
                 //change the state of charging button
@@ -308,25 +294,13 @@ namespace PL
                 MessageBox.Show(ex.ToString());
             }
         }
-        //enable realse drone from charging
+        // realse drone from charging
         private void SendFromCharge()
-        {
-            TimeLbl.Visibility = Visibility.Visible;
-            TimeTxt.Visibility = Visibility.Visible;
-            ReleaseBt.Visibility = Visibility.Visible;
-        }
-        //realse drone from charging
-        private void ReleaseBt_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 //Release Drone
-                bl.ReleaseDrone(selectedDrone.Id, Convert.ToDouble(TimeTxt.Text));
-                //hide all the buttons of releasing drone
-                TimeLbl.Visibility = Visibility.Hidden;
-                TimeTxt.Visibility = Visibility.Hidden;
-                ReleaseBt.Visibility = Visibility.Hidden;
-                TimeTxt.Text = "";
+                bl.ReleaseDrone(selectedDrone.Id);
                 //seccessfully released
                 MessageBox.Show("שוחרר מטעינה בהצלחה");
                 //enable deliver parcel with the drone
@@ -372,14 +346,5 @@ namespace PL
                 SIdtxtBox.Text = SIdtxtBox.Text.Remove(SIdtxtBox.Text.Length - 1);
             }
         }
-        //check if only number is entered to time textBox
-        private void TimeTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(TimeTxt.Text, "[^0-9 .]"))
-            {
-                MessageBox.Show("Please enter only numbers.");
-                TimeTxt.Text = TimeTxt.Text.Remove(TimeTxt.Text.Length - 1);
-            }
-        }        
     }
 }
