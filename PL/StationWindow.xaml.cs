@@ -22,15 +22,43 @@ namespace PL
     public partial class StationWindow : Window
     {
         IBL bl;
-        public StationWindow(IBL bL, StationListWindow dlw)
+        private StationListWindow st;
+        public StationWindow(IBL bL, StationListWindow slw)
         {
             bl = bL;
+            st = slw;
             InitializeComponent();
+            addStaion.Visibility = Visibility.Visible;
+            actions.Visibility = Visibility.Hidden;
         }
+        //close window by cancel button
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        public Station selectedStation;
         public StationWindow(IBL bL, StationToList station, StationListWindow dlw)
         {
             bl = bL;
             InitializeComponent();
+            selectedStation = bl.GetStation(station.Id);
+            DataContext = selectedStation;
+            addStaion.Visibility = Visibility.Hidden;
+            actions.Visibility = Visibility.Visible;
+        }
+
+        private void Exitbt_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Updatebt_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -28,11 +28,11 @@ namespace BlApi
         /// <param name="chargeSlots">new station charge slots</param>
         public void UpdateStation(int id, int name, int chargeSlots);
         /// <summary>
-        /// return the description of a specific station
+        /// return a specific station
         /// </summary>
         /// <param name="id">station's id</param>
         /// <returns></returns>
-        public string GetStation(int id);
+        public Station GetStation(int id);
         /// <summary>
         /// return list of stations
         /// </summary>

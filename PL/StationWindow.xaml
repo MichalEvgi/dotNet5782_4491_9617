@@ -5,8 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="StationWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="StationWindow" Height="640" Width="800">
+    <Grid Name="MainGrid">
+        <Grid Name="addStaion" Visibility="Hidden" Background="#FFD3F6F3">
+            <Label x:Name="IdLbl" Content="Id:" HorizontalAlignment="Left" Margin="234,100,0,0" VerticalAlignment="Top" Height="39" Width="70" FontWeight="Bold" FontSize="20"/>
+            <Label x:Name="NameLbl" Content="Name:" HorizontalAlignment="Left" Margin="234,170,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.25,0.464" Width="93" FontWeight="Bold" FontSize="20" Height="44"/>
+            <Label x:Name="LngLbl" Content="Longitude:" HorizontalAlignment="Left" Margin="234,240,0,0" VerticalAlignment="Top" Width="137" FontWeight="Bold" FontSize="20" Height="60"/>
+            <Label x:Name="LatLbl" Content="Lattitude:" HorizontalAlignment="Left" Margin="234,310,0,0" VerticalAlignment="Top" Width="121" FontWeight="Bold" FontSize="20" Height="53"/>
+            <Label x:Name="SlotsLbl" Content="Availble slots:" HorizontalAlignment="Left" Margin="234,380,0,0" VerticalAlignment="Top" Width="141" FontWeight="Bold" FontSize="20" Height="53"/>
+            <TextBox x:Name="IdtxtBox" HorizontalAlignment="Left" Margin="400,100,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="45" />
+            <TextBox x:Name="NametxtBox" HorizontalAlignment="Left" Margin="400,170,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="45"/>
+            <TextBox x:Name="LngtxtBox" HorizontalAlignment="Left" Margin="400,240,0,0" VerticalAlignment="Top" Width="151" Height="45"/>
+            <TextBox x:Name="LattxtBox" HorizontalAlignment="Left" Margin="400,310,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="45" />
+            <TextBox x:Name="SlotstxtBox" HorizontalAlignment="Left" Margin="400,380,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="45" />
+            <Button x:Name="AddButton" Content="הוסף" HorizontalAlignment="Left" Margin="302,522,0,0" VerticalAlignment="Top" Height="49" Width="118" Click="AddButton_Click" FontWeight="Bold" FontSize="20" Background="Transparent"/>
+            <Button x:Name="CancelButton" Content="בטל" HorizontalAlignment="Left" Margin="476,522,0,0" VerticalAlignment="Top" Height="49" Width="127" Click="CancelButton_Click" FontWeight="Bold" FontSize="20" Background="Transparent"/>
+
+        </Grid>
+        <Grid x:Name="actions" Visibility="Visible" Background="#FFD3F6F3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="57*"/>
+                <ColumnDefinition Width="121*"/>
+                <ColumnDefinition Width="622*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="545*"/>
+                <RowDefinition Height="0*"/>
+                <RowDefinition Height="79*"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="Updatelbl" Content="Update station:" HorizontalAlignment="Left" Margin="61,53,0,0" VerticalAlignment="Top" Height="34" Width="127" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="16" Grid.Column="1"/>
+            <Label x:Name="Idlbl" Content="Id:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Grid.Column="1" Width="61" Margin="0,130,0,0" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.541,0.668"/>
+            <Label x:Name="Namelbl" Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="40" Grid.Column="1" Margin="0,170,0,0" FontWeight="Bold" FontSize="14"/>
+            <Label x:Name="Locationlbl" Content="Location:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="98" Height="46" Grid.Column="1" Margin="0,210,0,0" FontWeight="Bold" FontSize="14"/>
+            <Label x:Name="AvSlotslbl" Content="Availble Slots:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Height="31" Grid.Column="1" Margin="0,270,0,0" FontWeight="Bold" FontSize="14"/>
+            <Button x:Name="Updatebt" Content="Update" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Height="45" Width="88" Click="Updatebt_Click" Grid.Column="1" FontWeight="Bold" FontSize="14" Background="Transparent" Grid.Row="2"/>
+            <TextBox x:Name="Idtxtbox" HorizontalAlignment="Left" Margin="3,130,0,0" Text="{Binding Path=Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27" IsReadOnly="True" Grid.Column="2" />
+            <TextBox x:Name="Nametxtbox"  HorizontalAlignment="Left" Margin="3,170,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="28" Grid.Column="2" />
+            <TextBox x:Name="Locationtxtbox" HorizontalAlignment="Left" Margin="3,210,0,0" Text="{Binding Mode=OneWay, Path=LocationS}" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Height="55" IsReadOnly="True" Grid.Column="2"/>
+            <TextBox x:Name="Avslotstxtbox" HorizontalAlignment="Left" Margin="3,270,0,0" Text="{Binding Path=AvailableSlots}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Column="2"/>
+            <Button x:Name="Exitbt" Content="Exit" HorizontalAlignment="Left" Margin="518,0,0,0" VerticalAlignment="Center" Height="33" Width="80" Click="Exitbt_Click" Grid.Row="2" Grid.Column="2" FontWeight="Bold" FontSize="14" Background="Transparent"/>
+
+
+        </Grid>
     </Grid>
+
 </Window>

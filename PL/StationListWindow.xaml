@@ -22,7 +22,7 @@
             <Label Content="Slots:" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
             <ComboBox Name="SlotSelector" Grid.Column="3" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" SelectionChanged="SlotsSelector_SelectionChanged"/>
         </Grid>
-        <ListView x:Name="StationListView" Margin="0,1,0,0" Grid.Row="1"  MouseDoubleClick="StationListView_MouseDoubleClick" SelectionChanged="StationListView_SelectionChanged">
+        <ListView x:Name="StationListView" Margin="0,1,0,0" Grid.Row="1"  MouseDoubleClick="StationListView_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

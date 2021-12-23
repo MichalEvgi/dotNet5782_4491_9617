@@ -241,7 +241,7 @@ namespace BlApi
         /// </summary>
         /// <param name="id">station's id</param>
         /// <returns></returns>
-        public string GetStation(int id)
+        public Station GetStation(int id)
         {
             // validation check that this station ID exists
             if (!dal.ExistStation(id))
@@ -259,7 +259,7 @@ namespace BlApi
                 AvailableSlots = s.ChargeSlots,
                 DronesInCharging = droneInChargings
             };
-            return station.ToString();
+            return station;
         }
         /// <summary>
         /// return list of stations
