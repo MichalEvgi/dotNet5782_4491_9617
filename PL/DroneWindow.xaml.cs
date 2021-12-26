@@ -66,10 +66,6 @@ namespace PL
                     }
                 }
             }
-            catch (NotFoundException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
             catch (InvalidInputException ex)
             {
                 MessageBox.Show(ex.ToString());

@@ -38,7 +38,42 @@ namespace PL
         }
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                if (IdtxtBox.Text == "" || NametxtBox.Text == "" || LngtxtBox.Text == "" || LattxtBox.Text == "" || SlotstxtBox.Text=="")
+                    //not all the fields are full
+                    MessageBox.Show("לא כל השדות מלאים");
+                else
+                {
+                    //add the drone
+                    bl.AddStation(new Station
+                    {
+                        Id = Convert.ToInt32(IdtxtBox.Text),
+                        Name = Convert.ToInt32(NametxtBox.Text),
+                        LocationS = new Location { Longitude = Convert.ToDouble(LngtxtBox.Text), Lattitude = Convert.ToDouble(LattxtBox.Text) },
+                        AvailableSlots = Convert.ToInt32(SlotstxtBox.Text)
+                    });
+                    //seccessfully added message
+                    MessageBoxResult result = MessageBox.Show("Seccessfuly added");
+                    if (result == MessageBoxResult.OK)
+                    { 
+                        //close when OK pressed
+                        this.Close();
+                    }
+                }
+            }
+            catch (NotFoundException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (InvalidInputException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (AlreadyExistsException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
         public Station selectedStation;
         public StationWindow(IBL bL, StationToList station, StationListWindow dlw)
@@ -58,7 +93,17 @@ namespace PL
 
         private void Updatebt_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                //change the model
+                bl.UpdateStation(selectedStation.Id, Convert.ToInt32(Nametxtbox.Text), Convert.ToInt32(AllSlotstxtbox.Text));
+                //seccessfully update message
+                MessageBox.Show("successfully updated");
+            }
+            catch(InvalidInputException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

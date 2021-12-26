@@ -38,13 +38,15 @@
             <Label x:Name="Namelbl" Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="40" Grid.Column="1" Margin="0,170,0,0" FontWeight="Bold" FontSize="14"/>
             <Label x:Name="Locationlbl" Content="Location:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="98" Height="46" Grid.Column="1" Margin="0,210,0,0" FontWeight="Bold" FontSize="14"/>
             <Label x:Name="AvSlotslbl" Content="Availble Slots:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Height="31" Grid.Column="1" Margin="0,270,0,0" FontWeight="Bold" FontSize="14"/>
+            <Label x:Name="Slotslbl" Content="Total Slots:" HorizontalAlignment="Left" Margin="0,310,0,0" Grid.Column="1"  Width="98" Height="30" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
             <Button x:Name="Updatebt" Content="Update" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Height="45" Width="88" Click="Updatebt_Click" Grid.Column="1" FontWeight="Bold" FontSize="14" Background="Transparent" Grid.Row="2"/>
             <TextBox x:Name="Idtxtbox" HorizontalAlignment="Left" Margin="3,130,0,0" Text="{Binding Path=Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27" IsReadOnly="True" Grid.Column="2" />
             <TextBox x:Name="Nametxtbox"  HorizontalAlignment="Left" Margin="3,170,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="28" Grid.Column="2" />
             <TextBox x:Name="Locationtxtbox" HorizontalAlignment="Left" Margin="3,210,0,0" Text="{Binding Mode=OneWay, Path=LocationS}" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Height="55" IsReadOnly="True" Grid.Column="2"/>
-            <TextBox x:Name="Avslotstxtbox" HorizontalAlignment="Left" Margin="3,270,0,0" Text="{Binding Path=AvailableSlots}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Column="2"/>
+            <TextBox x:Name="AvSlotstxtbox" HorizontalAlignment="Left" Margin="3,270,0,0" Text="{Binding Mode=OneWay, Path=AvailableSlots}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" IsReadOnly="True" Grid.Column="2"/>
+            <TextBox x:Name="AllSlotstxtbox" HorizontalAlignment="Left" Margin="3,310,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Column="2"/>
             <Button x:Name="Exitbt" Content="Exit" HorizontalAlignment="Left" Margin="518,0,0,0" VerticalAlignment="Center" Height="33" Width="80" Click="Exitbt_Click" Grid.Row="2" Grid.Column="2" FontWeight="Bold" FontSize="14" Background="Transparent"/>
-
+            
 
         </Grid>
     </Grid>
