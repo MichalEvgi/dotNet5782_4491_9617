@@ -22,13 +22,7 @@
             <Label Content="Slots:" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
             <ComboBox Name="SlotSelector" Grid.Column="3" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" SelectionChanged="SlotsSelector_SelectionChanged"/>
         </Grid>
-        <ListView x:Name="StationListView" Margin="0,1,0,0" Grid.Row="1"  MouseDoubleClick="StationListView_MouseDoubleClick">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <ListView x:Name="StationListView" Margin="0,0,0,0" Grid.Row="1"  MouseDoubleClick="StationListView_MouseDoubleClick"/>
         <Button Name="AddStation" Content="Add new station" Width="133" Height="30" Grid.Row="2" RenderTransformOrigin="0.536,0.696" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="532,0,0,0" Click="AddStation_Click" FontWeight="Bold" FontSize="16" Background="Transparent"/>
         <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="695,0,0,6" Grid.Row="2" VerticalAlignment="Bottom" Height="30" Width="87" Click="ExitButton_Click" FontWeight="Bold" FontSize="16" Background="Transparent"/>
     </Grid>

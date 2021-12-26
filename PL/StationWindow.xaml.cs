@@ -53,6 +53,7 @@ namespace PL
                         LocationS = new Location { Longitude = Convert.ToDouble(LngtxtBox.Text), Lattitude = Convert.ToDouble(LattxtBox.Text) },
                         AvailableSlots = Convert.ToInt32(SlotstxtBox.Text)
                     });
+                    SelectionChange();
                     //seccessfully added message
                     MessageBoxResult result = MessageBox.Show("Seccessfuly added");
                     if (result == MessageBoxResult.OK)
@@ -76,6 +77,13 @@ namespace PL
             }
         }
 
+        private void SelectionChange()
+        {
+            if (st.SlotSelector == null || st.SlotSelector.Text == "Clear filter")
+                st.StationListView.ItemsSource = bl.GetStationsList();
+            else
+                st.StationListView.ItemsSource = bl.AvailableStations();
+        }
         //check if only number is entered to id textBox
         private void IdtxtBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -141,9 +149,10 @@ namespace PL
             }
         }
         public Station selectedStation;
-        public StationWindow(IBL bL, StationToList station, StationListWindow dlw)
+        public StationWindow(IBL bL, StationToList station, StationListWindow slw)
         {
             bl = bL;
+            st = slw;
             InitializeComponent();
             selectedStation = bl.GetStation(station.Id);
             DataContext = selectedStation;
@@ -166,6 +175,7 @@ namespace PL
                 else
                     bl.UpdateStation(selectedStation.Id, Convert.ToInt32(Nametxtbox.Text), -1);
                 //seccessfully update message
+                SelectionChange();
                 MessageBox.Show("successfully updated");
             }
             catch(InvalidInputException ex)
