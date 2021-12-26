@@ -6,7 +6,23 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="CustomerWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Name="MainGrid">
+        <Grid Name="AddCustomer" Visibility="Hidden" Height="400" Width="370">
+            <Label x:Name="IdLbl" Content="Id:" HorizontalAlignment="Left" Margin="37,61,0,0" VerticalAlignment="Top" Height="39" Width="70" FontWeight="Bold" FontSize="20"/>
+            <Label x:Name="NameLbl" Content="Name:" HorizontalAlignment="Left" Margin="37,121,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.25,0.464" Width="93" FontWeight="Bold" FontSize="20" Height="44"/>
+            <Label x:Name="PhoneLbl" Content="Phone Number:" HorizontalAlignment="Left" Margin="37,173,0,0" VerticalAlignment="Top" Width="160" FontWeight="Bold" FontSize="20" Height="60"/>
+            <Label x:Name="LongitudeLbl" Content="Longitude:" HorizontalAlignment="Left" Margin="37,228,0,0" VerticalAlignment="Top" Width="121" FontWeight="Bold" FontSize="20" Height="53"/>
+            <Label x:Name="LattitudeLbl" Content="Lattitude:" HorizontalAlignment="Left" Margin="37,286,0,0" VerticalAlignment="Top" Width="121" FontWeight="Bold" FontSize="20" Height="53"/>
+            <TextBox x:Name="IdtxtBox" HorizontalAlignment="Center" Margin="0,61,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Height="39" TextChanged="IdtxtBox_TextChanged" />
+            <TextBox x:Name="NametxtBox" HorizontalAlignment="Left" Margin="117,124,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="44" RenderTransformOrigin="0.38,-1.333"/>
+            <TextBox x:Name="PhonetxtBox" HorizontalAlignment="Left" Margin="214,184,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="122" Height="38" TextChanged="PhonetxtBox_TextChanged" />
+            <TextBox x:Name="LongitudetxtBox" HorizontalAlignment="Left" Margin="169,238,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="44" TextChanged="LongitudetxtBox_TextChanged"/>
+            <TextBox x:Name="LattitudetxtBox" HorizontalAlignment="Left" Margin="144,299,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Height="26" TextChanged="LattitudetxtBox_TextChanged"/>
+            <Button x:Name="AddButton" Content="Add" HorizontalAlignment="Left" Margin="68,344,0,0" VerticalAlignment="Top" Height="38" Width="98"  FontWeight="Bold" FontSize="20" Background="Transparent" Click="AddButton_Click"/>
+            <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="214,344,0,0" VerticalAlignment="Top" Height="38" Width="106" Click="CancelButton_Click" FontWeight="Bold" FontSize="20" Background="Transparent"/>
+        </Grid>
+        <Grid Name="UpdateCustomer" Visibility="Visible">
+        </Grid>
+
     </Grid>
 </Window>

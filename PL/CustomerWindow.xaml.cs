@@ -22,10 +22,86 @@ namespace PL
     public partial class CustomerWindow : Window
     {
         IBL bl;
-        public CustomerWindow(IBL bL)
+        private CustomerListWindow cl;
+        public CustomerWindow(IBL bL,CustomerListWindow clw)
         {
             bl = bL;
+            cl = clw;
             InitializeComponent();
+            AddCustomer.Visibility = Visibility.Visible;
+            UpdateCustomer.Visibility = Visibility.Hidden;
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (IdtxtBox.Text == "" || NametxtBox.Text == "" || PhonetxtBox.Text == "" || LongitudetxtBox.Text == "" || LattitudetxtBox.Text=="")
+                    //not all the fields are full
+                    MessageBox.Show("not all fields are full");
+                else
+                {
+                    //add the customer
+                    bl.AddCustomer(new Customer { Id = Convert.ToInt32(IdtxtBox.Text),Name=NametxtBox.Text, Phone = PhonetxtBox.Text, LocationC=new Location {Longitude=Convert.ToDouble(LongitudetxtBox.Text),Lattitude=Convert.ToDouble(LattitudetxtBox.Text)} });
+                    //seccessfully added message
+                    MessageBoxResult result = MessageBox.Show("Added successfully");
+                    if (result == MessageBoxResult.OK)
+                    {
+                        cl.CustomerListView.ItemsSource = bl.GetCustomersList();
+                        //close when OK pressed
+                        this.Close();
+                    }
+                }
+            }
+            catch (InvalidInputException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (AlreadyExistsException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void IdtxtBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(IdtxtBox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                IdtxtBox.Text = IdtxtBox.Text.Remove(IdtxtBox.Text.Length - 1);
+            }
+        }
+
+        private void PhonetxtBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(PhonetxtBox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                PhonetxtBox.Text = PhonetxtBox.Text.Remove(PhonetxtBox.Text.Length - 1);
+            }
+        }
+
+        private void LongitudetxtBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(LongitudetxtBox.Text, "[^0-9 .]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                LongitudetxtBox.Text = LongitudetxtBox.Text.Remove(LongitudetxtBox.Text.Length - 1);
+            }
+        }
+
+        private void LattitudetxtBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(LattitudetxtBox.Text, "[^0-9 .]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                LattitudetxtBox.Text = LattitudetxtBox.Text.Remove(LattitudetxtBox.Text.Length - 1);
+            }
         }
     }
 }

@@ -937,11 +937,11 @@ namespace BlApi
 
         }
         /// <summary>
-        /// return the description of a specific parcel
+        /// return a specific parcel
         /// </summary>
         /// <param name="id">parcel's id</param>
         /// <returns></returns>
-        public string GetParcel(int id)
+        public Parcel GetParcel(int id)
         {
             // validation
             if (!dal.ExistParcel(id))
@@ -970,7 +970,7 @@ namespace BlApi
                     PickedUpTime = p.PickedUp,
                     DeliveredTime = p.Delivered
                 };
-                return parcel1.ToString();
+                return parcel1;
             }
             //if the parcel is associated
             //get the drone in parcel details
@@ -990,7 +990,7 @@ namespace BlApi
                 PickedUpTime = p.PickedUp,
                 DeliveredTime = p.Delivered
             };
-            return parcel.ToString();
+            return parcel;
         }
         /// <summary>
         /// return list of parcels

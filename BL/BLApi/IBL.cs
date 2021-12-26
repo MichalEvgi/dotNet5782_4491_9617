@@ -157,11 +157,11 @@ namespace BlApi
         /// <param name="id">drone's id</param>
         public void DeliverParcel(int id);
         /// <summary>
-        /// return the description of a specific parcel
+        /// return a specific parcel
         /// </summary>
         /// <param name="id">parcel's id</param>
         /// <returns></returns>
-        public string GetParcel(int id);
+        public Parcel GetParcel(int id);
         /// <summary>
         /// return list of parcels
         /// </summary>

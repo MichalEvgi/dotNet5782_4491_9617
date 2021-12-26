@@ -32,7 +32,7 @@ namespace PL
 
         private void AddCustomer_Click_1(object sender, RoutedEventArgs e)
         {
-            new CustomerWindow(bl).Show();
+            new CustomerWindow(bl,this).Show();
         }
 
         private void ExitButton_Click_1(object sender, RoutedEventArgs e)
