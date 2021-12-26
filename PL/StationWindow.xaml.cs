@@ -42,7 +42,7 @@ namespace PL
             {
                 if (IdtxtBox.Text == "" || NametxtBox.Text == "" || LngtxtBox.Text == "" || LattxtBox.Text == "" || SlotstxtBox.Text=="")
                     //not all the fields are full
-                    MessageBox.Show("לא כל השדות מלאים");
+                    MessageBox.Show("Not all fields are full");
                 else
                 {
                     //add the drone
@@ -75,6 +75,71 @@ namespace PL
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        //check if only number is entered to id textBox
+        private void IdtxtBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            if (System.Text.RegularExpressions.Regex.IsMatch(IdtxtBox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                IdtxtBox.Text = IdtxtBox.Text.Remove(IdtxtBox.Text.Length - 1);
+            }
+        }
+        //check if only number is entered to name textBox
+        private void NametxtBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(NametxtBox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                NametxtBox.Text = NametxtBox.Text.Remove(NametxtBox.Text.Length - 1);
+            }
+        }
+        //check if only number is entered to longitude textBox
+        private void LngtxtBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(LngtxtBox.Text, "[^0-9 .]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                LngtxtBox.Text = LngtxtBox.Text.Remove(LngtxtBox.Text.Length - 1);
+            }
+        }
+        //check if only number is entered to lattitude textBox
+        private void LattxtBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(LattxtBox.Text, "[^0-9 .]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                LattxtBox.Text = LattxtBox.Text.Remove(LattxtBox.Text.Length - 1);
+            }
+        }
+        //check if only number is entered to slots textBox
+        private void SlotstxtBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(SlotstxtBox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                SlotstxtBox.Text = SlotstxtBox.Text.Remove(SlotstxtBox.Text.Length - 1);
+            }
+        }
+        //check if only number is entered to slots textBox
+        private void AllSlotstxtbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(AllSlotstxtbox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                AllSlotstxtbox.Text = AllSlotstxtbox.Text.Remove(AllSlotstxtbox.Text.Length - 1);
+            }
+        }
+        //check if only number is entered to name textBox
+        private void Nametxtbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(Nametxtbox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                Nametxtbox.Text = NametxtBox.Text.Remove(Nametxtbox.Text.Length - 1);
+            }
+        }
         public Station selectedStation;
         public StationWindow(IBL bL, StationToList station, StationListWindow dlw)
         {
@@ -96,7 +161,10 @@ namespace PL
             try
             {
                 //change the model
-                bl.UpdateStation(selectedStation.Id, Convert.ToInt32(Nametxtbox.Text), Convert.ToInt32(AllSlotstxtbox.Text));
+                if (AllSlotstxtbox.Text != "")
+                    bl.UpdateStation(selectedStation.Id, Convert.ToInt32(Nametxtbox.Text), Convert.ToInt32(AllSlotstxtbox.Text));
+                else
+                    bl.UpdateStation(selectedStation.Id, Convert.ToInt32(Nametxtbox.Text), -1);
                 //seccessfully update message
                 MessageBox.Show("successfully updated");
             }
@@ -104,6 +172,11 @@ namespace PL
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void ChargeListbt_Click(object sender, RoutedEventArgs e)
+        {
+            new ChargingListWindow(bl, selectedStation).Show();
         }
     }
 }
