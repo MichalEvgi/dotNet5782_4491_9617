@@ -25,8 +25,9 @@ namespace PL
         public ParcelListWindow(IBL bL)
         {
             bl = bL;
-            ParcelListView.ItemsSource = bl.GetParcelsList();
             InitializeComponent();
+            ParcelListView.ItemsSource = bl.GetParcelsList().ToList();
+            
         }
         private void ParcelListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
