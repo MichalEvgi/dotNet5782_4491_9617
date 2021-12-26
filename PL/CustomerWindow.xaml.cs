@@ -104,13 +104,27 @@ namespace PL
             }
         }
 
+        public Customer selectedCustomer;
         public CustomerWindow(IBL bL,CustomerToList customer, CustomerListWindow clw)
         {
             bl = bL;
             cl = clw;
             InitializeComponent();
+            selectedCustomer = bl.GetCustomer(customer.Id);
+            DataContext = selectedCustomer;
             AddCustomer.Visibility = Visibility.Hidden;
             UpdateCustomer.Visibility = Visibility.Visible;
+        }
+
+        private void Updatebtn_Click(object sender, RoutedEventArgs e)
+        {
+            bl.UpdateCustomer(selectedCustomer.Id, NametxtBox.Text, PhonetxtBox.Text);
+            MessageBox.Show("Successfully updated");
+        }
+
+        private void Exitbtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

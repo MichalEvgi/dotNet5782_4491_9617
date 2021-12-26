@@ -77,9 +77,7 @@ namespace PL
         }
 
         public Drone selectedDrone;
-        public object s_SystemMenuHandle { get; private set; }
-        public object Handle { get; private set; }
-        //open action drone window
+       //open action drone window
         public DroneWindow(IBL bL, DroneToList drone,DroneListWindow dl)
         {
             bl = bL;

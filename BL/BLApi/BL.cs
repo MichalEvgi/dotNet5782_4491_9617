@@ -635,11 +635,11 @@ namespace BlApi
             dal.AddCustomer(temp);
         }
         /// <summary>
-        /// return the description of a specific customer
+        /// return a specific customer
         /// </summary>
         /// <param name="id">customer's id</param>
         /// <returns></returns>
-        public string GetCustomer(int id)
+        public Customer GetCustomer(int id)
         {
             // validation
             if (!dal.ExistCustomer(id))
@@ -658,7 +658,7 @@ namespace BlApi
                 FromCustomer = parcelFrom,
                 ToCustomer = parcelTo
             };
-            return customer.ToString();
+            return customer;
         }
         /// <summary>
         /// return list of customers

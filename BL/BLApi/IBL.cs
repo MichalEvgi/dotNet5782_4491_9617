@@ -120,11 +120,11 @@ namespace BlApi
         /// <param name="phone">new customer phone</param>
         public void UpdateCustomer(int id, string name, string phone);
         /// <summary>
-        /// return the description of a specific customer
+        /// return a specific customer
         /// </summary>
         /// <param name="id">customer's id</param>
         /// <returns></returns>
-        public string GetCustomer(int id);
+        public Customer GetCustomer(int id);
         /// <summary>
         /// return list of customers
         /// </summary>
