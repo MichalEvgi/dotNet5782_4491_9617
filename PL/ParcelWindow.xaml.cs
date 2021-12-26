@@ -34,6 +34,7 @@ namespace PL
         {
             bl = bL;
             pr = plw;
+            selectedParcel = bl.GetParcel(parcel.Id);
             InitializeComponent();
         }
     }
