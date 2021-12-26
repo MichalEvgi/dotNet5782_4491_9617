@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="4,0,-4,0">
         </Grid>
-        <ListView x:Name="CustomerListView" Margin="0,1,0,0" Grid.Row="1" >
+        <ListView x:Name="CustomerListView" Margin="0,1,0,0" Grid.Row="1" MouseDoubleClick="CustomerListView_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

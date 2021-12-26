@@ -39,5 +39,10 @@ namespace PL
         {
             this.Close();
         }
+        private void CustomerListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new CustomerWindow(bl, (CustomerToList)(this.CustomerListView.SelectedItem), this).Show();
+        }
+
     }
 }

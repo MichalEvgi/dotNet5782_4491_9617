@@ -22,6 +22,7 @@
             <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="214,344,0,0" VerticalAlignment="Top" Height="38" Width="106" Click="CancelButton_Click" FontWeight="Bold" FontSize="20" Background="Transparent"/>
         </Grid>
         <Grid Name="UpdateCustomer" Visibility="Visible">
+            
         </Grid>
 
     </Grid>

@@ -103,5 +103,14 @@ namespace PL
                 LattitudetxtBox.Text = LattitudetxtBox.Text.Remove(LattitudetxtBox.Text.Length - 1);
             }
         }
+
+        public CustomerWindow(IBL bL,CustomerToList customer, CustomerListWindow clw)
+        {
+            bl = bL;
+            cl = clw;
+            InitializeComponent();
+            AddCustomer.Visibility = Visibility.Hidden;
+            UpdateCustomer.Visibility = Visibility.Visible;
+        }
     }
 }
