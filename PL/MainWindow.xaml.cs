@@ -49,5 +49,10 @@ namespace PL
         {
             new StationListWindow(bL).Show();
         }
+
+        private void ParcelListBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new ParcelListWindow(bL).Show();
+        }
     }
 }

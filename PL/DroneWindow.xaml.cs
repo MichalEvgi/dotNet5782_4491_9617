@@ -342,5 +342,27 @@ namespace PL
                 SIdtxtBox.Text = SIdtxtBox.Text.Remove(SIdtxtBox.Text.Length - 1);
             }
         }
+
+        //show the drone in charging details window
+        public DroneWindow(IBL bL, DroneInCharging drone)
+        {
+            bl = bL;
+            InitializeComponent();
+            selectedDrone = bl.GetDrone(drone.Id);
+            DataContext = selectedDrone;
+            Updatelbl.Visibility = Visibility.Collapsed;
+            Updatebt.Visibility = Visibility.Collapsed;
+            Chargingbt.Visibility = Visibility.Collapsed;
+            Deliverybt.Visibility = Visibility.Collapsed;
+            deliverylbl.Visibility = Visibility.Collapsed;
+            Chargelbl.Visibility = Visibility.Collapsed;
+            //show the actions only
+            actions.Visibility = Visibility.Visible;
+            addDrone.Visibility = Visibility.Hidden;
+            //the drone is not in delivery
+            //hide the transfered parcel
+            Deliverytxtbox.Visibility = Visibility.Hidden;
+            Deliverylbl.Visibility = Visibility.Hidden;
+        }
     }
 }
