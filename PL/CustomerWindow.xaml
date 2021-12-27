@@ -30,8 +30,8 @@
         <TextBox x:Name="Nametxtbox" HorizontalAlignment="Left" Margin="215,136,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="34" />
         <TextBox x:Name="Phonetxtbox" HorizontalAlignment="Left" Margin="215,0,0,0" Text="{Binding Path=Phone}" TextWrapping="Wrap" VerticalAlignment="Center" Width="139" Height="46"/>
         <TextBox x:Name="locationtxtbox" HorizontalAlignment="Left" Margin="215,260,0,0" Text="{Binding Mode=OneWay, Path=LocationC}" TextWrapping="Wrap" VerticalAlignment="Top" Width="161" Height="37" IsReadOnly="True"/>
-        <Button x:Name="FromCustomerbtn" Content="Show parcels from customer" HorizontalAlignment="Left" Margin="486,120,0,0" VerticalAlignment="Top" Width="161" Height="33"/>
-        <Button x:Name="Tocustomerbtn" Content="Show parcels to customer" HorizontalAlignment="Left" Margin="484,0,0,0" VerticalAlignment="Center" Height="33" Width="163"/>
+        <Button x:Name="FromCustomerbtn" Content="Show parcels from customer" HorizontalAlignment="Left" Margin="486,120,0,0" VerticalAlignment="Top" Width="161" Height="33" Click="FromCustomerbtn_Click"/>
+        <Button x:Name="Tocustomerbtn" Content="Show parcels to customer" HorizontalAlignment="Left" Margin="484,0,0,0" VerticalAlignment="Center" Height="33" Width="163" Click="Tocustomerbtn_Click"/>
         <Button x:Name="Updatebtn" Content="Update" HorizontalAlignment="Left" Margin="166,341,0,0" VerticalAlignment="Top" Height="33" Width="76" Click="Updatebtn_Click"/>
         <Label x:Name="Updatelbl" Content="Update Customer" HorizontalAlignment="Left" Margin="150,30,0,0" VerticalAlignment="Top" Height="30" Width="108"/>
         <Button x:Name="Exitbtn" Content="Exit" HorizontalAlignment="Left" Margin="663,358,0,0" VerticalAlignment="Top" Height="40" Width="77" Click="Exitbtn_Click"/>

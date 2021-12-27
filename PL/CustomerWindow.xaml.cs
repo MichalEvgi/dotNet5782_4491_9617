@@ -119,12 +119,30 @@ namespace PL
         private void Updatebtn_Click(object sender, RoutedEventArgs e)
         {
             bl.UpdateCustomer(selectedCustomer.Id, NametxtBox.Text, PhonetxtBox.Text);
+            cl.CustomerListView.ItemsSource = bl.GetCustomersList();
             MessageBox.Show("Successfully updated");
+            
         }
 
         private void Exitbtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void FromCustomerbtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedCustomer.FromCustomer.Count()==0)
+                MessageBox.Show("There are no suitable packages");
+            else
+            new CustomerParcelsListWindow(bl, selectedCustomer).Show();
+        }
+
+        private void Tocustomerbtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedCustomer.ToCustomer.Count() == 0)
+                MessageBox.Show("There are no suitable packages");
+            else
+                new CustomerParcelsListWindow(bl, selectedCustomer, 1).Show();
         }
     }
 }

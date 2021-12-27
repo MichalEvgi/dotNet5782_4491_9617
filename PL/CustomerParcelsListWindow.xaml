@@ -8,8 +8,25 @@
         Title="CustomerParcelsListWindow" Height="450" Width="800">
     <Grid x:Name="MainGrid">
         <Grid x:Name="ParcelsFromCustomer" Visibility="Visible">
+            <ListView x:Name="FromCustomerList" Margin="0,0,0,77">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button x:Name="Exitbutn" Content="Exit" HorizontalAlignment="Left" Margin="665,367,0,0" VerticalAlignment="Top" Height="40" Width="97" Click="Exitbtn_Click"/>
         </Grid>
         <Grid x:Name="ParcelsToCustomer" Visibility="Hidden">
+            <ListView x:Name="ToCustomerList">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button x:Name="Exitbtn" Content="Exit" HorizontalAlignment="Left" Margin="665,367,0,0" VerticalAlignment="Top" Height="40" Width="97" Click="Exitbtn_Click"/>
         </Grid>
+        
     </Grid>
 </Window>

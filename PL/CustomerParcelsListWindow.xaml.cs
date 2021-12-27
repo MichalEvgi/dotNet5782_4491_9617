@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BO;
+using BlApi;
 
 namespace PL
 {
@@ -19,9 +21,31 @@ namespace PL
     /// </summary>
     public partial class CustomerParcelsListWindow : Window
     {
-        public CustomerParcelsListWindow()
+        IBL bl;
+        Customer selectedCustomer;
+        public CustomerParcelsListWindow(IBL bL,Customer customer)
         {
+            bl = bL;
+            selectedCustomer = customer;
             InitializeComponent();
+            ParcelsFromCustomer.Visibility = Visibility.Visible;
+            ParcelsToCustomer.Visibility = Visibility.Hidden;
+            FromCustomerList.ItemsSource = customer.FromCustomer;
+        }
+
+        public CustomerParcelsListWindow(IBL bL, Customer customer,int i)
+        {
+            bl = bL;
+            selectedCustomer = customer;
+            InitializeComponent();
+            ParcelsFromCustomer.Visibility = Visibility.Hidden;
+            ParcelsToCustomer.Visibility = Visibility.Visible;
+            ToCustomerList.ItemsSource = customer.ToCustomer;
+        }
+
+        private void Exitbtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
