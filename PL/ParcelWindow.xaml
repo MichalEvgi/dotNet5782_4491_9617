@@ -6,7 +6,34 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ParcelWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Name="MainGrid">
+        <Grid Name="addParcel" Visibility="Visible" Background="#FFD3F6F3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="SenderIdLbl" Content="Sender ID:" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" FontWeight="Bold" FontSize="20"/>
+            <Label x:Name="TargetIdLbl" Content="Target ID:"  HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"  FontWeight="Bold" FontSize="20"/>
+            <Label x:Name="WeightLbl" Content="Weight:"  HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" FontWeight="Bold" FontSize="20"/>
+            <Label x:Name="PriorityLbl" Content="Priority:"  HorizontalAlignment="Center" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold" FontSize="20"/>
+            <TextBox x:Name="SenderIdtxtBox"  HorizontalAlignment="Center" Grid.Column="2" VerticalAlignment="Center" TextWrapping="Wrap" Height="40"  Width="126" TextChanged="SenderIdtxtBox_TextChanged"/>
+            <TextBox x:Name="TargetIdtxtBox" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Height="40"  Width="126" TextChanged="TargetIdtxtBox_TextChanged"/>
+            <ComboBox x:Name="WeightCmb" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" Height="40"  Width="126"/>
+            <ComboBox x:Name="PriorityCmb" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" Height="40"  Width="126"/>
+            <Button x:Name="AddButton" Content="Add"  HorizontalAlignment="Center" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Height="49" Width="118" Click="AddButton_Click" FontWeight="Bold" FontSize="20" Background="Transparent"/>
+            <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" Height="49" Width="127" Click="CancelButton_Click" FontWeight="Bold" FontSize="20" Background="Transparent"/>
+
+        </Grid>
+        <Grid x:Name="actions" Visibility="Hidden" Background="#FFD3F6F3">
+        </Grid>
     </Grid>
 </Window>
