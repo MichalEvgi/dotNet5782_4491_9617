@@ -118,10 +118,21 @@ namespace PL
 
         private void Updatebtn_Click(object sender, RoutedEventArgs e)
         {
-            bl.UpdateCustomer(selectedCustomer.Id, NametxtBox.Text, PhonetxtBox.Text);
-            cl.CustomerListView.ItemsSource = bl.GetCustomersList();
-            MessageBox.Show("Successfully updated");
-            
+            try
+            {
+                bl.UpdateCustomer(selectedCustomer.Id, Nametxtbox.Text, Phonetxtbox.Text);
+                cl.CustomerListView.ItemsSource = bl.GetCustomersList();
+                MessageBox.Show("Successfully updated");
+            }
+            catch (NotFoundException ex)
+            {
+               MessageBox.Show(ex.ToString());
+            }
+            catch (InvalidInputException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
         }
 
         private void Exitbtn_Click(object sender, RoutedEventArgs e)
