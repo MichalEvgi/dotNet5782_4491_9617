@@ -45,6 +45,7 @@ namespace PL
             bl = bL;
             pr = plw;
             selectedParcel = bl.GetParcel(parcel.Id);
+            DataContext = selectedParcel;
             InitializeComponent();
             addParcel.Visibility = Visibility.Hidden;
             actions.Visibility = Visibility.Visible;
