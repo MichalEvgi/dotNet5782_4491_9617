@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="StationListWindow" Height="450" Width="800">
     <Grid Name="MainGrid" Background="#FFD3F6F3">
         <Grid.RowDefinitions>
@@ -21,6 +22,7 @@
             </Grid.ColumnDefinitions >
             <Label Content="Slots:" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
             <ComboBox Name="SlotSelector" Grid.Column="3" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" SelectionChanged="SlotsSelector_SelectionChanged"/>
+            <Button x:Name="amountbtn" Content="Slots Amount" Grid.Column="1" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Center" Height="27" Width="100" Click="amountbtn_Click"/>
         </Grid>
         <ListView x:Name="StationListView" Margin="0,0,0,0" Grid.Row="1"  MouseDoubleClick="StationListView_MouseDoubleClick"/>
         <Button Name="AddStation" Content="Add new station" Width="133" Height="30" Grid.Row="2" RenderTransformOrigin="0.536,0.696" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="532,0,0,0" Click="AddStation_Click" FontWeight="Bold" FontSize="16" Background="Transparent"/>

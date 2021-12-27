@@ -361,6 +361,7 @@ namespace PL
             //hide the transfered parcel
             Deliverytxtbox.Visibility = Visibility.Hidden;
             Deliverylbl.Visibility = Visibility.Hidden;
+            Modeltxtbox.IsReadOnly = true;
         }
     }
 }

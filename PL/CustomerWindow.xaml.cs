@@ -120,7 +120,7 @@ namespace PL
         {
             try
             {
-                bl.UpdateCustomer(selectedCustomer.Id, Nametxtbox.Text, Phonetxtbox.Text);
+                bl.UpdateCustomer(selectedCustomer.Id, Nametxtbox.Text, Phonetxtbox1.Text);
                 cl.CustomerListView.ItemsSource = bl.GetCustomersList();
                 MessageBox.Show("Successfully updated");
             }
@@ -154,6 +154,15 @@ namespace PL
                 MessageBox.Show("There are no suitable packages");
             else
                 new CustomerParcelsListWindow(bl, selectedCustomer, 1).Show();
+        }
+
+        private void Phonetxtbox1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(Phonetxtbox1.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                Phonetxtbox1.Text = Phonetxtbox1.Text.Remove(Phonetxtbox1.Text.Length - 1);
+            }
         }
     }
 }

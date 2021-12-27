@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="CustomerWindow" Height="450" Width="800">
     <Grid Name="MainGrid">
         <Grid Name="AddCustomer" Visibility="Hidden" Height="400" Width="370">
@@ -28,7 +29,7 @@
         <Label x:Name="Locationlbl" Content="Location:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="76" Height="31" Margin="90,245,0,0" FontWeight="Bold" FontSize="14"/>
         <TextBox x:Name="Idtxtbox" HorizontalAlignment="Left" Margin="215,85,0,0" Text="{Binding Path=Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" IsReadOnly="True"/>
         <TextBox x:Name="Nametxtbox" HorizontalAlignment="Left" Margin="215,136,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="34" />
-        <TextBox x:Name="Phonetxtbox" HorizontalAlignment="Left" Margin="215,0,0,0" Text="{Binding Path=Phone}" TextWrapping="Wrap" VerticalAlignment="Center" Width="139" Height="46"/>
+        <TextBox x:Name="Phonetxtbox1" HorizontalAlignment="Left" Margin="215,0,0,0" Text="{Binding Path=Phone}" TextWrapping="Wrap" VerticalAlignment="Center" Width="139" Height="46" TextChanged="Phonetxtbox1_TextChanged"/>
         <TextBox x:Name="locationtxtbox" HorizontalAlignment="Left" Margin="215,260,0,0" Text="{Binding Mode=OneWay, Path=LocationC}" TextWrapping="Wrap" VerticalAlignment="Top" Width="161" Height="37" IsReadOnly="True"/>
         <Button x:Name="FromCustomerbtn" Content="Show parcels from customer" HorizontalAlignment="Left" Margin="486,120,0,0" VerticalAlignment="Top" Width="161" Height="33" Click="FromCustomerbtn_Click"/>
         <Button x:Name="Tocustomerbtn" Content="Show parcels to customer" HorizontalAlignment="Left" Margin="484,0,0,0" VerticalAlignment="Center" Height="33" Width="163" Click="Tocustomerbtn_Click"/>

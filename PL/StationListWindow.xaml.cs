@@ -64,5 +64,15 @@ namespace PL
         {
             SelectorChanges();
         }
+
+        private void amountbtn_Click(object sender, RoutedEventArgs e)
+        {
+            var amountGroups =
+               from s in bl.GetStationsList()
+               group s by bl.GetStationsList().First() into g
+               select new { Amount = g.Key};
+            StationListView.ItemsSource = amountGroups;
+
+        }
     }
 }

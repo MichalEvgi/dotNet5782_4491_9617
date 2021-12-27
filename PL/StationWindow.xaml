@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PL"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.StationWindow"
         mc:Ignorable="d"
+       
         Title="StationWindow" Height="640" Width="800">
     <Grid x:Name="MainGrid">
         <Grid x:Name="addStaion" Visibility="Hidden" Background="#FFD3F6F3">
