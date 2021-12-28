@@ -8,11 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="DroneWindow" Height="640" Width="800">
     <Grid Name="MainGrid">
-        <Grid Name="addDrone" Visibility="Visible"  >
-            <Grid.Background>
-                <ImageBrush ImageSource="/תמונה1.png" TileMode="None" />
-            </Grid.Background>
-
+        <Grid Name="addDrone" Visibility="Visible" Background="#FFD3F6F3" >
             <TextBox x:Name="IdtxtBox" HorizontalAlignment="Left" Margin="302,117,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="39" TextChanged="IdtxtBox_TextChanged" materialDesign:HintAssist.Hint="Id" materialDesign:HintAssist.IsFloating="True"/>
             <TextBox x:Name="ModeltxtBox" HorizontalAlignment="Left" Margin="302,208,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="44" materialDesign:HintAssist.Hint="Model" materialDesign:HintAssist.IsFloating="True"/>
             <ComboBox x:Name="WeightCmb" HorizontalAlignment="Left" Margin="302,312,0,0" VerticalAlignment="Top" Width="151" Height="47" materialDesign:HintAssist.Hint="Max Weight" materialDesign:HintAssist.IsFloating="True">
