@@ -80,6 +80,7 @@ namespace PL
        //open action drone window
         public DroneWindow(IBL bL, DroneToList drone,DroneListWindow dl)
         {
+            
             bl = bL;
             dr = dl;
             InitializeComponent();
