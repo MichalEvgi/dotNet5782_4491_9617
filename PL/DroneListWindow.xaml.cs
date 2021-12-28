@@ -23,22 +23,14 @@ namespace PL
     public partial class DroneListWindow : Window
     {
         IBL bl;
-        public ObservableCollection<DroneToList> droneTos;
+        
         public DroneListWindow(IBL bL)
         {
             bl = bL;
             InitializeComponent();
-            //intialize droneTos
-            droneTos = new ObservableCollection<DroneToList>();
-            List<DroneToList> drone = bl.GetDronesList().ToList();
-            //copy droneList to droneTos
-            foreach (var d in drone)
-            {
-                droneTos.Add(d);
-            }
-            droneTos.CollectionChanged += DroneTos_CollectionChanged;
-            DroneListView.ItemsSource = droneTos;
+            DroneListView.ItemsSource = bl.GetDronesList();
             //set the items of StatusSelector to DroneStatus
+            
             foreach (DroneStatus ds in (DroneStatus[])Enum.GetValues(typeof(DroneStatus)))
             {
                 StatusSelector.Items.Add(ds);
@@ -53,30 +45,34 @@ namespace PL
             //add option of clear filter to WeightSelector
             WeightSelector.Items.Add("Clear filter");
         }
-        private void DroneTos_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void DroneListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectorChanges();
         }
+        //private void DroneListView_CollectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+
+        //}
         public void SelectorChanges()
         {
             if((StatusSelector.SelectedItem==null||StatusSelector.SelectedItem.ToString() == "Clear filter") && (WeightSelector.SelectedItem==null||WeightSelector.SelectedItem.ToString() == "Clear filter"))
             {
                 //if both fiter aren't set
-                DroneListView.ItemsSource = droneTos.ToList();
+                DroneListView.ItemsSource = bl.GetDronesList();
             }
             else
             {
                 if (StatusSelector.SelectedItem == null || StatusSelector.SelectedItem.ToString() == "Clear filter")
                     //if there is only weight filter
-                    DroneListView.ItemsSource = droneTos.Where(d => d.MaxWeight == (WeightCategories)WeightSelector.SelectedItem);
+                    DroneListView.ItemsSource =bl.GetDronesList().Where(d => d.MaxWeight == (WeightCategories)WeightSelector.SelectedItem);
                 else
                 {
                     if(WeightSelector.SelectedItem == null || WeightSelector.SelectedItem.ToString() == "Clear filter")
                         //if there is only status filter
-                        DroneListView.ItemsSource = droneTos.Where(d => d.Status == (DroneStatus)StatusSelector.SelectedItem);
+                        DroneListView.ItemsSource = bl.GetDronesList().Where(d => d.Status == (DroneStatus)StatusSelector.SelectedItem);
                     else
                         //if the two filter were selected
-                        DroneListView.ItemsSource = droneTos.Where(d => (d.MaxWeight == (WeightCategories)WeightSelector.SelectedItem) && (d.Status == (DroneStatus)StatusSelector.SelectedItem));
+                        DroneListView.ItemsSource = bl.GetDronesList().Where(d => (d.MaxWeight == (WeightCategories)WeightSelector.SelectedItem) && (d.Status == (DroneStatus)StatusSelector.SelectedItem));
                 }
             }
         }
@@ -144,5 +140,6 @@ namespace PL
         {
            new DroneWindow(bl,(DroneToList)(this.DroneListView.SelectedItem),this).Show();
         }
+
     }
 }

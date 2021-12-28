@@ -30,6 +30,7 @@ namespace PL
             StationListView.ItemsSource = bl.GetStationsList();
             SlotSelector.Items.Add("Availble slots");
             SlotSelector.Items.Add("Clear filter");
+            
         }
 
         private void StationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

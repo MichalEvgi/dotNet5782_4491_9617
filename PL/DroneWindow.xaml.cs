@@ -23,7 +23,6 @@ namespace PL
     public partial class DroneWindow : Window
     {
         IBL bl;
-        public ObservableCollection<DroneToList> droneTos;
         private DroneListWindow dr;
         //open add drone window
         public DroneWindow(IBL bL, DroneListWindow dlw)
@@ -49,18 +48,18 @@ namespace PL
             {
                 if (IdtxtBox.Text == "" || ModeltxtBox.Text == "" || WeightCmb.SelectedItem == null || SIdtxtBox.Text == "")
                     //not all the fields are full
-                    MessageBox.Show("לא כל השדות מלאים");
+                    MessageBox.Show("Not all fields are full");
                 else
                 {
                     //add the drone
                     bl.AddDrone(new Drone { Id = Convert.ToInt32(IdtxtBox.Text), Model = ModeltxtBox.Text, MaxWeight = (WeightCategories)WeightCmb.SelectedItem }, Convert.ToInt32(SIdtxtBox.Text));
-                    //update
-                    dr.droneTos.Add(bl.GetDroneTo(Convert.ToInt32(IdtxtBox.Text)));
+                    
                     //seccessfully added message
-                    MessageBoxResult result = MessageBox.Show("נוסף בהצלחה");
+                    MessageBoxResult result = MessageBox.Show("Seccessfuly added");
                     if (result == MessageBoxResult.OK)
                     {
                         dr.SelectorChanges();
+                       // dr.DroneListView.Items.Refresh();
                         //close when OK pressed
                         this.Close();
                     }
@@ -75,6 +74,7 @@ namespace PL
                 MessageBox.Show(ex.ToString());
             }
         }
+        
 
         public Drone selectedDrone;
        //open action drone window
@@ -94,7 +94,7 @@ namespace PL
                 //hide the transfered parcel
                 Deliverytxtbox.Visibility = Visibility.Hidden;
                 Deliverylbl.Visibility = Visibility.Hidden;
-                Deliverybt.Content = "שיוך חבילה";
+                Deliverybt.Content = "Package association";
                 //enable charging
                 Chargingbt.IsEnabled = true;
             }
@@ -106,21 +106,21 @@ namespace PL
                 //disable charging
                 Chargingbt.IsEnabled = false;
                 if (!selectedDrone.TransferedParcel.OnTheWay)
-                    Deliverybt.Content = "איסוף חבילה";
+                    Deliverybt.Content = "Package collection";
                 else
-                    Deliverybt.Content = "אספקת חבילה";
+                    Deliverybt.Content = "Package delivery";
             }
             if(selectedDrone.Status== DroneStatus.Maintenance)
             { //the drone in charging
               //disable delivery
                 Deliverybt.IsEnabled = false;
-                Chargingbt.Content = "שחרור מטעינה";
+                Chargingbt.Content = "Realease from charging";
             }
             else
             {   //the drone is not in charging
                 //enable delivery
                 Deliverybt.IsEnabled = true;
-                Chargingbt.Content = "שליחה לטעינה";
+                Chargingbt.Content = "Send for charging";
             }
         }
         //update drone model
@@ -129,18 +129,18 @@ namespace PL
             //change the model
             bl.UpdateDrone(selectedDrone.Id, Modeltxtbox.Text);
             //seccessfully update message
-            MessageBox.Show("עודכן בהצלחה");
+            MessageBox.Show("successfully updated");
             //updating
             dr.SelectorChanges();
         }
         // delivery button click event
         private void Deliverybt_Click(object sender, RoutedEventArgs e)
         {
-            if (Deliverybt.Content.ToString() == "שיוך חבילה")
+            if (Deliverybt.Content.ToString() == "Package association")
                 //Assign parcel state
                 AssignParcel();
             else
-                if (Deliverybt.Content.ToString() == "איסוף חבילה")
+                if (Deliverybt.Content.ToString() == "Package collection")
                 //Pick parcel state
                 PickParcel();
             else
@@ -155,7 +155,7 @@ namespace PL
                 //assign drone to parcel
                 bl.DroneToParcel(selectedDrone.Id);
                 //seccessfully asigned message
-                MessageBox.Show("שיוך בהצלחה");
+                MessageBox.Show("Associated successfully");
                 //updating
                 dr.SelectorChanges();
                 selectedDrone = bl.GetDrone(selectedDrone.Id);
@@ -164,7 +164,7 @@ namespace PL
                 Deliverylbl.Visibility = Visibility.Visible;
                 Deliverytxtbox.Visibility = Visibility.Visible;
                 //change the delivery button state
-                Deliverybt.Content = "איסוף חבילה";
+                Deliverybt.Content = "Package collection";
                 //disable charging
                 Chargingbt.IsEnabled = false;
             }
@@ -189,14 +189,14 @@ namespace PL
                 //pick parcel
                 bl.PickParcel(selectedDrone.Id);
                 //seccessfuly picked up message
-                MessageBox.Show("נאסף בהצלחה");
+                MessageBox.Show("Collected successfully");
                 //updating
                 //locationtxtbox.Text = selectedDrone.TransferedParcel.SourceLocation.ToString();
                 dr.SelectorChanges();
                 selectedDrone = bl.GetDrone(selectedDrone.Id);
                 DataContext = selectedDrone;
                 //change delivery button state
-                Deliverybt.Content = "אספקת חבילה";
+                Deliverybt.Content = "Package delivery";
             }
             catch (NotFoundException ex)
             {
@@ -219,7 +219,7 @@ namespace PL
                 //deliver parcel
                 bl.DeliverParcel(selectedDrone.Id);
                 //seccessfully delivered message
-                MessageBox.Show("סופק בהצלחה");
+                MessageBox.Show("Successfully provided");
                 //updating
                 dr.SelectorChanges();
                 selectedDrone = bl.GetDrone(selectedDrone.Id);
@@ -227,7 +227,7 @@ namespace PL
                 //hide delivered parcel
                 Deliverylbl.Visibility = Visibility.Hidden;
                 Deliverytxtbox.Visibility = Visibility.Hidden;
-                Deliverybt.Content = "שיוך חבילה";
+                Deliverybt.Content = "Package association";
                 //enable Charging
                 Chargingbt.IsEnabled = true;
             }
@@ -247,7 +247,7 @@ namespace PL
         //charging button click event
         private void Chargingbt_Click(object sender, RoutedEventArgs e)
         {
-            if (Chargingbt.Content.ToString() == "שליחה לטעינה")
+            if (Chargingbt.Content.ToString() == "Send for charging")
                 //send to charge
                 SendToChargeb();
             else
@@ -262,7 +262,7 @@ namespace PL
                 //send to charge
                 bl.SendToCharge(selectedDrone.Id);
                 //charged seccessfully message
-                MessageBox.Show("נשלח לטעינה בהצלחה");
+                MessageBox.Show("Send for charging successfully");
                 //update drone list
                 dr.SelectorChanges();
                 selectedDrone = bl.GetDrone(selectedDrone.Id);
@@ -270,7 +270,7 @@ namespace PL
                 //disable deliver parcel with the drone
                 Deliverybt.IsEnabled = false;
                 //change the state of charging button
-                Chargingbt.Content = "שחרור מטעינה";
+                Chargingbt.Content = "Realease from charging";
             }
             catch (NotFoundException ex)
             {
@@ -297,11 +297,11 @@ namespace PL
                 //Release Drone
                 bl.ReleaseDrone(selectedDrone.Id);
                 //seccessfully released
-                MessageBox.Show("שוחרר מטעינה בהצלחה");
+                MessageBox.Show("Realse from charging successfully");
                 //enable deliver parcel with the drone
                 Deliverybt.IsEnabled = true;
                 //change the state of charging button
-                Chargingbt.Content = "שליחה לטעינה";
+                Chargingbt.Content = "Send for charging";
                 //update the list
                 dr.SelectorChanges();
                 selectedDrone = bl.GetDrone(selectedDrone.Id);
