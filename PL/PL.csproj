@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="images\1d01659c303895bd6570de0146694fb7.jpg" />
+    <None Remove="תמונה1.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +21,7 @@
 
   <ItemGroup>
     <Resource Include="images\1d01659c303895bd6570de0146694fb7.jpg" />
+    <Resource Include="תמונה1.png" />
   </ItemGroup>
 
 </Project>
