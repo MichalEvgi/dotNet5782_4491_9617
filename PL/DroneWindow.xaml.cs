@@ -364,5 +364,28 @@ namespace PL
             Deliverylbl.Visibility = Visibility.Hidden;
             Modeltxtbox.IsReadOnly = true;
         }
+
+        //show the drone in parcel details window
+        public DroneWindow(IBL bL, DroneInParcel drone)
+        {
+            bl = bL;
+            InitializeComponent();
+            selectedDrone = bl.GetDrone(drone.Id);
+            DataContext = selectedDrone;
+            Updatelbl.Visibility = Visibility.Collapsed;
+            Updatebt.Visibility = Visibility.Collapsed;
+            Chargingbt.Visibility = Visibility.Collapsed;
+            Deliverybt.Visibility = Visibility.Collapsed;
+            deliverylbl.Visibility = Visibility.Collapsed;
+            Chargelbl.Visibility = Visibility.Collapsed;
+            //show the actions only
+            actions.Visibility = Visibility.Visible;
+            addDrone.Visibility = Visibility.Hidden;
+            //the drone is not in delivery
+            //hide the transfered parcel
+            Deliverytxtbox.Visibility = Visibility.Hidden;
+            Deliverylbl.Visibility = Visibility.Hidden;
+            Modeltxtbox.IsReadOnly = true;
+        }
     }
 }

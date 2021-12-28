@@ -23,7 +23,7 @@ namespace PL
     {
         IBL bl;
         private CustomerListWindow cl;
-        public CustomerWindow(IBL bL,CustomerListWindow clw)
+        public CustomerWindow(IBL bL, CustomerListWindow clw)
         {
             bl = bL;
             cl = clw;
@@ -41,13 +41,13 @@ namespace PL
         {
             try
             {
-                if (IdtxtBox.Text == "" || NametxtBox.Text == "" || PhonetxtBox.Text == "" || LongitudetxtBox.Text == "" || LattitudetxtBox.Text=="")
+                if (IdtxtBox.Text == "" || NametxtBox.Text == "" || PhonetxtBox.Text == "" || LongitudetxtBox.Text == "" || LattitudetxtBox.Text == "")
                     //not all the fields are full
                     MessageBox.Show("not all fields are full");
                 else
                 {
                     //add the customer
-                    bl.AddCustomer(new Customer { Id = Convert.ToInt32(IdtxtBox.Text),Name=NametxtBox.Text, Phone = PhonetxtBox.Text, LocationC=new Location {Longitude=Convert.ToDouble(LongitudetxtBox.Text),Lattitude=Convert.ToDouble(LattitudetxtBox.Text)} });
+                    bl.AddCustomer(new Customer { Id = Convert.ToInt32(IdtxtBox.Text), Name = NametxtBox.Text, Phone = PhonetxtBox.Text, LocationC = new Location { Longitude = Convert.ToDouble(LongitudetxtBox.Text), Lattitude = Convert.ToDouble(LattitudetxtBox.Text) } });
                     //seccessfully added message
                     MessageBoxResult result = MessageBox.Show("Added successfully");
                     if (result == MessageBoxResult.OK)
@@ -105,7 +105,7 @@ namespace PL
         }
 
         public Customer selectedCustomer;
-        public CustomerWindow(IBL bL,CustomerToList customer, CustomerListWindow clw)
+        public CustomerWindow(IBL bL, CustomerToList customer, CustomerListWindow clw)
         {
             bl = bL;
             cl = clw;
@@ -126,7 +126,7 @@ namespace PL
             }
             catch (NotFoundException ex)
             {
-               MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.ToString());
             }
             catch (InvalidInputException ex)
             {
@@ -142,10 +142,10 @@ namespace PL
 
         private void FromCustomerbtn_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedCustomer.FromCustomer.Count()==0)
+            if (selectedCustomer.FromCustomer.Count() == 0)
                 MessageBox.Show("There are no suitable packages");
             else
-            new CustomerParcelsListWindow(bl, selectedCustomer).Show();
+                new CustomerParcelsListWindow(bl, selectedCustomer).Show();
         }
 
         private void Tocustomerbtn_Click(object sender, RoutedEventArgs e)
@@ -163,6 +163,25 @@ namespace PL
                 MessageBox.Show("Please enter only numbers.");
                 Phonetxtbox1.Text = Phonetxtbox1.Text.Remove(Phonetxtbox1.Text.Length - 1);
             }
+        }
+
+        ParcelWindow pr;
+        public CustomerWindow(IBL bL, CustomerInParcel customer, ParcelWindow prw)
+        {
+            bl = bL;
+            pr = prw;
+            InitializeComponent();
+            selectedCustomer = bl.GetCustomer(customer.Id);
+            DataContext = selectedCustomer;
+            AddCustomer.Visibility = Visibility.Hidden;
+            UpdateCustomer.Visibility = Visibility.Visible;
+
+            FromCustomerbtn.Visibility = Visibility.Collapsed;
+            Tocustomerbtn.Visibility = Visibility.Collapsed;
+            Updatebtn.Visibility = Visibility.Collapsed;
+            Updatelbl.Visibility = Visibility.Collapsed;
+            Nametxtbox.IsReadOnly = true;
+            Phonetxtbox1.IsReadOnly = true;
         }
     }
 }
