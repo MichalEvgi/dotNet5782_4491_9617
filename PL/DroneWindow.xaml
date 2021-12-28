@@ -10,7 +10,7 @@
     <Grid Name="MainGrid">
         <Grid Name="addDrone" Visibility="Visible"  >
             <Grid.Background>
-                <ImageBrush ImageSource="C:\Users\מיכל\Source\Repos\MichalEvgi\dotNet5782_4491_9617\PL\images\תמונה1.png"/>
+                <ImageBrush ImageSource="/images/תמונה1.png" />
             </Grid.Background>
 
             <TextBox x:Name="IdtxtBox" HorizontalAlignment="Left" Margin="302,117,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="39" TextChanged="IdtxtBox_TextChanged" materialDesign:HintAssist.Hint="Id" materialDesign:HintAssist.IsFloating="True"/>
