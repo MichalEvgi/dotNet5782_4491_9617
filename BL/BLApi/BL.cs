@@ -129,18 +129,26 @@ namespace BlApi
                     {
                         //if the drone is available
                         //set a random location from the delivered parcels target locations
-                        DO.Parcel randParcel = dal.FilteredParcel(p => p.Delivered != null).ElementAt(rand.Next(0, dal.FilteredParcel(p => p.Delivered != null).Count()));
-                        DO.Customer targetRandParcel = dal.GetCustomerById(randParcel.TargetId);
-                        droneToList.CurrentLocation = new Location { Longitude = targetRandParcel.Longitude, Lattitude = targetRandParcel.Lattitude };
-                        //find the closest station with available charging slots
-                        DO.Station closeToDrone = ClosestStation(dal.FilteredStations(s => s.ChargeSlots > 0), droneToList.CurrentLocation.Longitude, droneToList.CurrentLocation.Lattitude);
-                        //calculate the minimum battery to go to the closest station for charging
-                        double minBattery = dal.Distance(droneToList.CurrentLocation.Longitude, droneToList.CurrentLocation.Lattitude, closeToDrone.Longitude, closeToDrone.Lattitude) * available;
-                        //if the min battery is over 100%
-                        if (minBattery > 100)
-                            throw new BatteryException("The battery is over than 100%, the consumption for drone:" + drone.Id + " is " + minBattery + "%");
-                        //set a random battery between min battery to 100%
-                        droneToList.Battery = rand.NextDouble() * (100 - minBattery) + minBattery;
+                        try
+                            {
+                            DO.Parcel randParcel = dal.FilteredParcel(p => p.Delivered != null).ElementAt(rand.Next(0, dal.FilteredParcel(p => p.Delivered != null).Count()));
+                            DO.Customer targetRandParcel = dal.GetCustomerById(randParcel.TargetId);
+                            droneToList.CurrentLocation = new Location { Longitude = targetRandParcel.Longitude, Lattitude = targetRandParcel.Lattitude };
+                            //find the closest station with available charging slots
+                            DO.Station closeToDrone = ClosestStation(dal.FilteredStations(s => s.ChargeSlots > 0), droneToList.CurrentLocation.Longitude, droneToList.CurrentLocation.Lattitude);
+                            //calculate the minimum battery to go to the closest station for charging
+                            double minBattery = dal.Distance(droneToList.CurrentLocation.Longitude, droneToList.CurrentLocation.Lattitude, closeToDrone.Longitude, closeToDrone.Lattitude) * available;
+                            //if the min battery is over 100%
+                            if (minBattery > 100)
+                                throw new BatteryException("The battery is over than 100%, the consumption for drone:" + drone.Id + " is " + minBattery + "%");
+                            //set a random battery between min battery to 100%
+                            droneToList.Battery = rand.NextDouble() * (100 - minBattery) + minBattery;
+                        }
+                        catch(Exception)
+                        {
+                            droneToList.CurrentLocation = new Location { Longitude = 35.05, Lattitude = 31.05 };
+                            droneToList.Battery = rand.NextDouble() * (50) + 50;
+                        }
                     }
 
                 }

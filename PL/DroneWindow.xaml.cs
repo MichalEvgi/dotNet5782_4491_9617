@@ -73,6 +73,10 @@ namespace PL
             {
                 MessageBox.Show(ex.ToString());
             }
+            catch (NotFoundException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
         
 
