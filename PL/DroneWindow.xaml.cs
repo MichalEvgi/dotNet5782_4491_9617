@@ -35,6 +35,8 @@ namespace PL
             //show addDrone only
             addDrone.Visibility = Visibility.Visible;
             actions.Visibility = Visibility.Hidden;
+            this.Width = 300;
+            this.Height = 450;
         }
         //close window by cancel button
         private void CancelButton_Click(object sender, RoutedEventArgs e)

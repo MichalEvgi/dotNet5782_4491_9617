@@ -8,33 +8,17 @@
         mc:Ignorable="d"
         Title="ParcelWindow" Height="450" Width="800">
     <Grid x:Name="MainGrid">
-        <Grid x:Name="addParcel" Visibility="Hidden" Background="#FFD3F6F3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Label x:Name="SenderIdLbl" Content="Sender ID:" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" FontWeight="Bold" FontSize="20"/>
-            <Label x:Name="TargetIdLbl" Content="Target ID:"  HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"  FontWeight="Bold" FontSize="20"/>
-            <Label x:Name="WeightLbl" Content="Weight:"  HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" FontWeight="Bold" FontSize="20"/>
-            <Label x:Name="PriorityLbl" Content="Priority:"  HorizontalAlignment="Center" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold" FontSize="20"/>
-            <TextBox x:Name="SenderIdtxtBox"  HorizontalAlignment="Center" Grid.Column="2" VerticalAlignment="Center" TextWrapping="Wrap" Height="40"  Width="126" TextChanged="SenderIdtxtBox_TextChanged"/>
-            <TextBox x:Name="TargetIdtxtBox" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Height="40"  Width="126" TextChanged="TargetIdtxtBox_TextChanged"/>
-            <ComboBox x:Name="WeightCmb" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" Height="40"  Width="126"/>
-            <ComboBox x:Name="PriorityCmb" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" Height="40"  Width="126"/>
-            <Button x:Name="AddButton" Content="Add"  HorizontalAlignment="Center" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Height="49" Width="118" Click="AddButton_Click" FontWeight="Bold" FontSize="20" Background="Transparent"/>
-            <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" Height="49" Width="127" Click="CancelButton_Click" FontWeight="Bold" FontSize="20" Background="Transparent"/>
+        <Grid x:Name="addParcel" Visibility="Visible" Background="#FFD3F6F3" Height="450" Width="300">
+
+            <TextBox x:Name="SenderIdtxtBox"  HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" Height="40"  Width="126" TextChanged="SenderIdtxtBox_TextChanged" materialDesign:HintAssist.Hint="Sender ID" materialDesign:HintAssist.IsFloating="True" Margin="0,53,0,0"/>
+            <TextBox x:Name="TargetIdtxtBox" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40"  Width="126" TextChanged="TargetIdtxtBox_TextChanged" materialDesign:HintAssist.Hint="Target ID" materialDesign:HintAssist.IsFloating="True" Margin="0,123,0,0"/>
+            <ComboBox x:Name="WeightCmb" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40"  Width="126" materialDesign:HintAssist.Hint="Weight" materialDesign:HintAssist.IsFloating="True" Margin="0,196,0,0"/>
+            <ComboBox x:Name="PriorityCmb" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40"  Width="126" materialDesign:HintAssist.Hint="Priority" materialDesign:HintAssist.IsFloating="True" Margin="0,262,0,0"/>
+            <Button x:Name="AddButton" Content="Add"  HorizontalAlignment="Center" VerticalAlignment="Top" Height="21" Width="82" Click="AddButton_Click" FontWeight="Bold" FontSize="12"  Margin="0,341,0,0"/>
+            <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Top" Height="21" Width="82" Click="CancelButton_Click" FontWeight="Bold" FontSize="12" Background="Transparent" Margin="0,367,0,0" BorderBrush="{x:Null}" Foreground="Gray"/>
 
         </Grid>
-        <Grid x:Name="actions" Visibility="Visible" Background="#FFD3F6F3">
+        <Grid x:Name="actions" Visibility="Hidden" Background="#FFD3F6F3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="57*"/>
                 <ColumnDefinition Width="80*"/>

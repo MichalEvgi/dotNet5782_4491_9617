@@ -32,6 +32,8 @@ namespace PL
             PriorityCmb.ItemsSource = Enum.GetValues(typeof(Priorities));
             addParcel.Visibility = Visibility.Visible;
             actions.Visibility = Visibility.Hidden;
+            this.Height = 450;
+            this.Width = 300;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

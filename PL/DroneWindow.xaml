@@ -8,17 +8,17 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="DroneWindow" Height="640" Width="800">
     <Grid Name="MainGrid">
-        <Grid Name="addDrone" Visibility="Visible" Background="#FFD3F6F3" >
-            <TextBox x:Name="IdtxtBox" HorizontalAlignment="Left" Margin="302,117,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="39" TextChanged="IdtxtBox_TextChanged" materialDesign:HintAssist.Hint="Id" materialDesign:HintAssist.IsFloating="True"/>
-            <TextBox x:Name="ModeltxtBox" HorizontalAlignment="Left" Margin="302,208,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="44" materialDesign:HintAssist.Hint="Model" materialDesign:HintAssist.IsFloating="True"/>
-            <ComboBox x:Name="WeightCmb" HorizontalAlignment="Left" Margin="302,312,0,0" VerticalAlignment="Top" Width="151" Height="47" materialDesign:HintAssist.Hint="Max Weight" materialDesign:HintAssist.IsFloating="True">
+        <Grid Name="addDrone" Visibility="Visible" Background="#FFD3F6F3" Height="450" Width="300">
+            <TextBox x:Name="IdtxtBox" HorizontalAlignment="Left" Margin="70,50,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="39" TextChanged="IdtxtBox_TextChanged" materialDesign:HintAssist.Hint="Id" materialDesign:HintAssist.IsFloating="True"/>
+            <TextBox x:Name="ModeltxtBox" HorizontalAlignment="Left" Margin="70,129,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="39" materialDesign:HintAssist.Hint="Model" materialDesign:HintAssist.IsFloating="True"/>
+            <ComboBox x:Name="WeightCmb" HorizontalAlignment="Left" Margin="70,0,0,0" VerticalAlignment="Center" Width="151" Height="39" materialDesign:HintAssist.Hint="Max Weight" materialDesign:HintAssist.IsFloating="True">
                 <ComboBox.Background>
                     <ImageBrush/>
                 </ComboBox.Background>
             </ComboBox>
-            <TextBox x:Name="SIdtxtBox" HorizontalAlignment="Left" Margin="302,395,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="53" TextChanged="SIdtxtBox_TextChanged" materialDesign:HintAssist.Hint="Station Id" materialDesign:HintAssist.IsFloating="True"/>
-            <Button x:Name="AddButton" Content="Add" Foreground="Purple" HorizontalAlignment="Left" Margin="275,501,0,0" VerticalAlignment="Top" Height="33" Width="125" Click="AddButton_Click" FontWeight="Normal" FontSize="15" Background="{x:Null}" BorderBrush="{x:Null}"/>
-            <Button x:Name="CancelButton" Content="Cancel" Foreground="Gray" HorizontalAlignment="Left" Margin="379,492,0,0" VerticalAlignment="Top" Height="51" Width="127" Click="CancelButton_Click" FontWeight="Bold" FontSize="14" Background="Transparent" BorderBrush="{x:Null}" FontFamily="Segoe UI">
+            <TextBox x:Name="SIdtxtBox" HorizontalAlignment="Left" Margin="70,288,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="39" TextChanged="SIdtxtBox_TextChanged" materialDesign:HintAssist.Hint="Station Id" materialDesign:HintAssist.IsFloating="True"/>
+            <Button x:Name="AddButton" Content="Add" Foreground="White" HorizontalAlignment="Left" Margin="104,359,0,0" VerticalAlignment="Top" Height="21" Width="82" Click="AddButton_Click" FontWeight="Bold" FontSize="12"  />
+            <Button x:Name="CancelButton" Content="Cancel" Foreground="Gray" HorizontalAlignment="Left" Margin="104,383,0,0" VerticalAlignment="Top" Height="24" Width="80" Click="CancelButton_Click" FontWeight="Bold" FontSize="12" Background="Transparent" BorderBrush="{x:Null}" FontFamily="Segoe UI" FontStyle="Normal">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -30,7 +30,7 @@
             </Button>
 
         </Grid>
-        <Grid x:Name="actions" Visibility="Hidden" Background="#FFD3F6F3">
+        <Grid x:Name="actions" Visibility="Hidden" Background="#FFD3F6F3" Margin="2,0,-2,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="57*"/>
                 <ColumnDefinition Width="121*"/>

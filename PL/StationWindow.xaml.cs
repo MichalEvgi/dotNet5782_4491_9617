@@ -30,6 +30,8 @@ namespace PL
             InitializeComponent();
             addStaion.Visibility = Visibility.Visible;
             actions.Visibility = Visibility.Hidden;
+            this.Height = 450;
+            this.Width = 300;
         }
         //close window by cancel button
         private void CancelButton_Click(object sender, RoutedEventArgs e)

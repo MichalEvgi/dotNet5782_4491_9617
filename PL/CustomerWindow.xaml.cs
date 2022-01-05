@@ -30,6 +30,8 @@ namespace PL
             InitializeComponent();
             AddCustomer.Visibility = Visibility.Visible;
             UpdateCustomer.Visibility = Visibility.Hidden;
+            this.Width = 300;
+            this.Height = 450;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
