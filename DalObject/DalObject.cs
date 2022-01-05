@@ -482,6 +482,17 @@ namespace Dal
 
             return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
         }
+        /// <summary>
+        /// Clear all the charging details when closing the program
+        /// </summary>
+        public void ClearDroneCharging()
+        {
+            foreach (DroneCharge d in DataSource.DroneCharges)
+            {
+                ReleaseDrone(d.DroneId);
+            }
+            DataSource.DroneCharges.Clear();
+        }
         #endregion
     }
 }

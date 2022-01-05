@@ -1172,6 +1172,13 @@ namespace BlApi
             sec = Math.Round(sec, 4);
             return $"{deg}° {min}' {sec}'' {ch}";
         }
+        /// <summary>
+        /// Clear all the charging details when closing the program
+        /// </summary>
+        public void ClearDroneCharging()
+        {
+            dal.ClearDroneCharging();
+        }
         #endregion
     }
 }

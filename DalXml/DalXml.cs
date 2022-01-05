@@ -34,7 +34,16 @@ namespace Dal
             }
         }
         #endregion
-        public DalXml(){}
+        public DalXml()
+        {
+            List<DroneCharge> chargingList = XMLTools.LoadListFromXMLSerializer<DroneCharge>(droneChargePath);
+            foreach (DroneCharge d in chargingList)
+            {
+                ReleaseDrone(d.DroneId);
+            }
+            chargingList.Clear();
+            XMLTools.SaveToXMLSerializer(chargingList, droneChargePath);
+        }
         string stationPath = @"StationXml.xml";//XMLSerializer
         string dronePath = @"DroneXml.xml";//XMLSerializer
         string parcelPath = @"ParcelXml.xml";//XMLSerializer
@@ -578,6 +587,19 @@ namespace Dal
                     (1 - Math.Cos((lon2 - lon1) * p)) / 2;
 
             return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
+        }
+        /// <summary>
+        /// Clear all the charging details when closing the program
+        /// </summary>
+        public void ClearDroneCharging()
+        {
+            List<DroneCharge> chargingList = XMLTools.LoadListFromXMLSerializer<DroneCharge>(droneChargePath);
+            foreach (DroneCharge d in chargingList)
+            {
+                ReleaseDrone(d.DroneId);
+            }
+            chargingList.Clear();
+            XMLTools.SaveToXMLSerializer(chargingList, droneChargePath);
         }
         #endregion
     }
