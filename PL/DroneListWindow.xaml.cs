@@ -58,7 +58,7 @@ namespace PL
             if((StatusSelector.SelectedItem==null||StatusSelector.SelectedItem.ToString() == "Clear filter") && (WeightSelector.SelectedItem==null||WeightSelector.SelectedItem.ToString() == "Clear filter"))
             {
                 //if both fiter aren't set
-                DroneListView.ItemsSource = bl.GetDronesList();
+                DroneListView.ItemsSource = bl.GetDronesList().Select(x => x);
             }
             else
             {
