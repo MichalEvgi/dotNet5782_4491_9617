@@ -588,19 +588,6 @@ namespace Dal
 
             return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
         }
-        /// <summary>
-        /// Clear all the charging details when closing the program
-        /// </summary>
-        public void ClearDroneCharging()
-        {
-            List<DroneCharge> chargingList = XMLTools.LoadListFromXMLSerializer<DroneCharge>(droneChargePath);
-            foreach (DroneCharge d in chargingList)
-            {
-                ReleaseDrone(d.DroneId);
-            }
-            chargingList.Clear();
-            XMLTools.SaveToXMLSerializer(chargingList, droneChargePath);
-        }
         #endregion
     }
 }

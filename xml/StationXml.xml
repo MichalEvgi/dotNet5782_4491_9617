@@ -5,7 +5,7 @@
     <Name>31524</Name>
     <Longitude>35.07</Longitude>
     <Lattitude>31.04</Lattitude>
-    <ChargeSlots>0</ChargeSlots>
+    <ChargeSlots>5</ChargeSlots>
   </Station>
   <Station>
     <Id>2</Id>

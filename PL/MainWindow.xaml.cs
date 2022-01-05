@@ -34,11 +34,6 @@ namespace PL
             {
             }
         }
-        private void Close_OnClick(object sender, RoutedEventArgs e)
-        {
-            bL.ClearDroneCharging();
-            Close();
-        }
         //open droneList window
         private void DroneListButton_Click(object sender, RoutedEventArgs e)
         {

@@ -173,11 +173,5 @@ namespace BlApi
         /// <returns></returns>
         public IEnumerable<ParcelToList> UnassociatedParcel();
         #endregion
-        #region HELP METHOD
-        /// <summary>
-        /// Clear all the charging details when closing the program
-        /// </summary>
-        public void ClearDroneCharging();
-        #endregion
     }
 }
