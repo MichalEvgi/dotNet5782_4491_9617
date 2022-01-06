@@ -396,7 +396,8 @@ namespace PL
 
         private void Parcelbtn_Click(object sender, RoutedEventArgs e)
         {
-
+            new ParcelInDeliveryWindow(bl).Show();
         }
+
     }
 }

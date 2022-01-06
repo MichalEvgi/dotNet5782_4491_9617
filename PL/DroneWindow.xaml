@@ -62,6 +62,7 @@
             <Button x:Name="Exitbt" Content="Exit" HorizontalAlignment="Left" Margin="518,0,0,0" VerticalAlignment="Center" Height="33" Width="80" Click="Exitbt_Click" Grid.Row="2" Grid.Column="2" FontWeight="Bold" FontSize="14" Background="Transparent"/>
             <Button x:Name="Deliverybt" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Margin="398,106,0,0" VerticalAlignment="Top" Click="Deliverybt_Click" Width="100" FontWeight="Bold" FontSize="14" Height="32" Background="Transparent"/>
             <Button x:Name="Chargingbt" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Margin="396,249,0,0" VerticalAlignment="Top" Width="102" Click="Chargingbt_Click" FontWeight="Bold" FontSize="14" Height="27" Background="Transparent"/>
+            <Button x:Name="Parcelbtn" Content="Delivery parcel" Grid.Column="2" HorizontalAlignment="Center" Margin="0,543,0,0" VerticalAlignment="Top" Grid.RowSpan="3" Click="Parcelbtn_Click"/>
 
 
         </Grid>

@@ -278,5 +278,6 @@ namespace PL
             Deletebt.Visibility = Visibility.Collapsed;
             
         }
+
     }
 }
