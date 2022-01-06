@@ -393,5 +393,10 @@ namespace PL
             Deliverylbl.Visibility = Visibility.Hidden;
             Modeltxtbox.IsReadOnly = true;
         }
+
+        private void Parcelbtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

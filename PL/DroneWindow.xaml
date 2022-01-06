@@ -8,7 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="DroneWindow" Height="640" Width="800">
     <Grid Name="MainGrid">
-        <Grid Name="addDrone" Visibility="Visible" Background="#FFD3F6F3" Height="450" Width="300">
+        <Grid Name="addDrone" Visibility="Hidden" Background="#FFD3F6F3" Height="450" Width="300">
             <TextBox x:Name="IdtxtBox" HorizontalAlignment="Left" Margin="70,50,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="39" TextChanged="IdtxtBox_TextChanged" materialDesign:HintAssist.Hint="Id" materialDesign:HintAssist.IsFloating="True"/>
             <TextBox x:Name="ModeltxtBox" HorizontalAlignment="Left" Margin="70,129,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="39" materialDesign:HintAssist.Hint="Model" materialDesign:HintAssist.IsFloating="True"/>
             <ComboBox x:Name="WeightCmb" HorizontalAlignment="Left" Margin="70,0,0,0" VerticalAlignment="Center" Width="151" Height="39" materialDesign:HintAssist.Hint="Max Weight" materialDesign:HintAssist.IsFloating="True">
@@ -30,7 +30,7 @@
             </Button>
 
         </Grid>
-        <Grid x:Name="actions" Visibility="Hidden" Background="#FFD3F6F3" Margin="2,0,-2,0">
+        <Grid x:Name="actions" Visibility="Visible" Background="#FFD3F6F3" Margin="2,0,-2,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="57*"/>
                 <ColumnDefinition Width="121*"/>
