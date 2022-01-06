@@ -12,13 +12,13 @@
     <Name>31524</Name>
     <Longitude>35.07</Longitude>
     <Lattitude>31.04</Lattitude>
-    <ChargeSlots>3</ChargeSlots>
+    <ChargeSlots>5</ChargeSlots>
   </Station>
   <Station>
     <Id>1</Id>
     <Name>31546</Name>
     <Longitude>35</Longitude>
     <Lattitude>31</Lattitude>
-    <ChargeSlots>3</ChargeSlots>
+    <ChargeSlots>2</ChargeSlots>
   </Station>
 </ArrayOfStation>
