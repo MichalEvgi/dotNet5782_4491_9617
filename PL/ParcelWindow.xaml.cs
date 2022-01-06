@@ -237,7 +237,7 @@ namespace PL
                 MessageBox.Show(ex.ToString());
             }
         }
-        public ParcelWindow(IBL bL, ParcelInCustomer parcel)
+        public ParcelWindow(IBL bL, ParcelInCustomer parcel, int senderOrTarget)
         {
             bl = bL;
             selectedParcel = bl.GetParcel(parcel.Id);
@@ -245,6 +245,17 @@ namespace PL
             InitializeComponent();
             addParcel.Visibility = Visibility.Hidden;
             actions.Visibility = Visibility.Visible;
+            Senderlbl.Visibility = Visibility.Collapsed;
+            Senderbt.Visibility = Visibility.Collapsed;
+            Targetlbl.Visibility = Visibility.Collapsed;
+            Targetbt.Visibility = Visibility.Collapsed;
+            OtherCustomerlbl.Visibility = Visibility.Visible;
+            Othertxtbox.Visibility = Visibility.Visible;
+            Othertxtbox.Text = parcel.OtherCustomer.ToString();
+            if (senderOrTarget==0)
+                OtherCustomerlbl.Content = "Sender:";
+            else
+                OtherCustomerlbl.Content = "Target:";
             if (selectedParcel.DeliveredTime == null)
             {
                 Deliveredlbl.Visibility = Visibility.Collapsed;
