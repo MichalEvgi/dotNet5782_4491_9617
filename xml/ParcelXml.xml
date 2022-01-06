@@ -1,18 +1,6 @@
 <?xml version="1.0"?>
 <ArrayOfParcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Parcel>
-    <Id>1001</Id>
-    <SenderId>212694491</SenderId>
-    <TargetId>212372312</TargetId>
-    <Weight>Heavy</Weight>
-    <Priority>Urgent</Priority>
-    <Requested>2022-01-02T18:16:02.5115025+02:00</Requested>
-    <DroneId>1992</DroneId>
-    <Scheduled xsi:nil="true" />
-    <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
-  </Parcel>
-  <Parcel>
     <Id>1002</Id>
     <SenderId>212372312</SenderId>
     <TargetId>160739554</TargetId>
@@ -23,6 +11,42 @@
     <Scheduled>2022-01-05T18:13:05.352927+02:00</Scheduled>
     <PickedUp>2022-01-06T19:28:04.8446268+02:00</PickedUp>
     <Delivered>2022-01-06T19:28:10.2305817+02:00</Delivered>
+  </Parcel>
+  <Parcel>
+    <Id>1001</Id>
+    <SenderId>212694491</SenderId>
+    <TargetId>212372312</TargetId>
+    <Weight>Heavy</Weight>
+    <Priority>Urgent</Priority>
+    <Requested>2022-01-02T18:16:02.5115025+02:00</Requested>
+    <DroneId xsi:nil="true" />
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+  </Parcel>
+  <Parcel>
+    <Id>1000</Id>
+    <SenderId>212694491</SenderId>
+    <TargetId>160739554</TargetId>
+    <Weight>Medium</Weight>
+    <Priority>Regular</Priority>
+    <Requested>2022-01-02T18:16:02.5115025+02:00</Requested>
+    <DroneId>1992</DroneId>
+    <Scheduled>2022-01-06T20:51:16.6455761+02:00</Scheduled>
+    <PickedUp>2022-01-06T20:51:35.1900383+02:00</PickedUp>
+    <Delivered>2022-01-06T20:51:44.1043389+02:00</Delivered>
+  </Parcel>
+  <Parcel>
+    <Id>1004</Id>
+    <SenderId>326273681</SenderId>
+    <TargetId>321544821</TargetId>
+    <Weight>Medium</Weight>
+    <Priority>Regular</Priority>
+    <Requested>2022-01-06T23:27:10.4409685+02:00</Requested>
+    <DroneId>3122</DroneId>
+    <Scheduled>2022-01-06T23:28:03.487055+02:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
   </Parcel>
   <Parcel>
     <Id>1000</Id>
