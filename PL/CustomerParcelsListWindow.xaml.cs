@@ -50,12 +50,12 @@ namespace PL
 
         private void ToCustomerList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new ParcelWindow(bl, (ParcelInCustomer)ToCustomerList.SelectedItem).Show();
+            new ParcelWindow(bl, (ParcelInCustomer)ToCustomerList.SelectedItem,0).Show();
         }
 
         private void FromCustomerList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new ParcelWindow(bl, (ParcelInCustomer)FromCustomerList.SelectedItem).Show();
+            new ParcelWindow(bl, (ParcelInCustomer)FromCustomerList.SelectedItem,1).Show();
         }
     }
 }

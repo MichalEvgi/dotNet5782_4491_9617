@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="ParcelWindow" Height="450" Width="800">
     <Grid x:Name="MainGrid">
-        <Grid x:Name="addParcel" Visibility="Visible" Background="#FFD3F6F3" Height="450" Width="300">
+        <Grid x:Name="addParcel" Visibility="Hidden" Background="#FFD3F6F3" Height="450" Width="300">
 
             <TextBox x:Name="SenderIdtxtBox"  HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" Height="40"  Width="126" TextChanged="SenderIdtxtBox_TextChanged" materialDesign:HintAssist.Hint="Sender ID" materialDesign:HintAssist.IsFloating="True" Margin="0,53,0,0"/>
             <TextBox x:Name="TargetIdtxtBox" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40"  Width="126" TextChanged="TargetIdtxtBox_TextChanged" materialDesign:HintAssist.Hint="Target ID" materialDesign:HintAssist.IsFloating="True" Margin="0,123,0,0"/>
@@ -18,7 +18,7 @@
             <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Top" Height="21" Width="82" Click="CancelButton_Click" FontWeight="Bold" FontSize="12" Background="Transparent" Margin="0,367,0,0" BorderBrush="{x:Null}" Foreground="Gray"/>
 
         </Grid>
-        <Grid x:Name="actions" Visibility="Hidden" Background="#FFD3F6F3">
+        <Grid x:Name="actions" Visibility="Visible" Background="#FFD3F6F3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="57*"/>
                 <ColumnDefinition Width="80*"/>
@@ -34,6 +34,7 @@
             </Grid.RowDefinitions>
             <Label x:Name="Idlbl" Content="Id:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Grid.Column="1" Width="61" Margin="0,70,0,0" FontWeight="Bold" FontSize="14" />
             <Label x:Name="Senderlbl" Content="Sender:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="40" Grid.Column="1" Margin="1,130,0,0" FontWeight="Bold" FontSize="14"/>
+            <Label x:Name="OtherCustomerlbl" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="40" Grid.Column="1" Margin="1,160,0,0" FontWeight="Bold" FontSize="14" Visibility="Collapsed"/>
             <Label x:Name="Targetlbl" Content="Target:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="98" Height="40" Grid.Column="1" Margin="0,190,0,0" FontWeight="Bold" FontSize="14"/>
             <Label x:Name="Weightlbl" Content="Weight:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="76" Height="40" Grid.Column="1" Margin="0,250,0,0" FontWeight="Bold" FontSize="14"/>
             <Label x:Name="Prioritylbl" Content="Priority:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Grid.Column="1" Height="40" Margin="0,310,0,0" FontWeight="Bold" FontSize="14"/>
@@ -45,6 +46,7 @@
             <Button x:Name="Deletebt" Content="delete" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="80" Grid.Column="4" FontWeight="Bold" FontSize="14" Background="Transparent" Grid.Row="2" Click="Deletebt_Click"/>
             <TextBox x:Name="Idtxtbox" HorizontalAlignment="Left" Margin="0,70,0,0" Text="{Binding Id, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="40" IsReadOnly="True" Grid.Column="2" />
             <Button x:Name="Senderbt" Content="show sender customer" HorizontalAlignment="Left" Margin="0,130,0,0" VerticalAlignment="Top" Width="150" FontSize="11" Height="40" Grid.Column="2" FontWeight="Bold" Background="Transparent" Click="Senderbt_Click"/>
+            <TextBox x:Name="Othertxtbox" HorizontalAlignment="Left" Margin="0,160,0,0"  VerticalAlignment="Top" Width="130" Height="40" IsReadOnly="True" Grid.Column="2" Visibility="Collapsed"/>
             <Button x:Name="Targetbt" Content="show target customer" HorizontalAlignment="Left" Margin="0,190,0,0" VerticalAlignment="Top" Width="150" FontSize="11" Height="40" Grid.Column="2" FontWeight="Bold" Background="Transparent" Click="Targetbt_Click"/>
             <TextBox x:Name="Weighttxtbox" HorizontalAlignment="Left" Margin="0,250,0,0" Text="{Binding Weight, Mode=OneWay}"  VerticalAlignment="Top" Width="130" Height="40" IsReadOnly="True" Grid.Column="2"/>
             <TextBox x:Name="Prioritytxtbox" HorizontalAlignment="Left" Margin="0,310,0,0" Text="{Binding Priority, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="40" IsReadOnly="True" Grid.Column="2"/>
