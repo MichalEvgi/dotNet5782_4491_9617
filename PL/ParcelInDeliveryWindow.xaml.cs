@@ -22,10 +22,18 @@ namespace PL
     public partial class ParcelInDeliveryWindow : Window
     {
         IBL bl;
-        public ParcelInDeliveryWindow(IBL bL)
+        ParcelInTransfer selectedParcel;
+        public ParcelInDeliveryWindow(IBL bL, ParcelInTransfer parcel)
         {
             bl = bL;
             InitializeComponent();
+            selectedParcel = parcel;
+            DataContext = selectedParcel;
+        }
+
+        private void Exitbt_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

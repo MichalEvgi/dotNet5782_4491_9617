@@ -98,23 +98,17 @@ namespace PL
             if (selectedDrone.Status != DroneStatus.Delivery)
             { //the drone is not in delivery
                 //hide the transfered parcel
-                Deliverytxtbox.Visibility = Visibility.Hidden;
-                Deliverylbl.Visibility = Visibility.Hidden;
-                Deliverybt.Content = "Package association";
+                Parcelbtn.Visibility = Visibility.Collapsed;
                 //enable charging
                 Chargingbt.IsEnabled = true;
             }
             else
             { //the drone is in delivery
                 //show the transfered parcel
-                Deliverytxtbox.Visibility = Visibility.Visible;
-                Deliverylbl.Visibility = Visibility.Visible;
+                Parcelbtn.Visibility = Visibility.Visible;
                 //disable charging
                 Chargingbt.IsEnabled = false;
-                if (!selectedDrone.TransferedParcel.OnTheWay)
-                    Deliverybt.Content = "Package collection";
-                else
-                    Deliverybt.Content = "Package delivery";
+                Chargingbt.IsEnabled = false;
             }
             if(selectedDrone.Status== DroneStatus.Maintenance)
             { //the drone in charging
@@ -139,22 +133,8 @@ namespace PL
             //updating
             dr.SelectorChanges();
         }
-        // delivery button click event
-        private void Deliverybt_Click(object sender, RoutedEventArgs e)
-        {
-            if (Deliverybt.Content.ToString() == "Package association")
-                //Assign parcel state
-                AssignParcel();
-            else
-                if (Deliverybt.Content.ToString() == "Package collection")
-                //Pick parcel state
-                PickParcel();
-            else
-                //Deliver parcel state
-                DeliverParcel();
-        }
         //assign drone to parcel
-        private void AssignParcel()
+        private void Deliverybt_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -167,10 +147,9 @@ namespace PL
                 selectedDrone = bl.GetDrone(selectedDrone.Id);
                 DataContext = selectedDrone;
                 //show the delivered parcel
-                Deliverylbl.Visibility = Visibility.Visible;
-                Deliverytxtbox.Visibility = Visibility.Visible;
+                Parcelbtn.Visibility = Visibility.Visible;
                 //change the delivery button state
-                Deliverybt.Content = "Package collection";
+                Deliverybt.IsEnabled = false;
                 //disable charging
                 Chargingbt.IsEnabled = false;
             }
@@ -187,69 +166,7 @@ namespace PL
                 MessageBox.Show(ex.ToString());
             }
         }
-        //pick parcel
-        private void PickParcel()
-        {
-            try
-            {
-                //pick parcel
-                bl.PickParcel(selectedDrone.Id);
-                //seccessfuly picked up message
-                MessageBox.Show("Collected successfully");
-                //updating
-                //locationtxtbox.Text = selectedDrone.TransferedParcel.SourceLocation.ToString();
-                dr.SelectorChanges();
-                selectedDrone = bl.GetDrone(selectedDrone.Id);
-                DataContext = selectedDrone;
-                //change delivery button state
-                Deliverybt.Content = "Package delivery";
-            }
-            catch (NotFoundException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            catch (DroneStatusException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            catch (ParcelModeException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-        //deliver parcel
-        private void DeliverParcel()
-        {
-            try
-            {
-                //deliver parcel
-                bl.DeliverParcel(selectedDrone.Id);
-                //seccessfully delivered message
-                MessageBox.Show("Successfully provided");
-                //updating
-                dr.SelectorChanges();
-                selectedDrone = bl.GetDrone(selectedDrone.Id);
-                DataContext = selectedDrone;
-                //hide delivered parcel
-                Deliverylbl.Visibility = Visibility.Hidden;
-                Deliverytxtbox.Visibility = Visibility.Hidden;
-                Deliverybt.Content = "Package association";
-                //enable Charging
-                Chargingbt.IsEnabled = true;
-            }
-            catch (NotFoundException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            catch (DroneStatusException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            catch (ParcelModeException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
+               
         //charging button click event
         private void Chargingbt_Click(object sender, RoutedEventArgs e)
         {
@@ -366,8 +283,7 @@ namespace PL
             addDrone.Visibility = Visibility.Hidden;
             //the drone is not in delivery
             //hide the transfered parcel
-            Deliverytxtbox.Visibility = Visibility.Hidden;
-            Deliverylbl.Visibility = Visibility.Hidden;
+            Parcelbtn.Visibility = Visibility.Collapsed;
             Modeltxtbox.IsReadOnly = true;
         }
 
@@ -389,14 +305,13 @@ namespace PL
             addDrone.Visibility = Visibility.Hidden;
             //the drone is not in delivery
             //hide the transfered parcel
-            Deliverytxtbox.Visibility = Visibility.Hidden;
-            Deliverylbl.Visibility = Visibility.Hidden;
+            Parcelbtn.Visibility = Visibility.Collapsed;
             Modeltxtbox.IsReadOnly = true;
         }
 
         private void Parcelbtn_Click(object sender, RoutedEventArgs e)
         {
-            new ParcelInDeliveryWindow(bl).Show();
+            new ParcelInDeliveryWindow(bl, selectedDrone.TransferedParcel).Show();
         }
 
     }

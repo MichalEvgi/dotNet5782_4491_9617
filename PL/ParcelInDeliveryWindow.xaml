@@ -4,18 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="ParcelInDeliveryWindow" Height="450" Width="800">
+        Title="ParcelInDeliveryWindow" Height="450" Width="600">
     <Grid x:Name="MainGrid" Background="#FFD3F6F3">
-        <TextBox x:Name="Targettxtbox" HorizontalAlignment="Left" Margin="322,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="Prioritytxtbox" HorizontalAlignment="Left" Margin="132,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="Idtxtbox" HorizontalAlignment="Left" Margin="132,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="PickUpLocationtxtbox" HorizontalAlignment="Left" Margin="322,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="Weighttxtbox" HorizontalAlignment="Left" Margin="132,301,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="Statustxtbox" HorizontalAlignment="Left" Margin="132,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="sendertxtbox" HorizontalAlignment="Left" Margin="322,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="DeliveryLocationtxtbox" HorizontalAlignment="Left" Margin="322,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="Distancetxtbox" HorizontalAlignment="Left" Margin="322,349,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-
+        <TextBox x:Name="Targettxtbox" Text="{Binding Target, Mode=OneWay}" materialDesign:HintAssist.Hint="Target:" materialDesign:HintAssist.IsFloating="True" IsReadOnly="True" HorizontalAlignment="Left" Margin="322,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Prioritytxtbox" Text="{Binding Priority, Mode=OneWay}" materialDesign:HintAssist.Hint="Priority:" materialDesign:HintAssist.IsFloating="True" IsReadOnly="True" HorizontalAlignment="Left" Margin="132,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Idtxtbox" Text="{Binding Id, Mode=OneWay}" materialDesign:HintAssist.Hint="Id:" materialDesign:HintAssist.IsFloating="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="132,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="PickUpLocationtxtbox" Text="{Binding SourceLocation, Mode=OneWay}" materialDesign:HintAssist.Hint="Sender Location:" materialDesign:HintAssist.IsFloating="True" IsReadOnly="True" HorizontalAlignment="Left" Margin="322,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Weighttxtbox" Text="{Binding Weight, Mode=OneWay}" materialDesign:HintAssist.Hint="Weight:" materialDesign:HintAssist.IsFloating="True" IsReadOnly="True" HorizontalAlignment="Left" Margin="132,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Statustxtbox" Text="{Binding OnTheWay, Mode=OneWay}" materialDesign:HintAssist.Hint="OnTheWay:" materialDesign:HintAssist.IsFloating="True" IsReadOnly="True" HorizontalAlignment="Left" Margin="132,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="sendertxtbox" Text="{Binding Sender, Mode=OneWay}" materialDesign:HintAssist.Hint="Sender:" materialDesign:HintAssist.IsFloating="True" IsReadOnly="True" HorizontalAlignment="Left" Margin="322,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="DeliveryLocationtxtbox" Text="{Binding DestinationLocation, Mode=OneWay}" materialDesign:HintAssist.Hint="Target Location:" materialDesign:HintAssist.IsFloating="True" IsReadOnly="True" HorizontalAlignment="Left" Margin="322,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Distancetxtbox" Text="{Binding Distance, Mode=OneWay}" materialDesign:HintAssist.Hint="Distance:" materialDesign:HintAssist.IsFloating="True" IsReadOnly="True" HorizontalAlignment="Left" Margin="322,349,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Modetxtbox" Text="{Binding ParcelMode, Mode=OneWay}" materialDesign:HintAssist.Hint="Parcel Mode:" materialDesign:HintAssist.IsFloating="True" IsReadOnly="True" HorizontalAlignment="Left" Margin="132,355,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="Exitbt" Content="exit" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="33" Width="59" FontWeight="Bold" FontSize="14" Background="Transparent" Click="Exitbt_Click" Margin="497,373,0,0"/>
     </Grid>
 </Window>
