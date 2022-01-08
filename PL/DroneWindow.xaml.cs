@@ -119,7 +119,10 @@ namespace PL
             else
             {   //the drone is not in charging
                 //enable delivery
-                Deliverybt.IsEnabled = true;
+                if (selectedDrone.Status == DroneStatus.Available)
+                     Deliverybt.IsEnabled = true;
+                else
+                    Deliverybt.IsEnabled = false;
                 Chargingbt.Content = "Send for charging";
             }
         }
