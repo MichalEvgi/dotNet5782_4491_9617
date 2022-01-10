@@ -1215,26 +1215,22 @@ namespace BlApi
         private double MinBattery(DO.Parcel parcel, double lonD, double latD)
         {
             // variables
-            DO.Customer senderCustomer;
-            DO.Customer stargetCustomer;
+            DO.Customer senderCustomer = dal.GetCustomerById(parcel.SenderId);
+            DO.Customer stargetCustomer = dal.GetCustomerById(parcel.TargetId);
             DO.Station closeToTarget;
             double senderLon, senderLat, targetLon, targetLat;
             double senderDistance, deliveryDistance, chargeDistance;
-            lock (dal)
-            {
-                // assign value to variables
-                senderCustomer = dal.GetCustomerById(parcel.SenderId);
-                stargetCustomer = dal.GetCustomerById(parcel.TargetId);
-                senderLon = senderCustomer.Longitude;
-                senderLat = senderCustomer.Lattitude;
-                targetLon = stargetCustomer.Longitude;
-                targetLat = stargetCustomer.Lattitude;
-                // get the closet station to target in order to charge drone
-                closeToTarget = ClosestStation(dal.FilteredStations(s => s.ChargeSlots > 0), targetLon, targetLat);
-                // calculte the total battery according the toatal distance = to sender + to target + back to station
-                senderDistance = dal.Distance(senderLon, senderLat, lonD, latD);
-                deliveryDistance = dal.Distance(senderLon, senderLat, targetLon, targetLat);
-                chargeDistance = dal.Distance(targetLon, targetLat, closeToTarget.Longitude, closeToTarget.Lattitude);
+            // assign value to variables
+            senderLon = senderCustomer.Longitude;
+            senderLat = senderCustomer.Lattitude;
+            targetLon = stargetCustomer.Longitude;
+            targetLat = stargetCustomer.Lattitude;
+            // get the closet station to target in order to charge drone
+            closeToTarget = ClosestStation(dal.FilteredStations(s => s.ChargeSlots > 0), targetLon, targetLat);
+            // calculte the total battery according the toatal distance = to sender + to target + back to station
+            senderDistance = dal.Distance(senderLon, senderLat, lonD, latD);
+            deliveryDistance = dal.Distance(senderLon, senderLat, targetLon, targetLat);
+            chargeDistance = dal.Distance(targetLon, targetLat, closeToTarget.Longitude, closeToTarget.Lattitude);
 
                 return (senderDistance + chargeDistance) * dal.ElectricityRequest().First() + deliveryDistance * dal.ElectricityRequest().ElementAt((int)parcel.Weight + 1);
             }
