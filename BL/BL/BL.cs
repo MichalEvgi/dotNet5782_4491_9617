@@ -1105,14 +1105,12 @@ namespace BlApi
         private double MinBattery(DO.Parcel parcel, double lonD, double latD)
         {
             // variables
-            DO.Customer senderCustomer;
-            DO.Customer stargetCustomer;
+            DO.Customer senderCustomer = dal.GetCustomerById(parcel.SenderId);
+            DO.Customer stargetCustomer = dal.GetCustomerById(parcel.TargetId);
             DO.Station closeToTarget;
             double senderLon, senderLat, targetLon, targetLat;
             double senderDistance, deliveryDistance, chargeDistance;
             // assign value to variables
-            senderCustomer = dal.GetCustomerById(parcel.SenderId);
-            stargetCustomer = dal.GetCustomerById(parcel.TargetId);
             senderLon = senderCustomer.Longitude;
             senderLat = senderCustomer.Lattitude;
             targetLon = stargetCustomer.Longitude;
