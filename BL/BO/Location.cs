@@ -15,7 +15,7 @@ namespace BO
         /// </summary>
         public override string ToString()
         {
-            return "Longitude:" + BlApi.BL.Lng(Longitude) + " Lattitude:" + BlApi.BL.Lat(Lattitude);
+            return "Longitude:" + BL.BL.Lng(Longitude) + " Lattitude:" + BL.BL.Lat(Lattitude);
         }
     }
 }
