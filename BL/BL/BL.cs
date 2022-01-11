@@ -1234,7 +1234,7 @@ namespace BlApi
 
                 return (senderDistance + chargeDistance) * dal.ElectricityRequest().First() + deliveryDistance * dal.ElectricityRequest().ElementAt((int)parcel.Weight + 1);
             }
-        }
+        
         /// <summary>
         /// create string of sexagesimal lattitude
         /// </summary>
