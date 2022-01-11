@@ -5,15 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Runtime.CompilerServices;
+using BlApi;
 using DalApi;
 using BO;
 
-namespace BlApi
+namespace BL
 {
     class BL : IBL
     {
         #region INITIALIZE
-        private IDal dal;
+        internal IDal dal;
         private List<DroneToList> drones;
         private static Random rand = new Random();
 
@@ -25,11 +26,11 @@ namespace BlApi
         {
             get
             {
-                if(instance==null)
+                if (instance == null)
                 {
-                    lock(padlock)
+                    lock (padlock)
                     {
-                        if(instance==null)
+                        if (instance == null)
                         {
                             instance = new BL();
                         }
@@ -131,7 +132,7 @@ namespace BlApi
                         //if the drone is available
                         //set a random location from the delivered parcels target locations
                         try
-                            {
+                        {
                             DO.Parcel randParcel = dal.FilteredParcel(p => p.Delivered != null).ElementAt(rand.Next(0, dal.FilteredParcel(p => p.Delivered != null).Count()));
                             DO.Customer targetRandParcel = dal.GetCustomerById(randParcel.TargetId);
                             droneToList.CurrentLocation = new Location { Longitude = targetRandParcel.Longitude, Lattitude = targetRandParcel.Lattitude };
@@ -145,7 +146,7 @@ namespace BlApi
                             //set a random battery between min battery to 100%
                             droneToList.Battery = rand.NextDouble() * (100 - minBattery) + minBattery;
                         }
-                        catch(Exception)
+                        catch (Exception)
                         {
                             droneToList.CurrentLocation = new Location { Longitude = 35.05, Lattitude = 31.05 };
                             droneToList.Battery = rand.NextDouble() * (50) + 50;
@@ -180,13 +181,13 @@ namespace BlApi
                 {
                     // add new station to DAL
                     dal.AddStation(new DO.Station
-                {
-                    Id = s.Id,
-                    Name = s.Name,
-                    Longitude = s.LocationS.Longitude,
-                    Lattitude = s.LocationS.Lattitude,
-                    ChargeSlots = s.AvailableSlots
-                });
+                    {
+                        Id = s.Id,
+                        Name = s.Name,
+                        Longitude = s.LocationS.Longitude,
+                        Lattitude = s.LocationS.Lattitude,
+                        ChargeSlots = s.AvailableSlots
+                    });
 
                 }
             }
@@ -333,7 +334,7 @@ namespace BlApi
         /// <param name="lon">longitude</param>
         /// <param name="lat">lattitude</param>
         /// <returns></returns>
-        private DO.Station ClosestStation(IEnumerable<DO.Station> stations, double lon, double lat)
+        internal DO.Station ClosestStation(IEnumerable<DO.Station> stations, double lon, double lat)
         {
             // validation to check count of stations
             if (stations.Count() == 0)
@@ -355,6 +356,16 @@ namespace BlApi
         }
         #endregion
         #region DRONE
+        /// <summary>
+        /// play the simulator
+        /// </summary>
+        /// <param name="droneId"> drone id</param>
+        /// <param name="updateDelgate"> delgate for updating the show</param>
+        /// <param name="stopDelgate"> delgate for stoping the simulator</param>
+        public void playSimulator(int droneId, Action updateDelgate, Func<bool> stopDelgate)
+        {
+            new Simulator(droneId, updateDelgate, stopDelgate, this);
+        }
         /// <summary>
         /// send to DAL for adding the drone to list of drones
         /// </summary>
@@ -562,12 +573,17 @@ namespace BlApi
                 DO.Customer dalTarget = dal.GetCustomerById(p.TargetId);
                 CustomerInParcel sender = new CustomerInParcel { Id = p.SenderId, Name = dalSender.Name };
                 CustomerInParcel target = new CustomerInParcel { Id = p.TargetId, Name = dalTarget.Name };
+
                 // default mode is associated
                 int parcelmode = 1;
+                double distanc = dal.Distance(droneToList.CurrentLocation.Longitude, droneToList.CurrentLocation.Lattitude, dalSender.Longitude, dalSender.Lattitude);
 
                 // update mode to Collected
                 if (p.PickedUp != null)
+                {
                     parcelmode = 2;
+                    distanc = dal.Distance(dalSender.Longitude, dalSender.Lattitude, dalTarget.Longitude, dalTarget.Lattitude);
+                }
 
                 // get all parcel details in order to add it to drone
                 ParcelInTransfer parcelInTransfer = new ParcelInTransfer
@@ -581,7 +597,7 @@ namespace BlApi
                     Target = target,
                     SourceLocation = new Location { Longitude = dalSender.Longitude, Lattitude = dalSender.Lattitude },
                     DestinationLocation = new Location { Longitude = dalTarget.Longitude, Lattitude = dalTarget.Lattitude },
-                    Distance = dal.Distance(dalSender.Longitude, dalSender.Lattitude, dalTarget.Longitude, dalTarget.Lattitude)
+                    Distance = distanc
                 };
 
 
@@ -1232,15 +1248,13 @@ namespace BlApi
             deliveryDistance = dal.Distance(senderLon, senderLat, targetLon, targetLat);
             chargeDistance = dal.Distance(targetLon, targetLat, closeToTarget.Longitude, closeToTarget.Lattitude);
 
-                return (senderDistance + chargeDistance) * dal.ElectricityRequest().First() + deliveryDistance * dal.ElectricityRequest().ElementAt((int)parcel.Weight + 1);
-            }
-        
+            return (senderDistance + chargeDistance) * dal.ElectricityRequest().First() + deliveryDistance * dal.ElectricityRequest().ElementAt((int)parcel.Weight + 1);
+        }
         /// <summary>
         /// create string of sexagesimal lattitude
         /// </summary>
         /// <param name="lat">lattitude</param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public static string Lat(double lat)
         {
             // convert the lat to string format
@@ -1264,7 +1278,6 @@ namespace BlApi
         /// </summary>
         /// <param name="lng">longitude</param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public static string Lng(double lng)
         {
             // convert the long to string format

@@ -46,6 +46,13 @@ namespace BlApi
         #endregion
         #region DRONE
         /// <summary>
+        /// play the simulator
+        /// </summary>
+        /// <param name="droneId"> drone id</param>
+        /// <param name="updateDelgate"> delgate for updating the show</param>
+        /// <param name="stopDelgate"> delgate for stoping the simulator</param>
+        public void playSimulator(int droneId, Action updateDelgate, Func<bool> stopDelgate);
+        /// <summary>
         /// send to DAL for adding the drone to list of drones
         /// </summary>
         public void AddDrone(Drone d, int stationId);
