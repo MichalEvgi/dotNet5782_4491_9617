@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using BO;
 using BlApi;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace PL
 {
@@ -312,9 +313,72 @@ namespace PL
             Modeltxtbox.IsReadOnly = true;
         }
 
+        //open the parcel in transfer window
         private void Parcelbtn_Click(object sender, RoutedEventArgs e)
         {
             new ParcelInDeliveryWindow(bl, selectedDrone.TransferedParcel).Show();
+        }
+
+        BackgroundWorker worker;
+
+        private void Simulatorbt_Click(object sender, RoutedEventArgs e)
+        {
+            if(Simulatorbt.Content.ToString() == "Automatic")
+            {
+                Simulatorbt.Content = "Manual";
+                //cover the action buttons
+                Updatebt.Visibility = Visibility.Collapsed;
+                Deliverybt.Visibility = Visibility.Collapsed;
+                Chargingbt.Visibility = Visibility.Collapsed;
+                deliverylbl.Visibility = Visibility.Collapsed;
+                Chargelbl.Visibility = Visibility.Collapsed;
+                Updatelbl.Visibility = Visibility.Collapsed;
+                playSimulator();
+            }
+            else
+            {
+                //close
+                Simulatorbt.Content = "Automatic";
+                Updatelbl.Visibility = Visibility.Visible;
+                Updatebt.Visibility = Visibility.Visible;
+                Deliverybt.Visibility = Visibility.Visible; 
+                Chargingbt.Visibility = Visibility.Visible;
+                deliverylbl.Visibility = Visibility.Visible;
+                Chargelbl.Visibility = Visibility.Visible;
+            }
+        }
+
+        //playing the simulator
+        private void playSimulator()
+        {
+            worker = new BackgroundWorker();
+            worker.DoWork += Worker_DoWork;
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+
+            worker.WorkerReportsProgress = true; 
+            worker.WorkerSupportsCancellation = true;
+
+            worker.RunWorkerAsync("argument");
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            object obj = e.Argument;
+
+            worker.ReportProgress(1);
+
+            e.Result = "result";
+        }
+
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            int progress = e.ProgressPercentage;
+        }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            object result = e.Result;
         }
 
     }
