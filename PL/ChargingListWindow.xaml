@@ -22,9 +22,15 @@
             </Grid.ColumnDefinitions >
         </Grid>
         <ListView x:Name="ChargingListView" Margin="0,1,0,0" Grid.Row="1"  MouseDoubleClick="ChargingListView_MouseDoubleClick">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="ID number"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Battery, StringFormat=\{0:#0.0\}%}" Header="Battery"/>
                 </GridView>
             </ListView.View>
         </ListView>

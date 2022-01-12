@@ -45,8 +45,8 @@
     <Requested>2022-01-02T18:16:02.5115025+02:00</Requested>
     <DroneId>3213</DroneId>
     <Scheduled>2022-01-06T20:40:33.6056836+02:00</Scheduled>
-    <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
+    <PickedUp>2022-01-12T14:25:31.5198356+02:00</PickedUp>
+    <Delivered>2022-01-12T14:32:14.8958489+02:00</Delivered>
   </Parcel>
   <Parcel>
     <Id>1005</Id>
@@ -57,7 +57,7 @@
     <Requested>2022-01-07T13:56:54.0170305+02:00</Requested>
     <DroneId>1992</DroneId>
     <Scheduled>2022-01-07T14:11:55.9810082+02:00</Scheduled>
-    <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
+    <PickedUp>2022-01-12T14:38:26.3072184+02:00</PickedUp>
+    <Delivered>2022-01-12T14:38:38.8333658+02:00</Delivered>
   </Parcel>
 </ArrayOfParcel>

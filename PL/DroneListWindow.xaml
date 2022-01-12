@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="DroneListWindow" Height="640" Width="800">
+        Title="DroneListWindow" Height="640" Width="850">
     <Grid Name="MainGrid" Background="#FFD3F6F3">
         <Grid.RowDefinitions>
             <RowDefinition Height="68*"/>
             <RowDefinition Height="496*"/>
             <RowDefinition Height="59*"/>
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="4,0,-4,0">
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -26,10 +26,21 @@
             <Label Content="Drone Max Weight:" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
             <ComboBox Name="WeightSelector" Grid.Column="3" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" SelectionChanged="WeightSelector_SelectionChanged"/>
         </Grid>
-        <ListView x:Name="DroneListView" Margin="0,1,0,0" Grid.Row="1"  MouseDoubleClick="DroneListView_MouseDoubleClick">
+        <ListView x:Name="DroneListView" Grid.Row="1"  MouseDoubleClick="DroneListView_MouseDoubleClick" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="ID number"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Model}" Header="Model"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding MaxWeight}" Header="Max weight"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Battery, StringFormat=\{0:#0.0\}%}" Header="Battery"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Status}" Header="Status"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding CurrentLocation}" Header="Location"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding ParcelId}" Header="Parcel ID"/>
                 </GridView>
             </ListView.View>
         </ListView>

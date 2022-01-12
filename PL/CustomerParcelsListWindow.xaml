@@ -10,9 +10,18 @@
     <Grid x:Name="MainGrid">
         <Grid x:Name="ParcelsFromCustomer" Visibility="Visible">
             <ListView x:Name="FromCustomerList" Margin="0,0,0,77" MouseDoubleClick="FromCustomerList_MouseDoubleClick">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="ID number"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Weight}" Header="Weight"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Priority}" Header="Priority"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding ParcelMode}" Header="Parcel mode"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding OtherCustomer}" Header="Target"/>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -20,9 +29,18 @@
         </Grid>
         <Grid x:Name="ParcelsToCustomer" Visibility="Hidden">
             <ListView x:Name="ToCustomerList" MouseDoubleClick="ToCustomerList_MouseDoubleClick">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="ID number"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Weight}" Header="Weight"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Priority}" Header="Priority"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding ParcelMode}" Header="Parcel mode"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding OtherCustomer}" Header="Sender"/>
                     </GridView>
                 </ListView.View>
             </ListView>

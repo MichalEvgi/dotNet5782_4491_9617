@@ -21,9 +21,19 @@
             </Grid.ColumnDefinitions >
         </Grid>
         <ListView x:Name="ParcelListView" Margin="0,1,0,0" Grid.Row="1"  MouseDoubleClick="ParcelListView_MouseDoubleClick">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="ID number"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding SenderName}" Header="Sender"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding TargetName}" Header="Target"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Weight}" Header="Weight"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Priority}" Header="Priority"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding ParcelMode}" Header="Parcel mode"/>
                 </GridView>
             </ListView.View>
         </ListView>

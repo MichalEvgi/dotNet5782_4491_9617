@@ -19,7 +19,7 @@ namespace BO
         public double Battery { get; set; }
         public DroneStatus Status { get; set; }
         public Location CurrentLocation { get; set; }
-        public int ParcelId { get; set; }
+        public int? ParcelId { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

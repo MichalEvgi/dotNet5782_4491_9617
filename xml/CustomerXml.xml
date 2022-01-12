@@ -42,4 +42,11 @@
     <Longitude>35.01</Longitude>
     <Lattitude>31.02</Lattitude>
   </Customer>
+  <Customer>
+    <Id>331288613</Id>
+    <Name>ESTER</Name>
+    <Phone>0507911411</Phone>
+    <Longitude>35.07</Longitude>
+    <Lattitude>31.04</Lattitude>
+  </Customer>
 </ArrayOfCustomer>

@@ -15,10 +15,21 @@
         </Grid.RowDefinitions>
         <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="4,0,-4,0">
         </Grid>
-        <ListView x:Name="CustomerListView" Margin="0,1,0,0" Grid.Row="1" MouseDoubleClick="CustomerListView_MouseDoubleClick">
+        <ListView x:Name="CustomerListView" Grid.Row="1" MouseDoubleClick="CustomerListView_MouseDoubleClick">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="ID number"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Phone"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Supplied}" Header="Supplied"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding NotSupplied}" Header="Not supplied"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Arrived}" Header="Arrived"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding NotArrived}" Header="Not arrived"/>
                 </GridView>
             </ListView.View>
         </ListView>

@@ -31,7 +31,7 @@ namespace BO
             {
                 toC += p.ToString();  //all the ToString of the list ToCustomer
             }
-            return "Id:" + Id + "\nName:" + Name + "\nPhone:" + Phone + "\nLocation:" + LocationC + "\nParcel from customer:" + fromC + "\nParcel to customer:" + toC;
+            return "Id:" + Id + "\nName:" + Name + "\nPhone:" + Phone + "\nLocation:" + LocationC.ToString() + "\nParcel from customer:" + fromC + "\nParcel to customer:" + toC;
         }
 
     }

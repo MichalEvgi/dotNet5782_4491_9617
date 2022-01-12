@@ -334,51 +334,53 @@ namespace PL
                 Chargelbl.Visibility = Visibility.Collapsed;
                 Updatelbl.Visibility = Visibility.Collapsed;
                 playSimulator();
+                worker.RunWorkerAsync();
             }
             else
             {
-                //close
-                Simulatorbt.Content = "Automatic";
-                Updatelbl.Visibility = Visibility.Visible;
-                Updatebt.Visibility = Visibility.Visible;
-                Deliverybt.Visibility = Visibility.Visible; 
-                Chargingbt.Visibility = Visibility.Visible;
-                deliverylbl.Visibility = Visibility.Visible;
-                Chargelbl.Visibility = Visibility.Visible;
+                
             }
         }
 
         //playing the simulator
         private void playSimulator()
         {
-            worker = new BackgroundWorker();
+            worker = new BackgroundWorker() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
             worker.DoWork += Worker_DoWork;
             worker.ProgressChanged += Worker_ProgressChanged;
             worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
 
-            worker.WorkerReportsProgress = true; 
-            worker.WorkerSupportsCancellation = true;
-
-            worker.RunWorkerAsync("argument");
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            object obj = e.Argument;
-
-            worker.ReportProgress(1);
-
-            e.Result = "result";
+            bl.playSimulator(selectedDrone.Id, ReportProgress, IsStop);
+        }
+        public void ReportProgress()
+        {
+            worker.ReportProgress(0);
         }
 
+        public bool IsStop()
+        {
+            return worker.CancellationPending;
+        }
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            int progress = e.ProgressPercentage;
+            selectedDrone = bl.GetDrone(selectedDrone.Id);
+            DataContext = selectedDrone;
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            object result = e.Result;
+            //close
+            Simulatorbt.Content = "Automatic";
+            Updatelbl.Visibility = Visibility.Visible;
+            Updatebt.Visibility = Visibility.Visible;
+            Deliverybt.Visibility = Visibility.Visible;
+            Chargingbt.Visibility = Visibility.Visible;
+            deliverylbl.Visibility = Visibility.Visible;
+            Chargelbl.Visibility = Visibility.Visible;
         }
 
     }

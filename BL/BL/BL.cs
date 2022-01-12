@@ -362,9 +362,9 @@ namespace BL
         /// <param name="droneId"> drone id</param>
         /// <param name="updateDelgate"> delgate for updating the show</param>
         /// <param name="stopDelgate"> delgate for stoping the simulator</param>
-        public void playSimulator(int droneId, Action updateDelgate, Func<bool> stopDelgate)
+        public void playSimulator(int droneId, Action reportProgress, Func<bool> stopDelgate)
         {
-            new Simulator(droneId, updateDelgate, stopDelgate, this);
+            new Simulator(droneId, reportProgress, stopDelgate, this);
         }
         /// <summary>
         /// send to DAL for adding the drone to list of drones
@@ -404,7 +404,7 @@ namespace BL
                         Battery = d.Battery,
                         Status = d.Status,
                         CurrentLocation = d.CurrentLocation,
-                        ParcelId = 0
+                        ParcelId = null
                     });
                 }
                 catch (DO.AlreadyExistsException ex)
@@ -1049,7 +1049,7 @@ namespace BL
                 drones[index].Battery -= dis * dal.ElectricityRequest().ElementAt((int)parcel.Weight + 1);
                 drones[index].CurrentLocation = new Location { Longitude = c.Longitude, Lattitude = c.Lattitude };
                 drones[index].Status = DroneStatus.Available;
-                drones[index].ParcelId = 0;
+                drones[index].ParcelId = null;
             }
         }
         /// <summary>

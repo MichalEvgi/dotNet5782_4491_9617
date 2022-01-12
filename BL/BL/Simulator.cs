@@ -16,15 +16,15 @@ namespace BL
         const int DELAY= 750;
         const double SPEED= 0.75;
         Drone drone;
-        public Simulator(int droneId, Action updateDelgate, Func<bool> stopDelgate, BL bl)
+        public Simulator(int droneId, Action reportProgress, Func<bool> stopDelgate, BL bl)
         {
-            lock (bl)
-            {
-                drone = bl.GetDrone(droneId);
-            }
            while(!stopDelgate())
             {
-                switch(drone.Status)
+                lock (bl)
+                {
+                    drone = bl.GetDrone(droneId);
+                }
+                switch (drone.Status)
                 {
                     case DroneStatus.Available:
                         lock (bl)
@@ -32,6 +32,7 @@ namespace BL
                             try
                             {
                                 bl.DroneToParcel(droneId);
+                                reportProgress();
                                 Thread.Sleep(DELAY);
                             }
                             catch (EmptyListException)
@@ -43,6 +44,8 @@ namespace BL
                                 try
                                 {
                                     bl.SendToCharge(droneId);
+                                    reportProgress();
+                                    Thread.Sleep(DELAY);
                                 }
                                 catch (BatteryException)
                                 {
@@ -57,17 +60,19 @@ namespace BL
                             bl.ReleaseDrone(droneId);
                             if (drone.Battery < 100)
                                 bl.SendToCharge(droneId);
+                            reportProgress();
                         }
                         Thread.Sleep(DELAY);
                         break;
                     case DroneStatus.Delivery:
                         double flyTime = drone.TransferedParcel.Distance * 1000.0 / SPEED;
                         Thread.Sleep((int)flyTime);
-                        if (!drone.TransferedParcel.OnTheWay)//haven't picked up yet
+                        if (bl.GetParcel(drone.TransferedParcel.Id).PickedUpTime==null)//haven't picked up yet
                         {
                             lock (bl)
                             {
                                 bl.PickParcel(droneId);
+   
                             }
                         }
                         else //already picked up
@@ -77,6 +82,7 @@ namespace BL
                                 bl.DeliverParcel(droneId);
                             }
                         }
+                        reportProgress();
                         Thread.Sleep(DELAY);
                         break;
                 }

@@ -27,7 +27,7 @@ namespace BO
             {
                 dronelist += d.ToString();   // all the toString of the list DronesInCharging
             }
-            return "Id:" + Id + "\nName:" + Name + "\nLocation:" + LocationS + "\nAvailable slots:" + AvailableSlots + "\nDrones in charging:" + dronelist;
+            return "Id:" + Id + "\nName:" + Name + "\nLocation:" + LocationS.ToString() + "\nAvailable slots:" + AvailableSlots + "\nDrones in charging:" + dronelist;
         }
 
     }

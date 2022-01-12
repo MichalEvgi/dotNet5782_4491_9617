@@ -140,6 +140,5 @@ namespace PL
         {
            new DroneWindow(bl,(DroneToList)(this.DroneListView.SelectedItem),this).Show();
         }
-
     }
 }
