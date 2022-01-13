@@ -23,14 +23,20 @@ namespace PL
     {
         IBL bl;
         ParcelInTransfer selectedParcel;
-        public ParcelInDeliveryWindow(IBL bL, ParcelInTransfer parcel)
+        int droneId;
+        public ParcelInDeliveryWindow(IBL bL, ParcelInTransfer parcel, int droneid)
         {
             bl = bL;
             InitializeComponent();
+            droneId = droneid;
             selectedParcel = parcel;
             DataContext = selectedParcel;
         }
-
+        public void ParcelChange()
+        {
+            selectedParcel = bl.GetDrone(droneId).TransferedParcel;
+            DataContext = selectedParcel;
+        }
         private void Exitbt_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

@@ -13,7 +13,7 @@ namespace BL
 
     class Simulator
     {
-        const int DELAY= 750;
+        const int DELAY= 1200;
         const double SPEED= 0.75;
         Drone drone;
         public Simulator(int droneId, Action reportProgress, Func<bool> stopDelgate, BL bl)

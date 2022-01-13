@@ -41,7 +41,7 @@ namespace Dal
             Config.LightWeight = 1;
             Config.MediumWeight = 2;
             Config.HeavyWeight = 3;
-            Config.ChargingRate = 25;
+            Config.ChargingRate = 100;
         }
         /// <summary>
         /// create 5 drones in the list of drone

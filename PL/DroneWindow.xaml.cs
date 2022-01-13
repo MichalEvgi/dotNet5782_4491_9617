@@ -245,9 +245,19 @@ namespace PL
             }
         }
         //close action drone window
+        private bool closeWindow = false;
         private void Exitbt_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            if(worker!=null)
+            {
+                Cursor = Cursors.Wait;
+                worker.CancelAsync();
+                closeWindow = true;
+                Exitbt.IsEnabled = false;
+                Simulatorbt.IsEnabled = false;
+            }
+            else
+               Close();
         }
         //check if only number is entered to id textBox
         private void IdtxtBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -282,6 +292,7 @@ namespace PL
             Deliverybt.Visibility = Visibility.Collapsed;
             deliverylbl.Visibility = Visibility.Collapsed;
             Chargelbl.Visibility = Visibility.Collapsed;
+            Simulatorbt.Visibility = Visibility.Collapsed;
             //show the actions only
             actions.Visibility = Visibility.Visible;
             addDrone.Visibility = Visibility.Hidden;
@@ -304,6 +315,7 @@ namespace PL
             Deliverybt.Visibility = Visibility.Collapsed;
             deliverylbl.Visibility = Visibility.Collapsed;
             Chargelbl.Visibility = Visibility.Collapsed;
+            Simulatorbt.Visibility = Visibility.Collapsed;
             //show the actions only
             actions.Visibility = Visibility.Visible;
             addDrone.Visibility = Visibility.Hidden;
@@ -316,14 +328,15 @@ namespace PL
         //open the parcel in transfer window
         private void Parcelbtn_Click(object sender, RoutedEventArgs e)
         {
-            new ParcelInDeliveryWindow(bl, selectedDrone.TransferedParcel).Show();
+            prcl= new ParcelInDeliveryWindow(bl, selectedDrone.TransferedParcel, selectedDrone.Id);
+            prcl.Show();
         }
 
         BackgroundWorker worker;
 
         private void Simulatorbt_Click(object sender, RoutedEventArgs e)
         {
-            if(Simulatorbt.Content.ToString() == "Automatic")
+            if (Simulatorbt.Content.ToString() == "Automatic")
             {
                 Simulatorbt.Content = "Manual";
                 //cover the action buttons
@@ -333,12 +346,17 @@ namespace PL
                 deliverylbl.Visibility = Visibility.Collapsed;
                 Chargelbl.Visibility = Visibility.Collapsed;
                 Updatelbl.Visibility = Visibility.Collapsed;
+                Parcelbtn.Visibility = Visibility.Collapsed;
                 playSimulator();
                 worker.RunWorkerAsync();
+                ReportProgress();
             }
             else
             {
-                
+                Cursor = Cursors.Wait;
+                worker.CancelAsync();
+                Exitbt.IsEnabled = false;
+                Simulatorbt.IsEnabled = false;
             }
         }
 
@@ -365,22 +383,84 @@ namespace PL
         {
             return worker.CancellationPending;
         }
+        private ParcelInDeliveryWindow prcl;
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             selectedDrone = bl.GetDrone(selectedDrone.Id);
             DataContext = selectedDrone;
+            if(selectedDrone.TransferedParcel!=null)
+            {
+                if (!selectedDrone.TransferedParcel.OnTheWay)
+                {
+                    prcl = new ParcelInDeliveryWindow(bl, selectedDrone.TransferedParcel, selectedDrone.Id);
+                    prcl.Show();
+                }
+                else
+                {
+                    if (prcl != null)
+                        prcl.ParcelChange();
+                    else
+                    {
+                        prcl = new ParcelInDeliveryWindow(bl, selectedDrone.TransferedParcel, selectedDrone.Id);
+                        prcl.Show();
+                    }
+                }
+            }
+            else
+            {
+                if (prcl != null)
+                    prcl.Close();
+            }    
+            dr.SelectorChanges();
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //close
-            Simulatorbt.Content = "Automatic";
-            Updatelbl.Visibility = Visibility.Visible;
-            Updatebt.Visibility = Visibility.Visible;
-            Deliverybt.Visibility = Visibility.Visible;
-            Chargingbt.Visibility = Visibility.Visible;
-            deliverylbl.Visibility = Visibility.Visible;
-            Chargelbl.Visibility = Visibility.Visible;
+            if (closeWindow)
+                Close();
+            else
+            {
+                //close
+                Cursor = Cursors.Arrow;
+                Simulatorbt.Content = "Automatic";
+                Simulatorbt.IsEnabled = true;
+                Exitbt.IsEnabled = true;
+                Updatelbl.Visibility = Visibility.Visible;
+                Updatebt.Visibility = Visibility.Visible;
+                Deliverybt.Visibility = Visibility.Visible;
+                Chargingbt.Visibility = Visibility.Visible;
+                deliverylbl.Visibility = Visibility.Visible;
+                Chargelbl.Visibility = Visibility.Visible;
+                if (selectedDrone.Status != DroneStatus.Delivery)
+                { //the drone is not in delivery
+                  //hide the transfered parcel
+                    Parcelbtn.Visibility = Visibility.Collapsed;
+                    //enable charging
+                    Chargingbt.IsEnabled = true;
+                }
+                else
+                { //the drone is in delivery
+                  //show the transfered parcel
+                    Parcelbtn.Visibility = Visibility.Visible;
+                    //disable charging
+                    Chargingbt.IsEnabled = false;
+                }
+                if (selectedDrone.Status == DroneStatus.Maintenance)
+                { //the drone in charging
+                  //disable delivery
+                    Deliverybt.IsEnabled = false;
+                    Chargingbt.Content = "Realease from charging";
+                }
+                else
+                {   //the drone is not in charging
+                    //enable delivery
+                    if (selectedDrone.Status == DroneStatus.Available)
+                        Deliverybt.IsEnabled = true;
+                    else
+                        Deliverybt.IsEnabled = false;
+                    Chargingbt.Content = "Send for charging";
+                }
+            }
         }
 
     }

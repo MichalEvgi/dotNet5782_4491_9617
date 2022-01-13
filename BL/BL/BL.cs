@@ -521,7 +521,7 @@ namespace BL
 
                 // update BL
                 // update battery by charge rate 4th element
-                drones[index].Battery += timeInCharging / 60 * dal.ElectricityRequest().ElementAt(4);
+                drones[index].Battery += timeInCharging/30 * dal.ElectricityRequest().ElementAt(4);
                 if (drones[index].Battery > 100)
                     drones[index].Battery = 100;
                 drones[index].Status = DroneStatus.Available;

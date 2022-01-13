@@ -5,5 +5,5 @@
   <LightWeight>1</LightWeight>
   <MediumWeight>2</MediumWeight>
   <HeavyWeight>3</HeavyWeight>
-  <ChargingRate>25</ChargingRate>
+  <ChargingRate>100</ChargingRate>
 </config>
