@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
   <runIndex>1006</runIndex>
-  <Available>0.5</Available>
-  <LightWeight>1</LightWeight>
-  <MediumWeight>2</MediumWeight>
-  <HeavyWeight>3</HeavyWeight>
-  <ChargingRate>100</ChargingRate>
+  <Available>1</Available>
+  <LightWeight>2</LightWeight>
+  <MediumWeight>3</MediumWeight>
+  <HeavyWeight>4</HeavyWeight>
+  <ChargingRate>200</ChargingRate>
 </config>

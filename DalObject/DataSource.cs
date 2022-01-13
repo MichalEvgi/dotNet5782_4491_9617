@@ -37,11 +37,11 @@ namespace Dal
             CreateStation();
             CreateCustomer();
             CreateParcel();
-            Config.Available = 0.5;
-            Config.LightWeight = 1;
-            Config.MediumWeight = 2;
-            Config.HeavyWeight = 3;
-            Config.ChargingRate = 100;
+            Config.Available = 1;
+            Config.LightWeight = 2;
+            Config.MediumWeight = 3;
+            Config.HeavyWeight = 4;
+            Config.ChargingRate = 200;
         }
         /// <summary>
         /// create 5 drones in the list of drone

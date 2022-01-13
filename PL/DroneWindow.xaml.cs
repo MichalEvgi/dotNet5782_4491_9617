@@ -416,6 +416,8 @@ namespace PL
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (prcl != null)
+                prcl.Close();
             if (closeWindow)
                 Close();
             else
