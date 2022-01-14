@@ -116,6 +116,8 @@ namespace PL
             DataContext = selectedCustomer;
             AddCustomer.Visibility = Visibility.Hidden;
             UpdateCustomer.Visibility = Visibility.Visible;
+            this.Width = 350;
+            this.Height = 400;        
         }
 
         private void Updatebtn_Click(object sender, RoutedEventArgs e)

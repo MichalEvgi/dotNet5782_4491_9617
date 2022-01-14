@@ -18,20 +18,17 @@
             <Button x:Name="AddButton" Content="Add" HorizontalAlignment="Left" Margin="99,356,0,0" VerticalAlignment="Top" Height="21" Width="82"  FontWeight="Bold" FontSize="12"  Click="AddButton_Click" FontStyle="Normal"/>
             <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="93,382,0,0" VerticalAlignment="Top" Height="23" Width="94" Click="CancelButton_Click" FontWeight="Bold" FontSize="12" Background="Transparent" BorderBrush="{x:Null}" Foreground="Gray" FontStyle="Normal" />
         </Grid>
-        <Grid Name="UpdateCustomer" Visibility="Visible">
-            <Label x:Name="Idlbl" Content="Id:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="61" Margin="90,84,0,0" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.541,0.668"/>
-            <Label x:Name="Namelbl" Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="40" Margin="90,136,0,0" FontWeight="Bold" FontSize="14"/>
-            <Label x:Name="Phonelbl" Content="Phone Number:" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Height="46" Margin="90,0,0,0" FontWeight="Bold" FontSize="14"/>
-            <Label x:Name="Locationlbl" Content="Location:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="76" Height="31" Margin="90,245,0,0" FontWeight="Bold" FontSize="14"/>
-            <TextBox x:Name="Idtxtbox" HorizontalAlignment="Left" Margin="215,85,0,0" Text="{Binding Path=Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" IsReadOnly="True"/>
-            <TextBox x:Name="Nametxtbox" HorizontalAlignment="Left" Margin="215,136,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="34" />
-            <TextBox x:Name="Phonetxtbox1" HorizontalAlignment="Left" Margin="215,0,0,0" Text="{Binding Path=Phone}" TextWrapping="Wrap" VerticalAlignment="Center" Width="139" Height="46" TextChanged="Phonetxtbox1_TextChanged"/>
-            <TextBox x:Name="locationtxtbox" HorizontalAlignment="Left" Margin="215,260,0,0" Text="{Binding Mode=OneWay, Path=LocationC}" TextWrapping="Wrap" VerticalAlignment="Top" Width="161" Height="37" IsReadOnly="True"/>
-            <Button x:Name="FromCustomerbtn" Content="Show parcels from customer" HorizontalAlignment="Left" Margin="486,120,0,0" VerticalAlignment="Top" Width="161" Height="33" Click="FromCustomerbtn_Click"/>
-            <Button x:Name="Tocustomerbtn" Content="Show parcels to customer" HorizontalAlignment="Left" Margin="484,0,0,0" VerticalAlignment="Center" Height="33" Width="163" Click="Tocustomerbtn_Click"/>
-            <Button x:Name="Updatebtn" Content="Update" HorizontalAlignment="Left" Margin="166,341,0,0" VerticalAlignment="Top" Height="33" Width="76" Click="Updatebtn_Click"/>
-            <Label x:Name="Updatelbl" Content="Update Customer" HorizontalAlignment="Left" Margin="150,30,0,0" VerticalAlignment="Top" Height="30" Width="108"/>
-            <Button x:Name="Exitbtn" Content="Exit" HorizontalAlignment="Left" Margin="663,358,0,0" VerticalAlignment="Top" Height="40" Width="77" Click="Exitbtn_Click"/>
+        <Grid Name="UpdateCustomer" Visibility="Visible" Background="#FFD3F6F3" Height="400" Width="350">
+
+            <TextBox x:Name="Idtxtbox" HorizontalAlignment="Left" Margin="45,63,0,0" Text="{Binding Path=Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="38" IsReadOnly="True" materialDesign:HintAssist.Hint="Id" materialDesign:HintAssist.IsFloating="True"/>
+            <TextBox x:Name="Nametxtbox" HorizontalAlignment="Left" Margin="48,120,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="38" materialDesign:HintAssist.Hint="Name" materialDesign:HintAssist.IsFloating="True"/>
+            <TextBox x:Name="Phonetxtbox1" HorizontalAlignment="Left" Margin="48,0,0,0" Text="{Binding Path=Phone}" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Height="38" TextChanged="Phonetxtbox1_TextChanged" materialDesign:HintAssist.Hint="Phone Number" materialDesign:HintAssist.IsFloating="True"/>
+            <TextBox x:Name="locationtxtbox" HorizontalAlignment="Left" Margin="48,235,0,0" Text="{Binding Mode=OneWay, Path=LocationC}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="57" IsReadOnly="True" materialDesign:HintAssist.Hint="Location" materialDesign:HintAssist.IsFloating="True"/>
+            <Button x:Name="FromCustomerbtn" Content="      Parcels &#xA; from customer" HorizontalAlignment="Left" Margin="200,87,0,0" VerticalAlignment="Top" Width="112" Height="37" Click="FromCustomerbtn_Click" FontSize="11"/>
+            <Button x:Name="Tocustomerbtn" Content="     Parcels &#xA; to customer" HorizontalAlignment="Left" Margin="200,148,0,0" VerticalAlignment="Top" Height="36" Width="114" Click="Tocustomerbtn_Click" FontSize="11"/>
+            <Button x:Name="Updatebtn" Content="Update" HorizontalAlignment="Left" Margin="59,306,0,0" VerticalAlignment="Top" Height="27" Width="92" Click="Updatebtn_Click" FontSize="12"/>
+            <Label x:Name="Updatelbl" Content="Update Customer" HorizontalAlignment="Left" Margin="48,28,0,0" VerticalAlignment="Top" Height="30" Width="114" FontWeight="Bold"/>
+            <Button x:Name="Exitbtn" Content="Exit" HorizontalAlignment="Left" Margin="261,319,0,0" VerticalAlignment="Top" Height="32" Width="63" Click="Exitbtn_Click" FontSize="12"/>
         </Grid>
     </Grid>
 
