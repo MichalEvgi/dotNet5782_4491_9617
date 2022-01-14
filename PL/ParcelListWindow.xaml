@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
         </Grid>
-        <ListView x:Name="ParcelListView" Margin="0,1,0,0" Grid.Row="1"  MouseDoubleClick="ParcelListView_MouseDoubleClick">
+        <ListView x:Name="ParcelListView" Grid.Row="1"  MouseDoubleClick="ParcelListView_MouseDoubleClick">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -36,6 +36,30 @@
                     <GridViewColumn DisplayMemberBinding="{Binding ParcelMode}" Header="Parcel mode"/>
                 </GridView>
             </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="True">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="{DynamicResource PrimaryHueMidBrush}" FontSize="18" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="{Binding ItemCount}" FontSize="16" Foreground="{DynamicResource PrimaryHueLightBrush}" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text=" item(s)" FontSize="12" Foreground="{DynamicResource PrimaryHueLightBrush}" FontStyle="Italic" VerticalAlignment="Bottom" />
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
         </ListView>
         <Button Name="AddParcel" Content="Add new parcel" Width="133" Height="30" Grid.Row="2" RenderTransformOrigin="0.536,0.696" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="532,0,0,0" Click="AddParcel_Click" FontWeight="Bold" FontSize="16" Background="Transparent"/>
         <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="695,0,0,6" Grid.Row="2" VerticalAlignment="Bottom" Height="30" Width="87" Click="ExitButton_Click" FontWeight="Bold" FontSize="16" Background="Transparent"/>

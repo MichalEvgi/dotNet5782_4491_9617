@@ -27,11 +27,12 @@ namespace PL
             bl = bL;
             InitializeComponent();
             ParcelListView.ItemsSource = bl.GetParcelsList().ToList();
-            
+
         }
         private void ParcelListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new ParcelWindow(bl, (ParcelToList)(this.ParcelListView.SelectedItem), this).Show();
+            if (ParcelListView.SelectedItem != null)
+                new ParcelWindow(bl, (ParcelToList)(ParcelListView.SelectedItem), this).Show();
         }
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {

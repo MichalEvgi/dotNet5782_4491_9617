@@ -22,7 +22,7 @@
             </Grid.ColumnDefinitions >
             <Label Content="Slots:" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
             <ComboBox Name="SlotSelector" Grid.Column="3" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" SelectionChanged="SlotsSelector_SelectionChanged"/>
-            <Button x:Name="amountbtn" Content="Slots Amount" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="27" Width="130" Click="amountbtn_Click"/>
+            <Button x:Name="amountbtn" Content="Slots Amount" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="27" Width="130" Click="amountbtn_Click" Margin="0,0,0,10"/>
         </Grid>
         <ListView x:Name="StationListView" Margin="0,0,0,0" Grid.Row="1"  MouseDoubleClick="StationListView_MouseDoubleClick">
             <ListView.ItemContainerStyle>
@@ -38,6 +38,30 @@
                     <GridViewColumn DisplayMemberBinding="{Binding FullSlots}" Header="Full slots"/>
                 </GridView>
             </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="True">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="{DynamicResource PrimaryHueMidBrush}" FontSize="18" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="{Binding ItemCount}" FontSize="16" Foreground="{DynamicResource PrimaryHueLightBrush}" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text=" item(s)" FontSize="12" Foreground="{DynamicResource PrimaryHueLightBrush}" FontStyle="Italic" VerticalAlignment="Bottom" />
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
         </ListView>
         <Button Name="AddStation" Content="Add new station" Width="164" Height="30" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="314,0,0,0" Click="AddStation_Click" FontWeight="Bold" FontSize="16" Background="Transparent"/>
         <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="490,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="30" Width="87" Click="ExitButton_Click" FontWeight="Bold" FontSize="16" Background="Transparent"/>

@@ -50,18 +50,19 @@
             <Label x:Name="Modellbl" Content="Model:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="76" Height="31" Grid.Column="1" Margin="0,285,0,0" FontWeight="Bold" FontSize="14"/>
             <Label x:Name="Statuslbl" Content="Status:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="57" Grid.Column="1" Height="34" Margin="1,343,0,0" FontWeight="Bold" FontSize="14"/>
             <Label x:Name="locationlbl" Content="Location:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Height="39" Grid.Column="1" Margin="0,395,0,0" FontWeight="Bold" FontSize="14"/>
-            <Button x:Name="Updatebt" Content="Update" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="33" Width="88" Click="Updatebt_Click" Grid.Column="1" FontWeight="Bold" FontSize="14" Grid.Row="2"/>
-            <TextBox x:Name="Idtxtbox" HorizontalAlignment="Left" Margin="3,125,0,0" Text="{Binding Path=Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27" IsReadOnly="True" Grid.Column="2" />
-            <TextBox x:Name="Batterytxtbox"  HorizontalAlignment="Left" Margin="3,176,0,0" Text="{Binding Path=Battery, StringFormat=\{0:#0.0\}%}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="28" IsReadOnly="True" Grid.Column="2" />
-            <TextBox x:Name="Weighttxtbox" HorizontalAlignment="Left" Margin="3,230,0,0" Text="{Binding Path=MaxWeight}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="38" IsReadOnly="True" Grid.Column="2"/>
-            <TextBox x:Name="Modeltxtbox" HorizontalAlignment="Left" Margin="3,289,0,0" Text="{Binding Path=Model}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Column="2"/>
-            <TextBox x:Name="Statustxtbox" HorizontalAlignment="Left" Margin="3,343,0,0" Text="{Binding Path=Status}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="34" IsReadOnly="True" Grid.Column="2"/>
-            <TextBox x:Name="locationtxtbox" HorizontalAlignment="Left" Margin="3,395,0,0" Text="{Binding Mode=OneWay, Path=CurrentLocation}" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Height="53" IsReadOnly="True" Grid.Column="2"/>
+            <Button x:Name="Updatebt" Content="Update" HorizontalAlignment="Left" VerticalAlignment="Center" Height="33" Width="88" Click="Updatebt_Click" Grid.Column="1" FontWeight="Bold" FontSize="14" Grid.Row="2"/>
+            <TextBox x:Name="Idtxtbox" HorizontalAlignment="Left" Margin="0,125,0,0" Text="{Binding Path=Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27" IsReadOnly="True" Grid.Column="2" />
+            <TextBox x:Name="Batterytxtbox"  HorizontalAlignment="Left" Margin="0,176,0,0" Text="{Binding Path=Battery, StringFormat=\{0:#0.0\}%}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="28" IsReadOnly="True" Grid.Column="2" />
+            <TextBox x:Name="Weighttxtbox" HorizontalAlignment="Left" Margin="0,230,0,0" Text="{Binding Path=MaxWeight}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="38" IsReadOnly="True" Grid.Column="2"/>
+            <TextBox x:Name="Modeltxtbox" HorizontalAlignment="Left" Margin="0,289,0,0" Text="{Binding Path=Model}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Column="2"/>
+            <TextBox x:Name="Statustxtbox" HorizontalAlignment="Left" Margin="0,343,0,0" Text="{Binding Path=Status}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="34" IsReadOnly="True" Grid.Column="2"/>
+            <TextBox x:Name="locationtxtbox" HorizontalAlignment="Left" Margin="0,395,0,0" Text="{Binding Mode=OneWay, Path=CurrentLocation}" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Height="53" IsReadOnly="True" Grid.Column="2"/>
             <Button x:Name="Exitbt" Content="Exit" HorizontalAlignment="Left" Margin="518,0,0,0" VerticalAlignment="Center" Height="33" Width="80" Click="Exitbt_Click" Grid.Row="2" Grid.Column="2" FontWeight="Bold" FontSize="14" />
             <Button x:Name="Deliverybt" Content="Package association" Grid.Column="2" HorizontalAlignment="Left" Margin="375,106,0,0" VerticalAlignment="Top" Click="Deliverybt_Click" Width="162" FontWeight="Bold" FontSize="14" Height="32"/>
             <Button x:Name="Chargingbt" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Margin="405,249,0,0" VerticalAlignment="Top" Width="102" Click="Chargingbt_Click" FontWeight="Bold" FontSize="14" Height="27" />
             <Button x:Name="Parcelbtn" Content="Delivery parcel" Grid.Column="1" HorizontalAlignment="Left" Margin="61,479,0,0" VerticalAlignment="Top" Click="Parcelbtn_Click" Grid.ColumnSpan="2"/>
             <Button x:Name="Simulatorbt" Content="Automatic" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="33" Width="113" Click="Simulatorbt_Click" Grid.Column="2" FontWeight="Bold" FontSize="14" Grid.Row="2"/>
+            
 
 
         </Grid>

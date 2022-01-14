@@ -32,16 +32,17 @@ namespace PL
 
         private void AddCustomer_Click_1(object sender, RoutedEventArgs e)
         {
-            new CustomerWindow(bl,this).Show();
+            new CustomerWindow(bl, this).Show();
         }
 
         private void ExitButton_Click_1(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
         private void CustomerListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new CustomerWindow(bl, (CustomerToList)(this.CustomerListView.SelectedItem), this).Show();
+            if (CustomerListView.SelectedItem != null)
+                new CustomerWindow(bl, (CustomerToList)(CustomerListView.SelectedItem), this).Show();
         }
 
     }

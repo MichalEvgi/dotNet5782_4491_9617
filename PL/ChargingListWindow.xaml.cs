@@ -34,12 +34,13 @@ namespace PL
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void ChargingListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new DroneWindow(bl, (DroneInCharging)ChargingListView.SelectedItem).Show();
+            if (ChargingListView.SelectedItem != null)
+                new DroneWindow(bl, (DroneInCharging)ChargingListView.SelectedItem).Show();
         }
     }
 }

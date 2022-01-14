@@ -30,7 +30,7 @@ namespace PL
             StationListView.ItemsSource = bl.GetStationsList();
             SlotSelector.Items.Add("Availble slots");
             SlotSelector.Items.Add("Clear filter");
-            
+
         }
 
         private void StationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -58,7 +58,8 @@ namespace PL
 
         private void StationListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new StationWindow(bl, (StationToList)(this.StationListView.SelectedItem), this).Show();
+            if (StationListView.SelectedItem != null)
+                new StationWindow(bl, (StationToList)(StationListView.SelectedItem), this).Show();
         }
 
         private void SlotsSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -68,15 +69,25 @@ namespace PL
         //bool grouped;
         private void amountbtn_Click(object sender, RoutedEventArgs e)
         {
-            //var amountGroups =
-            //   from s in bl.GetStationsList()
-            //   group s by bl.GetStationsList().First() into g
-            //   select new { Amount = g.Key };
-            //StationListView.ItemsSource = amountGroups;
-            //grouped = true;
-            //CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationListView.ItemsSource);
-            //PropertyGroupDescription groupDescription = new PropertyGroupDescription("Id");
-            //view.GroupDescriptions.Add(groupDescription);
+            IEnumerable<IGrouping<int, StationToList>> stationGroup = from st in bl.GetStationsList() group st by st.AvailableSlots;
+            List<StationToList> stationTos = new();
+
+            foreach (var group in stationGroup)
+            {
+                foreach (var st in group)
+                {
+                    stationTos.Add(st);
+                }
+            }
+            StationListView.ItemsSource = stationTos;
+
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationListView.ItemsSource);
+            if (view.GroupDescriptions.Count < 1)
+            {
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("AvailableSlots");
+                view.GroupDescriptions.Add(groupDescription);
+            }
         }
     }
 }

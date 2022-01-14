@@ -23,14 +23,14 @@ namespace PL
     public partial class DroneListWindow : Window
     {
         IBL bl;
-        
+
         public DroneListWindow(IBL bL)
         {
             bl = bL;
             InitializeComponent();
             DroneListView.ItemsSource = bl.GetDronesList();
             //set the items of StatusSelector to DroneStatus
-            
+
             foreach (DroneStatus ds in (DroneStatus[])Enum.GetValues(typeof(DroneStatus)))
             {
                 StatusSelector.Items.Add(ds);
@@ -55,7 +55,7 @@ namespace PL
         //}
         public void SelectorChanges()
         {
-            if((StatusSelector.SelectedItem==null||StatusSelector.SelectedItem.ToString() == "Clear filter") && (WeightSelector.SelectedItem==null||WeightSelector.SelectedItem.ToString() == "Clear filter"))
+            if ((StatusSelector.SelectedItem == null || StatusSelector.SelectedItem.ToString() == "Clear filter") && (WeightSelector.SelectedItem == null || WeightSelector.SelectedItem.ToString() == "Clear filter"))
             {
                 //if both fiter aren't set
                 DroneListView.ItemsSource = bl.GetDronesList().Select(x => x);
@@ -64,10 +64,10 @@ namespace PL
             {
                 if (StatusSelector.SelectedItem == null || StatusSelector.SelectedItem.ToString() == "Clear filter")
                     //if there is only weight filter
-                    DroneListView.ItemsSource =bl.GetDronesList().Where(d => d.MaxWeight == (WeightCategories)WeightSelector.SelectedItem);
+                    DroneListView.ItemsSource = bl.GetDronesList().Where(d => d.MaxWeight == (WeightCategories)WeightSelector.SelectedItem);
                 else
                 {
-                    if(WeightSelector.SelectedItem == null || WeightSelector.SelectedItem.ToString() == "Clear filter")
+                    if (WeightSelector.SelectedItem == null || WeightSelector.SelectedItem.ToString() == "Clear filter")
                         //if there is only status filter
                         DroneListView.ItemsSource = bl.GetDronesList().Where(d => d.Status == (DroneStatus)StatusSelector.SelectedItem);
                     else
@@ -98,7 +98,7 @@ namespace PL
                 //only drone status was selected
                 DroneListView.ItemsSource = bl.StatusDrone((DroneStatus)StatusSelector.SelectedItem);
             }
-   
+
         }
 
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -112,7 +112,7 @@ namespace PL
                     //no filter was selected
                     DroneListView.ItemsSource = bl.GetDronesList();
             }
-            else if(StatusSelector.SelectedItem!=null&& StatusSelector.SelectedItem.ToString() != "Clear filter")
+            else if (StatusSelector.SelectedItem != null && StatusSelector.SelectedItem.ToString() != "Clear filter")
             {
                 //both filter were selected
                 DroneListView.ItemsSource = bl.StatusAndWeight((DroneStatus)StatusSelector.SelectedItem, (WeightCategories)WeightSelector.SelectedItem);
@@ -123,12 +123,12 @@ namespace PL
                 DroneListView.ItemsSource = bl.WeightDrone((WeightCategories)WeightSelector.SelectedItem);
             }
 
-            
+
         }
         //open drone window with add drone state
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
-            new DroneWindow(bl,this).Show();
+            new DroneWindow(bl, this).Show();
         }
         //close window
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -138,7 +138,31 @@ namespace PL
         //open drone window with action state
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-           new DroneWindow(bl,(DroneToList)(this.DroneListView.SelectedItem),this).Show();
+            if (DroneListView.SelectedItem != null)
+                new DroneWindow(bl, (DroneToList)(DroneListView.SelectedItem), this).Show();
+        }
+
+        private void StatusGroup_Click(object sender, RoutedEventArgs e)
+        {
+            IEnumerable<IGrouping<DroneStatus, DroneToList>> droneGroup = from dro in bl.GetDronesList() group dro by dro.Status;
+            List<DroneToList> droneTos = new();
+
+            foreach (var group in droneGroup)
+            {
+                foreach (var dro in group)
+                {
+                    droneTos.Add(dro);
+                }
+            }
+            DroneListView.ItemsSource = droneTos;
+
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DroneListView.ItemsSource);
+            if (view.GroupDescriptions.Count < 1)
+            {
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("Status");
+                view.GroupDescriptions.Add(groupDescription);
+            }
         }
     }
 }

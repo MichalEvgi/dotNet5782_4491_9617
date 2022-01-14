@@ -23,7 +23,7 @@ namespace PL
     {
         IBL bl;
         Customer selectedCustomer;
-        public CustomerParcelsListWindow(IBL bL,Customer customer)
+        public CustomerParcelsListWindow(IBL bL, Customer customer)
         {
             bl = bL;
             selectedCustomer = customer;
@@ -33,7 +33,7 @@ namespace PL
             FromCustomerList.ItemsSource = customer.FromCustomer;
         }
 
-        public CustomerParcelsListWindow(IBL bL, Customer customer,int i)
+        public CustomerParcelsListWindow(IBL bL, Customer customer, int i)
         {
             bl = bL;
             selectedCustomer = customer;
@@ -50,12 +50,14 @@ namespace PL
 
         private void ToCustomerList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new ParcelWindow(bl, (ParcelInCustomer)ToCustomerList.SelectedItem,0).Show();
+            if (ToCustomerList.SelectedItem != null)
+                new ParcelWindow(bl, (ParcelInCustomer)ToCustomerList.SelectedItem, 0).Show();
         }
 
         private void FromCustomerList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new ParcelWindow(bl, (ParcelInCustomer)FromCustomerList.SelectedItem,1).Show();
+            if (FromCustomerList.SelectedItem != null)
+                new ParcelWindow(bl, (ParcelInCustomer)FromCustomerList.SelectedItem, 1).Show();
         }
     }
 }
