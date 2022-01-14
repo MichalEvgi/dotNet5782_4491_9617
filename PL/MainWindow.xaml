@@ -11,10 +11,10 @@
         <Grid.Background>
             <ImageBrush ImageSource="/images/1d01659c303895bd6570de0146694fb7.jpg"/>
         </Grid.Background>
-        <Button x:Name="DroneListButton" Content="Show Drone List" HorizontalAlignment="Left" Margin="31,20,0,0" VerticalAlignment="Top" Height="84" Width="207" FontSize="20" FontWeight="Bold" Click="DroneListButton_Click" Background="Transparent"/>
-        <Button x:Name="CustomerListBtn" Content="Show Customer list" HorizontalAlignment="Left" Margin="31,120,0,0" VerticalAlignment="Top" Height="84" Width="207" FontSize="20" FontWeight="Bold" Click="CustomerListBtn_Click" Background="Transparent"/>
-        <Button x:Name="StationListBtn" Content="Show Station List" HorizontalAlignment="Left" Margin="31,220,0,0" VerticalAlignment="Top" Height="84" Width="207" FontSize="20" FontWeight="Bold" Click="StationListBtn_Click" Background="Transparent"/>
-        <Button x:Name="ParcelListBtn" Content="Show Parcel List" HorizontalAlignment="Left" Margin="31,320,0,0" VerticalAlignment="Top" Height="84" Width="207" FontSize="20" FontWeight="Bold" Click="ParcelListBtn_Click" Background="Transparent"/>
+        <Button x:Name="DroneListButton" Content="Show Drone List" HorizontalAlignment="Left" Margin="31,20,0,0" VerticalAlignment="Top" Height="84" Width="215" FontSize="20" FontWeight="Bold" Click="DroneListButton_Click" Background="Transparent"/>
+        <Button x:Name="CustomerListBtn" Content="Show Customer list" HorizontalAlignment="Left" Margin="31,120,0,0" VerticalAlignment="Top" Height="84" Width="215" FontSize="20" FontWeight="Bold" Click="CustomerListBtn_Click" Background="Transparent"/>
+        <Button x:Name="StationListBtn" Content="Show Station List" HorizontalAlignment="Left" Margin="31,220,0,0" VerticalAlignment="Top" Height="84" Width="215" FontSize="20" FontWeight="Bold" Click="StationListBtn_Click" Background="Transparent"/>
+        <Button x:Name="ParcelListBtn" Content="Show Parcel List" HorizontalAlignment="Left" Margin="31,320,0,0" VerticalAlignment="Top" Height="84" Width="215" FontSize="20" FontWeight="Bold" Click="ParcelListBtn_Click" Background="Transparent"/>
 
     </Grid>
 </Window>

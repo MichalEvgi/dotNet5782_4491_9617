@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="ParcelListWindow" Height="450" Width="800">
     <Grid Name="MainGrid" Background="#FFD3F6F3">
         <Grid.RowDefinitions>
@@ -12,13 +13,18 @@
             <RowDefinition Height="496*"/>
             <RowDefinition Height="59*"/>
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="4,0,-4,0">
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
+            <Button x:Name="SenderGrop" Content="Sender group" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" Click="SenderGrop_Click"/>
+            <Button x:Name="TargetGroup" Content="Target group" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Top" Click="TargetGroup_Click"/>
+            <ComboBox x:Name="ParcelModecmb" HorizontalAlignment="Center" materialDesign:HintAssist.Hint="Parcel mode:" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Center" Width="120" SelectionChanged="ParcelModecmb_SelectionChanged"/>
+            <ComboBox x:Name="Prioritycmb" Grid.Column="1" HorizontalAlignment="Center" materialDesign:HintAssist.Hint="Priority:" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Center" Width="120" SelectionChanged="Prioritycmb_SelectionChanged" />
         </Grid>
         <ListView x:Name="ParcelListView" Grid.Row="1"  MouseDoubleClick="ParcelListView_MouseDoubleClick">
             <ListView.ItemContainerStyle>

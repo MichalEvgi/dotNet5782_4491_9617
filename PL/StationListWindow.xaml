@@ -18,11 +18,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <Label Content="Slots:" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
-            <ComboBox Name="SlotSelector" Grid.Column="3" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" SelectionChanged="SlotsSelector_SelectionChanged"/>
-            <Button x:Name="amountbtn" Content="Slots Amount" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="27" Width="130" Click="amountbtn_Click" Margin="0,0,0,10"/>
+            <ComboBox Name="SlotSelector" Grid.Column="2"  materialDesign:HintAssist.Hint="Availability:" materialDesign:HintAssist.IsFloating="True" SelectionChanged="SlotsSelector_SelectionChanged" Width="170" Height="40"/>
+            <Button x:Name="amountbtn" Content="Slots Amount" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="27" Width="130" Click="amountbtn_Click" Margin="0,0,0,10"/>
         </Grid>
         <ListView x:Name="StationListView" Margin="0,0,0,0" Grid.Row="1"  MouseDoubleClick="StationListView_MouseDoubleClick">
             <ListView.ItemContainerStyle>

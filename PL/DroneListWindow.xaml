@@ -18,15 +18,10 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <Label Content="Drone status:" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <ComboBox
-            Name="StatusSelector"  Grid.Column="1" SelectionChanged="StatusSelector_SelectionChanged" />
-            <Label Content="Drone Max Weight:" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <ComboBox Name="WeightSelector" Grid.Column="3" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" SelectionChanged="WeightSelector_SelectionChanged"/>
-            <Button x:Name="StatusGroup" Content="Group status" Grid.Column="4" HorizontalAlignment="Center" Margin="0,17,0,0" VerticalAlignment="Top" Click="StatusGroup_Click"/>
+            <ComboBox x:Name="StatusSelector"  Grid.Column="0"  materialDesign:HintAssist.Hint="Drone status:" materialDesign:HintAssist.IsFloating="True" SelectionChanged="StatusSelector_SelectionChanged" HorizontalAlignment="Center" Width="207" />
+            <ComboBox Name="WeightSelector" Grid.Column="1"  materialDesign:HintAssist.Hint="Drone Max Weight:" materialDesign:HintAssist.IsFloating="True"  SelectionChanged="WeightSelector_SelectionChanged" HorizontalAlignment="Center" Width="205"/>
+            <Button x:Name="StatusGroup" Content="Group status" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Top" Click="StatusGroup_Click"/>
         </Grid>
         <ListView x:Name="DroneListView" Grid.Row="1"  MouseDoubleClick="DroneListView_MouseDoubleClick" >
             <ListView.ItemContainerStyle>
