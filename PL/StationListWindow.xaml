@@ -21,6 +21,8 @@
             </Grid.ColumnDefinitions >
             <ComboBox Name="SlotSelector" Grid.Column="2"  materialDesign:HintAssist.Hint="Availability:" materialDesign:HintAssist.IsFloating="True" SelectionChanged="SlotsSelector_SelectionChanged" Width="170" Height="40"/>
             <Button x:Name="amountbtn" Content="Slots Amount" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="27" Width="130" Click="amountbtn_Click" Margin="0,0,0,10"/>
+            <Button x:Name="refresh" Content="" Background="Transparent"  Margin="170,0,0,0" VerticalAlignment="Center" Height="27" Width="27" Click="refresh_Click" BorderBrush="{x:Null}"/>
+            <materialDesign:PackIcon Kind="Refresh" BorderBrush="#FF5D26C4" Margin="170,0,0,0" VerticalAlignment="Center" Foreground="#FF5D26C4" Height="27" Width="27"/>
         </Grid>
         <ListView x:Name="StationListView" Margin="0,0,0,0" Grid.Row="1"  MouseDoubleClick="StationListView_MouseDoubleClick">
             <ListView.ItemContainerStyle>

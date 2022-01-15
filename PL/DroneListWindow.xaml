@@ -21,7 +21,9 @@
             </Grid.ColumnDefinitions >
             <ComboBox x:Name="StatusSelector"  Grid.Column="0"  materialDesign:HintAssist.Hint="Drone status:" materialDesign:HintAssist.IsFloating="True" SelectionChanged="StatusSelector_SelectionChanged" HorizontalAlignment="Center" Width="207" />
             <ComboBox Name="WeightSelector" Grid.Column="1"  materialDesign:HintAssist.Hint="Drone Max Weight:" materialDesign:HintAssist.IsFloating="True"  SelectionChanged="WeightSelector_SelectionChanged" HorizontalAlignment="Center" Width="205"/>
-            <Button x:Name="StatusGroup" Content="Group status" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Top" Click="StatusGroup_Click"/>
+            <Button x:Name="StatusGroup" Content="Group status" Grid.Column="2" HorizontalAlignment="Left"  VerticalAlignment="Top" Click="StatusGroup_Click" Margin="40,25,0,0"/>
+            <Button x:Name="refresh"  Grid.Column="2" Content="" Background="Transparent"  Margin="184,27,96,14"  Height="27" Width="27" Click="refresh_Click" BorderBrush="{x:Null}"/>
+            <materialDesign:PackIcon Kind="Refresh"  Grid.Column="2"  BorderBrush="#FF5D26C4" Margin="184,27,0,0" Foreground="#FF5D26C4" Height="27" Width="27"/>
         </Grid>
         <ListView x:Name="DroneListView" Grid.Row="1"  MouseDoubleClick="DroneListView_MouseDoubleClick" >
             <ListView.ItemContainerStyle>

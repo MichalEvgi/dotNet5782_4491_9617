@@ -89,5 +89,12 @@ namespace PL
                 view.GroupDescriptions.Add(groupDescription);
             }
         }
+
+        private void refresh_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationListView.ItemsSource);
+            view.GroupDescriptions.Clear();
+            SelectorChanges();
+        }
     }
 }
