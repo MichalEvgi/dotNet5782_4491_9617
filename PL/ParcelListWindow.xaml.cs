@@ -133,5 +133,36 @@ namespace PL
         {
             SelectorChanges();
         }
+        private void refresh_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            view.GroupDescriptions.Clear();
+            SelectorChanges();
+        }
+
+        private void DatePicker_CalendarClosed(object sender, RoutedEventArgs e)
+        {
+            timePicked();
+        }
+
+        private void DatePicker_CalendarClosed_1(object sender, RoutedEventArgs e)
+        {
+            timePicked();
+        }
+        private void timePicked()
+        {
+            DateTime? f = from.SelectedDate;
+            DateTime? t = to.SelectedDate;
+            if (f != null && t == null)
+                ParcelListView.ItemsSource = bl.GetParcelsList().Where(p => bl.GetParcel(p.Id).RequestedTime >= f.Value);
+            else
+            {
+                t= t.Value.AddDays(1);
+                if (f == null && t != null)
+                    ParcelListView.ItemsSource = bl.GetParcelsList().Where(p => bl.GetParcel(p.Id).RequestedTime < t.Value);
+                else
+                    ParcelListView.ItemsSource = bl.GetParcelsList().Where(p => bl.GetParcel(p.Id).RequestedTime >= f.Value && bl.GetParcel(p.Id).RequestedTime < t.Value);
+            }
+        }
     }
 }

@@ -9,9 +9,9 @@
         Title="ParcelListWindow" Height="450" Width="800">
     <Grid Name="MainGrid" Background="#FFD3F6F3">
         <Grid.RowDefinitions>
-            <RowDefinition Height="68*"/>
+            <RowDefinition Height="140*"/>
             <RowDefinition Height="496*"/>
-            <RowDefinition Height="59*"/>
+            <RowDefinition Height="60*"/>
         </Grid.RowDefinitions>
         <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto">
             <Grid.ColumnDefinitions>
@@ -21,10 +21,14 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <Button x:Name="SenderGrop" Content="Sender group" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" Click="SenderGrop_Click"/>
-            <Button x:Name="TargetGroup" Content="Target group" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Top" Click="TargetGroup_Click"/>
+            <Button x:Name="SenderGrop" Content="Sender group" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Click="SenderGrop_Click"/>
+            <Button x:Name="TargetGroup" Content="Target group" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Click="TargetGroup_Click"/>
             <ComboBox x:Name="ParcelModecmb" HorizontalAlignment="Center" materialDesign:HintAssist.Hint="Parcel mode:" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Center" Width="120" SelectionChanged="ParcelModecmb_SelectionChanged"/>
             <ComboBox x:Name="Prioritycmb" Grid.Column="1" HorizontalAlignment="Center" materialDesign:HintAssist.Hint="Priority:" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Center" Width="120" SelectionChanged="Prioritycmb_SelectionChanged" />
+            <Button x:Name="refresh" Content="" Background="Transparent" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="0" VerticalAlignment="Center" Height="27" Width="27" Click="refresh_Click" BorderBrush="{x:Null}"/>
+            <materialDesign:PackIcon Kind="Refresh" BorderBrush="#FF5D26C4" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="0" Margin="146.5,0,0,0" Foreground="#FF5D26C4" Height="27" Width="27" VerticalAlignment="Center"/>
+            <DatePicker x:Name="from" Grid.Column="2"   materialDesign:HintAssist.Hint="from:" materialDesign:HintAssist.IsFloating="True"  Margin="0,8,0,0" VerticalAlignment="Top" CalendarClosed="DatePicker_CalendarClosed"/>
+            <DatePicker x:Name="to" Grid.Column="2"   materialDesign:HintAssist.Hint="to:" materialDesign:HintAssist.IsFloating="True"  Margin="0,40,0,0" VerticalAlignment="Top" CalendarClosed="DatePicker_CalendarClosed_1"/>
         </Grid>
         <ListView x:Name="ParcelListView" Grid.Row="1"  MouseDoubleClick="ParcelListView_MouseDoubleClick">
             <ListView.ItemContainerStyle>
@@ -67,7 +71,7 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <Button Name="AddParcel" Content="Add new parcel" Width="133" Height="30" Grid.Row="2" RenderTransformOrigin="0.536,0.696" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="532,0,0,0" Click="AddParcel_Click" FontWeight="Bold" FontSize="16" Background="Transparent"/>
-        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="695,0,0,6" Grid.Row="2" VerticalAlignment="Bottom" Height="30" Width="87" Click="ExitButton_Click" FontWeight="Bold" FontSize="16" Background="Transparent"/>
+        <Button Name="AddParcel" Content="Add new parcel" Height="30" Grid.Row="2" RenderTransformOrigin="0.536,0.696" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="532,0,0,0" Click="AddParcel_Click" FontWeight="Bold" FontSize="16" Background="Transparent"/>
+        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="695,0,0,4" Grid.Row="2" VerticalAlignment="Bottom" Height="30" Click="ExitButton_Click" FontWeight="Bold" FontSize="16" Background="Transparent"/>
     </Grid>
 </Window>
