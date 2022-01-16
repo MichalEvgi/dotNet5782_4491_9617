@@ -179,7 +179,8 @@ namespace PL
             DataContext = selectedCustomer;
             AddCustomer.Visibility = Visibility.Hidden;
             UpdateCustomer.Visibility = Visibility.Visible;
-
+            this.Width = 350;
+            this.Height = 400;
             FromCustomerbtn.Visibility = Visibility.Collapsed;
             Tocustomerbtn.Visibility = Visibility.Collapsed;
             Updatebtn.Visibility = Visibility.Collapsed;

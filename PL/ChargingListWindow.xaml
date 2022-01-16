@@ -6,22 +6,13 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="ChargingListWindow" Height="450" Width="800">
+        Title="ChargingListWindow" Height="350" Width="300">
     <Grid Name="MainGrid" Background="#FFD3F6F3">
         <Grid.RowDefinitions>
-            <RowDefinition Height="68*"/>
             <RowDefinition Height="496*"/>
             <RowDefinition Height="59*"/>
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="4,0,-4,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions >
-        </Grid>
-        <ListView x:Name="ChargingListView" Margin="0,1,0,0" Grid.Row="1"  MouseDoubleClick="ChargingListView_MouseDoubleClick">
+        <ListView x:Name="ChargingListView"  Grid.Row="0"  MouseDoubleClick="ChargingListView_MouseDoubleClick" Margin="23,26,23,32">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -29,11 +20,11 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="ID number"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="ID number" />
                     <GridViewColumn DisplayMemberBinding="{Binding Battery, StringFormat=\{0:#0.0\}%}" Header="Battery"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="695,0,0,6" Grid.Row="2" VerticalAlignment="Bottom" Height="30" Width="87" Click="ExitButton_Click" FontWeight="Bold" FontSize="16" Background="Transparent"/>
+        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="219,0,0,0" VerticalAlignment="Center" Height="21" Width="58" Click="ExitButton_Click" FontWeight="Bold" FontSize="11" Grid.Row="1"/>
     </Grid>
 </Window>

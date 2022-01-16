@@ -51,29 +51,26 @@ namespace PL
             InitializeComponent();
             addParcel.Visibility = Visibility.Hidden;
             actions.Visibility = Visibility.Visible;
+            this.Height = 360;
+            this.Width = 560;
             if (selectedParcel.DeliveredTime == null)
             {
-                Deliveredlbl.Visibility = Visibility.Collapsed;
                 Deliveredtxtbox.Visibility = Visibility.Collapsed;
                 Deliverybt.Content = "Deliver parcel";
             }
             else
             {
                 Deliverybt.IsEnabled = false;
-                Dronelbl.Visibility = Visibility.Collapsed;
                 Dronebt.Visibility = Visibility.Collapsed;
             }
             if (selectedParcel.PickedUpTime == null)
             {
-                PickedUplbl.Visibility = Visibility.Collapsed;
                 PickedUptxtbox.Visibility = Visibility.Collapsed;
                 Deliverybt.Content = "Pick up parcel";
             }
             if (selectedParcel.ScheduledTime == null)
             {
-                Scheduledlbl.Visibility = Visibility.Collapsed;
                 Scheduledtxtbox.Visibility = Visibility.Collapsed;
-                Dronelbl.Visibility = Visibility.Collapsed;
                 Dronebt.Visibility = Visibility.Collapsed;
                 Deliverybt.IsEnabled = false;
                 Deletebt.IsEnabled = true;
@@ -192,7 +189,6 @@ namespace PL
                 pr.ParcelListView.ItemsSource = bl.GetParcelsList();
                 selectedParcel = bl.GetParcel(selectedParcel.Id);
                 DataContext = selectedParcel;
-                PickedUplbl.Visibility = Visibility.Visible;
                 PickedUptxtbox.Visibility = Visibility.Visible;
                 //change delivery button state
                 Deliverybt.Content = "Deliver parcel";
@@ -223,9 +219,7 @@ namespace PL
                 selectedParcel = bl.GetParcel(selectedParcel.Id);
                 DataContext = selectedParcel;
                 pr.ParcelListView.ItemsSource = bl.GetParcelsList();
-                Deliveredlbl.Visibility = Visibility.Visible;
                 Deliveredtxtbox.Visibility = Visibility.Visible;
-                Dronelbl.Visibility = Visibility.Collapsed;
                 Dronebt.Visibility = Visibility.Collapsed;
                 //change delivery button state
                 Deliverybt.IsEnabled = false;
@@ -251,9 +245,7 @@ namespace PL
             InitializeComponent();
             addParcel.Visibility = Visibility.Hidden;
             actions.Visibility = Visibility.Visible;
-            Senderlbl.Visibility = Visibility.Collapsed;
             Senderbt.Visibility = Visibility.Collapsed;
-            Targetlbl.Visibility = Visibility.Collapsed;
             Targetbt.Visibility = Visibility.Collapsed;
             OtherCustomerlbl.Visibility = Visibility.Visible;
             Othertxtbox.Visibility = Visibility.Visible;
@@ -264,21 +256,16 @@ namespace PL
                 OtherCustomerlbl.Content = "Target:";
             if (selectedParcel.DeliveredTime == null)
             {
-                Deliveredlbl.Visibility = Visibility.Collapsed;
                 Deliveredtxtbox.Visibility = Visibility.Collapsed;
-                Dronelbl.Visibility = Visibility.Collapsed;
                 Dronebt.Visibility = Visibility.Collapsed;
             }
             if (selectedParcel.PickedUpTime == null)
             {
-                PickedUplbl.Visibility = Visibility.Collapsed;
                 PickedUptxtbox.Visibility = Visibility.Collapsed;
             }
             if (selectedParcel.ScheduledTime == null)
             {
-                Scheduledlbl.Visibility = Visibility.Collapsed;
                 Scheduledtxtbox.Visibility = Visibility.Collapsed;
-                Dronelbl.Visibility = Visibility.Collapsed;
                 Dronebt.Visibility = Visibility.Collapsed;
             }
             Deliverylbl.Visibility = Visibility.Collapsed;

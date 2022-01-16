@@ -18,12 +18,12 @@
             <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Top" Height="21" Width="82" Click="CancelButton_Click" FontWeight="Bold" FontSize="12" Background="Transparent" Margin="0,367,0,0" BorderBrush="{x:Null}" Foreground="Gray"/>
 
         </Grid>
-        <Grid x:Name="actions" Visibility="Visible" Background="#FFD3F6F3">
+        <Grid x:Name="actions" Visibility="Visible" Background="#FFD3F6F3" Height="360" Width="560">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="57*"/>
-                <ColumnDefinition Width="80*"/>
+
+
                 <ColumnDefinition Width="140*"/>
-                <ColumnDefinition Width="80*"/>
+
                 <ColumnDefinition Width="140*"/>
                 <ColumnDefinition Width="170*"/>
             </Grid.ColumnDefinitions>
@@ -32,32 +32,22 @@
                 <RowDefinition Height="0*"/>
                 <RowDefinition Height="79*"/>
             </Grid.RowDefinitions>
-            <Label x:Name="Idlbl" Content="Id:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Grid.Column="1" Width="61" Margin="0,70,0,0" FontWeight="Bold" FontSize="14" />
-            <Label x:Name="Senderlbl" Content="Sender:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="40" Grid.Column="1" Margin="1,130,0,0" FontWeight="Bold" FontSize="14"/>
             <Label x:Name="OtherCustomerlbl" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="40" Grid.Column="1" Margin="1,160,0,0" FontWeight="Bold" FontSize="14" Visibility="Collapsed"/>
-            <Label x:Name="Targetlbl" Content="Target:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="98" Height="40" Grid.Column="1" Margin="0,190,0,0" FontWeight="Bold" FontSize="14"/>
-            <Label x:Name="Weightlbl" Content="Weight:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="76" Height="40" Grid.Column="1" Margin="0,250,0,0" FontWeight="Bold" FontSize="14"/>
-            <Label x:Name="Prioritylbl" Content="Priority:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Grid.Column="1" Height="40" Margin="0,310,0,0" FontWeight="Bold" FontSize="14"/>
-            <Label x:Name="Dronelbl" Content="Drone:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Grid.Column="3" Margin="0,70,0,0" FontWeight="Bold" FontSize="11" />
-            <Label x:Name="Requestedlbl" Content="Requested time:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Grid.Column="3" Margin="1,130,0,0" FontWeight="Bold" FontSize="11"/>
-            <Label x:Name="Scheduledlbl" Content="Scheduled time:" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="40" Grid.Column="3" Margin="0,190,0,0" FontWeight="Bold" FontSize="11"/>
-            <Label x:Name="PickedUplbl" Content="PickedUp time:" HorizontalAlignment="Left"  VerticalAlignment="Top"  Height="40" Grid.Column="3" Margin="0,250,0,0" FontWeight="Bold" FontSize="11"/>
-            <Label x:Name="Deliveredlbl" Content="Delivered time:" HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Column="3" Height="40" Margin="0,310,0,0" FontWeight="Bold" FontSize="11"/>
-            <Button x:Name="Deletebt" Content="delete" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="80" Grid.Column="4" FontWeight="Bold" FontSize="14" Background="Transparent" Grid.Row="2" Click="Deletebt_Click"/>
-            <TextBox x:Name="Idtxtbox" HorizontalAlignment="Left" Margin="0,70,0,0" Text="{Binding Id, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="40" IsReadOnly="True" Grid.Column="2" />
-            <Button x:Name="Senderbt" Content="show sender customer" HorizontalAlignment="Left" Margin="0,130,0,0" VerticalAlignment="Top" Width="150" FontSize="11" Height="40" Grid.Column="2" FontWeight="Bold" Background="Transparent" Click="Senderbt_Click"/>
+            <Button x:Name="Deletebt" Content="delete" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="70"  FontWeight="Bold" FontSize="11"   Click="Deletebt_Click" Grid.Column="2" Margin="10,283,0,0"/>
+            <TextBox x:Name="Idtxtbox" HorizontalAlignment="Left" Margin="51,24,0,0" Text="{Binding Id, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="40" IsReadOnly="True"  materialDesign:HintAssist.Hint="Id" materialDesign:HintAssist.IsFloating="True" Grid.ColumnSpan="2"/>
+            <Button x:Name="Senderbt" Content="show sender customer" HorizontalAlignment="Left" Margin="30,200,0,0" VerticalAlignment="Top" Width="150" FontSize="11" Height="40"  FontWeight="Bold" Click="Senderbt_Click" Grid.ColumnSpan="2"/>
             <TextBox x:Name="Othertxtbox" HorizontalAlignment="Left" Margin="0,160,0,0"  VerticalAlignment="Top" Width="130" Height="70" IsReadOnly="True" Grid.Column="2" Visibility="Collapsed"/>
-            <Button x:Name="Targetbt" Content="show target customer" HorizontalAlignment="Left" Margin="0,190,0,0" VerticalAlignment="Top" Width="150" FontSize="11" Height="40" Grid.Column="2" FontWeight="Bold" Background="Transparent" Click="Targetbt_Click"/>
-            <TextBox x:Name="Weighttxtbox" HorizontalAlignment="Left" Margin="0,250,0,0" Text="{Binding Weight, Mode=OneWay}"  VerticalAlignment="Top" Width="130" Height="40" IsReadOnly="True" Grid.Column="2"/>
-            <TextBox x:Name="Prioritytxtbox" HorizontalAlignment="Left" Margin="0,310,0,0" Text="{Binding Priority, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="40" IsReadOnly="True" Grid.Column="2"/>
-            <Button x:Name="Dronebt" HorizontalAlignment="Left" Margin="0,70,0,0" Content="show drone" VerticalAlignment="Top" Width="130" Height="40" Grid.Column="4" Click="Dronebt_Click" />
-            <materialDesign:TimePicker x:Name="Requestedtxtbox" IsEnabled="False" Text="{Binding RequestedTime, Mode=OneWay}" HorizontalAlignment="Left" Margin="0,130,0,0" VerticalAlignment="Top" Width="150" FontSize="11" Height="40" Grid.Column="4" FontWeight="Bold" Background="Transparent"/>
-            <materialDesign:TimePicker x:Name="Scheduledtxtbox" IsEnabled="False" Text="{Binding ScheduledTime, Mode=OneWay}" HorizontalAlignment="Left" Margin="0,190,0,0" VerticalAlignment="Top" Width="150" FontSize="11" Height="40" Grid.Column="4" FontWeight="Bold" Background="Transparent"/>
-            <materialDesign:TimePicker x:Name="PickedUptxtbox" IsEnabled="False" HorizontalAlignment="Left" Margin="0,250,0,0" Text="{Binding PickedUpTime, Mode=OneWay}"  VerticalAlignment="Top"  Width="150" FontSize="11" Height="40" Grid.Column="4" FontWeight="Bold" Background="Transparent"/>
-            <materialDesign:TimePicker x:Name="Deliveredtxtbox" IsEnabled="False" HorizontalAlignment="Left" Margin="0,310,0,0" Text="{Binding DeliveredTime, Mode=OneWay}" VerticalAlignment="Top"  Width="150" FontSize="11" Height="40" Grid.Column="4" FontWeight="Bold" Background="Transparent"/>
-            <Label x:Name="Deliverylbl" Content="Delivery:" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Column="5" Height="40" Margin="0,70,0,0" FontWeight="Bold" FontSize="14"/>
-            <Button x:Name="Deliverybt" Content="Delivery" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="40" Width="80" Grid.Column="5" FontWeight="Bold" FontSize="14" Background="Transparent" Margin="0,130,0,0" Click="Deliverybt_Click" />
-            <Button x:Name="Exitbt" Content="exit" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="40" Width="80" Grid.Row="2" Grid.Column="5" FontWeight="Bold" FontSize="14" Background="Transparent" Click="Exitbt_Click"/>
+            <Button x:Name="Targetbt" Content="show target customer" HorizontalAlignment="Left" Margin="30,261,0,0" VerticalAlignment="Top" Width="150" FontSize="11" Height="40"  FontWeight="Bold" Click="Targetbt_Click" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="Weighttxtbox" HorizontalAlignment="Left" Margin="51,80,0,0" Text="{Binding Weight, Mode=OneWay}"  VerticalAlignment="Top" Width="108" Height="40" IsReadOnly="True"  materialDesign:HintAssist.Hint="Weight" materialDesign:HintAssist.IsFloating="True" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="Prioritytxtbox" HorizontalAlignment="Left" Margin="51,135,0,0" Text="{Binding Priority, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="40" IsReadOnly="True"  materialDesign:HintAssist.Hint="Priority" materialDesign:HintAssist.IsFloating="True" Grid.ColumnSpan="2"/>
+            <Button x:Name="Dronebt" HorizontalAlignment="Center" Margin="0,127,0,0" Content="show drone" VerticalAlignment="Top" Width="110" Height="30" Grid.Column="2" Click="Dronebt_Click" FontSize="11" />
+            <materialDesign:TimePicker x:Name="Requestedtxtbox" IsEnabled="False" Text="{Binding RequestedTime, Mode=OneWay}" HorizontalAlignment="Left" Margin="44,44,0,0" VerticalAlignment="Top" Width="150" FontSize="11" Height="40" Grid.Column="1" FontWeight="Bold" Background="Transparent" materialDesign:HintAssist.Hint="Requested time" materialDesign:HintAssist.IsFloating="True" Grid.ColumnSpan="2"/>
+            <materialDesign:TimePicker x:Name="Scheduledtxtbox" IsEnabled="False" Text="{Binding ScheduledTime, Mode=OneWay}" HorizontalAlignment="Left" Margin="44,100,0,0" VerticalAlignment="Top" Width="150" FontSize="11" Height="40" Grid.Column="1" FontWeight="Bold" Background="Transparent" materialDesign:HintAssist.Hint="Scheduled time" materialDesign:HintAssist.IsFloating="True" Grid.ColumnSpan="2"/>
+            <materialDesign:TimePicker x:Name="PickedUptxtbox" IsEnabled="False" HorizontalAlignment="Left" Text="{Binding PickedUpTime, Mode=OneWay}"  Width="150" FontSize="11" Height="40" Grid.Column="1" FontWeight="Bold" Background="Transparent" materialDesign:HintAssist.Hint="PickedUp time" materialDesign:HintAssist.IsFloating="True" Grid.ColumnSpan="2" Margin="44,160,0,0" VerticalAlignment="Top"/>
+            <materialDesign:TimePicker x:Name="Deliveredtxtbox" IsEnabled="False" HorizontalAlignment="Left" Margin="44,220,0,0" Text="{Binding DeliveredTime, Mode=OneWay}" VerticalAlignment="Top"  Width="150" FontSize="11" Height="40" Grid.Column="1" FontWeight="Bold" Background="Transparent" materialDesign:HintAssist.Hint="Delivered time" materialDesign:HintAssist.IsFloating="True" Grid.ColumnSpan="2"/>
+            <Label x:Name="Deliverylbl" Content="Delivery:" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Column="2" Height="23" Margin="0,41,0,0" FontWeight="Bold" FontSize="11"/>
+            <Button x:Name="Deliverybt" Content="Delivery" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="32" Width="110" Grid.Column="2" FontWeight="Bold" FontSize="11" Margin="0,79,0,0" Click="Deliverybt_Click" />
+            <Button x:Name="Exitbt" Content="exit" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="26" Width="70" Grid.Column="2" FontWeight="Bold" FontSize="11" Click="Exitbt_Click" Margin="91,283,0,0"/>
         </Grid>
     </Grid>
 </Window>
