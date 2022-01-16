@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="CustomerParcelsListWindow" Height="450" Width="800">
+        Title="CustomerParcelsListWindow" Height="370" Width="650">
     <Grid x:Name="MainGrid">
-        <Grid x:Name="ParcelsFromCustomer" Visibility="Visible">
-            <ListView x:Name="FromCustomerList" Margin="0,0,0,77" MouseDoubleClick="FromCustomerList_MouseDoubleClick">
+        <Grid x:Name="ParcelsFromCustomer" Visibility="Hidden" Background="#FFD3F6F3">
+            <ListView x:Name="FromCustomerList" Margin="31,32,27,103" MouseDoubleClick="FromCustomerList_MouseDoubleClick" >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -25,10 +25,10 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button x:Name="Exitbutn" Content="Exit" HorizontalAlignment="Left" Margin="665,367,0,0" VerticalAlignment="Top" Height="40" Width="97" Click="Exitbtn_Click"/>
+            <Button x:Name="Exitbutn" Content="Exit" HorizontalAlignment="Left" Margin="549,292,0,0" VerticalAlignment="Top" Height="27" Width="74" Click="Exitbtn_Click" FontSize="11"/>
         </Grid>
-        <Grid x:Name="ParcelsToCustomer" Visibility="Hidden">
-            <ListView x:Name="ToCustomerList" MouseDoubleClick="ToCustomerList_MouseDoubleClick">
+        <Grid x:Name="ParcelsToCustomer" Visibility="Visible" Background="#FFD3F6F3">
+            <ListView x:Name="ToCustomerList" MouseDoubleClick="ToCustomerList_MouseDoubleClick" Margin="28,29,28,105" >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -44,8 +44,8 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button x:Name="Exitbtn" Content="Exit" HorizontalAlignment="Left" Margin="665,367,0,0" VerticalAlignment="Top" Height="40" Width="97" Click="Exitbtn_Click"/>
+            <Button x:Name="Exitbtn" Content="Exit" HorizontalAlignment="Left" Margin="526,285,0,0" VerticalAlignment="Top" Height="27" Width="78" Click="Exitbtn_Click" FontSize="11"/>
         </Grid>
-        
+
     </Grid>
 </Window>

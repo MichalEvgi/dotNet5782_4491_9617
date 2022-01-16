@@ -96,6 +96,8 @@ namespace PL
             //show the actions only
             actions.Visibility = Visibility.Visible;
             addDrone.Visibility = Visibility.Hidden;
+            this.Height = 450;
+            this.Width = 400;
             if (selectedDrone.Status != DroneStatus.Delivery)
             { //the drone is not in delivery
                 //hide the transfered parcel

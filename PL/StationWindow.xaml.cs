@@ -160,6 +160,8 @@ namespace PL
             DataContext = selectedStation;
             addStaion.Visibility = Visibility.Hidden;
             actions.Visibility = Visibility.Visible;
+            this.Height = 380;
+            this.Width = 300;
         }
 
         private void Exitbt_Click(object sender, RoutedEventArgs e)

@@ -59,5 +59,10 @@ namespace PL
             if (FromCustomerList.SelectedItem != null)
                 new ParcelWindow(bl, (ParcelInCustomer)FromCustomerList.SelectedItem, 1).Show();
         }
+
+        private void Setter_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
+        {
+
+        }
     }
 }
