@@ -190,6 +190,9 @@ namespace PL
 
         private void ChargeListbt_Click(object sender, RoutedEventArgs e)
         {
+            if (selectedStation.DronesInCharging.Count() == 0)
+                MessageBox.Show("There are no drones in charging");
+            else
             new ChargingListWindow(bl, selectedStation).Show();
         }
     }
