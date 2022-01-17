@@ -15,7 +15,7 @@ namespace BL
     {
         #region INITIALIZE
         internal IDal dal;
-        private List<DroneToList> drones;
+        internal List<DroneToList> drones;
         private static Random rand = new Random();
 
         #region Singelton
@@ -1039,15 +1039,16 @@ namespace BL
                 // if parcel is not picked up yet
                 if (parcel.PickedUp == null)
                     throw new ParcelModeException("The parcel is not picked up yet");
-                DO.Customer c = dal.GetCustomerById(parcel.TargetId);
+                DO.Customer cs = dal.GetCustomerById(parcel.SenderId);
+                DO.Customer ct = dal.GetCustomerById(parcel.TargetId);
                 // update DAL
                 dal.DeliverParcel(parcel.Id);
 
                 // get distance in order to update battery
-                double dis = dal.Distance(drones[index].CurrentLocation.Longitude, drones[index].CurrentLocation.Lattitude, c.Longitude, c.Lattitude);
+                double dis = dal.Distance(cs.Longitude, cs.Lattitude, ct.Longitude, ct.Lattitude);
                 // update BL
                 drones[index].Battery -= dis * dal.ElectricityRequest().ElementAt((int)parcel.Weight + 1);
-                drones[index].CurrentLocation = new Location { Longitude = c.Longitude, Lattitude = c.Lattitude };
+                drones[index].CurrentLocation = new Location { Longitude = ct.Longitude, Lattitude = ct.Lattitude };
                 drones[index].Status = DroneStatus.Available;
                 drones[index].ParcelId = null;
             }
