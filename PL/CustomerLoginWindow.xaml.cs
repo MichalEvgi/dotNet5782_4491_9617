@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
+using System.ComponentModel;
 
 namespace PL
 {
@@ -22,10 +23,30 @@ namespace PL
     public partial class CustomerLoginWindow : Window
     {
         private IBL bL;
+        Customer customer;
+        public bool ClosingWindow { get; private set; } = true;
         public CustomerLoginWindow(IBL bl,Customer c)
         {
             bL = bl;
+            customer = c;
             InitializeComponent();
+            FromcustomerList.ItemsSource = customer.FromCustomer;
+            TocustomerList.ItemsSource = customer.ToCustomer;
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = ClosingWindow;
+        }
+        private void Exitbtn_Click(object sender, RoutedEventArgs e)
+        {
+            ClosingWindow = false;
+            this.Close();
+        }
+
+        private void Addparcelbtn_Click(object sender, RoutedEventArgs e)
+        {
+            new ParcelWindow(bL, customer, this).Show();
         }
     }
 }

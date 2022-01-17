@@ -123,7 +123,8 @@ namespace PL
                     });
                     if(pr!=null)
                        pr.ParcelListView.ItemsSource = bl.GetParcelsList();
-                    //clg.FromcustomerList.ItemsSource = customer.FromCustomer;
+                    if (clg != null)
+                        clg.FromcustomerList.ItemsSource = bl.GetCustomer(customer.Id).FromCustomer;
                     //seccessfully added message
                     MessageBoxResult result = MessageBox.Show("Seccussfuly added");
                     if (result == MessageBoxResult.OK)
@@ -280,6 +281,8 @@ namespace PL
             actions.Visibility = Visibility.Visible;
             Senderbt.Visibility = Visibility.Collapsed;
             Targetbt.Visibility = Visibility.Collapsed;
+            this.Height = 360;
+            this.Width = 560;
             OtherCustomerlbl.Visibility = Visibility.Visible;
             Othertxtbox.Visibility = Visibility.Visible;
             Othertxtbox.Text = parcel.OtherCustomer.ToString();
