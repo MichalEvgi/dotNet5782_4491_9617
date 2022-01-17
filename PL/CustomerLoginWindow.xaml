@@ -49,8 +49,8 @@
         <Button x:Name="Addparcelbtn" Content="Add parcel" HorizontalAlignment="Left" Margin="81,65,0,0" VerticalAlignment="Top" Width="141" Height="35" Click="Addparcelbtn_Click"/>
         <ComboBox x:Name="Pickupcmb" HorizontalAlignment="Left" Margin="102,158,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="Deliverycmb" HorizontalAlignment="Left" Margin="102,304,0,0" VerticalAlignment="Top" Width="120"/>
-        <CheckBox x:Name="PickupCheck" Content="" HorizontalAlignment="Left" Margin="203,199,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="Deliverycheck" Content="" HorizontalAlignment="Left" Margin="203,358,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="PickupCheck" Content="" HorizontalAlignment="Left" Margin="203,199,0,0" VerticalAlignment="Top" Checked="PickupCheck_Checked"/>
+        <CheckBox x:Name="Deliverycheck" Content="" HorizontalAlignment="Left" Margin="203,358,0,0" VerticalAlignment="Top" Checked="Deliverycheck_Checked"/>
 
     </Grid>
 </Window>
