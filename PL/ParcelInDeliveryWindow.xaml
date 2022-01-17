@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="ParcelInDeliveryWindow" Height="390" Width="360">
+        Title="ParcelInDeliveryWindow" Height="390" Width="360" WindowStartupLocation="CenterScreen">
     <Grid x:Name="MainGrid" Background="#FFD3F6F3">
         <TextBox x:Name="Targettxtbox" Text="{Binding Target, Mode=OneWay}" materialDesign:HintAssist.Hint="Target:" materialDesign:HintAssist.IsFloating="True" IsReadOnly="True" HorizontalAlignment="Left" Margin="204,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="Prioritytxtbox" Text="{Binding Priority, Mode=OneWay}" materialDesign:HintAssist.Hint="Priority:" materialDesign:HintAssist.IsFloating="True" IsReadOnly="True" HorizontalAlignment="Left" Margin="32,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>

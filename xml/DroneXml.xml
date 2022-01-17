@@ -25,4 +25,14 @@
     <Model>fasty</Model>
     <MaxWeight>Medium</MaxWeight>
   </Drone>
+  <Drone>
+    <Id>4444</Id>
+    <Model>gthyj</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>4567</Id>
+    <Model>REAR</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
 </ArrayOfDrone>

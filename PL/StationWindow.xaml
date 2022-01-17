@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-        Title="StationWindow" Height="640" Width="800">
+        Title="StationWindow" Height="640" Width="800" WindowStartupLocation="CenterScreen">
     <Grid x:Name="MainGrid">
         <Grid x:Name="addStaion" Visibility="Hidden" Background="#FFD3F6F3" Width="300" Height="450">
             <TextBox x:Name="IdtxtBox" HorizontalAlignment="Center" Margin="0,25,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" Height="45" TextChanged="IdtxtBox_TextChanged" materialDesign:HintAssist.Hint="Id" materialDesign:HintAssist.IsFloating="True"/>

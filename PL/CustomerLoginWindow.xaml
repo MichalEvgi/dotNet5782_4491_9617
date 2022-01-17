@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.CustomerLoginWindow"
         mc:Ignorable="d"
-        Title="CustomerLoginWindow" Height="450" Width="800">
+        Title="CustomerLoginWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Background="#FFD3F6F3">
 
         <materialDesign:Card HorizontalAlignment="Left" Margin="367,53,0,0" VerticalAlignment="Top" Height="130" Width="397">

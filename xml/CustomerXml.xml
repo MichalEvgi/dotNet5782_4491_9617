@@ -49,4 +49,11 @@
     <Longitude>35.07</Longitude>
     <Lattitude>31.04</Lattitude>
   </Customer>
+  <Customer>
+    <Id>213259617</Id>
+    <Name>rivki</Name>
+    <Phone>0583330777</Phone>
+    <Longitude>35</Longitude>
+    <Lattitude>31</Lattitude>
+  </Customer>
 </ArrayOfCustomer>
