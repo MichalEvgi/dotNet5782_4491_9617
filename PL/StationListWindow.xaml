@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="StationListWindow" Height="450" Width="600">
     <Grid Name="MainGrid" Background="#FFD3F6F3">
@@ -63,7 +63,7 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <Button Name="AddStation" Content="Add new station" Width="164" Height="30" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="314,0,0,0" Click="AddStation_Click" FontWeight="Bold" FontSize="16" Background="Transparent"/>
-        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="490,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="30" Width="87" Click="ExitButton_Click" FontWeight="Bold" FontSize="16" Background="Transparent"/>
+        <Button Name="AddStation" Content="Add new station" Height="30" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="314,0,0,0" Click="AddStation_Click" FontWeight="Bold" FontSize="16" />
+        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="490,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="30" Click="ExitButton_Click" FontWeight="Bold" FontSize="16"/>
     </Grid>
 </Window>
