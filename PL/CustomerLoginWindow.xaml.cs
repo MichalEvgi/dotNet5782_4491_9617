@@ -34,11 +34,13 @@ namespace PL
             TocustomerList.ItemsSource = customer.ToCustomer;
             foreach(ParcelInCustomer p in customer.FromCustomer)
             {
-                Pickupcmb.Items.Add(p.Id);
+                if(p.ParcelMode==ParcelModes.Associated)
+                   Pickupcmb.Items.Add(p.Id);
             }
             foreach (ParcelInCustomer p in customer.ToCustomer)
             {
-                Deliverycmb.Items.Add(p.Id);
+                if(p.ParcelMode== ParcelModes.Collected)
+                  Deliverycmb.Items.Add(p.Id);
             }
         }
 
@@ -55,6 +57,60 @@ namespace PL
         private void Addparcelbtn_Click(object sender, RoutedEventArgs e)
         {
             new ParcelWindow(bL, customer, this).Show();
+        }
+
+        private void PickupCheck_Checked(object sender, RoutedEventArgs e)
+        {
+            if(PickupCheck.IsChecked==true && Pickupcmb.SelectedItem!= null)
+            {
+                try 
+                {
+                    Parcel p = bL.GetParcel(Convert.ToInt32(Pickupcmb.SelectedItem));
+                    if(p.DroneP!=null)
+                       bL.PickParcel(p.DroneP.Id);
+                    MessageBox.Show("The parcel picked up successfully");
+                }
+                catch(DroneStatusException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                catch(NotFoundException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                catch(ParcelModeException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+
+
+
+            }
+        }
+
+        private void Deliverycheck_Checked(object sender, RoutedEventArgs e)
+        {
+            if(Deliverycheck.IsChecked==true && Deliverycmb.SelectedItem!=null)
+            {
+                try
+                {
+                    Parcel p = bL.GetParcel(Convert.ToInt32(Deliverycmb.SelectedItem));
+                    bL.DeliverParcel(p.DroneP.Id);
+                    MessageBox.Show("The parcel delivered successfully");
+                }
+                catch(DroneStatusException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                catch(NotFoundException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                catch(ParcelModeException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
         }
     }
 }

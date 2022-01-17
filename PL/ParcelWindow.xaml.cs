@@ -130,6 +130,7 @@ namespace PL
                         clg.Pickupcmb.Items.Clear();
                         foreach (ParcelInCustomer p in customer.FromCustomer)
                         {
+                            if(p.ParcelMode== ParcelModes.Associated)
                             clg.Pickupcmb.Items.Add(p.Id);
                         }
                     }
