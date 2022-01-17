@@ -25,6 +25,11 @@ namespace PL
         private IBL bL;
         Customer customer;
         public bool ClosingWindow { get; private set; } = true;
+        /// <summary>
+        /// opening the customer interface window
+        /// </summary>
+        /// <param name="bl">IBL interface</param>
+        /// <param name="c">customer</param>
         public CustomerLoginWindow(IBL bl,Customer c)
         {
             bL = bl;
@@ -43,22 +48,31 @@ namespace PL
                   Deliverycmb.Items.Add(p.Id);
             }
         }
-
+        /// <summary>
+        /// close window event. close window if  ClosingWindow=false
+        /// </summary>
         protected override void OnClosing(CancelEventArgs e)
         {
             e.Cancel = ClosingWindow;
         }
+        /// <summary>
+        /// click on exit button event
+        /// </summary>
         private void Exitbtn_Click(object sender, RoutedEventArgs e)
         {
             ClosingWindow = false;
             this.Close();
         }
-
+        /// <summary>
+        /// add parcel by customer
+        /// </summary>
         private void Addparcelbtn_Click(object sender, RoutedEventArgs e)
         {
             new ParcelWindow(bL, customer, this).Show();
         }
-
+        /// <summary>
+        /// Confirmation of picking up the parcel
+        /// </summary>
         private void PickupCheck_Checked(object sender, RoutedEventArgs e)
         {
             if(PickupCheck.IsChecked==true && Pickupcmb.SelectedItem!= null)
@@ -82,12 +96,11 @@ namespace PL
                 {
                     MessageBox.Show(ex.ToString());
                 }
-
-
-
             }
         }
-
+        /// <summary>
+        /// Confirmation of delivering the parcel
+        /// </summary>
         private void Deliverycheck_Checked(object sender, RoutedEventArgs e)
         {
             if(Deliverycheck.IsChecked==true && Deliverycmb.SelectedItem!=null)
