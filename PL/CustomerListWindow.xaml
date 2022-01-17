@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto">
         </Grid>
-        <ListView x:Name="CustomerListView" Grid.Row="1" MouseDoubleClick="CustomerListView_MouseDoubleClick">
+        <ListView x:Name="CustomerListView" MouseDoubleClick="CustomerListView_MouseDoubleClick" Margin="0,47,0,10" Grid.RowSpan="2">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -33,7 +33,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="AddCustomer" Content="Add new customer" Height="30" Grid.Row="2" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="514,0,0,6"  FontWeight="Bold" FontSize="16" Click="AddCustomer_Click_1"/>
-        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="695,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="30"   FontWeight="Bold" FontSize="16" Click="ExitButton_Click_1"/>
+        <Button x:Name="AddCustomer" Content="Add new customer" Height="30" Grid.Row="2" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="560,0,0,0"  FontWeight="Bold" FontSize="11" Click="AddCustomer_Click_1" Width="130"/>
+        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="706,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="30"   FontWeight="Bold" FontSize="11" Click="ExitButton_Click_1"/>
     </Grid>
 </Window>

@@ -9,8 +9,8 @@
         Title="CustomerLoginWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Background="#FFD3F6F3">
 
-        <materialDesign:Card HorizontalAlignment="Left" Margin="367,53,0,0" VerticalAlignment="Top" Height="130" Width="397">
-            <ListView x:Name="FromcustomerList">
+        <materialDesign:Card HorizontalAlignment="Left" Margin="268,57,0,0" VerticalAlignment="Top" Height="140" Width="460">
+            <ListView x:Name="FromcustomerList"  >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -27,7 +27,7 @@
                 </ListView.View>
             </ListView>
         </materialDesign:Card>
-        <materialDesign:Card HorizontalAlignment="Left" Margin="367,217,0,0" VerticalAlignment="Top" Height="133" Width="397">
+        <materialDesign:Card HorizontalAlignment="Left" Margin="268,222,0,0" VerticalAlignment="Top" Height="140" Width="460">
             <ListView x:Name="TocustomerList">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
@@ -45,12 +45,31 @@
                 </ListView.View>
             </ListView>
         </materialDesign:Card>
-        <Button x:Name="Exitbtn" Content="Exit" HorizontalAlignment="Left" Margin="714,373,0,0" VerticalAlignment="Top" FontSize="11" Click="Exitbtn_Click"/>
-        <Button x:Name="Addparcelbtn" Content="Add parcel" HorizontalAlignment="Left" Margin="81,65,0,0" VerticalAlignment="Top" Width="141" Height="35" Click="Addparcelbtn_Click"/>
-        <ComboBox x:Name="Pickupcmb" HorizontalAlignment="Left" Margin="102,158,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="Deliverycmb" HorizontalAlignment="Left" Margin="102,304,0,0" VerticalAlignment="Top" Width="120"/>
-        <CheckBox x:Name="PickupCheck" Content="" HorizontalAlignment="Left" Margin="203,199,0,0" VerticalAlignment="Top" Checked="PickupCheck_Checked"/>
-        <CheckBox x:Name="Deliverycheck" Content="" HorizontalAlignment="Left" Margin="203,358,0,0" VerticalAlignment="Top" Checked="Deliverycheck_Checked"/>
-
+        <Button x:Name="Exitbtn" Content="Exit" HorizontalAlignment="Left" Margin="715,367,0,0" VerticalAlignment="Top" FontSize="11" Click="Exitbtn_Click"/>
+        <Button x:Name="Addparcelbtn" Content="Add parcel" HorizontalAlignment="Left" Margin="43,327,0,0" VerticalAlignment="Top" Width="141" Height="35" Click="Addparcelbtn_Click"/>
+        <ComboBox x:Name="Pickupcmb" HorizontalAlignment="Left" Margin="35,58,0,0" VerticalAlignment="Top" Width="149" Height="44" materialDesign:HintAssist.Hint="Waiting for pick up" materialDesign:HintAssist.IsFloating="True"/>
+        <ComboBox x:Name="Deliverycmb" HorizontalAlignment="Left" Margin="35,188,0,0" VerticalAlignment="Top" Width="149" materialDesign:HintAssist.Hint="Waiting for delivery" materialDesign:HintAssist.IsFloating="True"/>
+        <CheckBox x:Name="PickupCheck" Content="" HorizontalAlignment="Left" Margin="162,118,0,0" VerticalAlignment="Top" Checked="PickupCheck_Checked" Height="18" Width="22"/>
+        <CheckBox x:Name="Deliverycheck" Content="" HorizontalAlignment="Left" Margin="162,241,0,0" VerticalAlignment="Top" Checked="Deliverycheck_Checked"/>
+        <materialDesign:PackIcon Kind="Output" Height="20" Width="35" Margin="731,102,0,0" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF5D26C4" Foreground="#FF5D26C4">
+            <materialDesign:PackIcon.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90.404"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </materialDesign:PackIcon.RenderTransform>
+        </materialDesign:PackIcon>
+        <materialDesign:PackIcon Kind="Input" Margin="727,0,0,125" VerticalAlignment="Bottom" Height="20" Width="35" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF5D26C4" Foreground="#FF5D26C4">
+            <materialDesign:PackIcon.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90.628"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </materialDesign:PackIcon.RenderTransform>
+        </materialDesign:PackIcon>
     </Grid>
 </Window>

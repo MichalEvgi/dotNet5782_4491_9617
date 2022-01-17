@@ -21,8 +21,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <Button x:Name="SenderGrop" Content="Sender group" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Click="SenderGrop_Click"/>
-            <Button x:Name="TargetGroup" Content="Target group" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Click="TargetGroup_Click"/>
+            <Button x:Name="SenderGrop" Content="Sender group" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Click="SenderGrop_Click" FontSize="12"/>
+            <Button x:Name="TargetGroup" Content="Target group" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Click="TargetGroup_Click" FontSize="12"/>
             <ComboBox x:Name="ParcelModecmb" HorizontalAlignment="Center" materialDesign:HintAssist.Hint="Parcel mode:" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Center" Width="120" SelectionChanged="ParcelModecmb_SelectionChanged"/>
             <ComboBox x:Name="Prioritycmb" Grid.Column="1" HorizontalAlignment="Center" materialDesign:HintAssist.Hint="Priority:" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Center" Width="120" SelectionChanged="Prioritycmb_SelectionChanged" />
             <Button x:Name="refresh" Content="" Background="Transparent" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="0" VerticalAlignment="Center" Height="27" Width="27" Click="refresh_Click" BorderBrush="{x:Null}"/>
@@ -71,7 +71,7 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <Button Name="AddParcel" Content="Add new parcel" Height="30" Grid.Row="2" RenderTransformOrigin="0.536,0.696" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="532,0,0,0" Click="AddParcel_Click" FontWeight="Bold" FontSize="16"/>
-        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="695,0,0,4" Grid.Row="2" VerticalAlignment="Bottom" Height="30" Click="ExitButton_Click" FontWeight="Bold" FontSize="16" />
+        <Button Name="AddParcel" Content="Add new parcel" Height="30" Grid.Row="2" RenderTransformOrigin="0.536,0.696" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="592,0,0,0" Click="AddParcel_Click" FontWeight="Bold" FontSize="11"/>
+        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="720,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="30" Click="ExitButton_Click" FontWeight="Bold" FontSize="11" />
     </Grid>
 </Window>

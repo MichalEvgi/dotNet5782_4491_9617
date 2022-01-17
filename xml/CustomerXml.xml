@@ -1,13 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Customer>
-    <Id>160739554</Id>
-    <Name>ELHANAN</Name>
-    <Phone>0558867934</Phone>
-    <Longitude>35</Longitude>
-    <Lattitude>31.05</Lattitude>
-  </Customer>
-  <Customer>
     <Id>212372312</Id>
     <Name>NATHAN</Name>
     <Phone>0553835038</Phone>
@@ -55,5 +48,19 @@
     <Phone>0583330777</Phone>
     <Longitude>35</Longitude>
     <Lattitude>31</Lattitude>
+  </Customer>
+  <Customer>
+    <Id>213259616</Id>
+    <Name>tirza</Name>
+    <Phone>0532145698</Phone>
+    <Longitude>35.1</Longitude>
+    <Lattitude>31</Lattitude>
+  </Customer>
+  <Customer>
+    <Id>160739554</Id>
+    <Name>tre</Name>
+    <Phone>0558867934</Phone>
+    <Longitude>35</Longitude>
+    <Lattitude>31.05</Lattitude>
   </Customer>
 </ArrayOfCustomer>
