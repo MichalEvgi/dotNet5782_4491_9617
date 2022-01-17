@@ -103,7 +103,7 @@ namespace PL
                         Priority = (Priorities)PriorityCmb.SelectedItem
                     });
                     if (pr != null)
-                        pr.ParcelListView.ItemsSource = bl.GetParcelsList();
+                        pr.SelectorChanges();
                     if (clg != null)
                     {
                         customer = bl.GetCustomer(customer.Id);
@@ -229,7 +229,7 @@ namespace PL
             if (result == MessageBoxResult.OK)
             {
                 bl.DeleteParcel(selectedParcel.Id);
-                pr.ParcelListView.ItemsSource = bl.GetParcelsList();
+                pr.SelectorChanges();
                 MessageBoxResult result2 = MessageBox.Show("Deleted successfuly");
                 if (result2 == MessageBoxResult.OK)
                 {
@@ -263,7 +263,7 @@ namespace PL
                 //seccessfuly picked up message
                 MessageBox.Show("Picked up seccessfuly");
                 //updating
-                pr.ParcelListView.ItemsSource = bl.GetParcelsList();
+                pr.SelectorChanges();
                 selectedParcel = bl.GetParcel(selectedParcel.Id);
                 DataContext = selectedParcel;
                 PickedUptxtbox.Visibility = Visibility.Visible;
@@ -297,7 +297,7 @@ namespace PL
                 //updating
                 selectedParcel = bl.GetParcel(selectedParcel.Id);
                 DataContext = selectedParcel;
-                pr.ParcelListView.ItemsSource = bl.GetParcelsList();
+                pr.SelectorChanges();
                 Deliveredtxtbox.Visibility = Visibility.Visible;
                 Dronebt.Visibility = Visibility.Collapsed;
                 //change delivery button state
