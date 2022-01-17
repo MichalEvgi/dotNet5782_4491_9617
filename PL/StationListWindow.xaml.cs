@@ -25,6 +25,10 @@ namespace PL
     {
         IBL bl;
         public bool ClosingWindow { get; private set; } = true;
+        /// <summary>
+        /// open stations list window
+        /// </summary>
+        /// <param name="bL">IBL interface</param>
         public StationListWindow(IBL bL)
         {
             bl = bL;
@@ -34,11 +38,10 @@ namespace PL
             SlotSelector.Items.Add("Clear filter");
 
         }
-
-        private void StationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SelectorChanges();
-        }
+        
+        /// <summary>
+        /// refresh the list view
+        /// </summary>
         private void SelectorChanges()
         {
             if (SlotSelector.SelectedItem == null || SlotSelector.SelectedItem.ToString() == "Clear filter")
@@ -46,34 +49,48 @@ namespace PL
             else
                 StationListView.ItemsSource = bl.AvailableStations();
         }
-
+        /// <summary>
+        /// close window event. close window if  ClosingWindow=false
+        /// </summary>
         protected override void OnClosing(CancelEventArgs e)
         {
             e.Cancel = ClosingWindow;
         }
-        //close window
+        /// <summary>
+        /// click on exit button event
+        /// </summary>
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             ClosingWindow = false;
             this.Close();
         }
-
+        /// <summary>
+        /// open add station window
+        /// </summary>
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
             new StationWindow(bl, this).Show();
         }
-
+        /// <summary>
+        /// open station action window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StationListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (StationListView.SelectedItem != null)
                 new StationWindow(bl, (StationToList)(StationListView.SelectedItem), this).Show();
         }
-
+        /// <summary>
+        /// selected filter event
+        /// </summary>
         private void SlotsSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectorChanges();
         }
-        //bool grouped;
+        /// <summary>
+        /// grouping clicked
+        /// </summary>
         private void amountbtn_Click(object sender, RoutedEventArgs e)
         {
             IEnumerable<IGrouping<int, StationToList>> stationGroup = from st in bl.GetStationsList() group st by st.AvailableSlots;
@@ -96,7 +113,9 @@ namespace PL
                 view.GroupDescriptions.Add(groupDescription);
             }
         }
-
+        /// <summary>
+        /// refresh grouping
+        /// </summary>
         private void refresh_Click(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationListView.ItemsSource);
