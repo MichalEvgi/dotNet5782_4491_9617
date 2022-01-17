@@ -25,6 +25,12 @@ namespace PL
         IBL bl;
         ParcelInTransfer selectedParcel;
         int droneId;
+        /// <summary>
+        /// open the parcel in delivery with drone window
+        /// </summary>
+        /// <param name="bL">IBL interface</param>
+        /// <param name="parcel">parcel in transfer</param>
+        /// <param name="droneid">drone's id that take the parcel</param>
         public ParcelInDeliveryWindow(IBL bL, ParcelInTransfer parcel, int droneid)
         {
             bl = bL;
@@ -33,12 +39,17 @@ namespace PL
             selectedParcel = parcel;
             DataContext = selectedParcel;
         }
+        /// <summary>
+        /// refresh this window
+        /// </summary>
         public void ParcelChange()
         {
             selectedParcel = bl.GetDrone(droneId).TransferedParcel;
             DataContext = selectedParcel;
         }
-
+        /// <summary>
+        /// close the window
+        /// </summary>
         private void Exitbt_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

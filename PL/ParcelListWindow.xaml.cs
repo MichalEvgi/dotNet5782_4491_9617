@@ -24,6 +24,10 @@ namespace PL
     {
         IBL bl;
         public bool ClosingWindow { get; private set; } = true;
+        /// <summary>
+        /// open parcel list window
+        /// </summary>
+        /// <param name="bL">IBL interface</param>
         public ParcelListWindow(IBL bL)
         {
             bl = bL;
@@ -42,27 +46,39 @@ namespace PL
             Prioritycmb.Items.Add("Clear filter");
 
         }
+        /// <summary>
+        /// open chosen parcel window
+        /// </summary>
         private void ParcelListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ParcelListView.SelectedItem != null)
                 new ParcelWindow(bl, (ParcelToList)(ParcelListView.SelectedItem), this).Show();
         }
-
+        /// <summary>
+        /// close window event. close window if  ClosingWindow=false
+        /// </summary>
         protected override void OnClosing(CancelEventArgs e)
         {
             e.Cancel = ClosingWindow;
         }
+        /// <summary>
+        /// click on exit button event
+        /// </summary>
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             ClosingWindow = false;
             this.Close();
         }
-
+        /// <summary>
+        /// open add parcel window
+        /// </summary>
         private void AddParcel_Click(object sender, RoutedEventArgs e)
         {
             new ParcelWindow(bl, this).Show();
         }
-
+        /// <summary>
+        /// group the list by sender name
+        /// </summary>
         private void SenderGrop_Click(object sender, RoutedEventArgs e)
         {
             IEnumerable<IGrouping<string, ParcelToList>> parcelGroup = from par in bl.GetParcelsList() group par by par.SenderName;
@@ -85,7 +101,9 @@ namespace PL
                 view.GroupDescriptions.Add(groupDescription);
             }
         }
-
+        /// <summary>
+        /// group the list by target name
+        /// </summary>
         private void TargetGroup_Click(object sender, RoutedEventArgs e)
         {
             IEnumerable<IGrouping<string, ParcelToList>> parcelGroup = from par in bl.GetParcelsList() group par by par.TargetName;
@@ -108,11 +126,16 @@ namespace PL
                 view.GroupDescriptions.Add(groupDescription);
             }
         }
-
+        /// <summary>
+        /// parcel mode seclected event
+        /// </summary>
         private void ParcelModecmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectorChanges();
         }
+        /// <summary>
+        /// refresh the list view
+        /// </summary>
         public void SelectorChanges()
         {
             if ((ParcelModecmb.SelectedItem == null || ParcelModecmb.SelectedItem.ToString() == "Clear filter") && (Prioritycmb.SelectedItem == null || Prioritycmb.SelectedItem.ToString() == "Clear filter"))
@@ -136,27 +159,39 @@ namespace PL
                 }
             }
         }
-
+        /// <summary>
+        /// priority selected
+        /// </summary>
         private void Prioritycmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectorChanges();
         }
+        /// <summary>
+        /// refresh grouping
+        /// </summary>
         private void refresh_Click(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
             view.GroupDescriptions.Clear();
             SelectorChanges();
         }
-
+        /// <summary>
+        /// from date selected
+        /// </summary>
         private void DatePicker_CalendarClosed(object sender, RoutedEventArgs e)
         {
             timePicked();
         }
-
+        /// <summary>
+        /// to date selected
+        /// </summary>
         private void DatePicker_CalendarClosed_1(object sender, RoutedEventArgs e)
         {
             timePicked();
         }
+        /// <summary>
+        /// date selected
+        /// </summary>
         private void timePicked()
         {
             DateTime? f = from.SelectedDate;

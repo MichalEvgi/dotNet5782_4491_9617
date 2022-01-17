@@ -26,7 +26,12 @@ namespace PL
         IBL bl;
         private DroneListWindow dr;
         public bool ClosingWindow { get; private set; } = true;
-        //open add drone window
+        #region ADD DRONE
+        /// <summary>
+        /// open add drone window
+        /// </summary>
+        /// <param name="bL">IBL interface</param>
+        /// <param name="dlw">DroneListWindow</param>
         public DroneWindow(IBL bL, DroneListWindow dlw)
         {
             bl = bL;
@@ -40,13 +45,17 @@ namespace PL
             this.Width = 300;
             this.Height = 450;
         }
-        //close window by cancel button
+        /// <summary>
+        /// close window by cancel button
+        /// </summary>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             ClosingWindow = false;
             this.Close();
         }
-        //add drone click button
+        /// <summary>
+        /// add drone click button
+        /// </summary>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -84,10 +93,38 @@ namespace PL
                 MessageBox.Show(ex.ToString());
             }
         }
-        
+        /// <summary>
+        /// check if only number is entered to id textBox
+        /// </summary>
+        private void IdtxtBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
+            if (System.Text.RegularExpressions.Regex.IsMatch(IdtxtBox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                IdtxtBox.Text = IdtxtBox.Text.Remove(IdtxtBox.Text.Length - 1);
+            }
+        }
+        /// <summary>
+        /// check if only number is entered to station id textBox
+        /// </summary>
+        private void SIdtxtBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(SIdtxtBox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                SIdtxtBox.Text = SIdtxtBox.Text.Remove(SIdtxtBox.Text.Length - 1);
+            }
+        }
+        #endregion
+        #region ACTIONS DRONE
         public Drone selectedDrone;
-       //open action drone window
+        /// <summary>
+        /// open action drone window
+        /// </summary>
+        /// <param name="bL">IBL interface</param>
+        /// <param name="drone">selected drone</param>
+        /// <param name="dl">DroneListWindow</param>
         public DroneWindow(IBL bL, DroneToList drone,DroneListWindow dl)
         {
             
@@ -132,7 +169,9 @@ namespace PL
                 Chargingbt.Content = "Send for charging";
             }
         }
-        //update drone model
+        /// <summary>
+        /// update drone model
+        /// </summary>
         private void Updatebt_Click(object sender, RoutedEventArgs e)
         {
             //change the model
@@ -142,7 +181,9 @@ namespace PL
             //updating
             dr.SelectorChanges();
         }
-        //assign drone to parcel
+        /// <summary>
+        /// assign drone to parcel
+        /// </summary>
         private void Deliverybt_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -175,8 +216,10 @@ namespace PL
                 MessageBox.Show(ex.ToString());
             }
         }
-               
-        //charging button click event
+
+        /// <summary>
+        /// charging button click event
+        /// </summary>
         private void Chargingbt_Click(object sender, RoutedEventArgs e)
         {
             if (Chargingbt.Content.ToString() == "Send for charging")
@@ -186,7 +229,9 @@ namespace PL
                 //release from charging
                 SendFromCharge();
         }
-        // send drone for charging
+        /// <summary>
+        /// send drone for charging 
+        /// </summary>
         private void SendToChargeb()
         {
             try
@@ -221,7 +266,9 @@ namespace PL
                 MessageBox.Show(ex.ToString());
             }
         }
-        // realse drone from charging
+        /// <summary>
+        /// realse drone from charging
+        /// </summary>
         private void SendFromCharge()
         {
             try
@@ -249,13 +296,18 @@ namespace PL
                 MessageBox.Show(ex.ToString());
             }
         }
-        //close action drone window
+       
         private bool closeWindow = false;
-
+        /// <summary>
+        /// close window event. close window if  ClosingWindow=false
+        /// </summary>
         protected override void OnClosing(CancelEventArgs e)
         {
             e.Cancel = ClosingWindow;
         }
+        /// <summary>
+        /// close action drone window
+        /// </summary>
         private void Exitbt_Click(object sender, RoutedEventArgs e)
         {
             if(worker!=null)
@@ -273,27 +325,21 @@ namespace PL
             }
                
         }
-        //check if only number is entered to id textBox
-        private void IdtxtBox_TextChanged(object sender, TextChangedEventArgs e)
+        /// <summary>
+        /// open the parcel in transfer window
+        /// </summary>
+        private void Parcelbtn_Click(object sender, RoutedEventArgs e)
         {
-
-            if (System.Text.RegularExpressions.Regex.IsMatch(IdtxtBox.Text, "[^0-9]"))
-            {
-                MessageBox.Show("Please enter only numbers.");
-                IdtxtBox.Text = IdtxtBox.Text.Remove(IdtxtBox.Text.Length - 1);
-            }
+            prcl = new ParcelInDeliveryWindow(bl, selectedDrone.TransferedParcel, selectedDrone.Id);
+            prcl.Show();
         }
-        //check if only number is entered to station id textBox
-        private void SIdtxtBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(SIdtxtBox.Text, "[^0-9]"))
-            {
-                MessageBox.Show("Please enter only numbers.");
-                SIdtxtBox.Text = SIdtxtBox.Text.Remove(SIdtxtBox.Text.Length - 1);
-            }
-        }
-
-        //show the drone in charging details window
+        #endregion
+        #region DRONE IN CHARGE
+        /// <summary>
+        /// show the drone in charging details window
+        /// </summary>
+        /// <param name="bL">IBL interface</param>
+        /// <param name="drone">DroneInCharging</param>
         public DroneWindow(IBL bL, DroneInCharging drone)
         {
             bl = bL;
@@ -317,8 +363,13 @@ namespace PL
             Parcelbtn.Visibility = Visibility.Collapsed;
             Modeltxtbox.IsReadOnly = true;
         }
-
-        //show the drone in parcel details window
+        #endregion
+        #region DRONE IN PARCEL
+        /// <summary>
+        /// show the drone in parcel details window
+        /// </summary>
+        /// <param name="bL">IBL interface</param>
+        /// <param name="drone">DroneInParcel</param>
         public DroneWindow(IBL bL, DroneInParcel drone)
         {
             bl = bL;
@@ -342,16 +393,12 @@ namespace PL
             Parcelbtn.Visibility = Visibility.Collapsed;
             Modeltxtbox.IsReadOnly = true;
         }
-
-        //open the parcel in transfer window
-        private void Parcelbtn_Click(object sender, RoutedEventArgs e)
-        {
-            prcl= new ParcelInDeliveryWindow(bl, selectedDrone.TransferedParcel, selectedDrone.Id);
-            prcl.Show();
-        }
-
+        #endregion
+        #region SIMULATOR
         BackgroundWorker worker;
-
+        /// <summary>
+        /// start/stop the simulator
+        /// </summary>
         private void Simulatorbt_Click(object sender, RoutedEventArgs e)
         {
             if (Simulatorbt.Content.ToString() == "Automatic")
@@ -377,8 +424,9 @@ namespace PL
                 Simulatorbt.IsEnabled = false;
             }
         }
-
-        //playing the simulator
+        /// <summary>
+        ///playing the simulator 
+        /// </summary>
         private void playSimulator()
         {
             worker = new BackgroundWorker() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
@@ -387,21 +435,31 @@ namespace PL
             worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
 
         }
-
+        /// <summary>
+        /// playing the dowork when starting the procces
+        /// </summary>
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             bl.playSimulator(selectedDrone.Id, ReportProgress, IsStop);
         }
+        /// <summary>
+        /// report about changes
+        /// </summary>
         public void ReportProgress()
         {
             worker.ReportProgress(0);
         }
-
+        /// <summary>
+        /// check if the procces stoped
+        /// </summary>
         public bool IsStop()
         {
             return worker.CancellationPending;
         }
         private ParcelInDeliveryWindow prcl;
+        /// <summary>
+        /// changing the display when reporting progress
+        /// </summary>
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             selectedDrone = bl.GetDrone(selectedDrone.Id);
@@ -426,7 +484,9 @@ namespace PL
             } 
             dr.SelectorChanges();
         }
-
+        /// <summary>
+        /// end of the procces
+        /// </summary>
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (prcl != null)
@@ -484,6 +544,6 @@ namespace PL
                 }
             }
         }
-
+        #endregion
     }
 }

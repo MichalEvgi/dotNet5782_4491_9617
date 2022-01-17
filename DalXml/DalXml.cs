@@ -17,7 +17,7 @@ namespace Dal
         private static DalXml instance = null;
         private static readonly object padlock = new object();
 
-        public static DalXml Instance
+        internal static DalXml Instance
         {
             get
             {

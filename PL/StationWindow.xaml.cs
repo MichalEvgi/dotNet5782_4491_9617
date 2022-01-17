@@ -25,6 +25,12 @@ namespace PL
         IBL bl;
         private StationListWindow st;
         public bool ClosingWindow { get; private set; } = true;
+        #region ADD STATION
+        /// <summary>
+        /// open add station window
+        /// </summary>
+        /// <param name="bL">IBL interface</param>
+        /// <param name="slw">station list window</param>
         public StationWindow(IBL bL, StationListWindow slw)
         {
             bl = bL;
@@ -35,7 +41,9 @@ namespace PL
             this.Height = 450;
             this.Width = 300;
         }
-
+        /// <summary>
+        /// close window event. close window if  ClosingWindow=false
+        /// </summary>
         protected override void OnClosing(CancelEventArgs e)
         {
             e.Cancel = ClosingWindow;
@@ -46,6 +54,9 @@ namespace PL
             ClosingWindow = false;
             this.Close();
         }
+        /// <summary>
+        /// add station to database according to the fill text boxes
+        /// </summary>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -88,13 +99,6 @@ namespace PL
             }
         }
 
-        private void SelectionChange()
-        {
-            if (st.SlotSelector == null || st.SlotSelector.Text == "Clear filter")
-                st.StationListView.ItemsSource = bl.GetStationsList();
-            else
-                st.StationListView.ItemsSource = bl.AvailableStations();
-        }
         //check if only number is entered to id textBox
         private void IdtxtBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -141,6 +145,39 @@ namespace PL
                 SlotstxtBox.Text = SlotstxtBox.Text.Remove(SlotstxtBox.Text.Length - 1);
             }
         }
+        #endregion
+        #region STATION ACTIONS
+        public Station selectedStation;
+        /// <summary>
+        /// open station actions window
+        /// </summary>
+        /// <param name="bL">IBL interface</param>
+        /// <param name="station">selected station</param>
+        /// <param name="slw">station list window</param>
+        public StationWindow(IBL bL, StationToList station, StationListWindow slw)
+        {
+            bl = bL;
+            st = slw;
+            InitializeComponent();
+            selectedStation = bl.GetStation(station.Id);
+            DataContext = selectedStation;
+            addStaion.Visibility = Visibility.Hidden;
+            actions.Visibility = Visibility.Visible;
+            this.Height = 380;
+            this.Width = 300;
+        }
+
+        /// <summary>
+        /// refresh the station list view
+        /// </summary>
+        private void SelectionChange()
+        {
+            if (st.SlotSelector == null || st.SlotSelector.Text == "Clear filter")
+                st.StationListView.ItemsSource = bl.GetStationsList();
+            else
+                st.StationListView.ItemsSource = bl.AvailableStations();
+        }
+        
         //check if only number is entered to slots textBox
         private void AllSlotstxtbox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -159,26 +196,18 @@ namespace PL
                 Nametxtbox.Text = NametxtBox.Text.Remove(Nametxtbox.Text.Length - 1);
             }
         }
-        public Station selectedStation;
-        public StationWindow(IBL bL, StationToList station, StationListWindow slw)
-        {
-            bl = bL;
-            st = slw;
-            InitializeComponent();
-            selectedStation = bl.GetStation(station.Id);
-            DataContext = selectedStation;
-            addStaion.Visibility = Visibility.Hidden;
-            actions.Visibility = Visibility.Visible;
-            this.Height = 380;
-            this.Width = 300;
-        }
-
+        
+        /// <summary>
+        /// click on exit button event
+        /// </summary>
         private void Exitbt_Click(object sender, RoutedEventArgs e)
         {
             ClosingWindow = false;
             this.Close();
         }
-
+        /// <summary>
+        /// update the name and/or the total slots amount
+        /// </summary>
         private void Updatebt_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -197,7 +226,9 @@ namespace PL
                 MessageBox.Show(ex.ToString());
             }
         }
-
+        /// <summary>
+        /// open the list of all drones charging in this station
+        /// </summary>
         private void ChargeListbt_Click(object sender, RoutedEventArgs e)
         {
             if (selectedStation.DronesInCharging.Count() == 0)
@@ -205,5 +236,6 @@ namespace PL
             else
             new ChargingListWindow(bl, selectedStation).Show();
         }
+        #endregion
     }
 }
