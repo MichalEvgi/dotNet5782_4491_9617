@@ -1,12 +1,54 @@
-﻿<Window x:Class="PL.CustomerLoginWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.CustomerLoginWindow"
         mc:Ignorable="d"
         Title="CustomerLoginWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Background="#FFD3F6F3">
+
+        <materialDesign:Card HorizontalAlignment="Left" Margin="367,53,0,0" VerticalAlignment="Top" Height="130" Width="397">
+            <ListView x:Name="FromcustomerList">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="ID number"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Weight}" Header="Weight"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Priority}" Header="Priority"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding ParcelMode}" Header="ParcelMode"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding OtherCustomer}" Header="Target"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </materialDesign:Card>
+        <materialDesign:Card HorizontalAlignment="Left" Margin="367,217,0,0" VerticalAlignment="Top" Height="133" Width="397">
+            <ListView x:Name="TocustomerList">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="ID number"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Weight}" Header="Weight"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Priority}" Header="Priority"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding ParcelMode}" Header="ParcelMode"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding OtherCustomer}" Header="Sender"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </materialDesign:Card>
+        <Button x:Name="Exitbtn" Content="Exit" HorizontalAlignment="Left" Margin="714,373,0,0" VerticalAlignment="Top" FontSize="11" Click="Exitbtn_Click"/>
+        <Button x:Name="Addparcelbtn" Content="Add parcel" HorizontalAlignment="Left" Margin="81,65,0,0" VerticalAlignment="Top" Width="141" Height="35" Click="Addparcelbtn_Click"/>
+        <ComboBox HorizontalAlignment="Left" Margin="102,192,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox HorizontalAlignment="Left" Margin="102,304,0,0" VerticalAlignment="Top" Width="120"/>
+
     </Grid>
 </Window>
