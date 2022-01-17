@@ -8,9 +8,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Grid.Background >
-            <ImageBrush ImageSource="/images/9f30800d4ebec7281e47739ba69e0f12.jpg"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="/9f30800d4ebec7281e47739ba69e0f12 (1).jpg"/>
         </Grid.Background>
+
         <Button x:Name="DroneListButton" Content="Show Drone List" HorizontalAlignment="Left" Margin="543,55,0,0" VerticalAlignment="Top" Height="49" Width="163" FontSize="14" FontWeight="Bold" Click="DroneListButton_Click" Background="Transparent" Foreground="#DD000000" BorderBrush="#FF121112"/>
         <Button x:Name="CustomerListBtn" Content="Show Customer list" HorizontalAlignment="Left" Margin="543,131,0,0" VerticalAlignment="Top" Height="49" Width="163" FontSize="14" FontWeight="Bold" Click="CustomerListBtn_Click" Background="Transparent" BorderBrush="#FF121112" Foreground="#FF121112"/>
         <Button x:Name="StationListBtn" Content="Show Station List" HorizontalAlignment="Left" Margin="543,217,0,0" VerticalAlignment="Top" Height="49" Width="163" FontSize="14" FontWeight="Bold" Click="StationListBtn_Click" Background="Transparent" Foreground="#FF121112" BorderBrush="#FF121112"/>

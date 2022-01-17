@@ -33,6 +33,7 @@ namespace PL
             {
                 bL = bl;
                 InitializeComponent();
+                
             }
             catch(DalConfigException)
             {

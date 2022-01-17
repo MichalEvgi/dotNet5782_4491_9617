@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="9f30800d4ebec7281e47739ba69e0f12 %281%29.jpg" />
     <None Remove="images\1d01659c303895bd6570de0146694fb7.jpg" />
   </ItemGroup>
 
@@ -19,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="9f30800d4ebec7281e47739ba69e0f12 (1).jpg" />
     <Resource Include="images\1d01659c303895bd6570de0146694fb7.jpg" />
   </ItemGroup>
 
