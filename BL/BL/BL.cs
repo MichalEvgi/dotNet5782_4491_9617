@@ -26,7 +26,7 @@ namespace BL
         {
             get
             {
-                if (instance == null)
+                if (instance == null)//check if the insance exsit, if not create one.
                 {
                     lock (padlock)
                     {

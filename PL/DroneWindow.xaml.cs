@@ -25,6 +25,7 @@ namespace PL
     {
         IBL bl;
         private DroneListWindow dr;
+        public bool ClosingWindow { get; private set; } = true;
         //open add drone window
         public DroneWindow(IBL bL, DroneListWindow dlw)
         {
@@ -42,6 +43,7 @@ namespace PL
         //close window by cancel button
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            ClosingWindow = false;
             this.Close();
         }
         //add drone click button
@@ -62,8 +64,9 @@ namespace PL
                     if (result == MessageBoxResult.OK)
                     {
                         dr.SelectorChanges();
-                       // dr.DroneListView.Items.Refresh();
+                        // dr.DroneListView.Items.Refresh();
                         //close when OK pressed
+                        ClosingWindow = false;
                         this.Close();
                     }
                 }
@@ -248,6 +251,11 @@ namespace PL
         }
         //close action drone window
         private bool closeWindow = false;
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = ClosingWindow;
+        }
         private void Exitbt_Click(object sender, RoutedEventArgs e)
         {
             if(worker!=null)
@@ -259,7 +267,11 @@ namespace PL
                 Simulatorbt.IsEnabled = false;
             }
             else
-               Close();
+            {
+                ClosingWindow = false;
+                Close();
+            }
+               
         }
         //check if only number is entered to id textBox
         private void IdtxtBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -415,7 +427,10 @@ namespace PL
             else
             {
                 if (prcl != null)
+                {
                     prcl.Close();
+                }
+                    
             }    
             dr.SelectorChanges();
         }
@@ -423,9 +438,16 @@ namespace PL
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (prcl != null)
+            {
                 prcl.Close();
+            }
+                
             if (closeWindow)
+            {
+                ClosingWindow = false;
                 Close();
+            }
+                
             else
             {
                 //close

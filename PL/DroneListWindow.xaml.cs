@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
 using BlApi;
+using System.ComponentModel;
 
 namespace PL
 {
@@ -23,6 +24,7 @@ namespace PL
     public partial class DroneListWindow : Window
     {
         IBL bl;
+        public bool ClosingWindow { get; private set; } = true;
 
         public DroneListWindow(IBL bL)
         {
@@ -130,9 +132,15 @@ namespace PL
         {
             new DroneWindow(bl, this).Show();
         }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = ClosingWindow;
+        }
         //close window
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
+            ClosingWindow = false;
             this.Close();
         }
         //open drone window with action state

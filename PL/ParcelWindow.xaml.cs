@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
+using System.ComponentModel;
 
 namespace PL
 {
@@ -23,6 +24,7 @@ namespace PL
     {
         IBL bl;
         private ParcelListWindow pr;
+        public bool ClosingWindow { get; private set; } = true;
         public ParcelWindow(IBL bL, ParcelListWindow plw)
         {
             bl = bL;
@@ -36,8 +38,13 @@ namespace PL
             this.Width = 300;
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = ClosingWindow;
+        }
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            ClosingWindow = false;
             this.Close();
         }
 
@@ -102,6 +109,7 @@ namespace PL
                     if (result == MessageBoxResult.OK)
                     {
                         //close when OK pressed
+                        ClosingWindow = false;
                         this.Close();
                     }
                 }
@@ -134,6 +142,7 @@ namespace PL
 
         private void Exitbt_Click(object sender, RoutedEventArgs e)
         {
+            ClosingWindow = false;
             this.Close();
         }
 
@@ -161,7 +170,11 @@ namespace PL
                 pr.ParcelListView.ItemsSource = bl.GetParcelsList();
                 MessageBoxResult result2=MessageBox.Show("Deleted successfuly");
                 if (result2 == MessageBoxResult.OK)
+                {
+                    ClosingWindow = false;
                     this.Close();
+                }
+                    
 
 
             }

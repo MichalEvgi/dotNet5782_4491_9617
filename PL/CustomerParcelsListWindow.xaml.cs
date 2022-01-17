@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
 using BlApi;
+using System.ComponentModel;
+
 
 namespace PL
 {
@@ -23,6 +25,7 @@ namespace PL
     {
         IBL bl;
         Customer selectedCustomer;
+        public bool ClosingWindow { get; private set; } = true;
         public CustomerParcelsListWindow(IBL bL, Customer customer)
         {
             bl = bL;
@@ -43,8 +46,13 @@ namespace PL
             ToCustomerList.ItemsSource = customer.ToCustomer;
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = ClosingWindow;
+        }
         private void Exitbtn_Click(object sender, RoutedEventArgs e)
         {
+            ClosingWindow = false;
             this.Close();
         }
 

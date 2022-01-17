@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace PL
     {
         IBL bl;
         Station station;
+        public bool ClosingWindow { get; private set; } = true;
         public ChargingListWindow(IBL bL, Station s)
         {
             bl = bL;
@@ -32,8 +34,13 @@ namespace PL
             ChargingListView.ItemsSource = s.DronesInCharging.ToList();
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = ClosingWindow;
+        }
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
+            ClosingWindow = false;
             Close();
         }
 

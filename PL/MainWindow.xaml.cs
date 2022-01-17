@@ -23,11 +23,11 @@ namespace PL
     public partial class MainWindow : Window
     {
         private IBL bL;
-        public MainWindow()
+        public MainWindow(IBL bl)
         {
             try
             {
-                bL = BlFactory.GetBl();
+                bL = bl;
                 InitializeComponent();
             }
             catch(DalConfigException)

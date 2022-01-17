@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
+using System.ComponentModel;
 
 namespace PL
 {
@@ -23,6 +24,7 @@ namespace PL
     public partial class StationListWindow : Window
     {
         IBL bl;
+        public bool ClosingWindow { get; private set; } = true;
         public StationListWindow(IBL bL)
         {
             bl = bL;
@@ -45,9 +47,14 @@ namespace PL
                 StationListView.ItemsSource = bl.AvailableStations();
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = ClosingWindow;
+        }
         //close window
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
+            ClosingWindow = false;
             this.Close();
         }
 

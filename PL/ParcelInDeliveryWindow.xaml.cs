@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using BO;
 using BlApi;
 
+
 namespace PL
 {
     /// <summary>
@@ -37,6 +38,7 @@ namespace PL
             selectedParcel = bl.GetDrone(droneId).TransferedParcel;
             DataContext = selectedParcel;
         }
+
         private void Exitbt_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

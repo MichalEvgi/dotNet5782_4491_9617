@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace PL
     public partial class ParcelListWindow : Window
     {
         IBL bl;
+        public bool ClosingWindow { get; private set; } = true;
         public ParcelListWindow(IBL bL)
         {
             bl = bL;
@@ -45,8 +47,14 @@ namespace PL
             if (ParcelListView.SelectedItem != null)
                 new ParcelWindow(bl, (ParcelToList)(ParcelListView.SelectedItem), this).Show();
         }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = ClosingWindow;
+        }
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
+            ClosingWindow = false;
             this.Close();
         }
 

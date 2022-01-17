@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
+using System.ComponentModel;
 
 namespace PL
 {
@@ -23,6 +24,7 @@ namespace PL
     {
         IBL bl;
         private StationListWindow st;
+        public bool ClosingWindow { get; private set; } = true;
         public StationWindow(IBL bL, StationListWindow slw)
         {
             bl = bL;
@@ -33,9 +35,15 @@ namespace PL
             this.Height = 450;
             this.Width = 300;
         }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = ClosingWindow;
+        }
         //close window by cancel button
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            ClosingWindow = false;
             this.Close();
         }
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -59,8 +67,9 @@ namespace PL
                     //seccessfully added message
                     MessageBoxResult result = MessageBox.Show("Seccessfuly added");
                     if (result == MessageBoxResult.OK)
-                    { 
+                    {
                         //close when OK pressed
+                        ClosingWindow = false;
                         this.Close();
                     }
                 }
@@ -166,6 +175,7 @@ namespace PL
 
         private void Exitbt_Click(object sender, RoutedEventArgs e)
         {
+            ClosingWindow = false;
             this.Close();
         }
 

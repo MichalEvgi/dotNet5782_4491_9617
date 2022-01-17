@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
 using BlApi;
+using System.ComponentModel;
 
 namespace PL
 {
@@ -23,6 +24,7 @@ namespace PL
     {
         IBL bl;
         private CustomerListWindow cl;
+        public bool ClosingWindow { get; private set; } = true; 
         public CustomerWindow(IBL bL, CustomerListWindow clw)
         {
             bl = bL;
@@ -34,8 +36,19 @@ namespace PL
             this.Height = 450;
         }
 
+        public CustomerWindow(IBL bL)
+        {
+            bl = bL;
+            InitializeComponent();
+            AddCustomer.Visibility = Visibility.Visible;
+            UpdateCustomer.Visibility = Visibility.Hidden;
+            this.Width = 300;
+            this.Height = 450;
+        }
+        
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            ClosingWindow = false;
             this.Close();
         }
 
@@ -56,6 +69,7 @@ namespace PL
                     {
                         cl.CustomerListView.ItemsSource = bl.GetCustomersList();
                         //close when OK pressed
+                        ClosingWindow = false;
                         this.Close();
                     }
                 }
@@ -138,9 +152,13 @@ namespace PL
             }
 
         }
-
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = ClosingWindow;
+        }
         private void Exitbtn_Click(object sender, RoutedEventArgs e)
         {
+            ClosingWindow = false;
             this.Close();
         }
 
