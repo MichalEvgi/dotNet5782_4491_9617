@@ -26,6 +26,6 @@
     <Name>31234</Name>
     <Longitude>35</Longitude>
     <Lattitude>31</Lattitude>
-    <ChargeSlots>4</ChargeSlots>
+    <ChargeSlots>3</ChargeSlots>
   </Station>
 </ArrayOfStation>

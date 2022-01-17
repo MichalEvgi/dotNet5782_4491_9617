@@ -582,7 +582,7 @@ namespace BL
                 if (p.PickedUp != null)
                 {
                     parcelmode = 2;
-                    distanc = dal.Distance(dalSender.Longitude, dalSender.Lattitude, dalTarget.Longitude, dalTarget.Lattitude);
+                    distanc = dal.Distance(droneToList.CurrentLocation.Longitude, droneToList.CurrentLocation.Lattitude, dalTarget.Longitude, dalTarget.Lattitude);
                 }
 
                 // get all parcel details in order to add it to drone
@@ -942,7 +942,7 @@ namespace BL
                     throw new NotFoundException("Parcel that close enough for the drone:" + id + " battery,");
             }
         }
-        /// <summary>
+        /// <summary>szz
         /// pick parcel by drone
         /// </summary>
         /// <param name="id">drone's id</param>

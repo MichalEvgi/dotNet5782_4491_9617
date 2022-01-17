@@ -25,7 +25,10 @@ namespace PL
     {
         IBL bl;
         public bool ClosingWindow { get; private set; } = true;
-
+        /// <summary>
+        /// open drones list window
+        /// </summary>
+        /// <param name="bL">IBL interface</param>
         public DroneListWindow(IBL bL)
         {
             bl = bL;
@@ -47,14 +50,9 @@ namespace PL
             //add option of clear filter to WeightSelector
             WeightSelector.Items.Add("Clear filter");
         }
-        private void DroneListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SelectorChanges();
-        }
-        //private void DroneListView_CollectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-
-        //}
+        /// <summary>
+        /// refresh the drone list view
+        /// </summary>
         public void SelectorChanges()
         {
             if ((StatusSelector.SelectedItem == null || StatusSelector.SelectedItem.ToString() == "Clear filter") && (WeightSelector.SelectedItem == null || WeightSelector.SelectedItem.ToString() == "Clear filter"))
@@ -78,7 +76,9 @@ namespace PL
                 }
             }
         }
-
+        /// <summary>
+        /// drone status selected
+        /// </summary>
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (StatusSelector.SelectedItem.ToString() == "Clear filter")
@@ -102,7 +102,9 @@ namespace PL
             }
 
         }
-
+        /// <summary>
+        /// drone max weight selected
+        /// </summary>
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (WeightSelector.SelectedItem.ToString() == "Clear filter")
@@ -127,29 +129,39 @@ namespace PL
 
 
         }
-        //open drone window with add drone state
+        /// <summary>
+        /// open drone window with add drone state
+        /// </summary>
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
             new DroneWindow(bl, this).Show();
         }
-
+        /// <summary>
+        /// close window event. close window if  ClosingWindow=false
+        /// </summary>
         protected override void OnClosing(CancelEventArgs e)
         {
             e.Cancel = ClosingWindow;
         }
-        //close window
+        /// <summary>
+        /// click on exit button event
+        /// </summary>
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             ClosingWindow = false;
             this.Close();
         }
-        //open drone window with action state
+        /// <summary>
+        ///open drone window with action state
+        /// </summary>
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (DroneListView.SelectedItem != null)
                 new DroneWindow(bl, (DroneToList)(DroneListView.SelectedItem), this).Show();
         }
-
+        /// <summary>
+        /// group the list by status
+        /// </summary>
         private void StatusGroup_Click(object sender, RoutedEventArgs e)
         {
             IEnumerable<IGrouping<DroneStatus, DroneToList>> droneGroup = from dro in bl.GetDronesList() group dro by dro.Status;
@@ -172,7 +184,9 @@ namespace PL
                 view.GroupDescriptions.Add(groupDescription);
             }
         }
-
+        /// <summary>
+        /// refresh grouping
+        /// </summary>
         private void refresh_Click(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DroneListView.ItemsSource);

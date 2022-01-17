@@ -21,6 +21,13 @@ namespace BL
         Location dest;
         double progresLon, progresLat, progresBat;
         double dis, flyTime;
+        /// <summary>
+        /// play the simulator 
+        /// </summary>
+        /// <param name="droneId">drone id</param>
+        /// <param name="reportProgress">delgete that update the changes</param>
+        /// <param name="stopDelgate">delgete to when the simulator is stoped</param>
+        /// <param name="bl">IBL interface</param>
         public Simulator(int droneId, Action reportProgress, Func<bool> stopDelgate, BL bl)
         {
             lock (bl)
@@ -45,7 +52,7 @@ namespace BL
                                 try
                                 {
                                     bl.SendToCharge(droneId);
-                                drone = bl.GetDrone(droneId);
+                                   drone = bl.GetDrone(droneId);
                                 }
                                 catch (BatteryException)
                                 {
@@ -74,7 +81,7 @@ namespace BL
                             {
                                 progresBat = bl.dal.ElectricityRequest().First() * dis;
                             }
-                            if (check < dis)
+                            if (check <= dis)
                             {
                                 dro.CurrentLocation.Longitude += progresLon;
                                 dro.CurrentLocation.Lattitude += progresLat;
@@ -105,7 +112,7 @@ namespace BL
                             {
                                 progresBat = bl.dal.ElectricityRequest().ElementAt((int)drone.TransferedParcel.Weight + 1) * dis;
                             }
-                            if (check < dis)
+                            if (check <= dis)
                             {
                                 dro.CurrentLocation.Longitude += progresLon;
                                 dro.CurrentLocation.Lattitude += progresLat;

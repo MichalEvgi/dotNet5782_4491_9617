@@ -23,6 +23,9 @@ namespace PL
     {
         private IBL bL;
         Customer customer;
+        /// <summary>
+        /// open the main entery window
+        /// </summary>
         public EntryWindow()
         {
             try
@@ -35,7 +38,9 @@ namespace PL
             }
             
         }
-
+        /// <summary>
+        /// open the maneger/ customer window
+        /// </summary>
         private void Enterbtn_Click(object sender, RoutedEventArgs e)
         {
             if (Passwordtxtbox.Text == Convert.ToString(1111))
@@ -49,13 +54,15 @@ namespace PL
                    customer=bL.GetCustomer(Convert.ToInt32(Passwordtxtbox.Text));
                     new CustomerLoginWindow(bL, customer).Show();
                 }
-                catch(NotFoundException ex)
+                catch(NotFoundException)
                 {
                     MessageBox.Show("This customer does not exist, please log in");
                 }
             }
         }
-
+        /// <summary>
+        /// open sign up window
+        /// </summary>
         private void Loginbtn_Click(object sender, RoutedEventArgs e)
         {
             new CustomerWindow(bL).Show();

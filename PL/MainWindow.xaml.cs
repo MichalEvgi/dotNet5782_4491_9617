@@ -23,6 +23,10 @@ namespace PL
     public partial class MainWindow : Window
     {
         private IBL bL;
+        /// <summary>
+        /// open the maneger main window
+        /// </summary>
+        /// <param name="bl">IBL interface</param>
         public MainWindow(IBL bl)
         {
             try
@@ -34,22 +38,30 @@ namespace PL
             {
             }
         }
-        //open droneList window
+        /// <summary>
+        /// open droneList window
+        /// </summary>
         private void DroneListButton_Click(object sender, RoutedEventArgs e)
         {
             new DroneListWindow(bL).Show();
         }
-
+        /// <summary>
+        /// open customer list window
+        /// </summary>
         private void CustomerListBtn_Click(object sender, RoutedEventArgs e)
         {
             new CustomerListWindow(bL).Show();
         }
-
+        /// <summary>
+        /// open station list window
+        /// </summary>
         private void StationListBtn_Click(object sender, RoutedEventArgs e)
         {
             new StationListWindow(bL).Show();
         }
-
+        /// <summary>
+        /// open parcel list window
+        /// </summary>
         private void ParcelListBtn_Click(object sender, RoutedEventArgs e)
         {
             new ParcelListWindow(bL).Show();
