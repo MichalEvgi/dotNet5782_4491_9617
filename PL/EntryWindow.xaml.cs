@@ -56,7 +56,7 @@ namespace PL
                 }
                 catch(NotFoundException)
                 {
-                    MessageBox.Show("This customer does not exist, please log in");
+                    MessageBox.Show("This customer does not exist, please sign up");
                 }
             }
         }
@@ -66,6 +66,19 @@ namespace PL
         private void Loginbtn_Click(object sender, RoutedEventArgs e)
         {
             new CustomerWindow(bL).Show();
+        }
+
+        /// <summary>
+        /// check if only number is entered to Passwordtxtbox
+        /// </summary>
+        private void Passwordtxtbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            if (System.Text.RegularExpressions.Regex.IsMatch(Passwordtxtbox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                Passwordtxtbox.Text = Passwordtxtbox.Text.Remove(Passwordtxtbox.Text.Length - 1);
+            }
         }
     }
 }
