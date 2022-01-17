@@ -21,6 +21,7 @@ namespace BL
         Location dest;
         double progresLon, progresLat, progresBat;
         double dis, flyTime;
+        DO.Station st;
         /// <summary>
         /// play the simulator 
         /// </summary>
@@ -51,8 +52,30 @@ namespace BL
                             {
                                 try
                                 {
-                                    bl.SendToCharge(droneId);
-                                   drone = bl.GetDrone(droneId);
+                                    if (dro.Status == DroneStatus.Available)
+                                    {
+                                        st = bl.ClosestStation(bl.dal.FilteredStations(s => s.ChargeSlots > 0), dro.CurrentLocation.Longitude, dro.CurrentLocation.Lattitude);
+                                        dis = bl.dal.Distance(drone.CurrentLocation.Longitude, drone.CurrentLocation.Lattitude, st.Longitude, st.Lattitude);
+                                        progresBat = bl.dal.ElectricityRequest().First() * dis;
+                                        flyTime = dis / SPEED;
+                                        progresLon = (st.Longitude - drone.CurrentLocation.Longitude) / flyTime;
+                                        progresLat = (st.Lattitude - drone.CurrentLocation.Lattitude) / flyTime;
+                                        bl.SendToCharge(droneId);
+                                        dro.Battery += progresBat;
+                                        dro.CurrentLocation.Lattitude = drone.CurrentLocation.Lattitude;
+                                        dro.CurrentLocation.Longitude = drone.CurrentLocation.Longitude;
+                                    }
+
+                                    if (check <= dis)
+                                    {
+                                        dro.CurrentLocation.Longitude += progresLon;
+                                        dro.CurrentLocation.Lattitude += progresLat;
+                                        dro.Battery -= progresBat / flyTime;
+                                        check += 1;
+                                        break;
+                                    }
+
+                                    drone = bl.GetDrone(droneId);
                                 }
                                 catch (BatteryException)
                                 {
@@ -63,9 +86,12 @@ namespace BL
                     case DroneStatus.Maintenance:
                         lock (bl)
                         {
-                            bl.ReleaseDrone(droneId);
-                            if (drone.Battery < 100)
-                                bl.SendToCharge(droneId);
+                            if (dro.Battery <100)
+                            {
+                                dro.Battery += bl.dal.ElectricityRequest().ElementAt(4)/60;
+                                if (dro.Battery >= 100)
+                                    bl.ReleaseDrone(droneId);
+                            }
                             drone = bl.GetDrone(droneId);
                         }
                         break;
