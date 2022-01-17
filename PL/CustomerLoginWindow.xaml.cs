@@ -32,6 +32,14 @@ namespace PL
             InitializeComponent();
             FromcustomerList.ItemsSource = customer.FromCustomer;
             TocustomerList.ItemsSource = customer.ToCustomer;
+            foreach(ParcelInCustomer p in customer.FromCustomer)
+            {
+                Pickupcmb.Items.Add(p.Id);
+            }
+            foreach (ParcelInCustomer p in customer.ToCustomer)
+            {
+                Deliverycmb.Items.Add(p.Id);
+            }
         }
 
         protected override void OnClosing(CancelEventArgs e)

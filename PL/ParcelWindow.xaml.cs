@@ -124,7 +124,15 @@ namespace PL
                     if(pr!=null)
                        pr.ParcelListView.ItemsSource = bl.GetParcelsList();
                     if (clg != null)
-                        clg.FromcustomerList.ItemsSource = bl.GetCustomer(customer.Id).FromCustomer;
+                    {
+                        customer = bl.GetCustomer(customer.Id);
+                        clg.FromcustomerList.ItemsSource = customer.FromCustomer;
+                        clg.Pickupcmb.Items.Clear();
+                        foreach (ParcelInCustomer p in customer.FromCustomer)
+                        {
+                            clg.Pickupcmb.Items.Add(p.Id);
+                        }
+                    }
                     //seccessfully added message
                     MessageBoxResult result = MessageBox.Show("Seccussfuly added");
                     if (result == MessageBoxResult.OK)

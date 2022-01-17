@@ -11,10 +11,10 @@
         <Grid.Background>
             <ImageBrush ImageSource="/images/1d01659c303895bd6570de0146694fb7.jpg" />
         </Grid.Background>
-        <TextBox x:Name="Passwordtxtbox" HorizontalAlignment="Left" Margin="99,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" Height="43" TextChanged="Passwordtxtbox_TextChanged"/>
         <Label x:Name="Passwordlbl" Content="Enter your password" HorizontalAlignment="Left" Margin="118,31,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="13" Width="140"/>
-        <Button x:Name="Loginbtn" Content="Sign up" HorizontalAlignment="Left" Margin="152,128,0,0" VerticalAlignment="Top" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Foreground="Black" Click="Loginbtn_Click" />
+        <Button x:Name="Loginbtn" Content="Sign up" HorizontalAlignment="Left" Margin="147,128,0,0" VerticalAlignment="Top" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Foreground="Black" Click="Loginbtn_Click" />
         <Button x:Name="Enterbtn" Content=""  Height="32" Width="32" HorizontalAlignment="Left" Margin="45,72,0,0" VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent" Click="Enterbtn_Click"/>
         <materialDesign:PackIcon Kind="ArrowBack" Height="32" Width="32" Margin="45,72,0,0"/>
+        <PasswordBox x:Name="PassWordbox" HorizontalAlignment="Left" Margin="114,72,0,0" VerticalAlignment="Top" Width="148" Height="32"/>
     </Grid>
 </Window>

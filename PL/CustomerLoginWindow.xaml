@@ -47,8 +47,10 @@
         </materialDesign:Card>
         <Button x:Name="Exitbtn" Content="Exit" HorizontalAlignment="Left" Margin="714,373,0,0" VerticalAlignment="Top" FontSize="11" Click="Exitbtn_Click"/>
         <Button x:Name="Addparcelbtn" Content="Add parcel" HorizontalAlignment="Left" Margin="81,65,0,0" VerticalAlignment="Top" Width="141" Height="35" Click="Addparcelbtn_Click"/>
-        <ComboBox HorizontalAlignment="Left" Margin="102,192,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox HorizontalAlignment="Left" Margin="102,304,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="Pickupcmb" HorizontalAlignment="Left" Margin="102,158,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="Deliverycmb" HorizontalAlignment="Left" Margin="102,304,0,0" VerticalAlignment="Top" Width="120"/>
+        <CheckBox x:Name="PickupCheck" Content="" HorizontalAlignment="Left" Margin="203,199,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Deliverycheck" Content="" HorizontalAlignment="Left" Margin="203,358,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

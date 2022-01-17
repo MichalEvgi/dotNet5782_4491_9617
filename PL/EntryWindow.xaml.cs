@@ -43,7 +43,7 @@ namespace PL
         /// </summary>
         private void Enterbtn_Click(object sender, RoutedEventArgs e)
         {
-            if (Passwordtxtbox.Text == Convert.ToString(1111))
+            if (PassWordbox.Password == Convert.ToString(1111))
             {
                 new MainWindow(bL).Show();
             }
@@ -51,7 +51,7 @@ namespace PL
             {
                 try
                 {
-                   customer=bL.GetCustomer(Convert.ToInt32(Passwordtxtbox.Text));
+                   customer=bL.GetCustomer(Convert.ToInt32(PassWordbox.Password));
                     new CustomerLoginWindow(bL, customer).Show();
                 }
                 catch(NotFoundException)
@@ -68,17 +68,5 @@ namespace PL
             new CustomerWindow(bL).Show();
         }
 
-        /// <summary>
-        /// check if only number is entered to Passwordtxtbox
-        /// </summary>
-        private void Passwordtxtbox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-            if (System.Text.RegularExpressions.Regex.IsMatch(Passwordtxtbox.Text, "[^0-9]"))
-            {
-                MessageBox.Show("Please enter only numbers.");
-                Passwordtxtbox.Text = Passwordtxtbox.Text.Remove(Passwordtxtbox.Text.Length - 1);
-            }
-        }
     }
 }
