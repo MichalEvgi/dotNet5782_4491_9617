@@ -70,7 +70,8 @@ namespace PL
                     MessageBoxResult result = MessageBox.Show("Added successfully");
                     if (result == MessageBoxResult.OK)
                     {
-                        cl.CustomerListView.ItemsSource = bl.GetCustomersList();
+                        if(cl!=null)
+                           cl.CustomerListView.ItemsSource = bl.GetCustomersList();
                         //close when OK pressed
                         ClosingWindow = false;
                         this.Close();
@@ -234,6 +235,7 @@ namespace PL
             UpdateCustomer.Visibility = Visibility.Hidden;
             this.Width = 300;
             this.Height = 450;
+            
         }
         #endregion
         #region CUSTOMER IN PARCEL

@@ -24,6 +24,8 @@ namespace PL
     {
         IBL bl;
         private ParcelListWindow pr;
+        Customer customer;
+        private CustomerLoginWindow clg;
         public bool ClosingWindow { get; private set; } = true;
         public ParcelWindow(IBL bL, ParcelListWindow plw)
         {
@@ -36,6 +38,22 @@ namespace PL
             actions.Visibility = Visibility.Hidden;
             this.Height = 450;
             this.Width = 300;
+        }
+
+        public ParcelWindow(IBL bL,Customer c,CustomerLoginWindow cl)
+        {
+            bl = bL;
+            customer = c;
+            clg = cl;
+            InitializeComponent();
+            SenderIdtxtBox.Text = Convert.ToString(customer.Id);
+            SenderIdtxtBox.IsReadOnly = true;
+            addParcel.Visibility = Visibility.Visible;
+            actions.Visibility = Visibility.Hidden;
+            this.Height = 450;
+            this.Width = 300;
+            WeightCmb.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            PriorityCmb.ItemsSource = Enum.GetValues(typeof(Priorities));
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -103,7 +121,9 @@ namespace PL
                         Weight = (WeightCategories)WeightCmb.SelectedItem,
                         Priority = (Priorities)PriorityCmb.SelectedItem
                     });
-                    pr.ParcelListView.ItemsSource = bl.GetParcelsList();
+                    if(pr!=null)
+                       pr.ParcelListView.ItemsSource = bl.GetParcelsList();
+                    //clg.FromcustomerList.ItemsSource = customer.FromCustomer;
                     //seccessfully added message
                     MessageBoxResult result = MessageBox.Show("Seccussfuly added");
                     if (result == MessageBoxResult.OK)
