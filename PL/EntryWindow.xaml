@@ -9,7 +9,7 @@
         Title="EntryWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\מיכל\Source\Repos\MichalEvgi\dotNet5782_4491_9617\PL\images\1d01659c303895bd6570de0146694fb7.jpg" />
+            <ImageBrush ImageSource="/images/1d01659c303895bd6570de0146694fb7.jpg" />
         </Grid.Background>
         <TextBox x:Name="Passwordtxtbox" HorizontalAlignment="Left" Margin="99,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" Height="43"/>
         <Label x:Name="Passwordlbl" Content="Enter your password" HorizontalAlignment="Left" Margin="118,31,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="13" Width="140"/>
