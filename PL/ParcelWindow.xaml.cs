@@ -27,6 +27,12 @@ namespace PL
         Customer customer;
         private CustomerLoginWindow clg;
         public bool ClosingWindow { get; private set; } = true;
+        #region ADD PARCEL
+        /// <summary>
+        /// open add parcel window
+        /// </summary>
+        /// <param name="bL">IBL interface</param>
+        /// <param name="plw">ParcelListWindow</param>
         public ParcelWindow(IBL bL, ParcelListWindow plw)
         {
             bl = bL;
@@ -36,10 +42,16 @@ namespace PL
             PriorityCmb.ItemsSource = Enum.GetValues(typeof(Priorities));
             addParcel.Visibility = Visibility.Visible;
             actions.Visibility = Visibility.Hidden;
-            this.Height = 450;
-            this.Width = 300;
+            Height = 450;
+            Width = 300;
         }
 
+        /// <summary>
+        /// add parcel from customer interface
+        /// </summary>
+        /// <param name="bL">IBL interface</param>
+        /// <param name="c">customer</param>
+        /// <param name="cl">Customer Login Window</param>
         public ParcelWindow(IBL bL,Customer c,CustomerLoginWindow cl)
         {
             bl = bL;
@@ -55,18 +67,100 @@ namespace PL
             WeightCmb.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             PriorityCmb.ItemsSource = Enum.GetValues(typeof(Priorities));
         }
-
+        /// <summary>
+        /// close window event. close window if  ClosingWindow=false
+        /// </summary>
         protected override void OnClosing(CancelEventArgs e)
         {
             e.Cancel = ClosingWindow;
         }
+        /// <summary>
+        /// click on cancel button event
+        /// </summary>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             ClosingWindow = false;
             this.Close();
         }
-
+        /// <summary>
+        /// add parcel
+        /// </summary>
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (SenderIdtxtBox.Text == "" || TargetIdtxtBox.Text == "" || WeightCmb.SelectedItem == null || PriorityCmb.SelectedItem == null)
+                    //not all the fields are full
+                    MessageBox.Show("Not all fields are full");
+                else
+                {
+                    //add the drone
+                    bl.AddParcel(new Parcel
+                    {
+                        Sender = new CustomerInParcel { Id = Convert.ToInt32(SenderIdtxtBox.Text) },
+                        Target = new CustomerInParcel { Id = Convert.ToInt32(TargetIdtxtBox.Text) },
+                        Weight = (WeightCategories)WeightCmb.SelectedItem,
+                        Priority = (Priorities)PriorityCmb.SelectedItem
+                    });
+                    if (pr != null)
+                        pr.ParcelListView.ItemsSource = bl.GetParcelsList();
+                    if (clg != null)
+                    {
+                        customer = bl.GetCustomer(customer.Id);
+                        clg.FromcustomerList.ItemsSource = customer.FromCustomer;
+                        clg.Pickupcmb.Items.Clear();
+                        foreach (ParcelInCustomer p in customer.FromCustomer)
+                        {
+                            if (p.ParcelMode == ParcelModes.Associated)
+                                clg.Pickupcmb.Items.Add(p.Id);
+                        }
+                    }
+                    //seccessfully added message
+                    MessageBoxResult result = MessageBox.Show("Seccussfuly added");
+                    if (result == MessageBoxResult.OK)
+                    {
+                        //close when OK pressed
+                        ClosingWindow = false;
+                        this.Close();
+                    }
+                }
+            }
+            catch (NotFoundException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        /// <summary>
+        /// check if only number is entered to sender id textBox
+        /// </summary>
+        private void SenderIdtxtBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(SenderIdtxtBox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                SenderIdtxtBox.Text = SenderIdtxtBox.Text.Remove(SenderIdtxtBox.Text.Length - 1);
+            }
+        }
+        /// <summary>
+        /// check if only number is entered to target id textBox
+        /// </summary>
+        private void TargetIdtxtBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(TargetIdtxtBox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                TargetIdtxtBox.Text = TargetIdtxtBox.Text.Remove(TargetIdtxtBox.Text.Length - 1);
+            }
+        }
+        #endregion
+        #region PARCEL ACTIONS
         public Parcel selectedParcel;
+        /// <summary>
+        /// open parcel actions window
+        /// </summary>
+        /// <param name="bL">IBL interface</param>
+        /// <param name="parcel">parcel to list</param>
+        /// <param name="plw">Parcel List Window</param>
         public ParcelWindow(IBL bL, ParcelToList parcel, ParcelListWindow plw)
         {
             bl = bL;
@@ -105,112 +199,50 @@ namespace PL
                 Deletebt.IsEnabled = false;
             }
         }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (SenderIdtxtBox.Text == "" || TargetIdtxtBox.Text == "" || WeightCmb.SelectedItem == null || PriorityCmb.SelectedItem == null)
-                    //not all the fields are full
-                    MessageBox.Show("Not all fields are full");
-                else
-                {
-                    //add the drone
-                    bl.AddParcel(new Parcel { Sender = new CustomerInParcel { Id = Convert.ToInt32( SenderIdtxtBox.Text) },
-                        Target = new CustomerInParcel { Id = Convert.ToInt32(TargetIdtxtBox.Text) }, 
-                        Weight = (WeightCategories)WeightCmb.SelectedItem,
-                        Priority = (Priorities)PriorityCmb.SelectedItem
-                    });
-                    if(pr!=null)
-                       pr.ParcelListView.ItemsSource = bl.GetParcelsList();
-                    if (clg != null)
-                    {
-                        customer = bl.GetCustomer(customer.Id);
-                        clg.FromcustomerList.ItemsSource = customer.FromCustomer;
-                        clg.Pickupcmb.Items.Clear();
-                        foreach (ParcelInCustomer p in customer.FromCustomer)
-                        {
-                            if(p.ParcelMode== ParcelModes.Associated)
-                            clg.Pickupcmb.Items.Add(p.Id);
-                        }
-                    }
-                    //seccessfully added message
-                    MessageBoxResult result = MessageBox.Show("Seccussfuly added");
-                    if (result == MessageBoxResult.OK)
-                    {
-                        //close when OK pressed
-                        ClosingWindow = false;
-                        this.Close();
-                    }
-                }
-            }
-            catch (NotFoundException ex)
-            {
-              MessageBox.Show(ex.ToString());
-            }
-        }
-
-        //check if only number is entered to sender id textBox
-        private void SenderIdtxtBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(SenderIdtxtBox.Text, "[^0-9]"))
-            {
-                MessageBox.Show("Please enter only numbers.");
-                SenderIdtxtBox.Text = SenderIdtxtBox.Text.Remove(SenderIdtxtBox.Text.Length - 1);
-            }
-        }
-
-        //check if only number is entered to target id textBox
-        private void TargetIdtxtBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(TargetIdtxtBox.Text, "[^0-9]"))
-            {
-                MessageBox.Show("Please enter only numbers.");
-                TargetIdtxtBox.Text = TargetIdtxtBox.Text.Remove(TargetIdtxtBox.Text.Length - 1);
-            }
-        }
-
-        private void Exitbt_Click(object sender, RoutedEventArgs e)
-        {
-            ClosingWindow = false;
-            this.Close();
-        }
-
+        /// <summary>
+        /// open the sender customer in parcel
+        /// </summary>
         private void Senderbt_Click(object sender, RoutedEventArgs e)
         {
             new CustomerWindow(bl, selectedParcel.Sender, this).Show();
         }
-
+        /// <summary>
+        /// open the target customer in parcel
+        /// </summary>
         private void Targetbt_Click(object sender, RoutedEventArgs e)
         {
             new CustomerWindow(bl, selectedParcel.Target, this).Show();
         }
-
+        /// <summary>
+        /// open drone in parcel window
+        /// </summary>
         private void Dronebt_Click(object sender, RoutedEventArgs e)
         {
             new DroneWindow(bl, selectedParcel.DroneP).Show();
         }
-
+        /// <summary>
+        /// delete parcel
+        /// </summary>
         private void Deletebt_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete?", "Delete parcel", MessageBoxButton.OKCancel);
-            if(result == MessageBoxResult.OK)
+            if (result == MessageBoxResult.OK)
             {
                 bl.DeleteParcel(selectedParcel.Id);
                 pr.ParcelListView.ItemsSource = bl.GetParcelsList();
-                MessageBoxResult result2=MessageBox.Show("Deleted successfuly");
+                MessageBoxResult result2 = MessageBox.Show("Deleted successfuly");
                 if (result2 == MessageBoxResult.OK)
                 {
                     ClosingWindow = false;
-                    this.Close();
+                    Close();
                 }
-                    
-
-
             }
 
         }
 
+        /// <summary>
+        /// deliver/pick up a parcel
+        /// </summary>
         private void Deliverybt_Click(object sender, RoutedEventArgs e)
         {
             if (selectedParcel.PickedUpTime == null)
@@ -219,7 +251,9 @@ namespace PL
                 deliver();
         }
 
-        //pick up parcel
+        /// <summary>
+        /// pick up parcel
+        /// </summary>
         private void pickedUp()
         {
             try
@@ -249,7 +283,9 @@ namespace PL
                 MessageBox.Show(ex.ToString());
             }
         }
-        //deliver parcel
+        /// <summary>
+        /// deliver parcel
+        /// </summary>
         private void deliver()
         {
             try
@@ -280,6 +316,22 @@ namespace PL
                 MessageBox.Show(ex.ToString());
             }
         }
+        /// <summary>
+        /// click on exit button event
+        /// </summary>
+        private void Exitbt_Click(object sender, RoutedEventArgs e)
+        {
+            ClosingWindow = false;
+            Close();
+        }
+        #endregion
+        #region PARCEL IN CUSTOMER
+        /// <summary>
+        /// open the parcel send by or to a customer
+        /// </summary>
+        /// <param name="bL">IBL interface</param>
+        /// <param name="parcel">ParcelInCustomer</param>
+        /// <param name="senderOrTarget">0=the customer is the target, 1=the customer is athe sender</param>
         public ParcelWindow(IBL bL, ParcelInCustomer parcel, int senderOrTarget)
         {
             bl = bL;
@@ -318,6 +370,6 @@ namespace PL
             Deletebt.Visibility = Visibility.Collapsed;
             
         }
-
+        #endregion
     }
 }
