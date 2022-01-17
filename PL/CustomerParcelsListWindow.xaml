@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="CustomerParcelsListWindow" Height="370" Width="650">
+        Title="CustomerParcelsListWindow" Height="370" Width="650" WindowStartupLocation="CenterScreen">
     <Grid x:Name="MainGrid">
         <Grid x:Name="ParcelsFromCustomer" Visibility="Hidden" Background="#FFD3F6F3">
             <ListView x:Name="FromCustomerList" Margin="31,32,27,103" MouseDoubleClick="FromCustomerList_MouseDoubleClick" >

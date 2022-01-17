@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.ParcelWindow"
         mc:Ignorable="d"
-        Title="ParcelWindow" Height="450" Width="800">
+        Title="ParcelWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid x:Name="MainGrid">
         <Grid x:Name="addParcel" Visibility="Visible" Background="#FFD3F6F3" Height="450" Width="300">
 

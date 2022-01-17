@@ -4,16 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen" 
+        mc:Ignorable="d"  
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="DroneListWindow" Height="640" Width="920">
+        Title="DroneListWindow" Height="640" Width="920" WindowStartupLocation="CenterScreen">
     <Grid Name="MainGrid" Background="#FFD3F6F3">
         <Grid.RowDefinitions>
             <RowDefinition Height="68*"/>
             <RowDefinition Height="496*"/>
             <RowDefinition Height="59*"/>
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto">
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>

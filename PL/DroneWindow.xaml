@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="DroneWindow" Height="640" Width="800">
+        Title="DroneWindow" Height="640" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Name="MainGrid">
         <Grid Name="addDrone" Visibility="Hidden" Background="#FFD3F6F3" Height="450" Width="300">
             <TextBox x:Name="IdtxtBox" HorizontalAlignment="Left" Margin="70,50,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="39" TextChanged="IdtxtBox_TextChanged" materialDesign:HintAssist.Hint="Id" materialDesign:HintAssist.IsFloating="True"/>
