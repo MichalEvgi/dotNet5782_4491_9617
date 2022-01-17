@@ -15,7 +15,7 @@ namespace BL
     {
         #region INITIALIZE
         internal IDal dal;
-        private List<DroneToList> drones;
+        internal List<DroneToList> drones;
         private static Random rand = new Random();
 
         #region Singelton

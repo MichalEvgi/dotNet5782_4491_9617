@@ -396,27 +396,22 @@ namespace PL
             DataContext = selectedDrone;
             if(selectedDrone.TransferedParcel!=null)
             {
-                if (!selectedDrone.TransferedParcel.OnTheWay)
-                {
+                if (prcl != null)
+                     prcl.ParcelChange();
+                else
+                  {
                     prcl = new ParcelInDeliveryWindow(bl, selectedDrone.TransferedParcel, selectedDrone.Id);
                     prcl.Show();
-                }
-                else
-                {
-                    if (prcl != null)
-                        prcl.ParcelChange();
-                    else
-                    {
-                        prcl = new ParcelInDeliveryWindow(bl, selectedDrone.TransferedParcel, selectedDrone.Id);
-                        prcl.Show();
-                    }
-                }
+                  }
             }
             else
             {
                 if (prcl != null)
+                {
                     prcl.Close();
-            }    
+                    prcl = null;
+                }
+            } 
             dr.SelectorChanges();
         }
 
