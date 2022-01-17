@@ -542,6 +542,7 @@ namespace PL
                         Deliverybt.IsEnabled = false;
                     Chargingbt.Content = "Send for charging";
                 }
+                worker = null;
             }
         }
         #endregion
