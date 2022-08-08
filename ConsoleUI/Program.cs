@@ -13,7 +13,7 @@ namespace ConsoleUI
             {
                 IDal dalObject = DalFactory.GetDal();
                 int choice;
-                Console.WriteLine("To add press 1.");
+                Console.WriteLine("To add press 1");
                 Console.WriteLine("To update press 2");
                 Console.WriteLine("To view an entity, press 3");
                 Console.WriteLine("To view a list press 4");
